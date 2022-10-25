@@ -30,10 +30,7 @@ module.exports = (sequelize) => {
 				type: DataTypes.INTEGER,
 				defaultValue: 0,
 			},
-			type: {
-				type: DataTypes.ENUM,
-                values: ['acustica', 'criolla', 'electrica','electro-acustica']
-            },
+			type: DataTypes.STRING,
             leftHand: {
                 type: DataTypes.BOOLEAN,
                 defaultValue: false,
