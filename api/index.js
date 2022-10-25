@@ -5,7 +5,7 @@ const { conn } = require('./src/db.js');
 const fs = require('fs')
 const path = require('path')
 const { Product } = require('../api/src/db')
-const loadGuitarJson = async () => {
+/* const loadGuitarJson = async () => {
     const guitarJson = fs.readFileSync(path.join(__dirname, '../guitar.json'))
     const guitars = JSON.parse(guitarJson);
     const products = guitars.map((guitar) => {
@@ -28,12 +28,12 @@ const loadGuitarJson = async () => {
     })
     const inserted = await Product.bulkCreate(products)
 	return (inserted) ? inserted.length : 'No se insertaron productos'
-}
+} */
 
 // Syncing all the models at once.
-conn.sync({ force: true }).then(() => {
+conn.sync({ force: false }).then(() => {
     server.listen(3001, function () {
-    loadGuitarJson().then( res => console.log('Productos insertados: ',res))
+   /*  loadGuitarJson().then( res => console.log('Productos insertados: ',res)) */
     console.log('escuchando en puerto 3001'); // eslint-disable-line no-console
   });
 });
