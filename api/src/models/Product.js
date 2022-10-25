@@ -39,10 +39,6 @@ module.exports = (sequelize) => {
                 defaultValue: false,
             },
 			aditionalInformation: DataTypes.TEXT,
-			rating: {
-				type: DataTypes.INTEGER,
-				defaultValue: 0,
-			},
 		},
 		{
 			paranoid: true,

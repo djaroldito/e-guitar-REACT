@@ -11,8 +11,12 @@ module.exports = (sequelize) => {
 			zipcode: DataTypes.STRING,
 			phone: DataTypes.STRING,
 			email: {
-				type: DataTypes.STRING,
-				unique: 'emailIndex',
+                type: DataTypes.STRING,
+                unique: 'emailIndex',
+                validate: {
+                    isEmail: true,
+                }
+
 			},
 			password: {
                 type: DataTypes.STRING,
