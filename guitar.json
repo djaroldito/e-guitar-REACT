@@ -40,7 +40,7 @@
         "stock": "",
         "discount":"",
         "type": "",
-        "left-hand": ,
+        "left-hand": false,
         "Additional-information": ""
     }
 ]
