@@ -1,0 +1,46 @@
+[
+    {
+        "id": "1",
+        "brand": "Femmto",
+        "model": "CG001-Azul",
+        "img": ["https://http2.mlstatic.com/D_NQ_NP_2X_607586-MLA50209395075_062022-F.webp","https://http2.mlstatic.com/D_NQ_NP_2X_748520-MLA50415595917_062022-F.webp","https://http2.mlstatic.com/D_NQ_NP_2X_842296-MLA48982704770_012022-F.webp"],
+        "color": ["naranja", "natural"],
+        "price": 16.999,
+        "strings": 6,
+        "description": "Guitarra recomendada por la mayoría de los profesores para empezar a tocar! Una medida ESTANDAR puede utilizarse tanto para adultos como para chicos! Medidas: 12cm de alto x 96cm de largo x 44cm de ancho. Colores: Azul esfumado; Cedro esfumado naranja; Madera Natural Clarita; Negro Azabache. Incluye manual de instrucciones en español con clases para aprender a tocar. INCLUYE: Guitarra Criolla. Manual De Aprendizaje.",
+        "stock": "5",
+        "discount":"0%",
+        "type": "Criolla",
+        "Additional-information": "FACTURAS: Realizamos A y B. Si necesitas factura para un CUIT específico, ingrésalo en tus datos de la cuenta antes de realizar la compra. SERVICIO TECNICO: Servicio técnico oficial propio para que tu garantía sea real y accedas a todos los repuestos originales y accesorios que necesites. "
+    },
+    {
+        "id": "2",
+        "brand": "Yamaha",
+        "model": "C40",
+        "img": "https://i.ibb.co/QJfqs4K/1.jpg",
+        "color": ["negro", "natural"],
+        "price": 52.830,
+        "strings": 6,
+        "description": "Con más de un siglo en la fabricación de instrumentos musicales, Yamaha es una marca que habla por sí sola. Al ser una referente mundial de la industria musical, su sello de calidad en guitarras es un diferencial asegurado para tus canciones.",
+        "stock": "5",
+        "discount":"0%",
+        "type": "Criolla",
+        "left-hand":false,
+        "Additional-information": "Un modelo para cada guitarrista. La tapa de abeto genera un tono brillante y claro, incluso en los registros más agudos. "
+    },
+    {
+        "id": "",
+        "brand":"" ,
+        "model":"" ,
+        "img": [],
+        "color": [],
+        "price": 0 ,
+        "strings": 0 ,
+        "description": "",
+        "stock": "",
+        "discount":"",
+        "type": "",
+        "left-hand": false,
+        "Additional-information": ""
+    }
+]
