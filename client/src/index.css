@@ -17,3 +17,9 @@ header{
   max-width: 3200px;
   background-color: rgb(89, 75, 167);
 }
+
+main, section{
+  max-width: 1200px;
+  margin-left: auto;
+  margin-right: auto;
+}

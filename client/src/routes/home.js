@@ -1,50 +1,30 @@
 import styled from "styled-components";
 import {BsCart2} from 'react-icons/bs'
 import {FaGuitar} from 'react-icons/fa'
+import {useDispatch, useSelector} from 'react-redux'
+import { useEffect } from "react";
+import {getAllPrds} from './../Redux/productActions'
+import {Link} from 'react-router-dom'
 
 const Home = () => {
-  let arr = [ {
-    id: "1",
-    brand: "Femmto",
-    model: "CG001-Azul",
-    img: "https://http2.mlstatic.com/D_NQ_NP_2X_607586-MLA50209395075_062022-F.webp",
-    color: ["naranja", "natural"],
-    price: 16.999,
-    strings: 6,
-    description: "Guitarra recomendada por la mayoría de los profesores para empezar a tocar! Una medida ESTANDAR puede utilizarse tanto para adultos como para chicos! Medidas: 12cm de alto x 96cm de largo x 44cm de ancho. Colores: Azul esfumado; Cedro esfumado naranja; Madera Natural Clarita; Negro Azabache. Incluye manual de instrucciones en español con clases para aprender a tocar. INCLUYE: Guitarra Criolla. Manual De Aprendizaje.",
-    stock: "5",
-    discount:"0%",
-    type: "Criolla",
-    AdditionalInformation: "FACTURAS: Realizamos A y B. Si necesitas factura para un CUIT específico, ingrésalo en tus datos de la cuenta antes de realizar la compra. SERVICIO TECNICO: Servicio técnico oficial propio para que tu garantía sea real y accedas a todos los repuestos originales y accesorios que necesites. "
-},
-{
-    id: "2",
-    brand: "Yamaha",
-    model: "C40",
-    img: "https://i.ibb.co/QJfqs4K/1.jpg",
-    color: ["negro", "natural"],
-    price: 52.830,
-    strings: 6,
-    description: "Con más de un siglo en la fabricación de instrumentos musicales, Yamaha es una marca que habla por sí sola. Al ser una referente mundial de la industria musical, su sello de calidad en guitarras es un diferencial asegurado para tus canciones.",
-    stock: "5",
-    discount:"0%",
-    type: "Criolla",
-    leftHand:false,
-    AdditionalInformation: "Un modelo para cada guitarrista. La tapa de abeto genera un tono brillante y claro, incluso en los registros más agudos. "
-},
-];
+const dispatch = useDispatch()
+const products = useSelector(state => state.products.products)
+
+useEffect(() => {if(products.length === 0) {dispatch(getAllPrds())}},[products.length,dispatch])
+
+
   return (
     <main>
       <CardsCont>
-        {arr.map((item) => (
+        {products?.map((item) => (
           <DivCont key={item.id}>
              <img src={item.img} alt="" />
             <div className="text-cont">
            <h2>{item.brand}</h2>
               <h3>{item.model}</h3>
               <p>$ {item.price}</p>
-              <button><FaGuitar/> Show Details</button>
-              <button><BsCart2/> Add Cart</button>
+              <Link to={`/${item.id}`}> <FaGuitar/> Show Details</Link>
+              <button className="cartbtn"><BsCart2/> Add Cart</button>
             </div>
           </DivCont>
         ))}
@@ -66,6 +46,12 @@ const DivCont = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;
+
+  a{
+    text-decoration: none;
+    color: blue;
+
+  }
 
   h2,
   h3 {
@@ -95,6 +81,11 @@ const DivCont = styled.div`
     border-radius: 10px;
     width: 85%;
     cursor: pointer;
+  }
+  .cartbtn{
+    background-color: rgb(41, 73, 143);
+    color: whitesmoke;
+    font-weight: 600;
   }
 `;
 const CardsCont = styled.div`
