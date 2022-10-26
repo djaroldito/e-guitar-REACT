@@ -8,22 +8,24 @@ const sequelize = require("sequelize")
 const { Product } = require("../db.js")
 
 //  GET /rguitars
-//  GET /rguitars?brand="..."
+//  GET /rguitars?brand="..." &type="..." &color="..."
 router.get("/", async (req, res) => {
 	try {
-		const { brand } = req.query
+		const { brand, type, color } = req.query
 
 		// if no product load form json
 		await loadProductData()
 
-		// check if there is brand
-		if (brand) {
+		// check if there are filter parameters
+		if (brand || type || color) {
+			const whereQuery = {}
+			// ilike trabaja entre mayusculas y minusculas y de cierta forma te acelera los procesos
+			if (brand) whereQuery.brand = { [sequelize.Op.iLike]: `%${brand}%` }
+			if (type) whereQuery.type = { [sequelize.Op.iLike]: `%${type}%` }
+            if (color) whereQuery.color = { [sequelize.Op.iLike]: `%${color}%` }
+            
 			const guitar = await Product.findAll({
-				where: {
-					brand: {
-						[sequelize.Op.iLike]: `%${brand}%`, // ilike trabaja entre mayusculas y minusculas y de cierta forma te acelera los procesos
-					},
-				},
+				where: whereQuery,
 			})
 			// if found send guitar, else NOT FOUND
 			guitar.length
@@ -60,6 +62,11 @@ router.get("/:idGuitar", async (req, res) => {
 		res.status(404).send(error.message)
 	}
 })
+
+/**
+ * CRUD PRODUCT
+ ***************
+ */
 
 // POST /rguitars
 router.post("/", async (req, res) => {
@@ -134,7 +141,7 @@ router.put("/:idGuitar", async (req, res) => {
 			type,
 			leftHand,
 			aditionalInformation,
-        } = req.body
+		} = req.body
 		// check required info
 		if (
 			!brand ||
@@ -170,7 +177,7 @@ router.put("/:idGuitar", async (req, res) => {
 					},
 				}
 			)
-			res.status(200).send('Producto actualizado!')
+			res.status(200).send("Producto actualizado!")
 		}
 	} catch (error) {
 		res.status(400).send(error.message)

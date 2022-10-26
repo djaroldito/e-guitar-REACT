@@ -1,5 +1,7 @@
 import axios from "axios";
-import { getAllProducts, getProductById } from "./productSlice";
+import { getAllProducts, 
+        getProductById, 
+        getProductByBrand } from "./productSlice";
 
 export const getAllPrds = () => (dispatch) => {
     axios("http://localhost:3001/rguitars")

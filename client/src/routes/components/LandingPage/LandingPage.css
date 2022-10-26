@@ -1,0 +1,100 @@
+@import url("//fonts.googleapis.com/css?family=Atomic+Age");
+
+.LandingBg{
+    filter: grayscale(70%);
+    width: 100vw;
+    height: 100vh;
+    object-fit: cover;
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    z-index: -1;
+}
+
+.Arrow {
+    width: 6vmin;
+    height: 6vmin;
+    box-sizing: border-box;
+    position: absolute;
+    left: 93%;
+    bottom:50%;
+    transform: rotate(45deg);
+}
+.Arrow::before {
+    content: '';
+    width: 100%;
+    height: 100%;
+    border-width: 0.8vmin 0.8vmin 0 0;
+    border-style: solid;
+    border-color: #fafafa;
+    transition: 0.2s ease;
+    display: block;
+    transform-origin: 100% 0;
+}
+.Arrow:after {
+    content: '';
+    float: left;
+    position: relative;
+    top: -100%;
+    width: 100%;
+    height: 100%;
+    border-width: 0 0.8vmin 0 0;
+    border-style: solid;
+    border-color: #fafafa;
+    transform-origin: 100% 0;
+    transition: 0.2s ease;
+}
+.Arrow:hover::after {
+    transform: rotate(45deg);
+    border-color: orange;
+    height: 120%;
+    
+   
+}
+.Arrow:hover::before {
+    border-color: orange;
+    transform: scale(0.8);
+}
+
+.Arrow .ArrowContent{
+    position: absolute; 
+    display: block;
+    color:white;
+    right:100%;
+    top:100%;
+    opacity: 0;
+    transform: rotate(-45deg);
+    transition: all .2s ease-in-out;
+}
+.Arrow:hover .ArrowContent{
+    opacity: 1;
+}
+
+.title{
+    font-size:4vw;
+    font-family: "Atomic Age"; 
+    color: #EB984E;
+    text-align: center;
+    
+}
+.title p {
+    line-height: 1.5;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.footerLandingPage{
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    background-color: rgb(0, 0, 0, .5);
+    display: flex;
+    align-items: center;
+    justify-content: center; 
+}
+.footerLandingPage p{
+    font-size: 20px;
+    color: white;   
+}
