@@ -16,11 +16,17 @@ export const productSlice = createSlice({
         getProductByBrand: (state, action) =>{
             state.products = action.payload
         },
+        getProductFiltered: (state, action) =>{
+            state.products = action.payload
+        }
     }
 });
 
+/* getFilteredProducts, createNewProduct */
+
 export const { getAllProducts, 
                getProductById, 
-               getProductByBrand } = productSlice.actions;
+               getProductByBrand,
+               getProductFiltered } = productSlice.actions;
 
 export default productSlice.reducer;
