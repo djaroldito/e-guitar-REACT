@@ -19,13 +19,19 @@ export const productSlice = createSlice({
         },
         getProductToCart: (state, action) => {
             state.cart = state.cart.concat(action.payload)
-        }
-    }
+        },
+        delProductToCart: (state, action) => {
+            state.cart = state.cart.filter(el=> el.id !== action.payload)
+        },
+
+
+    },
 });
 
 export const { getAllProducts, 
                getProductById, 
                getProductByBrand,
-               getProductToCart } = productSlice.actions;
+               getProductToCart,
+               delProductToCart } = productSlice.actions;
 
 export default productSlice.reducer;

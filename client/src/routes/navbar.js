@@ -5,6 +5,7 @@ import { useState } from "react"
 import {BiLogIn} from 'react-icons/bi'
 import {FaUserAlt} from 'react-icons/fa'
 import {AiOutlineSearch} from 'react-icons/ai'
+import Cart from "./components/cart"
 
 const NavBar = () =>{
     const [isActive, setIsActive] = useState(false);
@@ -34,6 +35,7 @@ const NavBar = () =>{
                     <FaUserAlt/>
                 </UserCont>
                 </IconCont>
+                <NavLink to='/cart'>Cart</NavLink>
             </NavCont>
         </header>
     )

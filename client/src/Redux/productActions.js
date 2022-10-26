@@ -1,7 +1,8 @@
 import axios from "axios";
 import { getAllProducts, 
         getProductById, 
-        getProductByBrand } from "./productSlice";
+        getProductByBrand,
+         } from "./productSlice";
 
 export const getAllPrds = () => (dispatch) => {
     axios("http://localhost:3001/rguitars")
@@ -14,3 +15,5 @@ export const getById = (id) => (dispatch) => {
     .then(res => dispatch(getProductById(res.data)))
     .catch(err => console.log(err))
 }
+
+
