@@ -1,14 +1,16 @@
 import { Route, Routes } from 'react-router-dom';
 import Example from './routes/home';
 import NavBar from './routes/navbar';
-// import Home from './routes/home';
+import LandingPage from './routes/components/LandingPage/LandingPage';
+import Home from './routes/home';
 
 function App() {
   return (
    <>
    <NavBar/>
    <Routes>
-    <Route path='/' element={<Example/>}/>
+    <Route path='/' element={<LandingPage/>}/>
+    <Route path='/home' element={<Home/>}/>
    </Routes>
    </>
   );
