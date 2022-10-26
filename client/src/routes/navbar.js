@@ -16,7 +16,7 @@ const NavBar = () =>{
     return(
         <header>
             <NavCont>
-            <NavLink to='/'>Home</NavLink>
+            <NavLink to='/home'>Home</NavLink>
             <NavLink to='/'>discount</NavLink>
                 <Search>
                         <div style={isActive ? {display: 'block'} : {display:'none'}}>
@@ -40,7 +40,7 @@ const NavBar = () =>{
 }
 
 const NavCont = styled.div`
-max-width: 90%;
+max-width: 1200px;
 height: 100%;
 color: whitesmoke;
 margin-left: auto;
