@@ -5,6 +5,7 @@ import {useDispatch, useSelector} from 'react-redux'
 import { useEffect } from "react";
 import {getAllPrds} from './../Redux/productActions'
 import {Link} from 'react-router-dom'
+import { getProductToCart } from "../Redux/productSlice";
 
 const Home = () => {
 const dispatch = useDispatch()
@@ -24,7 +25,7 @@ useEffect(() => {if(products.length === 0) {dispatch(getAllPrds())}},[products.l
               <h3>{item.model}</h3>
               <p>$ {item.price}</p>
               <Link to={`/${item.id}`}> <FaGuitar/> Show Details</Link>
-              <button className="cartbtn"><BsCart2/> Add Cart</button>
+              <button className="cartbtn" onClick={() => dispatch(getProductToCart(item))}><BsCart2/> Add Cart</button>
             </div>
           </DivCont>
         ))}
