@@ -5,6 +5,7 @@ export const productSlice = createSlice({
     initialState:{
         products: [],
         detail: {},
+        cart: []
     },
     reducers:{
         getAllProducts: (state, action) =>{
@@ -18,6 +19,9 @@ export const productSlice = createSlice({
         },
         getProductFiltered: (state, action) =>{
             state.products = action.payload
+        },
+        getProductToCart: (state, action) => {
+            state.cart = state.cart.concat(action.payload)
         }
     }
 });
@@ -27,6 +31,8 @@ export const productSlice = createSlice({
 export const { getAllProducts, 
                getProductById, 
                getProductByBrand,
-               getProductFiltered } = productSlice.actions;
+               getProductFiltered,
+               getProductToCart } = productSlice.actions;
+
 
 export default productSlice.reducer;

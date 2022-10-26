@@ -1,16 +1,31 @@
 import { NavLink } from "react-router-dom"
 import styled from "styled-components"
 import SearchBar from "./components/searchbar"
+import { useState } from "react"
 import {BiLogIn} from 'react-icons/bi'
 import {FaUserAlt} from 'react-icons/fa'
+import {AiOutlineSearch} from 'react-icons/ai'
 
 const NavBar = () =>{
+    const [isActive, setIsActive] = useState(false);
+
+    const handleClick = () => {
+        setIsActive(current => !current)
+    }
+
     return(
         <header>
             <NavCont>
-                <NavLink to='/'>Home</NavLink>
-                <NavLink to='/'>discount</NavLink>
-                <SearchBar/>
+            <NavLink to='/home'>Home</NavLink>
+            <NavLink to='/'>discount</NavLink>
+                <Search>
+                        <div style={isActive ? {display: 'block'} : {display:'none'}}>
+                            <SearchBar/>
+                        </div>
+                    <button onClick={handleClick}>
+                        <AiOutlineSearch/>
+                    </button>
+                </Search>
                 <IconCont>
                 <UserCont >
                     <BiLogIn/>
@@ -26,7 +41,7 @@ const NavBar = () =>{
 
 const NavCont = styled.div`
 max-width: 1200px;
-height: 70px;
+height: 100%;
 color: whitesmoke;
 margin-left: auto;
 margin-right: auto;
@@ -41,15 +56,23 @@ a{
     font-weight: 500;
     font-size: 20px;
     padding: 15px;
+    transition: 0.4s ease;
+}
+a:hover{
+    background-color:#EB984E
 }
 `
+const Search = styled.div`
+    font-size:20px;
+    display:flex;
+    
+`
+
 const UserCont = styled.div`
 font-size: 20px;
 border-radius: 50%;
 padding: 4px 6px;
 color: rgb(10,20,11);
-
-
 `
 
 const IconCont = styled.div`
