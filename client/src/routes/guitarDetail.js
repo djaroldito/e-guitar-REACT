@@ -13,7 +13,6 @@ const GuitarDetail = () => {
 
   const detail = useSelector(state => state.products.detail)
   
-
   console.log(detail)
 
   return (
