@@ -1,4 +1,3 @@
-
 import { Route, Routes } from 'react-router-dom';
 import Example from './routes/home';
 import NavBar from './routes/navbar';
