@@ -7,12 +7,12 @@ const SuggestionCard = (data) => {
             <div className="SCard">
                 <h2>{data.brand} {data.model}</h2>
                 <h4>${data.price}</h4>
-                <img src={data.img} className="ImgContainer"></img>
+                <img src={data.img} className="ImgContainer" alt=""/>
             </div>
         </Link>
-       
+
     )
-   
+
 }
 
 

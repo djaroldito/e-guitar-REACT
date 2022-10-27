@@ -2,8 +2,8 @@ import { NavLink } from "react-router-dom"
 import styled from "styled-components"
 import {BiLogIn} from 'react-icons/bi'
 import {FaUserAlt} from 'react-icons/fa'
-import Cart from "./components/cart"
-import {AiOutlineSearch} from 'react-icons/ai'
+//import Cart from "./components/cart"
+//import {AiOutlineSearch} from 'react-icons/ai'
 import "../index.css";
 import React from "react";
 
@@ -11,7 +11,7 @@ const NavBar = () =>{
     const path = window.location.pathname;
 
     return(
-        <header className={path == '/' ? "headerLanding" : "header"}>
+        <header className={path === '/' ? "headerLanding" : "header"}>
             <NavCont>
             <NavLink to='/home'>Home</NavLink>
             <NavLink to='/'>discount</NavLink>

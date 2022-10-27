@@ -6,7 +6,7 @@ const SearchBar = ({handler}) =>{
     const [Search, setSearch] = useState([]);
     const [isSelected, setIsSelected] = useState(false);
     const products = useSelector(state => state.products.products);
-    
+
     const handleChange = (e) => {
         filter(e.target.value)
     }
@@ -18,7 +18,7 @@ const SearchBar = ({handler}) =>{
     const handleClick = () => {
         setIsSelected(current => !current)
     }
-    
+
     const filter = (searched) => {
         var result = products.filter(r => {
             const name = r.brand.toString().toLowerCase() + ' ' + r.model.toString().toLowerCase();
@@ -26,24 +26,24 @@ const SearchBar = ({handler}) =>{
             if(name.includes(searched.toLowerCase()))
             return r;
         })
-        if(searched == ''){
+        if(searched === ''){
             setSearch([]);
         }else{
                 setSearch(result);
             }
         }
-    
 
-    
+
+
     return(
         <div>
             <form onSubmit={e => handleSubmit(e)}>
-                <input type='text' placeholder="Search..." onChange={(e) => handleChange(e)} onFocus={handleClick} onBlur={handleClick} style={{padding:"14px 16px", width: "90%"} }/> 
+                <input type='text' placeholder="Search..." onChange={(e) => handleChange(e)} onFocus={handleClick} onBlur={handleClick} style={{padding:"14px 16px", width: "90%"} }/>
             </form>
-            <div className="SContainer">                
+            <div className="SContainer">
                 {isSelected && Search?.slice(0, 3).map(r => {
                     return(
-                        <SuggestionCard 
+                        <SuggestionCard
                             id={r.id}
                             model={r.model}
                             brand={r.brand}
@@ -51,7 +51,7 @@ const SearchBar = ({handler}) =>{
                             img={r.img}
                         />
                     )
-                }) 
+                })
             }
             </div>
         </div>
