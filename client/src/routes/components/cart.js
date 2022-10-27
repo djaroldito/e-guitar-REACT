@@ -1,20 +1,17 @@
-import { useEffect, React } from "react"
+import { React } from "react"
 import { useDispatch, useSelector } from "react-redux"
-import { Link } from "react-router-dom"
 import styled from "styled-components"
 import { delProductToCart } from "../../Redux/productSlice"
-
+import {delAllProductToCart} from '../../Redux/productSlice'
 
 const Cart = () =>{
-  
-    const carrito = useSelector(state => state.products.cart)
-    const dispatch = useDispatch()
+   const carrito = useSelector(state => state.products.cart)
+   const dispatch = useDispatch()
 
-   
-  return(
+   return(
   <main>
-     
   <div>
+    <button onClick={() => dispatch(delAllProductToCart())}>Remove all products</button> 
 
           {carrito.map((el=>(
           <div key={el.id}>
@@ -27,19 +24,12 @@ const Cart = () =>{
           {el.type?<p> <b>Type: </b>{el.type}.</p>: null}
           {el.color?<p> <b>Color: </b>{el.color}.</p>: null}
           <p><b>Price: </b>{el.price}</p>
-         
-         
           <p><b>Stock: </b>{el.stock}</p>
           <p><b>Discount: </b>{el.discount}</p>
-        
-        
-          <button onClick={() => dispatch(delProductToCart(el.id))}>Remove product</button>
+          <button onClick={() => dispatch(delProductToCart(el.id))}>Remove one products</button>
           </div>
           )))}
-           
-
-         
-         
+       
           </div>
   </main>
   )
