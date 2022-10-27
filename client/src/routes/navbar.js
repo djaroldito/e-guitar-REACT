@@ -1,31 +1,20 @@
 import { NavLink } from "react-router-dom"
 import styled from "styled-components"
-import SearchBar from "./components/searchbar"
-import { useState } from "react"
 import {BiLogIn} from 'react-icons/bi'
 import {FaUserAlt} from 'react-icons/fa'
+import Cart from "./components/cart"
 import {AiOutlineSearch} from 'react-icons/ai'
+import "../index.css";
+import React from "react";
 
 const NavBar = () =>{
-    const [isActive, setIsActive] = useState(false);
-
-    const handleClick = () => {
-        setIsActive(current => !current)
-    }
+    const path = window.location.pathname;
 
     return(
-        <header>
+        <header className={path == '/' ? "headerLanding" : "header"}>
             <NavCont>
             <NavLink to='/home'>Home</NavLink>
             <NavLink to='/'>discount</NavLink>
-                <Search>
-                        <div style={isActive ? {display: 'block'} : {display:'none'}}>
-                            <SearchBar/>
-                        </div>
-                    <button onClick={handleClick}>
-                        <AiOutlineSearch/>
-                    </button>
-                </Search>
                 <IconCont>
                 <UserCont >
                     <BiLogIn/>
@@ -34,6 +23,7 @@ const NavBar = () =>{
                     <FaUserAlt/>
                 </UserCont>
                 </IconCont>
+                <NavLink to='/cart'>Cart</NavLink>
             </NavCont>
         </header>
     )
@@ -62,11 +52,7 @@ a:hover{
     background-color:#EB984E
 }
 `
-const Search = styled.div`
-    font-size:20px;
-    display:flex;
-    
-`
+
 
 const UserCont = styled.div`
 font-size: 20px;

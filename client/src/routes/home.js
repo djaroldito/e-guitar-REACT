@@ -1,54 +1,89 @@
 import styled from "styled-components";
-import { BsCart2 } from "react-icons/bs";
-import { FaGuitar } from "react-icons/fa";
-import { useDispatch, useSelector } from "react-redux";
-import { useEffect } from "react";
-import { getAllPrds, getBrands, getColors, getTypes } from "./../Redux/productActions";
-import { Link } from "react-router-dom";
+import {BsCart2} from 'react-icons/bs'
+import {FaGuitar} from 'react-icons/fa'
+import {useDispatch, useSelector} from 'react-redux'
+import { useEffect, useState } from "react";
 import { getProductToCart } from "../Redux/productSlice";
-import Filter from "./components/filters";
+import Pagination from "./components/Pagination/Pagination";
+import {getAllPrds} from './../Redux/productActions'
+import {Link} from 'react-router-dom'
+import {AiOutlineSearch} from 'react-icons/ai'
+import SearchBar from './components/searchbar'
 
 const Home = () => {
-  const dispatch = useDispatch();
-  const products = useSelector((state) => state.products.products);
+const [isActive, setIsActive] = useState(false);
+const [Searched, setSearch] = useState([]);
+const dispatch = useDispatch()
+const products = useSelector(state => state.products.products)
 
-  useEffect(() => {
-    if (products.length === 0) {
-      dispatch(getAllPrds());
-      dispatch(getBrands())
-      dispatch(getColors())
-      dispatch(getTypes())
-    }
-  }, [products.length, dispatch]);
+useEffect(() => {if(products.length === 0) {dispatch(getAllPrds())}},[products.length,dispatch])
+
+const [currentPage, setCurrentPage] = useState(1)
+  const guitarsPerPage = 4
+	const firstIdx = (currentPage - 1) * guitarsPerPage
+	const lastIdx = firstIdx + guitarsPerPage
+
+  let currentGuitars = products.slice(firstIdx, lastIdx);
+
+ const handlePageChange = (pageNumber) => {
+  dispatch(setCurrentPage(pageNumber))
+  }
+
+  const SearchHandler = (value) => {
+    setSearch(value)
+  }
+  const handleClick = () => {
+    setIsActive(current => !current)
+  }
+  const ProductRender = (item) => 
+    (
+      <DivCont key={item.id}>
+        <img src={item.img} alt="" />
+        <div className="text-cont">
+        <h2>{item.brand}</h2>
+          <h3>{item.model}</h3>
+          <p>$ {item.price}</p>
+          <Link to={`/${item.id}`}> <FaGuitar/> Show Details</Link>
+          <button className="cartbtn"><BsCart2/> Add Cart</button>
+        </div>
+    </DivCont>
+  )
 
   return (
     <main>
-        <Filter/>
+      <Search>
+              <div style={isActive ? {display: 'block', width:'30%'} : {display:'none', width:'30%'}}>
+                  <SearchBar handler={SearchHandler} products={products} Search={Search}/>
+              </div>
+          <button onClick={handleClick}>
+              <AiOutlineSearch/>
+          </button>
+      </Search>
       <CardsCont>
-        {products?.map((item) => (
-          <DivCont key={item.id}>
-            <img src={item.img} alt="" />
-            <div className="text-cont">
-              <h2>{item.brand}</h2>
-              <h3>{item.model}</h3>
-              <p>$ {item.price}</p>
-              <Link to={`/${item.id}`}>
-                <FaGuitar /> Show Details
-              </Link>
-              <button
-                className="cartbtn"
-                onClick={() => dispatch(getProductToCart(item))}
-              >
-                <BsCart2 /> Add Cart
-              </button>
-            </div>
-          </DivCont>
-        ))}
+      {Searched.length>0 ?         
+          Searched.map((item) => ProductRender(item)) : currentGuitars.map((item) => ProductRender(item))
+          }
       </CardsCont>
+      <Pagination 
+          handleChange={handlePageChange}
+          totalCards={products.length}
+          currentPage={currentPage}
+          guitarsPerPage={guitarsPerPage}/>
     </main>
   );
 };
 
+
+const Search = styled.div`
+    padding: 14px 16px;
+    display:flex;
+    justify-content: center;
+    button{
+      background-color:transparent;
+      border: none;
+      font-size:30px;
+    }
+`
 const DivCont = styled.div`
   width: 350px;
   height: 350px;
@@ -111,5 +146,6 @@ const CardsCont = styled.div`
   margin-left: auto;
   margin-right: 25px;
 `;
+
 
 export default Home;

@@ -21,7 +21,11 @@ export const productSlice = createSlice({
         getProductByBrand: (state, action) =>{
             state.products = action.payload
         },
+        getProductFiltered: (state, action) =>{
+            state.products = action.payload
+        },
         getProductToCart: (state, action) => {
+<<<<<<< HEAD
             state.cart = state.cart.concat(action.payload)
         },
         getAllBrands: (state, action) =>{
@@ -37,15 +41,42 @@ export const productSlice = createSlice({
             state.types = action.payload
         }
     }
+=======
+            state.cart.find(el=>el.id === action.payload.id) ?
+            state.cart = [...state.cart]:
+            state.cart = [...state.cart, action.payload]
+                  
+        },
+        delProductToCart: (state, action) => {
+            state.cart = state.cart.filter(el=> el.id !== action.payload)
+        },
+
+        delAllProductToCart: (state, action) => {
+            state.cart = []
+        },
+
+
+    },
+>>>>>>> dev
 });
+
+/* getFilteredProducts, createNewProduct */
 
 export const { getAllProducts, 
                getProductById, 
                getProductByBrand,
+<<<<<<< HEAD
                getProductToCart,
                getAllBrands,
                getAllColors,
                getByFilters,
                getAllTypes } = productSlice.actions;
+=======
+               getProductFiltered,
+               delProductToCart,
+               getProductToCart,
+               delAllProductToCart } = productSlice.actions;
+
+>>>>>>> dev
 
 export default productSlice.reducer;
