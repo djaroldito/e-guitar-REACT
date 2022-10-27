@@ -1,31 +1,46 @@
 import styled from "styled-components";
-import {BsCart2} from 'react-icons/bs'
-import {FaGuitar} from 'react-icons/fa'
-import {useDispatch, useSelector} from 'react-redux'
+import { BsCart2 } from "react-icons/bs";
+import { FaGuitar } from "react-icons/fa";
+import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
-import {getAllPrds} from './../Redux/productActions'
-import {Link} from 'react-router-dom'
+import { getAllPrds, getBrands, getColors, getTypes } from "./../Redux/productActions";
+import { Link } from "react-router-dom";
 import { getProductToCart } from "../Redux/productSlice";
+import Filter from "./components/filters";
 
 const Home = () => {
-const dispatch = useDispatch()
-const products = useSelector(state => state.products.products)
+  const dispatch = useDispatch();
+  const products = useSelector((state) => state.products.products);
 
-useEffect(() => {if(products.length === 0) {dispatch(getAllPrds())}},[products.length,dispatch])
-
+  useEffect(() => {
+    if (products.length === 0) {
+      dispatch(getAllPrds());
+      dispatch(getBrands())
+      dispatch(getColors())
+      dispatch(getTypes())
+    }
+  }, [products.length, dispatch]);
 
   return (
     <main>
+        <Filter/>
       <CardsCont>
         {products?.map((item) => (
           <DivCont key={item.id}>
-             <img src={item.img} alt="" />
+            <img src={item.img} alt="" />
             <div className="text-cont">
-           <h2>{item.brand}</h2>
+              <h2>{item.brand}</h2>
               <h3>{item.model}</h3>
               <p>$ {item.price}</p>
-              <Link to={`/${item.id}`}> <FaGuitar/> Show Details</Link>
-              <button className="cartbtn" onClick={() => dispatch(getProductToCart(item))}><BsCart2/> Add Cart</button>
+              <Link to={`/${item.id}`}>
+                <FaGuitar /> Show Details
+              </Link>
+              <button
+                className="cartbtn"
+                onClick={() => dispatch(getProductToCart(item))}
+              >
+                <BsCart2 /> Add Cart
+              </button>
             </div>
           </DivCont>
         ))}
@@ -48,10 +63,9 @@ const DivCont = styled.div`
   flex-direction: row;
   align-items: center;
 
-  a{
+  a {
     text-decoration: none;
     color: blue;
-
   }
 
   h2,
@@ -74,7 +88,7 @@ const DivCont = styled.div`
     max-height: 300px;
     object-fit: contain;
   }
-  button{
+  button {
     background: none;
     border: 1px solid black;
     padding: 10px 7px;
@@ -83,7 +97,7 @@ const DivCont = styled.div`
     width: 85%;
     cursor: pointer;
   }
-  .cartbtn{
+  .cartbtn {
     background-color: rgb(41, 73, 143);
     color: whitesmoke;
     font-weight: 600;

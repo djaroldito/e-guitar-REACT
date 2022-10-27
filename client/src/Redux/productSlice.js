@@ -1,11 +1,15 @@
 import { createSlice }  from "@reduxjs/toolkit";
 
+
 export const productSlice = createSlice({
     name: "products",
     initialState:{
         products: [],
         detail: {},
-        cart: []
+        cart: [],
+        brands: [],
+        colors: [],
+        types: [],
     },
     reducers:{
         getAllProducts: (state, action) =>{
@@ -19,6 +23,18 @@ export const productSlice = createSlice({
         },
         getProductToCart: (state, action) => {
             state.cart = state.cart.concat(action.payload)
+        },
+        getAllBrands: (state, action) =>{
+            state.brands = action.payload
+        },
+        getAllColors: (state,action) =>{
+            state.colors = action.payload
+        },
+        getByFilters: (state,action)  =>{
+            state.products = action.payload
+        },
+        getAllTypes:  (state,action)  =>{
+            state.types = action.payload
         }
     }
 });
@@ -26,6 +42,10 @@ export const productSlice = createSlice({
 export const { getAllProducts, 
                getProductById, 
                getProductByBrand,
-               getProductToCart } = productSlice.actions;
+               getProductToCart,
+               getAllBrands,
+               getAllColors,
+               getByFilters,
+               getAllTypes } = productSlice.actions;
 
 export default productSlice.reducer;
