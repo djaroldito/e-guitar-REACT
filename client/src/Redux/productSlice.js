@@ -5,6 +5,7 @@ export const productSlice = createSlice({
     initialState:{
         products: [],
         detail: {},
+        cart: []
     },
     reducers:{
         getAllProducts: (state, action) =>{
@@ -16,11 +17,36 @@ export const productSlice = createSlice({
         getProductByBrand: (state, action) =>{
             state.products = action.payload
         },
-    }
+        getProductFiltered: (state, action) =>{
+            state.products = action.payload
+        },
+        getProductToCart: (state, action) => {
+            state.cart.find(el=>el.id === action.payload.id) ?
+            state.cart = [...state.cart]:
+            state.cart = [...state.cart, action.payload]
+                  
+        },
+        delProductToCart: (state, action) => {
+            state.cart = state.cart.filter(el=> el.id !== action.payload)
+        },
+
+        delAllProductToCart: (state, action) => {
+            state.cart = []
+        },
+
+
+    },
 });
+
+/* getFilteredProducts, createNewProduct */
 
 export const { getAllProducts, 
                getProductById, 
-               getProductByBrand } = productSlice.actions;
+               getProductByBrand,
+               getProductFiltered,
+               delProductToCart,
+               getProductToCart,
+               delAllProductToCart } = productSlice.actions;
+
 
 export default productSlice.reducer;

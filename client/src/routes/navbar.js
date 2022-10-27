@@ -5,6 +5,7 @@ import { useState } from "react"
 import {BiLogIn} from 'react-icons/bi'
 import {FaUserAlt} from 'react-icons/fa'
 import {AiOutlineSearch} from 'react-icons/ai'
+import Cart from "./components/cart"
 
 const NavBar = () =>{
     const [isActive, setIsActive] = useState(false);
@@ -16,7 +17,7 @@ const NavBar = () =>{
     return(
         <header>
             <NavCont>
-            <NavLink to='/'>Home</NavLink>
+            <NavLink to='/home'>Home</NavLink>
             <NavLink to='/'>discount</NavLink>
                 <Search>
                         <div style={isActive ? {display: 'block'} : {display:'none'}}>
@@ -34,13 +35,14 @@ const NavBar = () =>{
                     <FaUserAlt/>
                 </UserCont>
                 </IconCont>
+                <NavLink to='/cart'>Cart</NavLink>
             </NavCont>
         </header>
     )
 }
 
 const NavCont = styled.div`
-max-width: 90%;
+max-width: 1200px;
 height: 100%;
 color: whitesmoke;
 margin-left: auto;
