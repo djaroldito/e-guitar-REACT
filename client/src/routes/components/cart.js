@@ -1,20 +1,33 @@
 import { React } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import styled from "styled-components"
-import { delProductToCart } from "../../Redux/productSlice"
-import {delAllProductToCart} from '../../Redux/productSlice'
+import {delOneFromCart,delAllFromCart, clearCart, getProductToCart } from "../../Redux/productSlice"
+
 
 const Cart = () =>{
    const carrito = useSelector(state => state.products.cart)
    const dispatch = useDispatch()
 
+   const delFromCart = (id, all = false) =>{
+     if (all){
+      dispatch(delAllFromCart(id))
+    }else{
+      dispatch(delOneFromCart(id))
+    }
+
+   }
+   
    return(
   <main>
   <div>
-    <button onClick={() => dispatch(delAllProductToCart())}>Remove all products</button> 
+    {carrito.length >= 1 ? <button onClick={() => dispatch(clearCart())}>Clear Cart</button> : null }
+    <br/>
+         {carrito.length >= 1 ? <label >Total:</label> : null }
+         {carrito.length >= 1 ?  carrito.reduce((acc,prod)=>acc + (prod.price * prod.quantity) , 0):null}
 
-          {carrito.map((el=>(
-          <div key={el.id}>
+
+          {carrito.map((el, index)=>(
+          <div key={index}>
           <h2>{el.brand}</h2>
 
           <ImgDiv>            
@@ -23,13 +36,17 @@ const Cart = () =>{
           {el.model?<p> <b>Model: </b>{el.model}.</p>: null}
           {el.type?<p> <b>Type: </b>{el.type}.</p>: null}
           {el.color?<p> <b>Color: </b>{el.color}.</p>: null}
-          <p><b>Price: </b>{el.price}</p>
-          <p><b>Stock: </b>{el.stock}</p>
-          <p><b>Discount: </b>{el.discount}</p>
-          <button onClick={() => dispatch(delProductToCart(el.id))}>Remove one products</button>
+          {el.price?<p> <b>Price: </b>{el.price} x {el.quantity} = ${el.price * el.quantity}.</p>: null}
+         
+
+          {el.discount?<p> <b>Discount: </b>{el.discount}.</p>: null}
+          {el.quantity?<p> <b>Quantity: </b>{el.quantity}.</p>: null}
+
+          <button onClick={() => dispatch(getProductToCart(el.id))} >Add one product</button>
+          <button onClick={() => delFromCart(el.id) }>Remove one Item</button>
+          <button onClick={() => delFromCart(el.id, true)}>Remove All Item</button>
           </div>
-          )))}
-       
+          ))}
           </div>
   </main>
   )
