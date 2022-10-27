@@ -1,38 +1,74 @@
 import styled from "styled-components";
 import {BsCart2} from 'react-icons/bs'
 import {FaGuitar} from 'react-icons/fa'
+import {useState} from "react";
+
 import {useDispatch, useSelector} from 'react-redux'
 import { useEffect } from "react";
 import {getAllPrds} from './../Redux/productActions'
+import SearchBar from "./components/searchbar"
 import {Link} from 'react-router-dom'
+import {AiOutlineSearch} from 'react-icons/ai'
 
 const Home = () => {
+const [isActive, setIsActive] = useState(false);
+const [Searched, setSearch] = useState([]);
 const dispatch = useDispatch()
 const products = useSelector(state => state.products.products)
 
 useEffect(() => {if(products.length === 0) {dispatch(getAllPrds())}},[products.length,dispatch])
 
+const SearchHandler = (value) => {
+  setSearch(value)
+}
+const handleClick = () => {
+  setIsActive(current => !current)
+}
+const ProductRender = (item) => 
+  (
+    <DivCont key={item.id}>
+      <img src={item.img} alt="" />
+      <div className="text-cont">
+      <h2>{item.brand}</h2>
+        <h3>{item.model}</h3>
+        <p>$ {item.price}</p>
+        <Link to={`/${item.id}`}> <FaGuitar/> Show Details</Link>
+        <button className="cartbtn"><BsCart2/> Add Cart</button>
+      </div>
+  </DivCont>
+)
 
-  return (
+
+return (
     <main>
+      <Search>
+              <div style={isActive ? {display: 'block', width:'30%'} : {display:'none', width:'30%'}}>
+                  <SearchBar handler={SearchHandler} products={products} Search={Search}/>
+              </div>
+          <button onClick={handleClick}>
+              <AiOutlineSearch/>
+          </button>
+      </Search>
       <CardsCont>
-        {products?.map((item) => (
-          <DivCont key={item.id}>
-             <img src={item.img} alt="" />
-            <div className="text-cont">
-           <h2>{item.brand}</h2>
-              <h3>{item.model}</h3>
-              <p>$ {item.price}</p>
-              <Link to={`/${item.id}`}> <FaGuitar/> Show Details</Link>
-              <button className="cartbtn"><BsCart2/> Add Cart</button>
-            </div>
-          </DivCont>
-        ))}
+        {Searched.length>0 ?         
+          Searched.map((item) => ProductRender(item)) : products.map((item) => ProductRender(item))
+          }
       </CardsCont>
     </main>
   );
 };
 
+
+const Search = styled.div`
+    padding: 14px 16px;
+    display:flex;
+    justify-content: center;
+    button{
+      background-color:transparent;
+      border: none;
+      font-size:30px;
+    }
+`
 const DivCont = styled.div`
   width: 350px;
   height: 350px;
@@ -96,5 +132,6 @@ const CardsCont = styled.div`
   margin-left: auto;
   margin-right: 25px;
 `;
+
 
 export default Home;
