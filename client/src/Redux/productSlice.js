@@ -21,10 +21,10 @@ export const productSlice = createSlice({
             state.products = action.payload
         },
         getProductToCart: (state, action) => {
+            state.cart.find(el=>el.id === action.payload.id) ?
+            state.cart = [...state.cart]:
             state.cart = [...state.cart, action.payload]
-           // let itemInCart = state.cart.find(item=>item.id === action.payload.id) 
-           //console.log(itemInCart)
-           
+                  
         },
         delProductToCart: (state, action) => {
             state.cart = state.cart.filter(el=> el.id !== action.payload)
