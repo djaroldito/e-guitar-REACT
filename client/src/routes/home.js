@@ -1,10 +1,12 @@
 import styled from "styled-components";
-import {BsCart2} from 'react-icons/bs'
-import {FaGuitar} from 'react-icons/fa'
-import {useDispatch, useSelector} from 'react-redux'
+import {BsCart2} from 'react-icons/bs';
+import {FaGuitar} from 'react-icons/fa';
+import {useDispatch, useSelector} from 'react-redux';
 import { useEffect } from "react";
-import {getAllPrds} from './../Redux/productActions'
-import {Link} from 'react-router-dom'
+import {getAllPrds} from './../Redux/productActions';
+import {Link} from 'react-router-dom';
+import {useState} from "react";
+import Pagination from "./components/Pagination/Pagination"
 
 const Home = () => {
 const dispatch = useDispatch()
@@ -12,11 +14,33 @@ const products = useSelector(state => state.products.products)
 
 useEffect(() => {if(products.length === 0) {dispatch(getAllPrds())}},[products.length,dispatch])
 
+ //paginados
+ /* const [currentPage, setCurrentPage] = useState(1); 
 
+ const [guitarsPerPage, setGuitarsPage] = useState(3); 
+ const indexOfLastGuitar = currentPage * guitarsPerPage; 
+ const indexOfFirstGuitar = indexOfLastGuitar - guitarsPerPage; 
+ */
+ const [currentPage, setCurrentPage] = useState(1)
+  const guitarsPerPage = 4
+	const firstIdx = (currentPage - 1) * guitarsPerPage
+	const lastIdx = firstIdx + guitarsPerPage
+
+
+
+
+
+  let currentGuitars = products.slice(firstIdx, lastIdx);
+  
+
+
+ const handlePageChange = (pageNumber) => {
+  dispatch(setCurrentPage(pageNumber))
+  }
   return (
     <main>
       <CardsCont>
-        {products?.map((item) => (
+        {currentGuitars?.map((item) => (
           <DivCont key={item.id}>
              <img src={item.img} alt="" />
             <div className="text-cont">
@@ -29,6 +53,11 @@ useEffect(() => {if(products.length === 0) {dispatch(getAllPrds())}},[products.l
           </DivCont>
         ))}
       </CardsCont>
+      <Pagination 
+          handleChange={handlePageChange}
+          totalCards={products.length}
+          currentPage={currentPage}
+          guitarsPerPage={guitarsPerPage}/>
     </main>
   );
 };
