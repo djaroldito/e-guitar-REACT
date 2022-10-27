@@ -1,12 +1,12 @@
 import styled from "styled-components";
 import {BsCart2} from 'react-icons/bs'
 import {FaGuitar} from 'react-icons/fa'
-import {useState} from "react";
-
 import {useDispatch, useSelector} from 'react-redux'
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
+import { getProductToCart } from "../Redux/productSlice";
+import {useState} from "react";
+import Pagination from "./components/Pagination/Pagination";
 import {getAllPrds} from './../Redux/productActions'
-import SearchBar from "./components/searchbar"
 import {Link} from 'react-router-dom'
 import {AiOutlineSearch} from 'react-icons/ai'
 
@@ -18,28 +18,38 @@ const products = useSelector(state => state.products.products)
 
 useEffect(() => {if(products.length === 0) {dispatch(getAllPrds())}},[products.length,dispatch])
 
-const SearchHandler = (value) => {
-  setSearch(value)
-}
-const handleClick = () => {
-  setIsActive(current => !current)
-}
-const ProductRender = (item) => 
-  (
-    <DivCont key={item.id}>
-      <img src={item.img} alt="" />
-      <div className="text-cont">
-      <h2>{item.brand}</h2>
-        <h3>{item.model}</h3>
-        <p>$ {item.price}</p>
-        <Link to={`/${item.id}`}> <FaGuitar/> Show Details</Link>
-        <button className="cartbtn"><BsCart2/> Add Cart</button>
-      </div>
-  </DivCont>
-)
+const [currentPage, setCurrentPage] = useState(1)
+  const guitarsPerPage = 4
+	const firstIdx = (currentPage - 1) * guitarsPerPage
+	const lastIdx = firstIdx + guitarsPerPage
 
+  let currentGuitars = products.slice(firstIdx, lastIdx);
 
-return (
+ const handlePageChange = (pageNumber) => {
+  dispatch(setCurrentPage(pageNumber))
+  }
+
+  const SearchHandler = (value) => {
+    setSearch(value)
+  }
+  const handleClick = () => {
+    setIsActive(current => !current)
+  }
+  const ProductRender = (item) => 
+    (
+      <DivCont key={item.id}>
+        <img src={item.img} alt="" />
+        <div className="text-cont">
+        <h2>{item.brand}</h2>
+          <h3>{item.model}</h3>
+          <p>$ {item.price}</p>
+          <Link to={`/${item.id}`}> <FaGuitar/> Show Details</Link>
+          <button className="cartbtn"><BsCart2/> Add Cart</button>
+        </div>
+    </DivCont>
+  )
+
+  return (
     <main>
       <Search>
               <div style={isActive ? {display: 'block', width:'30%'} : {display:'none', width:'30%'}}>
@@ -50,10 +60,15 @@ return (
           </button>
       </Search>
       <CardsCont>
-        {Searched.length>0 ?         
+      {Searched.length>0 ?         
           Searched.map((item) => ProductRender(item)) : products.map((item) => ProductRender(item))
           }
       </CardsCont>
+      <Pagination 
+          handleChange={handlePageChange}
+          totalCards={products.length}
+          currentPage={currentPage}
+          guitarsPerPage={guitarsPerPage}/>
     </main>
   );
 };

@@ -2,9 +2,10 @@ import { NavLink } from "react-router-dom"
 import styled from "styled-components"
 import {BiLogIn} from 'react-icons/bi'
 import {FaUserAlt} from 'react-icons/fa'
+import Cart from "./components/cart"
+import {AiOutlineSearch} from 'react-icons/ai'
 import "../index.css";
 import React from "react";
-
 
 const NavBar = () =>{
     const path = window.location.pathname;
@@ -12,7 +13,7 @@ const NavBar = () =>{
     return(
         <header className={path == '/' ? "headerLanding" : "header"}>
             <NavCont>
-            <NavLink to='/'>Home</NavLink>
+            <NavLink to='/home'>Home</NavLink>
             <NavLink to='/'>discount</NavLink>
                 <IconCont>
                 <UserCont >
@@ -22,13 +23,14 @@ const NavBar = () =>{
                     <FaUserAlt/>
                 </UserCont>
                 </IconCont>
+                <NavLink to='/cart'>Cart</NavLink>
             </NavCont>
         </header>
     )
 }
 
 const NavCont = styled.div`
-max-width: 90%;
+max-width: 1200px;
 height: 100%;
 color: whitesmoke;
 margin-left: auto;
