@@ -4,11 +4,11 @@ import {FaGuitar} from 'react-icons/fa'
 import {useDispatch, useSelector} from 'react-redux'
 import { useEffect, useState } from "react";
 import { getProductToCart } from "../Redux/productSlice";
-import {useState} from "react";
 import Pagination from "./components/Pagination/Pagination";
 import {getAllPrds} from './../Redux/productActions'
 import {Link} from 'react-router-dom'
 import {AiOutlineSearch} from 'react-icons/ai'
+import SearchBar from './components/searchbar'
 
 const Home = () => {
 const [isActive, setIsActive] = useState(false);
@@ -61,7 +61,7 @@ const [currentPage, setCurrentPage] = useState(1)
       </Search>
       <CardsCont>
       {Searched.length>0 ?         
-          Searched.map((item) => ProductRender(item)) : products.map((item) => ProductRender(item))
+          Searched.map((item) => ProductRender(item)) : currentGuitars.map((item) => ProductRender(item))
           }
       </CardsCont>
       <Pagination 
@@ -98,10 +98,9 @@ const DivCont = styled.div`
   flex-direction: row;
   align-items: center;
 
-  a{
+  a {
     text-decoration: none;
     color: blue;
-
   }
 
   h2,
@@ -124,7 +123,7 @@ const DivCont = styled.div`
     max-height: 300px;
     object-fit: contain;
   }
-  button{
+  button {
     background: none;
     border: 1px solid black;
     padding: 10px 7px;
@@ -133,7 +132,7 @@ const DivCont = styled.div`
     width: 85%;
     cursor: pointer;
   }
-  .cartbtn{
+  .cartbtn {
     background-color: rgb(41, 73, 143);
     color: whitesmoke;
     font-weight: 600;
