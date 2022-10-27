@@ -4,11 +4,11 @@ import {FaGuitar} from 'react-icons/fa'
 import {useDispatch, useSelector} from 'react-redux'
 import { useEffect, useState } from "react";
 import { getProductToCart } from "../Redux/productSlice";
-import {useState} from "react";
 import Pagination from "./components/Pagination/Pagination";
 import {getAllPrds} from './../Redux/productActions'
 import {Link} from 'react-router-dom'
-import {AiOutlineSearch} from 'react-icons/ai'
+import { AiOutlineSearch } from 'react-icons/ai'
+import SearchBar from './components/searchbar'
 
 const Home = () => {
 const [isActive, setIsActive] = useState(false);
@@ -35,7 +35,7 @@ const [currentPage, setCurrentPage] = useState(1)
   const handleClick = () => {
     setIsActive(current => !current)
   }
-  const ProductRender = (item) => 
+  const ProductRender = (item) =>
     (
       <DivCont key={item.id}>
         <img src={item.img} alt="" />
@@ -53,18 +53,18 @@ const [currentPage, setCurrentPage] = useState(1)
     <main>
       <Search>
               <div style={isActive ? {display: 'block', width:'30%'} : {display:'none', width:'30%'}}>
-                  <SearchBar handler={SearchHandler} products={products} Search={Search}/>
+                  <SearchBar handler={SearchHandler} products={currentGuitars} Search={Search}/>
               </div>
           <button onClick={handleClick}>
               <AiOutlineSearch/>
           </button>
       </Search>
       <CardsCont>
-      {Searched.length>0 ?         
-          Searched.map((item) => ProductRender(item)) : products.map((item) => ProductRender(item))
+      {Searched.length>0 ?
+          Searched.map((item) => ProductRender(item)) : currentGuitars.map((item) => ProductRender(item))
           }
       </CardsCont>
-      <Pagination 
+      <Pagination
           handleChange={handlePageChange}
           totalCards={products.length}
           currentPage={currentPage}
