@@ -43,7 +43,7 @@ const [currentPage, setCurrentPage] = useState(1)
         <h2>{item.brand}</h2>
           <h3>{item.model}</h3>
           <p>$ {item.price}</p>
-          <Link to={`/${item.id}`}> <FaGuitar/> Show Details</Link>
+          <Link to={`/home/${item.id}`}> <FaGuitar/> Show Details</Link>
           <button className="cartbtn"><BsCart2/> Add Cart</button>
         </div>
     </DivCont>
@@ -60,11 +60,7 @@ const [currentPage, setCurrentPage] = useState(1)
           </button>
       </Search>
       <CardsCont>
-<<<<<<< HEAD
       {Searched.length>0 ?
-=======
-      {Searched.length>0 ?
->>>>>>> dev
           Searched.map((item) => ProductRender(item)) : currentGuitars.map((item) => ProductRender(item))
           }
       </CardsCont>

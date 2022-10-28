@@ -8,6 +8,8 @@ import Cart from './routes/components/cart';
 import Register from './routes/Signup/register';
 import Login from './routes/Signup/Login';
 
+import ProductForm from './routes/components/ProductForm'
+
 
 function App() {
   return (
@@ -20,6 +22,7 @@ function App() {
     <Route path='/cart' element={<Cart/>}/>
     <Route path="/register" element={<Register />} />
     <Route path="/login" element={<Login />} />
+    <Route path="/newProduct" element={<ProductForm />} />
    </Routes>
    </>
   );
