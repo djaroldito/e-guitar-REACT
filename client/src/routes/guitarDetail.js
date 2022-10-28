@@ -17,6 +17,7 @@ const GuitarDetail = () => {
   }, [dispatch, id]);
 
   const detail = useSelector((state) => state.products.detail);
+  console.log(detail)
 
   return (
     <section>
@@ -34,8 +35,12 @@ const GuitarDetail = () => {
         <TextCont>
           <h2>{detail.brand}</h2>
           <h3>${detail.price}</h3>
-          <h3>{detail.model}</h3>
+          <h3>model: {detail.model}</h3>
           <p>{detail.description}</p>
+        {detail.leftHand? <LeftHand>Left Hand Aviable</LeftHand>: null}
+          <form>
+            
+          </form>
         </TextCont>
       </CountDiv>
     </section>
@@ -43,8 +48,9 @@ const GuitarDetail = () => {
 };
 
 const CountDiv = styled.div`
-  width: 70%;
-  max-height: 600px;
+  width: 700px;
+  max-width: 900px;
+  min-height: 300px;
   margin: auto;
   display: flex;
   flex-direction: row;
@@ -59,12 +65,12 @@ const CountDiv = styled.div`
     align-items: center;
     height: 100%;
   }
-
+  
   img {
     max-width: 100%;
     max-height: 400px;
   }
-
+  
   .mySwiper {
     max-width: 300px;
   }
@@ -74,7 +80,27 @@ const TextCont = styled.div`
   display: flex;
   flex-direction: column;
   width: 100%;
-  margin-left: 25px;
-`;
+  margin-left: 50px;
+  height: 1px;
+  height: 1px;
+
+  h2,h3 {
+    font-weight: 400;
+    margin: 3px;
+
+  }
+`
+const LeftHand = styled.div`
+  padding: 5px;
+  border: 1px black solid;
+  height: 20px;
+  background: green;
+  color: white;
+  margin-top: 15px;
+  border-radius: 5px;
+  width: 125px;
+`
+
+;
 
 export default GuitarDetail;

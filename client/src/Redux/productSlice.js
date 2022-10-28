@@ -40,6 +40,18 @@ export const productSlice = createSlice({
         clearCart: (state, action) => {
             state.cart = []
         },
+        getAllColors: (state, action) =>{
+            state.colors = action.payload
+        },
+        getAllBrands: (state, action) =>{
+            state.brands = action.payload
+        },
+        getAllTypes: (state, action) =>{
+            state.types = action.payload
+        },
+        getByFilters: (state, action)=>{
+            state.products = action.payload
+        },
 
         delOneFromCart: (state, action) => {
            let elToDel = state.cart.find(el=> el.id === action.payload)
@@ -76,8 +88,11 @@ export const { getAllProducts,
                getProductToCart,
                delOneFromCart,
                delAllFromCart,
-
-               } = productSlice.actions;
+               getAllColors,
+               getAllBrands,
+               getAllTypes,
+               getByFilters,
+               delAllProductToCart } = productSlice.actions;
 
 
 export default productSlice.reducer;
