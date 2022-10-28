@@ -6,10 +6,7 @@ export const productSlice = createSlice({
     initialState:{
         products: [],
         detail: {},
-        cart: [],
-        brands: [],
-        colors: [],
-        types: [],
+        cart: []
     },
     reducers:{
         getAllProducts: (state, action) =>{
@@ -25,36 +22,8 @@ export const productSlice = createSlice({
             state.products = action.payload
         },
         getProductToCart: (state, action) => {
-<<<<<<< HEAD
             let newItem = state.products.find(el=> el.id === action.payload)
             let itemInCart = state.cart.find(el=> el.id === newItem.id)
-=======
-<<<<<<< HEAD
-            state.cart = state.cart.concat(action.payload)
-        },
-        getAllBrands: (state, action) =>{
-            state.brands = action.payload
-        },
-        getAllColors: (state,action) =>{
-            state.colors = action.payload
-        },
-        getByFilters: (state,action)  =>{
-            state.products = action.payload
-        },
-        getAllTypes:  (state,action)  =>{
-            state.types = action.payload
-        }
-    }
-=======
-            state.cart.find(el=>el.id === action.payload.id) ?
-            state.cart = [...state.cart]:
-            state.cart = [...state.cart, action.payload]
-                  
-        },
-        delProductToCart: (state, action) => {
-            state.cart = state.cart.filter(el=> el.id !== action.payload)
-        },
->>>>>>> dev
 
             return itemInCart 
             ?{
@@ -78,7 +47,6 @@ export const productSlice = createSlice({
             ...state,
             cart:state.cart.map(el=> el.id === action.payload ? {...el, quantity: el.quantity - 1}: el)
 
-<<<<<<< HEAD
            }
            :{
             ...state,
@@ -96,10 +64,6 @@ export const productSlice = createSlice({
            
 
         },
-=======
-    },
->>>>>>> dev
->>>>>>> dev
 });
 
 /* getFilteredProducts, createNewProduct */
@@ -107,13 +71,6 @@ export const productSlice = createSlice({
 export const { getAllProducts, 
                getProductById, 
                getProductByBrand,
-<<<<<<< HEAD
-               getProductToCart,
-               getAllBrands,
-               getAllColors,
-               getByFilters,
-               getAllTypes } = productSlice.actions;
-=======
                getProductFiltered,
                clearCart,
                getProductToCart,
@@ -122,6 +79,5 @@ export const { getAllProducts,
 
                } = productSlice.actions;
 
->>>>>>> dev
 
 export default productSlice.reducer;

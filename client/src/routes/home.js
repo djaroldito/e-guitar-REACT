@@ -60,7 +60,6 @@ const [currentPage, setCurrentPage] = useState(1)
           </button>
       </Search>
       <CardsCont>
-<<<<<<< HEAD
         {products?.map((item) => (
           <DivCont key={item.id}>
              <img src={item.img} alt="" />
@@ -73,11 +72,9 @@ const [currentPage, setCurrentPage] = useState(1)
             </div>
           </DivCont>
         ))}
-=======
       {Searched.length>0 ?         
           Searched.map((item) => ProductRender(item)) : currentGuitars.map((item) => ProductRender(item))
           }
->>>>>>> dev
       </CardsCont>
       <Pagination 
           handleChange={handlePageChange}
