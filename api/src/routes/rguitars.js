@@ -205,7 +205,7 @@ const loadProductData = async () => {
 		// get all guitars from database
 		let bdGuitar = await Product.findAll()
 		// if no guitars loaded
-		if (bdGuitar.length === 0) {
+        if (bdGuitar.length === 0) {
 			// read from guitarJson and bulk to database
 			const guitarJson = fs.readFileSync(
 				path.join(__dirname, "../../../guitar.json")

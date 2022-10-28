@@ -75,7 +75,7 @@ const [currentPage, setCurrentPage] = useState(1)
            <h2>{item.brand}</h2>
               <h3>{item.model}</h3>
               <p>$ {item.price}</p>
-              <Link to={`/${item.id}`}> <FaGuitar/> Show Details</Link>
+              <Link to={`/home/${item.id}`}> <FaGuitar/> Show Details</Link>
               <button className="cartbtn" onClick={() => dispatch(getProductToCart(item.id))}><BsCart2/> Add Cart</button>
             </div>
           </DivCont>
