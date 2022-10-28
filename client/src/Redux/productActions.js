@@ -7,6 +7,7 @@ import {
   getAllColors,
   getByFilters,
   getAllTypes,
+  
 } from "./productSlice";
 
 export const getAllPrds = () => (dispatch) => {
