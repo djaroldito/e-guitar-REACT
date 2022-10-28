@@ -59,7 +59,6 @@ const [currentPage, setCurrentPage] = useState(1)
   return (
     <main>
       <Search>
-        <Filter/>
               <div style={isActive ? {display: 'block', width:'30%'} : {display:'none', width:'30%'}}>
                   <SearchBar handler={SearchHandler} products={products} Search={Search}/>
               </div>
