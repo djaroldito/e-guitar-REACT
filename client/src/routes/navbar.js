@@ -7,6 +7,7 @@ import {FaUserAlt} from 'react-icons/fa'
 import {AiOutlineSearch} from 'react-icons/ai'
 import Cart from "./components/cart"
 
+
 const NavBar = () =>{
     const [isActive, setIsActive] = useState(false);
 
@@ -27,9 +28,12 @@ const NavBar = () =>{
                         <AiOutlineSearch/>
                     </button>
                 </Search>
+                <NavLink to='/register'>Register</NavLink>
                 <IconCont>
                 <UserCont >
-                    <BiLogIn/>
+                    <NavLink to="/login">
+                        <BiLogIn/>
+                    </NavLink>
                 </UserCont>
                 <UserCont className={"logged"}>
                     <FaUserAlt/>
