@@ -37,6 +37,7 @@ const Cart = () =>{
           {el.type?<p> <b>Type: </b>{el.type}.</p>: null}
           {el.color?<p> <b>Color: </b>{el.color}.</p>: null}
           {el.price?<p> <b>Price: </b>{el.price} x {el.quantity} = ${el.price * el.quantity}.</p>: null}
+          {el.stock?<p> <b>Stock: </b>{el.stock}.</p>: null}
          
 
           {el.discount?<p> <b>Discount: </b>{el.discount}.</p>: null}
