@@ -6,7 +6,10 @@ export const productSlice = createSlice({
     initialState:{
         products: [],
         detail: {},
-        cart: []
+        cart: [],
+        brands: [],
+        colors: [],
+        types: [],
     },
     reducers:{
         getAllProducts: (state, action) =>{
@@ -14,18 +17,18 @@ export const productSlice = createSlice({
         },
         getProductById: (state, action) =>{
             state.detail = action.payload
-        }, 
+        },
         getProductByBrand: (state, action) =>{
             state.products = action.payload
         },
         getProductFiltered: (state, action) =>{
             state.products = action.payload
         },
-        getProductToCart: (state, action) => {
+         getProductToCart: (state, action) => {
             let newItem = state.products.find(el=> el.id === action.payload)
             let itemInCart = state.cart.find(el=> el.id === newItem.id)
 
-            return itemInCart 
+            return itemInCart
             ?{
                 ...state,
                 cart:state.cart.map(el=> el.id === newItem.id ? {...el, quantity: el.quantity < el.stock ? el.quantity + 1 : el.stock }:el)
@@ -35,7 +38,10 @@ export const productSlice = createSlice({
                 cart:[...state.cart, {...newItem, quantity:1}],
             
             }
-                     
+       
+
+            
+
         },
         clearCart: (state, action) => {
             state.cart = []
@@ -53,7 +59,7 @@ export const productSlice = createSlice({
             state.products = action.payload
         },
 
-        delOneFromCart: (state, action) => {
+         delOneFromCart: (state, action) => {
            let elToDel = state.cart.find(el=> el.id === action.payload)
            return elToDel.quantity > 1 ? {
             ...state,
@@ -73,15 +79,14 @@ export const productSlice = createSlice({
            }
         },
 
-           
 
-        },
+    },
 });
 
 /* getFilteredProducts, createNewProduct */
 
-export const { getAllProducts, 
-               getProductById, 
+export const { getAllProducts,
+               getProductById,
                getProductByBrand,
                getProductFiltered,
                clearCart,

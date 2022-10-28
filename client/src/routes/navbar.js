@@ -12,10 +12,11 @@ const NavBar = () =>{
     const path = window.location.pathname;
 
     return(
-        <header className={path == '/' ? "headerLanding" : "header"}>
+        <header className={path === '/' ? "headerLanding" : "header"}>
             <NavCont>
             <NavLink to='/home'>Home</NavLink>
             <NavLink to='/'>discount</NavLink>
+            <NavLink to='/newProduct'>New Product</NavLink>
                 <IconCont>
                 <UserCont >
                     <NavLink to="/login">
