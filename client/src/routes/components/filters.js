@@ -50,8 +50,8 @@ const Filter = () => {
               <label htmlFor={item}>{item}</label>
             </div>
           ))}
-          <select>
-
+          <select name='type' onChange={handleChange} >
+          <option label="type"></option>
             {types?.map((item, pos) => (
               <option value={item} key={pos}>
               {item}
