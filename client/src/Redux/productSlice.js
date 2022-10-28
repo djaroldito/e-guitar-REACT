@@ -18,12 +18,12 @@ export const productSlice = createSlice({
         getProductById: (state, action) =>{
             state.detail = action.payload
         }, 
-        getProductByBrand: (state, action) =>{
-            state.products = action.payload
-        },
-        getProductFiltered: (state, action) =>{
-            state.products = action.payload
-        },
+        // getProductByBrand: (state, action) =>{
+        //     state.products = action.payload
+        // },
+        // getProductFiltered: (state, action) =>{
+        //     state.products = action.payload
+        // },
         getProductToCart: (state, action) => {
             let newItem = state.products.find(el=> el.id === action.payload)
             let itemInCart = state.cart.find(el=> el.id === newItem.id)
@@ -74,9 +74,7 @@ export const productSlice = createSlice({
             ...state,
             cart: state.cart.filter(el=> el.id !== action.payload)
            }
-        },
-
-           
+        },           
 
         },
 });
