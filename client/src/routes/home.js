@@ -5,7 +5,7 @@ import {useDispatch, useSelector} from 'react-redux'
 import { useEffect, useState } from "react";
 import { getProductToCart } from "../Redux/productSlice";
 import Pagination from "./components/Pagination/Pagination";
-import {getAllPrds} from './../Redux/productActions'
+import {getAllPrds, getTypes, getColors, getBrands} from './../Redux/productActions'
 import {Link} from 'react-router-dom'
 import {AiOutlineSearch} from 'react-icons/ai'
 import SearchBar from './components/searchbar'
@@ -17,7 +17,13 @@ const [Searched, setSearch] = useState([]);
 const dispatch = useDispatch()
 const products = useSelector(state => state.products.products)
 
-useEffect(() => {if(products.length === 0) {dispatch(getAllPrds())}},[products.length,dispatch])
+useEffect(() => {if(products.length === 0) 
+  {dispatch(getAllPrds())
+  dispatch(getTypes())
+  dispatch(getColors())
+  dispatch(getBrands())
+  }
+},[products.length,dispatch])
 
 const [currentPage, setCurrentPage] = useState(1)
   const guitarsPerPage = 4
@@ -44,7 +50,7 @@ const [currentPage, setCurrentPage] = useState(1)
         <h2>{item.brand}</h2>
           <h3>{item.model}</h3>
           <p>$ {item.price}</p>
-          <Link to={`/${item.id}`}> <FaGuitar/> Show Details</Link>
+          <Link to={`/home/${item.id}`}> <FaGuitar/> Show Details</Link>
           <button className="cartbtn"><BsCart2/> Add Cart</button>
         </div>
     </DivCont>
@@ -61,6 +67,7 @@ const [currentPage, setCurrentPage] = useState(1)
               <AiOutlineSearch/>
           </button>
       </Search>
+      <Filter/>
       <CardsCont>
       {Searched.length>0 ?         
           Searched.map((item) => ProductRender(item)) : currentGuitars.map((item) => ProductRender(item))

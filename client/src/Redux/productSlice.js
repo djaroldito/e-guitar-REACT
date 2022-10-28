@@ -37,6 +37,18 @@ export const productSlice = createSlice({
         delAllProductToCart: (state, action) => {
             state.cart = []
         },
+        getAllColors: (state, action) =>{
+            state.colors = action.payload
+        },
+        getAllBrands: (state, action) =>{
+            state.brands = action.payload
+        },
+        getAllTypes: (state, action) =>{
+            state.types = action.payload
+        },
+        getByFilters: (state, action)=>{
+            state.products = action.payload
+        }
 
 
     },
@@ -47,12 +59,14 @@ export const productSlice = createSlice({
 export const { getAllProducts, 
                getProductById, 
                getProductByBrand,
-               getProductToCart,
-               getAllBrands,
-               getAllColors,
-               getByFilters,
-               delAllProductToCart,
+               getProductFiltered,
                delProductToCart,
-               getAllTypes } = productSlice.actions;
+               getProductToCart,
+               getAllColors,
+               getAllBrands,
+               getAllTypes,
+               getByFilters,
+               delAllProductToCart } = productSlice.actions;
+
 
 export default productSlice.reducer;
