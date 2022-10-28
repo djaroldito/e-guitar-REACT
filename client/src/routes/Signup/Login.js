@@ -19,7 +19,7 @@ export default function Login() {
     // Firebase: configuración front / + seguridad va en el back
     
     //  login-signin facebook
-    const handleRegister = (e) =>{
+    const handleSignIn = (e) =>{
         e.preventDefault();
 
         try{
@@ -41,7 +41,7 @@ export default function Login() {
 
         <div className="loginRight">
             <h2>Or use the classical way</h2>
-            <form class="form" onSubmit={(e) => handleRegister(e)}>
+            <form class="form" onSubmit={(e) => handleSignIn(e)}>
                 <fieldset>
                     <input type="text" placeholder='User' required />
                 </fieldset>
