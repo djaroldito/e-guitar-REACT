@@ -6,10 +6,7 @@ export const productSlice = createSlice({
     initialState:{
         products: [],
         detail: {},
-        cart: [],
-        brands: [],
-        colors: [],
-        types: [],
+        cart: []
     },
     reducers:{
         getAllProducts: (state, action) =>{
@@ -25,16 +22,22 @@ export const productSlice = createSlice({
             state.products = action.payload
         },
         getProductToCart: (state, action) => {
-            state.cart.find(el=>el.id === action.payload.id) ?
-            state.cart = [...state.cart]:
-            state.cart = [...state.cart, action.payload]
-                  
-        },
-        delProductToCart: (state, action) => {
-            state.cart = state.cart.filter(el=> el.id !== action.payload)
-        },
+            let newItem = state.products.find(el=> el.id === action.payload)
+            let itemInCart = state.cart.find(el=> el.id === newItem.id)
 
-        delAllProductToCart: (state, action) => {
+            return itemInCart 
+            ?{
+                ...state,
+                cart:state.cart.map(el=> el.id === newItem.id ? {...el, quantity: el.quantity + 1}:el)
+            } 
+            :{ 
+                ...state, 
+                cart:[...state.cart, {...newItem, quantity:1}],
+            
+            }
+                     
+        },
+        clearCart: (state, action) => {
             state.cart = []
         },
         getAllColors: (state, action) =>{
@@ -48,10 +51,31 @@ export const productSlice = createSlice({
         },
         getByFilters: (state, action)=>{
             state.products = action.payload
-        }
+        },
 
+        delOneFromCart: (state, action) => {
+           let elToDel = state.cart.find(el=> el.id === action.payload)
+           return elToDel.quantity > 1 ? {
+            ...state,
+            cart:state.cart.map(el=> el.id === action.payload ? {...el, quantity: el.quantity - 1}: el)
 
-    },
+           }
+           :{
+            ...state,
+            cart: state.cart.filter(el=> el.id !== action.payload)
+           }
+        },
+
+        delAllFromCart: (state, action) => {
+           return{
+            ...state,
+            cart: state.cart.filter(el=> el.id !== action.payload)
+           }
+        },
+
+           
+
+        },
 });
 
 /* getFilteredProducts, createNewProduct */
@@ -60,8 +84,10 @@ export const { getAllProducts,
                getProductById, 
                getProductByBrand,
                getProductFiltered,
-               delProductToCart,
+               clearCart,
                getProductToCart,
+               delOneFromCart,
+               delAllFromCart,
                getAllColors,
                getAllBrands,
                getAllTypes,
