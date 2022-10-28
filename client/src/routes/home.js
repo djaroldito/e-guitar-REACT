@@ -68,7 +68,7 @@ const [currentPage, setCurrentPage] = useState(1)
       </Search>
       <Filter/>
       <CardsCont>
-        {products?.map((item) => (
+        {currentGuitars?.map((item) => (
           <DivCont key={item.id}>
              <img src={item.img} alt="" />
             <div className="text-cont">
@@ -80,9 +80,9 @@ const [currentPage, setCurrentPage] = useState(1)
             </div>
           </DivCont>
         ))}
-      {Searched.length>0 ?         
+      {/* {Searched.length>0 ?
           Searched.map((item) => ProductRender(item)) : currentGuitars.map((item) => ProductRender(item))
-          }
+          } */}
       </CardsCont>
       <Pagination 
           handleChange={handlePageChange}
