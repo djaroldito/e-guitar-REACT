@@ -60,7 +60,11 @@ const [currentPage, setCurrentPage] = useState(1)
           </button>
       </Search>
       <CardsCont>
+<<<<<<< HEAD
       {Searched.length>0 ?
+=======
+      {Searched.length>0 ?
+>>>>>>> dev
           Searched.map((item) => ProductRender(item)) : currentGuitars.map((item) => ProductRender(item))
           }
       </CardsCont>
@@ -98,10 +102,9 @@ const DivCont = styled.div`
   flex-direction: row;
   align-items: center;
 
-  a{
+  a {
     text-decoration: none;
     color: blue;
-
   }
 
   h2,
@@ -124,7 +127,7 @@ const DivCont = styled.div`
     max-height: 300px;
     object-fit: contain;
   }
-  button{
+  button {
     background: none;
     border: 1px solid black;
     padding: 10px 7px;
@@ -133,7 +136,7 @@ const DivCont = styled.div`
     width: 85%;
     cursor: pointer;
   }
-  .cartbtn{
+  .cartbtn {
     background-color: rgb(41, 73, 143);
     color: whitesmoke;
     font-weight: 600;
