@@ -11,14 +11,10 @@ export default function Login() {
 
     // Navbar -> regitrarse / login
     // comprar algo !login -> registrarte
-
-    // Nav -> (*) Usuario -> contraña, alias, imagen
-                // Admin  -> modificaciones pertinentes
-    
-    // MIEDO : cómo se guardan los datos al registrarse, dónde, cómo se conecta con el back
-    // Firebase: configuración front / + seguridad va en el back
     
     //  login-signin facebook
+    // Reformatear el Login -> sólo usuario, contraseña y botón de Google + mje de Need an Account? Sign Up
+
     const handleSignIn = (e) =>{
         e.preventDefault();
 
@@ -33,10 +29,7 @@ export default function Login() {
     <div id="loginContainer">
         <div className="loginLeft">
             <h3>Create your account</h3>
-            <button className="loginBtn Facebook">Log in with Facebook</button>
-            <button className="loginBtn Twitter">Log in with Twitter</button>
             <button className="loginBtn google">Log in with Google+</button>
-            <button className="loginBtn linkedin">Log in with LinkedIn+</button>
         </div>
 
         <div className="loginRight">
