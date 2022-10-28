@@ -17,7 +17,7 @@ const [Searched, setSearch] = useState([]);
 const dispatch = useDispatch()
 const products = useSelector(state => state.products.products)
 
-useEffect(() => {if(products.length === 0) 
+useEffect(() => {if(products.length === 0)
   {dispatch(getAllPrds())
   dispatch(getTypes())
   dispatch(getColors())
@@ -42,7 +42,7 @@ const [currentPage, setCurrentPage] = useState(1)
   const handleClick = () => {
     setIsActive(current => !current)
   }
-  const ProductRender = (item) => 
+  const ProductRender = (item) =>
     (
       <DivCont key={item.id}>
         <img src={item.img} alt="" />
@@ -68,7 +68,7 @@ const [currentPage, setCurrentPage] = useState(1)
       </Search>
       <Filter/>
       <CardsCont>
-        {products?.map((item) => (
+        {currentGuitars?.map((item) => (
           <DivCont key={item.id}>
              <img src={item.img} alt="" />
             <div className="text-cont">
@@ -80,11 +80,11 @@ const [currentPage, setCurrentPage] = useState(1)
             </div>
           </DivCont>
         ))}
-      {Searched.length>0 ?         
+      {/* {Searched.length>0 ?
           Searched.map((item) => ProductRender(item)) : currentGuitars.map((item) => ProductRender(item))
-          }
+          } */}
       </CardsCont>
-      <Pagination 
+      <Pagination
           handleChange={handlePageChange}
           totalCards={products.length}
           currentPage={currentPage}
