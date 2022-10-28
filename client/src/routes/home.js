@@ -56,6 +56,8 @@ const [currentPage, setCurrentPage] = useState(1)
     </DivCont>
   )
 
+
+
   return (
     <main>
       <Search>

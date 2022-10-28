@@ -1,9 +1,11 @@
 import React, { useRef } from 'react';
 import "./Styles/Login.css";
 
+
+
 export default function Login() {
-    const registerEmail = useRef();
-    const registerPsw = useRef();
+    
+
 
     //back <-> front <- formulario
     // Administrador -> 
@@ -19,18 +21,26 @@ export default function Login() {
     // Firebase: configuración front / + seguridad va en el back
     
     //  login-signin facebook
-    const handleSignIn = (e) =>{
-        e.preventDefault();
 
-        try{
+   /*  const email= useRef();
+    const user= useRef();
+    const password= useRef();
 
-        } catch (error) {
-            console.log(error.message);
-        }
+    const getEmail = localStorage.getItem("emailData");
+    const getPassword = localStorage.getItem("passwordData")
+ */
+
+    const handleSubmit = () =>{
+        /* if(email.current.value & password.current.value){
+            localStorage.setItem("userDate",user.current.value)
+            localStorage.setItem("emailData",email.current.value)
+            localStorage.setItem("passwordData",password.current.value)
+        } */
     }
 
   return (
     <div id="loginContainer">
+        
         <div className="loginLeft">
             <h3>Create your account</h3>
             <button className="loginBtn Facebook">Log in with Facebook</button>
@@ -38,22 +48,24 @@ export default function Login() {
             <button className="loginBtn google">Log in with Google+</button>
             <button className="loginBtn linkedin">Log in with LinkedIn+</button>
         </div>
-
+       { 
         <div className="loginRight">
             <h2>Or use the classical way</h2>
-            <form class="form" onSubmit={(e) => handleSignIn(e)}>
+            <form class="form" onSubmit={handleSubmit}>
                 <fieldset>
                     <input type="text" placeholder='User' required />
                 </fieldset>
                 <fieldset>
-                    <input type="email" placeholder='E-mail' required />
+                    <input type="email" placeholder='E-mail' /* ref={email} */ required />
                 </fieldset>
                 <fieldset>
-                    <input type="password" placeholder='Password' required />
+                    <input type="password" placeholder='Password' /* ref={password}  */required />
                 </fieldset>
                 <button type='submit' className="submitBtn">Sign Up</button>
             </form>
+            
         </div>
+        }
     </div>
   )
 }
