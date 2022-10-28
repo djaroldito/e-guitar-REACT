@@ -14,13 +14,14 @@ import { Link } from "react-router-dom";
 import { AiOutlineSearch } from "react-icons/ai";
 import SearchBar from "./components/searchbar";
 import Filter from "./components/filters";
+import { getProductToCart } from "../Redux/productSlice";
 
 const Home = () => {
   const [isActive, setIsActive] = useState(false);
   const [Searched, setSearch] = useState([]);
   const dispatch = useDispatch();
   const products = useSelector((state) => state.products.products);
-
+  
   useEffect(() => {
     if (products.length === 0) {
       dispatch(getTypes());
@@ -28,8 +29,8 @@ const Home = () => {
       dispatch(getBrands());
       dispatch(getAllPrds());
     }
-  }, [products.length, dispatch]);
-
+  }, [products, dispatch]);
+  
   const [currentPage, setCurrentPage] = useState(1);
   const guitarsPerPage = 4;
   const firstIdx = (currentPage - 1) * guitarsPerPage;
@@ -72,8 +73,7 @@ const Home = () => {
             isActive
               ? { display: "block", width: "30%" }
               : { display: "none", width: "30%" }
-          }
-        >
+          }>
           <SearchBar
             handler={SearchHandler}
             products={products}
@@ -85,19 +85,31 @@ const Home = () => {
         </button>
       </Search>
       <ContainerDiv>
-        <Filter />
-        <CardsCont>
-          {Searched.length > 0
-            ? Searched.map((item) => ProductRender(item))
-            : currentGuitars.map((item) => ProductRender(item))}
-        </CardsCont>
+
+      <Filter/>
+      <CardsCont>
+        {products?.map((item) => (
+          <DivCont key={item.id}>
+             <img src={item.img} alt="" />
+            <div className="text-cont">
+           <h2>{item.brand}</h2>
+              <h3>{item.model}</h3>
+              <p>$ {item.price}</p>
+              <Link to={`/${item.id}`}> <FaGuitar/> Show Details</Link>
+              <button className="cartbtn" onClick={() => dispatch(getProductToCart(item.id))}><BsCart2/> Add Cart</button>
+            </div>
+          </DivCont>
+        ))}
+      {Searched.length>0 ?         
+          Searched.map((item) => ProductRender(item)) : currentGuitars.map((item) => ProductRender(item))
+        }
+      </CardsCont>
       </ContainerDiv>
-      <Pagination
-        handleChange={handlePageChange}
-        totalCards={products.length}
-        currentPage={currentPage}
-        guitarsPerPage={guitarsPerPage}
-      />
+      <Pagination 
+          handleChange={handlePageChange}
+          totalCards={products.length}
+          currentPage={currentPage}
+          guitarsPerPage={guitarsPerPage}/>
     </main>
   );
 };
