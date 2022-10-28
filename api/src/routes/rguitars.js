@@ -23,7 +23,7 @@ router.get("/", async (req, res) => {
 			if (brand) whereQuery.brand = { [sequelize.Op.iLike]: `%${brand}%` }
 			if (type) whereQuery.type = { [sequelize.Op.iLike]: `%${type}%` }
             if (color) whereQuery.color = { [sequelize.Op.iLike]: `%${color}%` }
-            
+
 			const guitar = await Product.findAll({
 				where: whereQuery,
 			})
@@ -70,6 +70,7 @@ router.get("/:idGuitar", async (req, res) => {
 
 // POST /rguitars
 router.post("/", async (req, res) => {
+    //res.sendStatus(200)
 	const {
 		brand,
 		model,
@@ -95,12 +96,8 @@ router.post("/", async (req, res) => {
 			price &&
 			strings &&
 			description &&
-			stock &&
-			discount &&
-			type &&
-			leftHand &&
-			aditionalInformation
-		) {
+			type
+        ) {
 			const newGuitar = await Product.create({
 				brand,
 				model,
@@ -114,7 +111,7 @@ router.post("/", async (req, res) => {
 				type,
 				leftHand,
 				aditionalInformation,
-			})
+            })
 			res.status(200).json(newGuitar)
 		} else {
 			return res.status(400).send("Faltan parametros")
@@ -208,7 +205,7 @@ const loadProductData = async () => {
 		// get all guitars from database
 		let bdGuitar = await Product.findAll()
 		// if no guitars loaded
-		if (bdGuitar.length === 0) {
+        if (bdGuitar.length === 0) {
 			// read from guitarJson and bulk to database
 			const guitarJson = fs.readFileSync(
 				path.join(__dirname, "../../../guitar.json")
