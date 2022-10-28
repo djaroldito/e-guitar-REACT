@@ -7,6 +7,7 @@ import {AiOutlineSearch} from 'react-icons/ai'
 import "../index.css";
 import React from "react";
 
+
 const NavBar = () =>{
     const path = window.location.pathname;
 
@@ -17,7 +18,9 @@ const NavBar = () =>{
             <NavLink to='/'>discount</NavLink>
                 <IconCont>
                 <UserCont >
-                    <BiLogIn/>
+                    <NavLink to="/login">
+                        <BiLogIn/>
+                    </NavLink>
                 </UserCont>
                 <UserCont className={"logged"}>
                     <FaUserAlt/>
