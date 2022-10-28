@@ -65,13 +65,13 @@ const Filter = () => {
 
 const Filters = styled.div`
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   flex-wrap: wrap;
 
   form {
     display: flex;
-    flex-wrap: wrap;
-    flex-direction: row;
+    
+    flex-direction: column;
   }
   .radio {
     /* display: none; */

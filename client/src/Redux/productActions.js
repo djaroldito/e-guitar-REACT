@@ -2,7 +2,6 @@ import axios from "axios";
 import {
   getAllProducts,
   getProductById,
-  getProductByBrand,
   getAllBrands,
   getAllColors,
   getByFilters,
