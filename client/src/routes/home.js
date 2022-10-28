@@ -7,7 +7,7 @@ import { getProductToCart } from "../Redux/productSlice";
 import Pagination from "./components/Pagination/Pagination";
 import {getAllPrds, getTypes, getColors, getBrands} from './../Redux/productActions'
 import {Link} from 'react-router-dom'
-import {AiOutlineSearch} from 'react-icons/ai'
+import { AiOutlineSearch } from 'react-icons/ai'
 import SearchBar from './components/searchbar'
 import Filter from "./components/filters";
 
@@ -17,7 +17,7 @@ const [Searched, setSearch] = useState([]);
 const dispatch = useDispatch()
 const products = useSelector(state => state.products.products)
 
-useEffect(() => {if(products.length === 0) 
+useEffect(() => {if(products.length === 0)
   {dispatch(getAllPrds())
   dispatch(getTypes())
   dispatch(getColors())
@@ -42,7 +42,7 @@ const [currentPage, setCurrentPage] = useState(1)
   const handleClick = () => {
     setIsActive(current => !current)
   }
-  const ProductRender = (item) => 
+  const ProductRender = (item) =>
     (
       <DivCont key={item.id}>
         <img src={item.img} alt="" />
@@ -62,7 +62,7 @@ const [currentPage, setCurrentPage] = useState(1)
     <main>
       <Search>
               <div style={isActive ? {display: 'block', width:'30%'} : {display:'none', width:'30%'}}>
-                  <SearchBar handler={SearchHandler} products={products} Search={Search}/>
+                  <SearchBar handler={SearchHandler} products={currentGuitars} Search={Search}/>
               </div>
           <button onClick={handleClick}>
               <AiOutlineSearch/>
@@ -77,7 +77,7 @@ const [currentPage, setCurrentPage] = useState(1)
            <h2>{item.brand}</h2>
               <h3>{item.model}</h3>
               <p>$ {item.price}</p>
-              <Link to={`/${item.id}`}> <FaGuitar/> Show Details</Link>
+              <Link to={`/home/${item.id}`}> <FaGuitar/> Show Details</Link>
               <button className="cartbtn" onClick={() => dispatch(getProductToCart(item.id))}><BsCart2/> Add Cart</button>
             </div>
           </DivCont>
@@ -86,7 +86,7 @@ const [currentPage, setCurrentPage] = useState(1)
           Searched.map((item) => ProductRender(item)) : currentGuitars.map((item) => ProductRender(item))
           } */}
       </CardsCont>
-      <Pagination 
+      <Pagination
           handleChange={handlePageChange}
           totalCards={products.length}
           currentPage={currentPage}
