@@ -1,0 +1,19 @@
+.prdFormContiner {
+    background-color: pink;
+    height: 80vh;
+    width: 60vw;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.prdFormType {
+    background-color: red;
+}
+
+.prdFormBrand {
+    background-color: blue;
+}
+
+.prdFormModel {
+    background-color: brown;
+}

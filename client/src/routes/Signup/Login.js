@@ -5,9 +5,7 @@ import "./Styles/Login.css";
 const USER_REGEX = /^[A-z][A-z0-9-_]{3,23}$/;
 const PWD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).{8,24}$/;
 //  login-signin Google
-// Agregar loguito de Gmail en el botón
 // Averiguar por el reseteo de password
-// Modificar el código para que permita usar el botón de google
 // Acá sólo iría un campo con el pwrd, si no coincide tira error -> chequear la data de la db
 
 
@@ -29,9 +27,8 @@ export default function Login() {
     }
 
   return (
-    <div >
         <div id="loginContainer">
-            <h2 className='loginTitle'>Log In</h2>
+            <h2>Log In</h2>
             <form className="signInForm" onSubmit={(e) => handleSignIn(e)}>
                 <fieldset>
                     <input type="text" placeholder='User' required />
@@ -50,7 +47,7 @@ export default function Login() {
                 <button type='submit' className="submitBtn">Log In</button>
                 
                 <div className='loginGg'>
-                    <p>Or sign In whith</p>
+                    <p>Or Sign In whith</p>
                 </div>
                 <div>
                     <AiOutlineGoogle size={30} className='signinGgIc'/> 
@@ -68,6 +65,5 @@ export default function Login() {
                 </div>
             </form>
         </div>
-    </div>
   )
 }
