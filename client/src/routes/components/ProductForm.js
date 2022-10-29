@@ -1,27 +1,28 @@
 import React, { useRef, useState, useEffect } from "react"
+import axios from "axios"
 import { Formik, Form, Field, ErrorMessage } from "formik"
 import { BiPhotoAlbum } from "react-icons/bi"
 // redux
 import { useDispatch, useSelector } from "react-redux"
 import { useParams } from "react-router-dom"
 import { getById, postProductForm } from "../../Redux/productActions"
-import axios from "axios"
 
 export default function ProductForm() {
 	const { id } = useParams()
 	const isAddMode = !id
 	const dispatch = useDispatch()
 
-	useEffect(() => {
-		if (id) {
-			dispatch(getById(id))
-		}
-	}, [])
-
 	const { colors, brands, types, detail } = useSelector(
 		(state) => state.products
 	)
 	const fileRef = useRef()
+
+	useEffect(() => {
+        if (id) {
+            console.log(id)
+            dispatch(getById(id))
+		}
+	}, [id, dispatch])
 
 	const initialValues = isAddMode
 		? {
@@ -37,9 +38,9 @@ export default function ProductForm() {
 				type: "",
 				leftHand: false,
 				aditionalInformation: "",
-				files: [],
+				images: [],
 		  }
-		: { ...detail, images: detail.img ? detail.img.split(",") : [], files: [] }
+		: { ...detail, images: detail.img ? detail.img.split(",") : [] }
 
 	return (
 		<div>
@@ -196,19 +197,18 @@ export default function ProductForm() {
 						</div>
 						<div>
 							{values.images.length}
+
 							{/* {values.files.length > 0 &&
 								values.files.map((f, i) => {
 									return <PreviewImage file={f} key={i} />
                                 })} */}
-							{/* {values.images.length > 0 &&
-								values.images.map((f, i) => {
-									return <PreviewImage file={f} key={i} />
-								})} */}
+							{values.images.length > 0 &&
+								values.images.map((f, i) => <PreviewImage file={f} key={i} />)}
 						</div>
 						<button
 							type='button'
 							onClick={() => fileRef.current.click()}
-							disabled={values.files.length >= 3}
+							disabled={values.images.length >= 3}
 						>
 							<BiPhotoAlbum /> Upload Image
 						</button>
@@ -223,16 +223,20 @@ export default function ProductForm() {
 }
 
 export const PreviewImage = ({ file }) => {
-	const [preview, setPreview] = useState(null)
-	if (typeof file === "string") {
-		setPreview(file)
-	} else {
-		const reader = new FileReader()
-		reader.readAsDataURL(file)
-		reader.onload = () => {
-			setPreview(reader.result)
+	const [preview, setPreview] = useState("")
+
+	useEffect(() => {
+		if (typeof file === "string") {
+			setPreview(file)
+		} else {
+			const reader = new FileReader()
+			reader.readAsDataURL(file)
+			reader.onload = () => {
+				setPreview(reader.result)
+			}
 		}
-	}
+	}, [file])
+
 	return (
 		<div style={{ display: "inline-block" }}>
 			{preview ? (
