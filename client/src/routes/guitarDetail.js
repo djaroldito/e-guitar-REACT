@@ -8,20 +8,20 @@ import { Pagination } from "swiper"
 import "swiper/css"
 import "swiper/css/pagination"
 import styled from "styled-components"
+
 import Swal from "sweetalert2"
 import { FaTrashAlt, FaEdit } from "react-icons/fa"
 
 const GuitarDetail = () => {
-    const dispatch = useDispatch()
-    const navigate = useNavigate();
+	const dispatch = useDispatch()
+	const navigate = useNavigate()
 	const { id } = useParams()
 
 	useEffect(() => {
 		dispatch(getById(id))
 	}, [dispatch, id])
 
-	const detail = useSelector((state) => state.products.detail)
-	console.log(detail)
+    const detail = useSelector((state) => state.products.detail)
 
 	const handleDeleteProduct = (id) => {
 		Swal.fire({
@@ -33,12 +33,16 @@ const GuitarDetail = () => {
 			cancelButtonColor: "#d33",
 			confirmButtonText: "Yes, delete it!",
 		}).then((result) => {
-            if (result.isConfirmed) {
-				axios.delete(`http://localhost:3001/rguitars/${id}`)
-                    .then((res) => {
+			if (result.isConfirmed) {
+				axios
+					.delete(`http://localhost:3001/rguitars/${id}`)
+					.then((res) => {
 						if (res.status === 200) {
-                            Swal.fire("Deleted!", 'Your product has been deleted.', "success")
-                            .then((r)=> navigate('/home') )
+							Swal.fire(
+								"Deleted!",
+								"Your product has been deleted.",
+								"success"
+							).then((r) => navigate("/home"))
 						}
 					})
 					.catch((error) => {
@@ -74,10 +78,14 @@ const GuitarDetail = () => {
 					{detail.leftHand ? <LeftHand>Left Hand Available</LeftHand> : null}
 					<form></form>
 
-					<button type='button'>
-						<FaEdit />
-					</button>
-					<button type='button' onClick={() => handleDeleteProduct(detail.id)}>
+
+                    <button type='button'
+						title='Edit product' onClick={() => navigate(`/editProduct/${detail.id}`)}><FaEdit /></button>
+					<button
+						type='button'
+						title='Delete product'
+						onClick={() => handleDeleteProduct(detail.id)}
+					>
 						<FaTrashAlt />
 					</button>
 				</TextCont>
