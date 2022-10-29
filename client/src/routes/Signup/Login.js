@@ -1,4 +1,5 @@
 import React, { useRef } from 'react';
+import { NavLink } from "react-router-dom"
 import "./Styles/Login.css";
 
 
@@ -7,20 +8,21 @@ export default function Login() {
     
 
 
-    //back <-> front <- formulario
-    // Administrador -> 
-    // Login
-
     // Navbar -> regitrarse / login
     // comprar algo !login -> registrarte
-
-    // Nav -> (*) Usuario -> contraña, alias, imagen
-                // Admin  -> modificaciones pertinentes
-    
-    // MIEDO : cómo se guardan los datos al registrarse, dónde, cómo se conecta con el back
-    // Firebase: configuración front / + seguridad va en el back
-    
     //  login-signin facebook
+<<<<<<< HEAD
+=======
+    // Reformatear el Login -> sólo usuario, contraseña y botón de Google + mje de Need an Account? Sign Up
+    // Agregar loguito de Gmail en el botón
+    // Averiguar por el reseteo de password
+    // Rutas y localStorage
+    // Modificar el código para que permita usar el botón de google
+
+    
+    const handleSignIn = (e) =>{
+        e.preventDefault();
+>>>>>>> dev
 
    /*  const email= useRef();
     const user= useRef();
@@ -39,6 +41,7 @@ export default function Login() {
     }
 
   return (
+<<<<<<< HEAD
     <div id="loginContainer">
         
         <div className="loginLeft">
@@ -52,16 +55,45 @@ export default function Login() {
         <div className="loginRight">
             <h2>Or use the classical way</h2>
             <form class="form" onSubmit={handleSubmit}>
+=======
+    <div >
+        <div id="loginContainer">
+            <h2 className='loginTitle'>Log In</h2>
+            <form className="signInForm" onSubmit={(e) => handleSignIn(e)}>
+>>>>>>> dev
                 <fieldset>
                     <input type="text" placeholder='User' required />
                 </fieldset>
                 <fieldset>
+<<<<<<< HEAD
                     <input type="email" placeholder='E-mail' /* ref={email} */ required />
                 </fieldset>
                 <fieldset>
                     <input type="password" placeholder='Password' /* ref={password}  */required />
+=======
+                    <input type="password" placeholder='Password' required />
+>>>>>>> dev
                 </fieldset>
-                <button type='submit' className="submitBtn">Sign Up</button>
+
+                <div className='loginPsw'>
+                    <p>Forgot Password?</p>
+                </div>
+                <button type='submit' className="submitBtn">Log In</button>
+                
+                <div className='loginGg'>
+                    <p>Or sign In whith</p>
+                </div>
+                <button className="loginBtn google">Log in with Google+</button>
+                
+                <div className='loginAcc'>
+                    <p>Don't you have an Account?</p>
+                </div>
+
+                <div className='loginSup'>
+                    <NavLink to="/signup">
+                        <p>SIGN UP</p>
+                    </NavLink>
+                </div>
             </form>
             
         </div>

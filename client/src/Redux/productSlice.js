@@ -31,13 +31,16 @@ export const productSlice = createSlice({
             return itemInCart
             ?{
                 ...state,
-                cart:state.cart.map(el=> el.id === newItem.id ? {...el, quantity: el.quantity + 1}:el)
-            }
-            :{
-                ...state,
+                cart:state.cart.map(el=> el.id === newItem.id ? {...el, quantity: el.quantity < el.stock ? el.quantity + 1 : el.stock }:el)
+            } 
+            :{ 
+                ...state, 
                 cart:[...state.cart, {...newItem, quantity:1}],
-
+            
             }
+       
+
+            
 
         },
         clearCart: (state, action) => {
