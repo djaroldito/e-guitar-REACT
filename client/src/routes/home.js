@@ -23,7 +23,7 @@ useEffect(() => {if(products.length === 0)
   dispatch(getColors())
   dispatch(getBrands())
   }
-},[products.length,dispatch])
+},[])
 
 const [currentPage, setCurrentPage] = useState(1)
   const guitarsPerPage = 4
@@ -152,10 +152,16 @@ const DivCont = styled.div`
     width: 85%;
     cursor: pointer;
   }
+
   .cartbtn {
     background-color: rgb(41, 73, 143);
     color: whitesmoke;
     font-weight: 600;
+    transition: .3s ease-out;
+  }
+  .cartbtn:hover{
+    background-color: whitesmoke;
+    color: rgb(41, 73, 143);
   }
 `;
 const CardsCont = styled.div`
