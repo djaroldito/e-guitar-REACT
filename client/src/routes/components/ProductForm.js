@@ -29,7 +29,7 @@ export default function ProductForm() {
 	}
 
 	return (
-		<div>
+		<div className="productContainer">
 			<h3>Create new product</h3>
 			<Formik
 				initialValues={initialValues}
