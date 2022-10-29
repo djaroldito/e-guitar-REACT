@@ -11,6 +11,7 @@ import { AiOutlineSearch } from 'react-icons/ai'
 import SearchBar from './components/searchbar'
 import Filter from "./components/filters";
 
+
 const Home = () => {
 const [isActive, setIsActive] = useState(false);
 const [Searched, setSearch] = useState([]);
@@ -24,6 +25,8 @@ useEffect(() => {if(products.length === 0)
   dispatch(getBrands())
   }
 },[])
+
+
 
 const [currentPage, setCurrentPage] = useState(1)
   const guitarsPerPage = 4
@@ -56,8 +59,12 @@ const [currentPage, setCurrentPage] = useState(1)
     </DivCont>
   )
 
+      
+
   return (
     <main>
+      
+      
       <Search>
               <div style={isActive ? {display: 'block', width:'30%'} : {display:'none', width:'30%'}}>
                   <SearchBar handler={SearchHandler} products={currentGuitars} Search={Search}/>
