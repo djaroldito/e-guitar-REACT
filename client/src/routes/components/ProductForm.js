@@ -1,36 +1,50 @@
-import React, { useRef, useState } from "react"
+import React, { useRef, useState, useEffect } from "react"
+import axios from "axios"
 import { Formik, Form, Field, ErrorMessage } from "formik"
 import { BiPhotoAlbum } from "react-icons/bi"
 // redux
 import { useDispatch, useSelector } from "react-redux"
-import { postProductForm } from "../../Redux/productActions"
-import axios from "axios"
+import { useParams } from "react-router-dom"
+import { getById, postProductForm } from "../../Redux/productActions"
 
 export default function ProductForm() {
+	const { id } = useParams()
+	const isAddMode = !id
 	const dispatch = useDispatch()
 
-	const { colors, brands, types } = useSelector((state) => state.products)
+	const { colors, brands, types, detail } = useSelector(
+		(state) => state.products
+	)
 	const fileRef = useRef()
 
-	const initialValues = {
-		brand: "",
-		model: "",
-		img: "",
-		color: "",
-		price: 0,
-		strings: 0,
-		description: "",
-		stock: 0,
-		discount: 0,
-		type: "",
-		leftHand: false,
-		aditionalInformation: "",
-		files: [],
-	}
+	useEffect(() => {
+        if (id) {
+            console.log(id)
+            dispatch(getById(id))
+		}
+	}, [id, dispatch])
+
+	const initialValues = isAddMode
+		? {
+				brand: "",
+				model: "",
+				img: "",
+				color: "",
+				price: 0,
+				strings: 0,
+				description: "",
+				stock: 0,
+				discount: 0,
+				type: "",
+				leftHand: false,
+				aditionalInformation: "",
+				images: [],
+		  }
+		: { ...detail, images: detail.img ? detail.img.split(",") : [] }
 
 	return (
 		<div>
-			<h3>Create new product</h3>
+			<h3>Product Detail</h3>
 			<Formik
 				initialValues={initialValues}
 				validate={(values) => {
@@ -70,8 +84,8 @@ export default function ProductForm() {
 												", ",
 												res.data.secure_url
 											))
-                                )
-                                return true
+									)
+								return true
 							})
 						// post new product
 						const response = await dispatch(postProductForm(values))
@@ -120,7 +134,6 @@ export default function ProductForm() {
 							<Field type='text' name='model' />
 							<ErrorMessage name='model' component='div' />
 						</div>
-
 						<div>
 							<label htmlFor='color'>Color:</label>
 							<Field as='select' name='color'>
@@ -154,8 +167,10 @@ export default function ProductForm() {
 							<ErrorMessage name='stock' component='div' />
 						</div>
 						<div>
-							<label htmlFor='discount'>Discount:
-							<Field type='number' min='0' name='discount' />  % </label>
+							<label htmlFor='discount'>
+								Discount:
+								<Field type='number' min='0' name='discount' /> %{" "}
+							</label>
 							<ErrorMessage name='discount' component='div' />
 						</div>
 						<div>
@@ -179,17 +194,21 @@ export default function ProductForm() {
 									setFieldValue("files", values.files.concat(e.target.files[0]))
 								}}
 							/>
-                        </div>
-                        <div>
-						{values.files.length > 0 &&
-							values.files.map((f, i) => {
-								return <PreviewImage file={f} key={i} />
-							})}
-                        </div>
+						</div>
+						<div>
+							{values.images.length}
+
+							{/* {values.files.length > 0 &&
+								values.files.map((f, i) => {
+									return <PreviewImage file={f} key={i} />
+                                })} */}
+							{values.images.length > 0 &&
+								values.images.map((f, i) => <PreviewImage file={f} key={i} />)}
+						</div>
 						<button
 							type='button'
 							onClick={() => fileRef.current.click()}
-							disabled={values.files.length >= 3}
+							disabled={values.images.length >= 3}
 						>
 							<BiPhotoAlbum /> Upload Image
 						</button>
@@ -204,15 +223,22 @@ export default function ProductForm() {
 }
 
 export const PreviewImage = ({ file }) => {
-	const [preview, setPreview] = useState(null)
-	const reader = new FileReader()
-	reader.readAsDataURL(file)
-	reader.onload = () => {
-		setPreview(reader.result)
-	}
+	const [preview, setPreview] = useState("")
+
+	useEffect(() => {
+		if (typeof file === "string") {
+			setPreview(file)
+		} else {
+			const reader = new FileReader()
+			reader.readAsDataURL(file)
+			reader.onload = () => {
+				setPreview(reader.result)
+			}
+		}
+	}, [file])
 
 	return (
-		<div style={{display:'inline-block'}}>
+		<div style={{ display: "inline-block" }}>
 			{preview ? (
 				<img src={preview} alt='Preview' width='200px' height='200px' />
 			) : (
