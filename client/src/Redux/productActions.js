@@ -61,9 +61,3 @@ export const postProductForm = async (formData) => {
 		return { error: error.response ? error.response.data : error.message }
 	}
 }
-
-export const fillFilters = () => async (dispatch) => {
-    await dispatch(getBrands())
-    await dispatch(getColors())
-    await dispatch(getTypes())
-}
