@@ -1,19 +1,21 @@
-import React, { useRef } from 'react';
-import { NavLink } from "react-router-dom"
+import React, { useRef, useState } from 'react';
+import { NavLink } from "react-router-dom";
+import { AiOutlineEye, AiOutlineEyeInvisible, AiOutlineUser, AiOutlineGoogle } from "react-icons/ai"
 import "./Styles/Login.css";
+const USER_REGEX = /^[A-z][A-z0-9-_]{3,23}$/;
+const PWD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).{8,24}$/;
+//  login-signin Google
+// Agregar loguito de Gmail en el botón
+// Averiguar por el reseteo de password
+// Modificar el código para que permita usar el botón de google
+// Acá sólo iría un campo con el pwrd, si no coincide tira error -> chequear la data de la db
+
 
 export default function Login() {
     const registerEmail = useRef();
     const registerPsw = useRef();
 
-    // Navbar -> regitrarse / login
-    // comprar algo !login -> registrarte
-    //  login-signin facebook
-    // Reformatear el Login -> sólo usuario, contraseña y botón de Google + mje de Need an Account? Sign Up
-    // Agregar loguito de Gmail en el botón
-    // Averiguar por el reseteo de password
-    // Rutas y localStorage
-    // Modificar el código para que permita usar el botón de google
+    const [showPsw, setShowPsw] = useState(false);
 
     
     const handleSignIn = (e) =>{
@@ -33,9 +35,13 @@ export default function Login() {
             <form className="signInForm" onSubmit={(e) => handleSignIn(e)}>
                 <fieldset>
                     <input type="text" placeholder='User' required />
-                </fieldset>
+                    <AiOutlineUser className='loginUsIc' />
+               </fieldset>
                 <fieldset>
-                    <input type="password" placeholder='Password' required />
+                    <input type={showPsw ? "text" : "password"} placeholder='Password' id="password" required />
+                    <div className='loginEyeIcon' onClick={() => setShowPsw(!showPsw)}>
+                        {showPsw ? <AiOutlineEye/> : <AiOutlineEyeInvisible className='loginInIc'/>}
+                    </div>
                 </fieldset>
 
                 <div className='loginPsw'>
@@ -45,6 +51,9 @@ export default function Login() {
                 
                 <div className='loginGg'>
                     <p>Or sign In whith</p>
+                </div>
+                <div>
+                    <AiOutlineGoogle size={30} className='signinGgIc'/> 
                 </div>
                 <button className="loginBtn google">Log in with Google+</button>
                 
