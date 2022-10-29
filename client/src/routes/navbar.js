@@ -3,7 +3,6 @@ import styled from "styled-components"
 import {BiLogIn} from 'react-icons/bi'
 import {FaUserAlt} from 'react-icons/fa'
 import Cart from "./components/cart"
-import {AiOutlineSearch} from 'react-icons/ai'
 import "../index.css";
 import React from "react";
 
