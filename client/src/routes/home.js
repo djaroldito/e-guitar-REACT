@@ -23,7 +23,7 @@ useEffect(() => {if(products.length === 0)
   dispatch(getColors())
   dispatch(getBrands())
   }
-},[products.length,dispatch])
+},[])
 
 const [currentPage, setCurrentPage] = useState(1)
   const guitarsPerPage = 4
