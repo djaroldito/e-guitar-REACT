@@ -1,17 +1,13 @@
-import React, { useEffect, useRef, useState } from "react"
+import React, { useRef, useState } from "react"
 import { Formik, Form, Field, ErrorMessage } from "formik"
 import { BiPhotoAlbum } from "react-icons/bi"
 // redux
 import { useDispatch, useSelector } from "react-redux"
-import { postProductForm, fillFilters } from "../../Redux/productActions"
+import { postProductForm } from "../../Redux/productActions"
 import axios from "axios"
 
 export default function ProductForm() {
 	const dispatch = useDispatch()
-
-	useEffect(() => {
-		dispatch(fillFilters())
-	}, [dispatch])
 
 	const { colors, brands, types } = useSelector((state) => state.products)
 	const fileRef = useRef()
