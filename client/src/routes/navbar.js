@@ -3,6 +3,8 @@ import styled from "styled-components"
 import {BiLogIn} from 'react-icons/bi'
 import {FaUserAlt} from 'react-icons/fa'
 import Cart from "./components/cart"
+import {AiOutlineShoppingCart} from 'react-icons/ai'
+import {AiOutlineSearch} from 'react-icons/ai'
 import "../index.css";
 import React from "react";
 
@@ -26,7 +28,7 @@ const NavBar = () =>{
                     <FaUserAlt/>
                 </UserCont>
                 </IconCont>
-                <NavLink to='/cart'>Cart</NavLink>
+                <NavLink to='/cart'><AiOutlineShoppingCart/></NavLink>
             </NavCont>
         </header>
     )
