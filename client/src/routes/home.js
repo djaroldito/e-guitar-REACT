@@ -152,10 +152,16 @@ const DivCont = styled.div`
     width: 85%;
     cursor: pointer;
   }
+
   .cartbtn {
     background-color: rgb(41, 73, 143);
     color: whitesmoke;
     font-weight: 600;
+    transition: .3s ease-out;
+  }
+  .cartbtn:hover{
+    background-color: whitesmoke;
+    color: rgb(41, 73, 143);
   }
 `;
 const CardsCont = styled.div`
