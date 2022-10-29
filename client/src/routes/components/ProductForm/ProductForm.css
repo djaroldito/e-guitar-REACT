@@ -6,6 +6,10 @@
     margin-right: auto;
 }
 
+
+/* HEADER -------------------------------------------------- */
+
+/* BODY ---------------------------------------------------- */
 .prdFormType {
     background-color: red;
 }
@@ -17,3 +21,5 @@
 .prdFormModel {
     background-color: brown;
 }
+
+/* FOOTER -------------------------------------------------- */
