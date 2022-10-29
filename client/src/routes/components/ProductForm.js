@@ -1,11 +1,12 @@
-import React, { useRef, useState, useEffect } from "react"
-import axios from "axios"
-import { Formik, Form, Field, ErrorMessage } from "formik"
-import { BiPhotoAlbum } from "react-icons/bi"
+import React, { useRef, useState, useEffect } from "react";
+import axios from "axios";
+import { Formik, Form, Field, ErrorMessage } from "formik";
+import { BiPhotoAlbum } from "react-icons/bi";
 // redux
-import { useDispatch, useSelector } from "react-redux"
-import { useParams } from "react-router-dom"
-import { getById, postProductForm } from "../../Redux/productActions"
+import { useDispatch, useSelector } from "react-redux";
+import { useParams } from "react-router-dom";
+import { getById, postProductForm } from "../../Redux/productActions";
+import "./ProductForm/ProductForm.css";
 
 export default function ProductForm() {
 	const { id } = useParams()
@@ -43,8 +44,14 @@ export default function ProductForm() {
 		: { ...detail, images: detail.img ? detail.img.split(",") : [] }
 
 	return (
-		<div>
-			<h3>Product Detail</h3>
+		<div className="prdFormContiner">
+
+			<div className="prdProgressBar"></div>{/* PROGRESS BAR ------------------------------ */}
+
+			<div className="prdHeader"> {/* HEADER ---------------------------------------------- */}
+				<h3>Product Detail</h3>
+			</div>
+
 			<Formik
 				initialValues={initialValues}
 				validate={(values) => {
@@ -103,7 +110,7 @@ export default function ProductForm() {
 				{({ values, isSubmitting, status, setFieldValue }) => (
 					<Form>
 						{!!status && <p>{status}</p>}
-						<div>
+						<div className="prdFormType">
 							<label htmlFor='type'>Type:</label>
 							<Field as='select' name='type'>
 								<option value=''>Select type</option>
@@ -116,7 +123,7 @@ export default function ProductForm() {
 							</Field>
 							<ErrorMessage name='type' component='div' />
 						</div>
-						<div>
+						<div className="prdFormBrand">
 							<label htmlFor='brand'>Brand:</label>
 							<Field as='select' name='brand'>
 								<option value=''>Select a brand</option>
@@ -129,7 +136,7 @@ export default function ProductForm() {
 							</Field>
 							<ErrorMessage name='brand' component='div' />
 						</div>
-						<div>
+						<div className="prdFormModel">
 							<label htmlFor='model'>Model:</label>
 							<Field type='text' name='model' />
 							<ErrorMessage name='model' component='div' />
@@ -218,6 +225,11 @@ export default function ProductForm() {
 					</Form>
 				)}
 			</Formik>
+			
+			<div className="prdBody">
+				<button>Prev</button>
+				<button>Next</button>
+			</div>
 		</div>
 	)
 }
