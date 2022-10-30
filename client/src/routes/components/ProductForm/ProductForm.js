@@ -59,14 +59,12 @@ export default function ProductForm() {
 	}
 
 	return (
-		<div className="prdFormContiner">
+		<>
+		<div className="prdHeader"> {/* HEADER ---------------------------------------------- */}
+			<h2>Create Product</h2>
+		</div>
 
-			<div className="prdProgressBar"></div>{/* PROGRESS BAR ------------------------------ */}
-
-			<div className="prdHeader"> {/* HEADER ---------------------------------------------- */}
-				<h3>Product Detail</h3>
-			</div>
-
+		<div className="prdFormContiner">			
 			<Formik
 				enableReinitialize
 				initialValues={initialValues}
@@ -123,8 +121,12 @@ export default function ProductForm() {
 			>
 				{({ isSubmitting, status }) => (
 					<Form>
+						<div className="prdGrid">
 						{!!status && <p>{status}</p>}
-						<div className="prdFormType">
+						<div className="prdFeatures"> {/* FEATURES ---------------- */}
+
+						<div className="prdFormType"> {/* Type & LHand ------------ */}
+
 							<label htmlFor='type'>Type:</label>
 							<Field as='select' name='type'>
 								<option value=''>Select type</option>
@@ -136,8 +138,14 @@ export default function ProductForm() {
 									))}
 							</Field>
 							<ErrorMessage name='type' component='div' />
+
+
+							<Field type='checkbox' name='leftHand' />
+							<label htmlFor='model'>Left-hand</label>
+
 						</div>
-						<div className="prdFormBrand">
+
+						<div className="prdFormBrand"> {/*Brand-------------------  */}
 							<label htmlFor='brand'>Brand:</label>
 							<Field as='select' name='brand'>
 								<option value=''>Select a brand</option>
@@ -150,12 +158,12 @@ export default function ProductForm() {
 							</Field>
 							<ErrorMessage name='brand' component='div' />
 						</div>
-						<div className="prdFormModel">
+						<div className="prdFormModel"> {/* Model ------------------ */}
 							<label htmlFor='model'>Model:</label>
 							<Field type='text' name='model' />
 							<ErrorMessage name='model' component='div' />
 						</div>
-						<div>
+						<div className="prdColor"> {/* Color ---------------------- */}
 							<label htmlFor='color'>Color:</label>
 							<Field as='select' name='color'>
 								<option value=''>Select a color</option>
@@ -168,45 +176,12 @@ export default function ProductForm() {
 							</Field>
 							<ErrorMessage name='color' component='div' />
 						</div>
-						<div>
-							<label htmlFor='price'>Price: $</label>
-							<Field type='float' min='0' name='price' />
-							<ErrorMessage name='price' component='div' />
-						</div>
-						<div>
+						<div className="prdStrings"> {/* Strings ------------------ */}
 							<label htmlFor='strings'>Strings:</label>
 							<Field type='number' min='0' name='strings' />
 							<ErrorMessage name='strings' component='div' />
 						</div>
-						<div>
-							<Field type='checkbox' name='leftHand' />
-							<label htmlFor='model'>Left-hand</label>
-						</div>
-						<div>
-							<label htmlFor='stock'>Stock:</label>
-							<Field type='number' min='0' name='stock' />
-							<ErrorMessage name='stock' component='div' />
-						</div>
-						<div>
-							<label htmlFor='discount'>
-								Discount:
-								<Field type='number' min='0' name='discount' /> %{" "}
-							</label>
-							<ErrorMessage name='discount' component='div' />
-						</div>
-						<div>
-							<label htmlFor='description'>Description:</label>
-							<Field as='textarea' name='description' />
-							<ErrorMessage name='description' component='div' />
-						</div>
-						<div>
-							<label htmlFor='aditionalInformation'>
-								Additional Information:
-							</label>
-							<Field as='textarea' name='aditionalInformation' />
-							<ErrorMessage name='aditionalInformation' component='div' />
-						</div>
-						<div>
+						<div className="prdImgload"> {/* Img load ------------------ */}
 							<input
 								type='file'
 								ref={fileRef}
@@ -228,19 +203,60 @@ export default function ProductForm() {
 									/>
 								))}
 						</div>
-						<button
+						<button /*  Button ------------------------------------------ */
 							type='button'
 							onClick={() => fileRef.current.click()}
 							disabled={productImages.length >= 3}
-						>
+							className="prdButton">
 							<BiPhotoAlbum /> Upload Image
 						</button>
-						<button type='submit' disabled={isSubmitting}>
+						</div>
+				{/* ----------------------------------------------------------------- */}
+						
+						<div className="prdValuation"> {/* VALUATION ------------- */}
+						<div className="prdPrice"> {/* Price --------------------- */}
+							<label htmlFor='price'>Price: $</label>
+							<Field type='number' step='0.1' min='0' name='price' />
+							<ErrorMessage name='price' component='div' />
+						</div>
+
+						<div className="prdDiscount"> {/* Discount ---------------- */}
+							<label htmlFor='discount'>
+								Discount:
+								<Field type='number' min='0' name='discount' /> %{" "}
+							</label>
+							<ErrorMessage name='discount' component='div' />
+						</div>
+
+						<div className="prdStock"> {/* Stock -----------------------*/}
+							<label htmlFor='stock'>Stock:</label>
+							<Field type='number' min='0' name='stock' />
+							<ErrorMessage name='stock' component='div' />
+						</div>
+
+						<div className="prdDescription"> {/* Description ----------- */}
+							<label htmlFor='description'>Description:</label>
+							<Field as='textarea' name='description' />
+							<ErrorMessage name='description' component='div' />
+						</div>
+
+						<div className="prdAdInfo"> {/* Add Info ------------------- */}
+							<label htmlFor='aditionalInformation'>
+								Additional Information:
+							</label>
+							<Field as='textarea' name='aditionalInformation' />
+							<ErrorMessage name='aditionalInformation' component='div' />
+						</div>
+						<button type='submit' disabled={isSubmitting} className="prdSubmit">
 							Create
 						</button>
+						</div>
+						</div>
 					</Form>
 				)}
-			</Formik>
+
+			</Formik> {/* -------------------------------------------------------------------------- */}
 		</div>
+		</>
 	)
 }
