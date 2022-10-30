@@ -8,9 +8,8 @@
             "https://http2.mlstatic.com/D_NQ_NP_2X_748520-MLA50415595917_062022-F.webp",
             "https://http2.mlstatic.com/D_NQ_NP_2X_842296-MLA48982704770_012022-F.webp"
         ],
-        "color": [
-            "naranja",
-            "natural"
+        "color":[ 
+            "naranja", "natural"
         ],
         "price": 16.999,
         "strings": 6,
