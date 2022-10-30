@@ -3,14 +3,14 @@ import {BsCart2} from 'react-icons/bs'
 import {FaGuitar} from 'react-icons/fa'
 import {useDispatch, useSelector} from 'react-redux'
 import { useEffect, useState } from "react";
-import { getProductToCart, getCart } from "../Redux/productSlice";
+import { getProductToCart } from "../Redux/productSlice";
 import Pagination from "./components/Pagination/Pagination";
 import {getAllPrds, getTypes, getColors, getBrands} from './../Redux/productActions'
 import {Link} from 'react-router-dom'
 import { AiOutlineSearch } from 'react-icons/ai'
 import SearchBar from './components/searchbar'
 import Filter from "./components/filters";
-import Cart from "./components/cart";
+
 
 
 const Home = () => {
@@ -67,15 +67,14 @@ const [currentPage, setCurrentPage] = useState(1)
         localStorage.setItem('carrito','[]')
     }
   }
-  const addCartItem =  async(item)=> {
-      
-   dispatch(getProductToCart(item))
-  
-  }
 
+  constructorCart()
   
-   constructorCart()
-  //console.log(getCart)
+  const addCartItem =  async(item)=> {
+    dispatch(getProductToCart(item))
+   }
+  
+  
   return (
     <main>
       <Search>

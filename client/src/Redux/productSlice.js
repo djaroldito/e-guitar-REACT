@@ -24,9 +24,7 @@ export const productSlice = createSlice({
             state.products = action.payload
         },
          getProductToCart: (state, action) => {
-            // let newItem = state.products.find(el=> el.id === action.payload)
-            // let itemInCart = state.cart.find(el=> el.id === newItem.id)
-
+         
             let cartIndex = state.cart.findIndex(
                 (item) => item.id === action.payload.id,
               )
@@ -42,7 +40,6 @@ export const productSlice = createSlice({
 
         delOneFromCart: (state, action) => {
        
-
             let elToDel = state.cart.findIndex(
                 (item) => item.id === action.payload.id,
               )
@@ -61,15 +58,7 @@ export const productSlice = createSlice({
              cart: state.cart.filter(el=> el.id !== action.payload)
             }
          },
- 
-
-        getCart: (state, action) => {
-            return{
-             ...state,
-             cart: state.cart
-            }
-         },
-        
+       
         clearCart: (state, action) => {
             state.cart = []
             localStorage.setItem('carrito',JSON.stringify(state.cart))

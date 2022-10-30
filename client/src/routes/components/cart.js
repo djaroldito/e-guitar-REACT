@@ -57,7 +57,7 @@ const Cart = () =>{
           {el.stock?<p> <b>Stock: </b>{el.stock}.</p>: null}
           {el.discount?<p> <b>Discount: </b>{el.discount}.</p>: null}
           {el.quantity?<p> <b>Quantity: </b>{el.quantity}.</p>: null}
-          <button disabled= { el.quantity < el.stock ? false : true  } onClick={() => addCartItem(el)}>Add Cart local</button>
+          <button disabled= { el.quantity < el.stock ? false : true  } onClick={() => addCartItem(el)}>Add One Item</button>
           <button onClick={() => delFromCart(el) }>Remove one Item</button>
           <button onClick={() => delFromCart(el.id, true)}>Remove All Item</button>
           </div>
@@ -81,4 +81,3 @@ export const ImgDiv = styled.div`
 `;
 
 export default Cart
-
