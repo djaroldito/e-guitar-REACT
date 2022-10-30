@@ -206,7 +206,7 @@ export default function ProductForm() {
 						<button /*  Button ------------------------------------------ */
 							type='button'
 							onClick={() => fileRef.current.click()}
-							disabled={values.images.length >= 3}
+							disabled={productImages.length >= 3}
 							className="prdButton">
 							<BiPhotoAlbum /> Upload Image
 						</button>
@@ -258,31 +258,5 @@ export default function ProductForm() {
 			</Formik> {/* -------------------------------------------------------------------------- */}
 		</div>
 		</>
-	)
-}
-
-export const PreviewImage = ({ file }) => {
-	const [preview, setPreview] = useState("")
-
-	useEffect(() => {
-		if (typeof file === "string") {
-			setPreview(file)
-		} else {
-			const reader = new FileReader()
-			reader.readAsDataURL(file)
-			reader.onload = () => {
-				setPreview(reader.result)
-			}
-		}
-	}, [file])
-
-	return (
-		<div style={{ display: "inline-block" }}>
-			{preview ? (
-				<img src={preview} alt='Preview' width='200px' height='200px' />
-			) : (
-				"loading..."
-			)}
-		</div>
 	)
 }
