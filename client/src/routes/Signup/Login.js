@@ -55,7 +55,7 @@ export default function Login() {
                 <button className="loginBtn google">Log in with Google+</button>
                 
                 <div className='loginAcc'>
-                    <p>Don't you have an Account?</p>
+                    <p>You don't have an Account?</p>
                 </div>
 
                 <div className='loginSup'>
