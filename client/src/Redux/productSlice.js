@@ -96,6 +96,7 @@ export const { getAllProducts,
                getAllTypes,
                getByFilters,
                delAllProductToCart,
-               getCart } = productSlice.actions;
+               getCart,
+               clearDetail } = productSlice.actions;
 
 export default productSlice.reducer;

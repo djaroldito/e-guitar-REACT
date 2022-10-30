@@ -61,9 +61,15 @@ export const postProductForm = async (formData) => {
 		return { error: error.response ? error.response.data : error.message }
 	}
 }
-
-export const fillFilters = () => async (dispatch) => {
-    await dispatch(getBrands())
-    await dispatch(getColors())
-    await dispatch(getTypes())
+export const editProductForm = async (formData) => {
+    try {
+		const { data: productCreated } = await axios.put(
+			`http://localhost:3001/rguitars/${formData.id}`,
+			formData
+		)
+		return productCreated
+	} catch (error) {
+		console.error("editProductForm:", error.message)
+		return { error: error.response ? error.response.data : error.message }
+	}
 }
