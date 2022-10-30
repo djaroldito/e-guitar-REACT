@@ -9,25 +9,23 @@ router.get("/login", async (req, res) => {
 		const { email, password } = req.query
 
 		// if no users load defaul
-		 /* await loadAdminUserData() */ 
-        
+		 await loadAdminUserData()
+
 		if (!email || !password) {
 			res.status(400).send("Faltan parametros")
 		} else {
-            console.log(email, password)
 			const user = await User.findOne({
 				where: {
 					email,
 					password
 				},
 			})
-            console.log(user)
 			if (!user) {
                 return res.status(404).send("Email o Password erróneos")
-				
+
 			} else {
                 return res.status(200).json(user)
-				
+
 			}
 		}
 	} catch (error) {
@@ -45,7 +43,7 @@ const loadAdminUserData = async () => {
 		// if no users loaded
 		if (dbUsers.length === 0) {
 			await User.create({
-				email: "admin@mail.com",
+				email: "admin@gmail.com",
                 password: "admin",
                 isAdmin: true,
 			})
