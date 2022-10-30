@@ -112,7 +112,6 @@ export default function ProductForm() {
 						<div className="prdFeatures"> {/* FEATURES ---------------- */}
 
 						<div className="prdFormType"> {/* Type & LHand ------------ */}
-
 							<label htmlFor='type'>Type:</label>
 							<Field as='select' name='type'>
 								<option value=''>Select type</option>
@@ -125,10 +124,8 @@ export default function ProductForm() {
 							</Field>
 							<ErrorMessage name='type' component='div' />
 
-
 							<Field type='checkbox' name='leftHand' />
 							<label htmlFor='model'>Left-hand</label>
-
 						</div>
 
 						<div className="prdFormBrand"> {/*Brand-------------------  */}
