@@ -1,6 +1,5 @@
 import { createSlice }  from "@reduxjs/toolkit";
 
-
 export const productSlice = createSlice({
     name: "products",
     initialState:{
@@ -25,26 +24,55 @@ export const productSlice = createSlice({
             state.products = action.payload
         },
          getProductToCart: (state, action) => {
-            let newItem = state.products.find(el=> el.id === action.payload)
-            let itemInCart = state.cart.find(el=> el.id === newItem.id)
+            // let newItem = state.products.find(el=> el.id === action.payload)
+            // let itemInCart = state.cart.find(el=> el.id === newItem.id)
 
-            return itemInCart
-            ?{
-                ...state,
-                cart:state.cart.map(el=> el.id === newItem.id ? {...el, quantity: el.quantity < el.stock ? el.quantity + 1 : el.stock }:el)
-            } 
-            :{ 
-                ...state, 
-                cart:[...state.cart, {...newItem, quantity:1}],
-            
-            }
+            let cartIndex = state.cart.findIndex(
+                (item) => item.id === action.payload.id,
+              )
+              if (cartIndex >= 0  ) {
+                state.cart[cartIndex].quantity += 1
+              } else {
+                let tempProduct = { ...action.payload, quantity: 1 }
+                state.cart.push(tempProduct)
+              }
+              localStorage.setItem('carrito',JSON.stringify(state.cart))
+       
+           },
+
+        delOneFromCart: (state, action) => {
        
 
+            let elToDel = state.cart.findIndex(
+                (item) => item.id === action.payload.id,
+              )
+              if (elToDel >= 0  ) {
+                state.cart[elToDel].quantity -= 1
+              } else {
+                state.cart = state.cart.filter(el=> el.id !== action.payload) 
+              }
+              localStorage.setItem('carrito',JSON.stringify(state.cart))
             
+            },
+            
+         delAllFromCart: (state, action) => {
+            return{
+             ...state,
+             cart: state.cart.filter(el=> el.id !== action.payload)
+            }
+         },
+ 
 
-        },
+        getCart: (state, action) => {
+            return{
+             ...state,
+             cart: state.cart
+            }
+         },
+        
         clearCart: (state, action) => {
             state.cart = []
+            localStorage.setItem('carrito',JSON.stringify(state.cart))
         },
         getAllColors: (state, action) =>{
             state.colors = action.payload
@@ -59,26 +87,7 @@ export const productSlice = createSlice({
             state.products = action.payload
         },
 
-         delOneFromCart: (state, action) => {
-           let elToDel = state.cart.find(el=> el.id === action.payload)
-           return elToDel.quantity > 1 ? {
-            ...state,
-            cart:state.cart.map(el=> el.id === action.payload ? {...el, quantity: el.quantity - 1}: el)
-
-           }
-           :{
-            ...state,
-            cart: state.cart.filter(el=> el.id !== action.payload)
-           }
-        },
-
-        delAllFromCart: (state, action) => {
-           return{
-            ...state,
-            cart: state.cart.filter(el=> el.id !== action.payload)
-           }
-        },
-
+       
 
     },
 });
@@ -97,7 +106,7 @@ export const { getAllProducts,
                getAllBrands,
                getAllTypes,
                getByFilters,
-               delAllProductToCart } = productSlice.actions;
-
+               delAllProductToCart,
+               getCart } = productSlice.actions;
 
 export default productSlice.reducer;
