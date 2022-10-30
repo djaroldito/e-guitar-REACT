@@ -19,13 +19,13 @@ const GuitarDetail = () => {
 	const { id } = useParams()
 
 	useEffect(() => {
-        dispatch(getById(id))
-        return () => {
-            dispatch(clearDetail())
-        }
+		dispatch(getById(id))
+		return () => {
+			dispatch(clearDetail())
+		}
 	}, [dispatch, id])
 
-    const detail = useSelector((state) => state.products.detail)
+	const detail = useSelector((state) => state.products.detail)
 
 	const handleDeleteProduct = (id) => {
 		Swal.fire({
@@ -82,16 +82,24 @@ const GuitarDetail = () => {
 					{detail.leftHand ? <LeftHand>Left Hand Available</LeftHand> : null}
 					<form></form>
 
-
-                    <button type='button'
-						title='Edit product' onClick={() => navigate(`/editProduct/${detail.id}`)}><FaEdit /></button>
-					<button
-						type='button'
-						title='Delete product'
-						onClick={() => handleDeleteProduct(detail.id)}
-					>
-						<FaTrashAlt />
-					</button>
+					{localStorage.getItem("isAdmin") && (
+						<>
+							<button
+								type='button'
+								title='Edit product'
+								onClick={() => navigate(`/editProduct/${detail.id}`)}
+							>
+								<FaEdit />
+							</button>
+							<button
+								type='button'
+								title='Delete product'
+								onClick={() => handleDeleteProduct(detail.id)}
+							>
+								<FaTrashAlt />
+							</button>
+						</>
+					)}
 				</TextCont>
 			</CountDiv>
 		</section>
