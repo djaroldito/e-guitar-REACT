@@ -1,7 +1,7 @@
 import { NavLink } from "react-router-dom";
 import styled from "styled-components";
-import { BiLogIn } from "react-icons/bi";
-import { FaUserAlt, FaBeer } from "react-icons/fa";
+import { BiLogIn, BiLogOut } from "react-icons/bi";
+import { FaUserAlt} from "react-icons/fa";
 import Cart from "./components/cart";
 import {AiOutlineShoppingCart} from 'react-icons/ai'
 import { AiOutlineSearch } from "react-icons/ai";
@@ -17,6 +17,7 @@ const NavBar = () => {
     localStorage.clear();
     window.location.reload();
   };
+  const email = localStorage.getItem('emailData');
   return (
     <header className={path === "/" ? "headerLanding" : "header"}>
       <NavCont>
@@ -24,24 +25,31 @@ const NavBar = () => {
         <NavLink to="/">discount</NavLink>
         <NavLink to="/newProduct">Add Product</NavLink>
 
-        <IconCont>
+        <IconCont className={""}>
+        {!isAuthenticated && !email ? 
+          (
           <UserCont>
             <NavLink to="/login">
               <BiLogIn />
             </NavLink>
           </UserCont>
+          )
+        :  (
+            <UserCont>
+              {isAuthenticated ? (
+                <LogoutButton />
+              ) : (
+                <button onClick={handleLog}><BiLogOut/></button>
+              )}
+            </UserCont>
+          )
+      }
 
           <UserCont className={"logged"}>
             <FaUserAlt />
           </UserCont>
         </IconCont>
-        <UserCont>
-          {isAuthenticated ? (
-            <LogoutButton />
-          ) : (
-            <button onClick={handleLog}>Logout</button>
-          )}
-        </UserCont>
+       
 
         <NavLink to='/cart'><AiOutlineShoppingCart/></NavLink>
       </NavCont>

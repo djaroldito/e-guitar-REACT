@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux"
 import styled from "styled-components"
 import {delOneFromCart,delAllFromCart, clearCart, getProductToCart } from "../../Redux/productSlice"
 import {AiOutlineDelete} from "react-icons/ai";
+import EmptyCart from "./Cart/EmptyCart";
 import {BsCart2} from 'react-icons/bs'
 import "./Cart/Cart.css";
 
@@ -22,7 +23,7 @@ const Cart = () =>{
    
    return(
   <main>
-    {carrito.length >= 1 ? <button onClick={() => dispatch(clearCart())}>Clear Cart</button> : null }
+    {carrito.length >= 1 ? <button onClick={() => dispatch(clearCart())}>Clear Cart</button> : <EmptyCart/> }
   <div className="ProductCartContainer">
     <br/>
         
