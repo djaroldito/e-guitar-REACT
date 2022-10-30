@@ -1,7 +1,7 @@
-import React, { useRef, useState, useEffect } from "react"
-import axios from "axios"
-import { Formik, Form, Field, ErrorMessage } from "formik"
-import { BiPhotoAlbum } from "react-icons/bi"
+import React, { useRef, useState, useEffect } from "react";
+import axios from "axios";
+import { Formik, Form, Field, ErrorMessage } from "formik";
+import { BiPhotoAlbum } from "react-icons/bi";
 // redux
 import { useDispatch, useSelector } from "react-redux"
 import { useParams } from "react-router-dom"
@@ -59,8 +59,14 @@ export default function ProductForm() {
 	}
 
 	return (
-		<div>
-			<h3>Product Detail</h3>
+		<div className="prdFormContiner">
+
+			<div className="prdProgressBar"></div>{/* PROGRESS BAR ------------------------------ */}
+
+			<div className="prdHeader"> {/* HEADER ---------------------------------------------- */}
+				<h3>Product Detail</h3>
+			</div>
+
 			<Formik
 				enableReinitialize
 				initialValues={initialValues}
@@ -118,7 +124,7 @@ export default function ProductForm() {
 				{({ isSubmitting, status }) => (
 					<Form>
 						{!!status && <p>{status}</p>}
-						<div>
+						<div className="prdFormType">
 							<label htmlFor='type'>Type:</label>
 							<Field as='select' name='type'>
 								<option value=''>Select type</option>
@@ -131,7 +137,7 @@ export default function ProductForm() {
 							</Field>
 							<ErrorMessage name='type' component='div' />
 						</div>
-						<div>
+						<div className="prdFormBrand">
 							<label htmlFor='brand'>Brand:</label>
 							<Field as='select' name='brand'>
 								<option value=''>Select a brand</option>
@@ -144,7 +150,7 @@ export default function ProductForm() {
 							</Field>
 							<ErrorMessage name='brand' component='div' />
 						</div>
-						<div>
+						<div className="prdFormModel">
 							<label htmlFor='model'>Model:</label>
 							<Field type='text' name='model' />
 							<ErrorMessage name='model' component='div' />
