@@ -148,7 +148,6 @@ router.put("/:idGuitar", async (req, res) => {
 			!price ||
 			!strings ||
 			!description ||
-			!stock ||
 			!type
 		) {
 			res.status(400).send("Faltan parametros")

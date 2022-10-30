@@ -14,7 +14,6 @@ export default function Pagination({
 	guitarsPerPage,
 }) {
 	const pagesCount = Math.ceil(totalCards / guitarsPerPage)
-  
 	if (pagesCount === 1) return null
 
 	// range of numbers
@@ -37,11 +36,11 @@ export default function Pagination({
 	}
 
 	// make the page numbers with the range
-  
+
 	const pageNumbers = new Array(countOfNumbers)
 		.fill()
 		.map((d, i) => i + firstNumber)
-    
+
 	return (
 		<Container>
 			<Li

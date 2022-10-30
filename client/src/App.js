@@ -8,7 +8,7 @@ import Cart from './routes/components/cart';
 import Signup from './routes/Signup/Signup';
 import Login from './routes/Signup/Login';
 
-import ProductForm from './routes/components/ProductForm'
+import ProductForm from './routes/components/ProductForm/ProductForm'
 
 
 function App() {

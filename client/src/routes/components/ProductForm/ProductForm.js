@@ -3,14 +3,18 @@ import axios from "axios";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import { BiPhotoAlbum } from "react-icons/bi";
 // redux
-import { useDispatch, useSelector } from "react-redux";
-import { useParams } from "react-router-dom";
-import { getById, postProductForm } from "../../Redux/productActions";
-import "./ProductForm/ProductForm.css";
+import { useDispatch, useSelector } from "react-redux"
+import { useParams } from "react-router-dom"
+import {
+	getById,
+	postProductForm,
+	editProductForm,
+} from "../../../Redux/productActions"
+import { clearDetail } from "../../../Redux/productSlice"
+import { PreviewImage } from "./PreviewImage"
 
 export default function ProductForm() {
 	const { id } = useParams()
-	const isAddMode = !id
 	const dispatch = useDispatch()
 
 	const { colors, brands, types, detail } = useSelector(
@@ -19,29 +23,40 @@ export default function ProductForm() {
 	const fileRef = useRef()
 
 	useEffect(() => {
-        if (id) {
-            console.log(id)
-            dispatch(getById(id))
+		if (id) {
+			dispatch(getById(id))
+			setProductImages(detail.img.split(","))
+		} else {
+			setProductImages([])
 		}
-	}, [id, dispatch])
+		return () => {
+			dispatch(clearDetail())
+			setProductImages([])
+		}
+	}, [id, dispatch]) // eslint-disable-line
 
-	const initialValues = isAddMode
-		? {
-				brand: "",
-				model: "",
-				img: "",
-				color: "",
-				price: 0,
-				strings: 0,
-				description: "",
-				stock: 0,
-				discount: 0,
-				type: "",
-				leftHand: false,
-				aditionalInformation: "",
-				images: [],
-		  }
-		: { ...detail, images: detail.img ? detail.img.split(",") : [] }
+    const initialValues = {
+        id: detail.id || "",
+		brand: detail.brand || "",
+		model: detail.model || "",
+		img: detail.img || "",
+		color: detail.color || "",
+		price: detail.price || 0,
+		strings: detail.strings || 0,
+		description: detail.description || "",
+		stock: detail.stock || 0,
+		discount: detail.discount || 0,
+		type: detail.type || "",
+		leftHand: detail.leftHand || false,
+		aditionalInformation: detail.aditionalInformation || "",
+		images: [],
+	}
+
+	const [productImages, setProductImages] = useState([])
+
+	const handleDeleteImage = (file) => {
+		setProductImages(productImages.filter((f) => f !== file))
+	}
 
 	return (
 		<div className="prdFormContiner">
@@ -53,6 +68,7 @@ export default function ProductForm() {
 			</div>
 
 			<Formik
+				enableReinitialize
 				initialValues={initialValues}
 				validate={(values) => {
 					const errors = {}
@@ -72,42 +88,40 @@ export default function ProductForm() {
 					return errors
 				}}
 				onSubmit={async (values, { setSubmitting, setStatus }) => {
-					try {
-						// upload images
-						const { files } = values
-						files.length &&
-							files.map((file) => {
-								const formData = new FormData()
-								formData.append("file", file)
-								formData.append("upload_preset", "kym7uarq")
-								axios
-									.post(
+					//try {
+					// upload images
+					if (productImages.length) {
+						const imgArray = await Promise.all(
+							productImages.map(async (file) => {
+								if (typeof file === "string") {
+									// original path
+									return file
+								} else {
+									// file to update
+									const formData = new FormData()
+									formData.append("file", file)
+									formData.append("upload_preset", "kym7uarq")
+									const res = await axios.post(
 										`https://api.cloudinary.com/v1_1/dnzbhrg86/image/upload`,
 										formData
 									)
-									.then(
-										(res) =>
-											(values.img = values.img.concat(
-												", ",
-												res.data.secure_url
-											))
-									)
-								return true
+									return res.data.url
+								}
 							})
-						// post new product
-						const response = await dispatch(postProductForm(values))
-						if (response.error) {
-							setStatus(response.error)
-							setSubmitting(false)
-						}
-					} catch (error) {
-						setStatus(error.message)
+						)
+						values.img = imgArray.join(",")
+					}
+					// // post new product
+					const response = id ? await dispatch(editProductForm(values)) : await dispatch(postProductForm(values))
+
+					if (response.error) {
+						console.error("response", response.error)
+						setStatus(response.error)
 						setSubmitting(false)
-						console.error("upload_cloudinary", error.message)
 					}
 				}}
 			>
-				{({ values, isSubmitting, status, setFieldValue }) => (
+				{({ isSubmitting, status }) => (
 					<Form>
 						{!!status && <p>{status}</p>}
 						<div className="prdFormType">
@@ -156,7 +170,7 @@ export default function ProductForm() {
 						</div>
 						<div>
 							<label htmlFor='price'>Price: $</label>
-							<Field type='number' step='0.1' min='0' name='price' />
+							<Field type='float' min='0' name='price' />
 							<ErrorMessage name='price' component='div' />
 						</div>
 						<div>
@@ -198,24 +212,26 @@ export default function ProductForm() {
 								ref={fileRef}
 								hidden
 								onChange={(e) => {
-									setFieldValue("files", values.files.concat(e.target.files[0]))
+									// setProductImages(productImages.push(e.target.files[0]))
+									setProductImages([...productImages, e.target.files[0]])
 								}}
 							/>
 						</div>
 						<div>
-							{values.images.length}
-
-							{/* {values.files.length > 0 &&
-								values.files.map((f, i) => {
-									return <PreviewImage file={f} key={i} />
-                                })} */}
-							{values.images.length > 0 &&
-								values.images.map((f, i) => <PreviewImage file={f} key={i} />)}
+							{/* Render Images */}
+							{productImages.length > 0 &&
+								productImages.map((f, i) => (
+									<PreviewImage
+										file={f}
+										key={i}
+										handleDelete={() => handleDeleteImage(f)}
+									/>
+								))}
 						</div>
 						<button
 							type='button'
 							onClick={() => fileRef.current.click()}
-							disabled={values.images.length >= 3}
+							disabled={productImages.length >= 3}
 						>
 							<BiPhotoAlbum /> Upload Image
 						</button>
@@ -225,37 +241,6 @@ export default function ProductForm() {
 					</Form>
 				)}
 			</Formik>
-			
-			<div className="prdBody">
-				<button>Prev</button>
-				<button>Next</button>
-			</div>
-		</div>
-	)
-}
-
-export const PreviewImage = ({ file }) => {
-	const [preview, setPreview] = useState("")
-
-	useEffect(() => {
-		if (typeof file === "string") {
-			setPreview(file)
-		} else {
-			const reader = new FileReader()
-			reader.readAsDataURL(file)
-			reader.onload = () => {
-				setPreview(reader.result)
-			}
-		}
-	}, [file])
-
-	return (
-		<div style={{ display: "inline-block" }}>
-			{preview ? (
-				<img src={preview} alt='Preview' width='200px' height='200px' />
-			) : (
-				"loading..."
-			)}
 		</div>
 	)
 }

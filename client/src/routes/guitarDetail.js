@@ -3,6 +3,7 @@ import axios from "axios"
 import { useDispatch, useSelector } from "react-redux"
 import { useParams, useNavigate } from "react-router-dom"
 import { getById } from "../Redux/productActions"
+import { clearDetail } from "../Redux/productSlice"
 import { Swiper, SwiperSlide } from "swiper/react"
 import { Pagination } from "swiper"
 import "swiper/css"
@@ -18,7 +19,10 @@ const GuitarDetail = () => {
 	const { id } = useParams()
 
 	useEffect(() => {
-		dispatch(getById(id))
+        dispatch(getById(id))
+        return () => {
+            dispatch(clearDetail())
+        }
 	}, [dispatch, id])
 
     const detail = useSelector((state) => state.products.detail)
