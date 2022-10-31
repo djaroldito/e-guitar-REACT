@@ -59,28 +59,14 @@ const Cart = () =>{
             
             {el.discount?<p> <b>Discount: </b>{el.discount}.</p>: null}
             <div className="InputCartContainer">
-              <button onClick={() => delFromCart(el.id) }>-</button>
+              <button  disabled= { el.quantity != 1 ? false : true} onClick={() => delFromCart(el)}>-</button>
               <input placeholder={el.quantity} disabled></input>
-              <button onClick={() => dispatch(getProductToCart(el.id))} >+</button>
+              <button disabled= { el.quantity < el.stock ? false : true} onClick={() => addCartItem(el)} >+</button>
               {el.stock?<p> <b>disponibles {el.stock}</b>.</p>: null}
             </div>
               {el.price?<p>$ {el.price}</p>: null}
               <button onClick={() => delFromCart(el.id, true)}><AiOutlineDelete/></button>
-
-          <ImgDiv>            
-          <img src={el.img} alt={carrito.brand}/>
-          </ImgDiv>
-          {el.model?<p> <b>Model: </b>{el.model}.</p>: null}
-          {el.type?<p> <b>Type: </b>{el.type}.</p>: null}
-          {el.color?<p> <b>Color: </b>{el.color}.</p>: null}
-          {el.price?<p> <b>Price: </b>{el.price} x {el.quantity} = ${el.price * el.quantity}.</p>: null}
-          {el.stock?<p> <b>Stock: </b>{el.stock}.</p>: null}
-          {el.discount?<p> <b>Discount: </b>{el.discount}.</p>: null}
-          {el.quantity?<p> <b>Quantity: </b>{el.quantity}.</p>: null}
-          <button disabled= { el.quantity < el.stock ? false : true  } onClick={() => addCartItem(el)}>Add One Item</button>
-          <button onClick={() => delFromCart(el) }>Remove one Item</button>
-          <button onClick={() => delFromCart(el.id, true)}>Remove All Item</button>
-          </div>
+              </div>
           ))}
             <Total>
               {carrito.length >= 1 ? <label >Total: </label> : null }
