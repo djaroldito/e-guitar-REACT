@@ -1,12 +1,12 @@
+import React from "react";
 import { NavLink } from "react-router-dom";
 import styled from "styled-components";
 import { BiLogIn, BiLogOut } from "react-icons/bi";
-import { FaUserAlt} from "react-icons/fa";
+import { FaUserAlt } from "react-icons/fa";
 import Cart from "./components/cart";
-import {AiOutlineShoppingCart} from 'react-icons/ai'
+import { AiOutlineShoppingCart } from "react-icons/ai";
 import { AiOutlineSearch } from "react-icons/ai";
 import "../index.css";
-import React from "react";
 import { useAuth0 } from "@auth0/auth0-react";
 import { LogoutButton } from "./Signup/Logout";
 
@@ -17,41 +17,43 @@ const NavBar = () => {
     localStorage.clear();
     window.location.reload();
   };
-  const email = localStorage.getItem('emailData');
+  const email = localStorage.getItem("emailData");
+  const isAdmin = localStorage.getItem("isAdmin");
+
   return (
     <header className={path === "/" ? "headerLanding" : "header"}>
       <NavCont>
         <NavLink to="/home">Home</NavLink>
         <NavLink to="/">discount</NavLink>
-        <NavLink to="/newProduct">Add Product</NavLink>
+        {isAdmin && <NavLink to="/newProduct">Add Product</NavLink>}
 
         <IconCont className={""}>
-        {!isAuthenticated && !email ? 
-          (
-          <UserCont>
-            <NavLink to="/login">
-              <BiLogIn />
-            </NavLink>
-          </UserCont>
-          )
-        :  (
+          {!isAuthenticated && !email ? (
+            <UserCont>
+              <NavLink to="/login">
+                <BiLogIn />
+              </NavLink>
+            </UserCont>
+          ) : (
             <UserCont>
               {isAuthenticated ? (
                 <LogoutButton />
               ) : (
-                <button onClick={handleLog}><BiLogOut/></button>
+                <button onClick={handleLog}>
+                  <BiLogOut />
+                </button>
               )}
             </UserCont>
-          )
-      }
+          )}
 
           <UserCont className={"logged"}>
             <FaUserAlt />
           </UserCont>
         </IconCont>
-       
 
-        <NavLink to='/cart'><AiOutlineShoppingCart/></NavLink>
+        <NavLink to="/cart">
+          <AiOutlineShoppingCart />
+        </NavLink>
       </NavCont>
     </header>
   );
