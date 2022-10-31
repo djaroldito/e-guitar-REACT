@@ -1,15 +1,15 @@
 import styled from "styled-components";
-import { BsCart2 } from "react-icons/bs";
-import { FaGuitar } from "react-icons/fa";
-import { useDispatch, useSelector } from "react-redux";
+import {BsCart2} from 'react-icons/bs'
+import {FaGuitar} from 'react-icons/fa'
+import {useDispatch, useSelector} from 'react-redux'
 import { useEffect, useState } from "react";
+import { getProductToCart } from "../Redux/productSlice";
 import Pagination from "./components/Pagination/Pagination";
 import {getAllPrds, getTypes, getColors, getBrands} from './../Redux/productActions'
 import {Link} from 'react-router-dom'
 import { AiOutlineSearch } from 'react-icons/ai'
 import SearchBar from './components/searchbar'
 import Filter from "./components/filters";
-import { getProductToCart } from "../Redux/productSlice";
 
 
 const Home = () => {
@@ -38,13 +38,13 @@ const [currentPage, setCurrentPage] = useState(1)
 
   let currentGuitars = products.slice(firstIdx, lastIdx);
 
-  const handlePageChange = (pageNumber) => {
-    dispatch(setCurrentPage(pageNumber));
-  };
+ const handlePageChange = (pageNumber) => {
+  dispatch(setCurrentPage(pageNumber))
+  }
 
   const SearchHandler = (value) => {
-    setSearch(value);
-  };
+    setSearch(value)
+  }
   const handleClick = () => {
     setIsActive(current => !current)
   }
@@ -79,6 +79,7 @@ const [currentPage, setCurrentPage] = useState(1)
   return (
     <main>
       
+      
       <Search>
               <div style={isActive ? {display: 'block', width:'30%'} : {display:'none', width:'30%'}}>
                   <SearchBar handler={SearchHandler} products={currentGuitars} Search={Search}/>
@@ -87,7 +88,6 @@ const [currentPage, setCurrentPage] = useState(1)
               <AiOutlineSearch/>
           </button>
       </Search>
-      <ContainerDiv>
       <Filter/>
       <CardsCont>
         {currentGuitars?.map((item) => (
@@ -102,13 +102,11 @@ const [currentPage, setCurrentPage] = useState(1)
               <button className="cartbtn" onClick={() => addCartItem(item)}><BsCart2/> Add Cart</button>
             </div>
           </DivCont>
-
         ))}
       {/* {Searched.length>0 ?
           Searched.map((item) => ProductRender(item)) : currentGuitars.map((item) => ProductRender(item))
           } */}
       </CardsCont>
-      </ContainerDiv>
       <Pagination
           handleChange={handlePageChange}
           totalCards={products.length}
@@ -119,20 +117,21 @@ const [currentPage, setCurrentPage] = useState(1)
 };
 
 const Search = styled.div`
-  padding: 14px 16px;
-  display: flex;
-  justify-content: center;
-  button {
-    background-color: transparent;
-    border: none;
-    font-size: 30px;
-  }
-`;
+    padding: 14px 16px;
+    display:flex;
+    justify-content: center;
+    button{
+      background-color:transparent;
+      border: none;
+      font-size:30px;
+    }
+`
 const DivCont = styled.div`
   width: 350px;
   height: 350px;
   border: 1px solid gray;
   background-color: white;
+  margin-left: auto;
   margin-right: 10px;
   margin-top: 30px;
   text-align: center;
@@ -192,13 +191,8 @@ const CardsCont = styled.div`
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
+  margin-left: auto;
   margin-right: 25px;
-`;
-
-const ContainerDiv = styled.div`
-  width: 100%;
-  display: flex;
-  flex-direction: row;
 `;
 
 export default Home;
