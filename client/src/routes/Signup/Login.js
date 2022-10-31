@@ -47,10 +47,9 @@ export default function Login() {
 
                 navigate("/home", { state: { localStorage } });
 			}
-		} catch (error) {
-			console.log(error.message)
+        } catch (error) {
 			Swal.fire({
-				title: "Usuario no encontrado",
+				title: error.response.data,
 				showClass: {
 					popup: "animate__animated animate__fadeInDown",
 				},
