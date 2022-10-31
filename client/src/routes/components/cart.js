@@ -3,30 +3,48 @@ import { useDispatch, useSelector } from "react-redux"
 import styled from "styled-components"
 import {delOneFromCart,delAllFromCart, clearCart, getProductToCart } from "../../Redux/productSlice"
 import {AiOutlineDelete} from "react-icons/ai";
+import EmptyCart from "./Cart/EmptyCart";
 import {BsCart2} from 'react-icons/bs'
 import "./Cart/Cart.css";
 
-
 const Cart = () =>{
    const carrito = useSelector(state => state.products.cart)
+
    const dispatch = useDispatch()
 
-   const delFromCart = (id, all = false) =>{
-     if (all){
-      dispatch(delAllFromCart(id))
-    }else{
-      dispatch(delOneFromCart(id))
-    }
+  //  const delFromCart = (id, all = false) =>{
+  //    if (all){
+  //     dispatch(delAllFromCart(id))
+  //   }else{
+  //     dispatch(delOneFromCart(id))
+  //   }
 
-   }
+  //  }
+
+   const constructorCart = ()=>{
+    if (!localStorage.getItem('carrito')){
+        localStorage.setItem('carrito','[]')
+    }
+  }
+   const addCartItem = (item)=> {
+    dispatch(getProductToCart(item))
+
+  }
+
+  const delFromCart = (item)=> {
+    dispatch(delOneFromCart(item))
+
+  }
+ 
+  constructorCart()
+  //console.log(getCart)
    
    return(
   <main>
-    {carrito.length >= 1 ? <button onClick={() => dispatch(clearCart())}>Clear Cart</button> : null }
+    {carrito.length >= 1 ? <button onClick={() => dispatch(clearCart())}>Clear Cart</button> : <EmptyCart/> }
   <div className="ProductCartContainer">
     <br/>
         
-
 
           {carrito.map((el, index)=>(
             <div key={index} className="ProductCard">
@@ -41,16 +59,14 @@ const Cart = () =>{
             
             {el.discount?<p> <b>Discount: </b>{el.discount}.</p>: null}
             <div className="InputCartContainer">
-              <button onClick={() => delFromCart(el.id) }>-</button>
+              <button  disabled= { el.quantity != 1 ? false : true} onClick={() => delFromCart(el)}>-</button>
               <input placeholder={el.quantity} disabled></input>
-              <button onClick={() => dispatch(getProductToCart(el.id))} >+</button>
+              <button disabled= { el.quantity < el.stock ? false : true} onClick={() => addCartItem(el)} >+</button>
               {el.stock?<p> <b>disponibles {el.stock}</b>.</p>: null}
             </div>
               {el.price?<p>$ {el.price}</p>: null}
               <button onClick={() => delFromCart(el.id, true)}><AiOutlineDelete/></button>
-
-            
-            </div>
+              </div>
           ))}
             <Total>
               {carrito.length >= 1 ? <label >Total: </label> : null }

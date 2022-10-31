@@ -61,3 +61,15 @@ export const postProductForm = async (formData) => {
 		return { error: error.response ? error.response.data : error.message }
 	}
 }
+export const editProductForm = async (formData) => {
+    try {
+		const { data: productUpdated } = await axios.put(
+			`http://localhost:3001/rguitars/${formData.id}`,
+			formData
+		)
+		return productUpdated
+	} catch (error) {
+		console.error("editProductForm:", error.message)
+		return { error: error.response ? error.response.data : error.message }
+	}
+}

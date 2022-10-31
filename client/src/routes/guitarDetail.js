@@ -3,6 +3,7 @@ import axios from "axios"
 import { useDispatch, useSelector } from "react-redux"
 import { useParams, useNavigate } from "react-router-dom"
 import { getById } from "../Redux/productActions"
+import { clearDetail } from "../Redux/productSlice"
 import { Swiper, SwiperSlide } from "swiper/react"
 import { Pagination } from "swiper"
 import "swiper/css"
@@ -19,37 +20,45 @@ const GuitarDetail = () => {
 
 	useEffect(() => {
 		dispatch(getById(id))
+		return () => {
+			dispatch(clearDetail())
+		}
 	}, [dispatch, id])
 
     const detail = useSelector((state) => state.products.detail)
 
-	const handleDeleteProduct = (id) => {
-		Swal.fire({
-			title: "Are you sure?",
-			text: "You won't be able to revert this!",
-			icon: "warning",
-			showCancelButton: true,
-			confirmButtonColor: "#3085d6",
-			cancelButtonColor: "#d33",
-			confirmButtonText: "Yes, delete it!",
-		}).then((result) => {
-			if (result.isConfirmed) {
-				axios
-					.delete(`http://localhost:3001/rguitars/${id}`)
-					.then((res) => {
-						if (res.status === 200) {
-							Swal.fire(
-								"Deleted!",
-								"Your product has been deleted.",
-								"success"
-							).then((r) => navigate("/home"))
-						}
-					})
-					.catch((error) => {
-						Swal.fire("Error!", error.message, "error")
-					})
-			}
-		})
+	const handleDeleteProduct = () => {
+		if (localStorage.getItem("isAdmin")) {
+			Swal.fire({
+				title: "Are you sure?",
+				text: "You won't be able to revert this!",
+				icon: "warning",
+				showCancelButton: true,
+				confirmButtonText: "Yes, delete it!",
+				cancelButtonText: "No, cancel!",
+				reverseButtons: true,
+				confirmButtonColor: "#3085d6",
+				cancelButtonColor: "#d33",
+			}).then((result) => {
+				if (result.isConfirmed) {
+					axios
+						.delete(`http://localhost:3001/rguitars/${detail.id}`)
+						.then((res) => {
+							if (res.status === 200) {
+								Swal.fire(
+									"Deleted!",
+									"Your product has been deleted.",
+									"success"
+								).then((r) => navigate("/home"))
+							}
+						})
+						.catch((error) => {
+							Swal.fire("Error!", error.message, "error")
+							return false
+						})
+				}
+			})
+		}
 	}
 
 	return (
@@ -78,16 +87,24 @@ const GuitarDetail = () => {
 					{detail.leftHand ? <LeftHand>Left Hand Available</LeftHand> : null}
 					<form></form>
 
-
-                    <button type='button'
-						title='Edit product' onClick={() => navigate(`/editProduct/${detail.id}`)}><FaEdit /></button>
-					<button
-						type='button'
-						title='Delete product'
-						onClick={() => handleDeleteProduct(detail.id)}
-					>
-						<FaTrashAlt />
-					</button>
+					{localStorage.getItem("isAdmin") && (
+						<>
+							<button
+								type='button'
+								title='Edit product'
+								onClick={() => navigate(`/editProduct/${detail.id}`)}
+							>
+								<FaEdit />
+							</button>
+							<button
+								type='button'
+								title='Delete product'
+								onClick={handleDeleteProduct}
+							>
+								<FaTrashAlt />
+							</button>
+						</>
+					)}
 				</TextCont>
 			</CountDiv>
 		</section>
