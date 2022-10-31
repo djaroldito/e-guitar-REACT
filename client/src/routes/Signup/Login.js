@@ -1,59 +1,128 @@
-import React, { useRef } from 'react';
-import "./Styles/Login.css";
+import React, { useRef, useState } from "react"
+import { NavLink, useNavigate } from "react-router-dom"
+import "./Styles/Login.css"
+import {
+	AiOutlineEye,
+	AiOutlineEyeInvisible,
+	AiOutlineUser,
+	AiOutlineGoogle,
+} from "react-icons/ai"
 
+import axios from "axios"
+import Swal from "sweetalert2"
+import Home from "../home"
+import { useAuth0 } from "@auth0/auth0-react"
+
+const USER_REGEX = /^[A-z][A-z0-9-_]{3,23}$/
+const PWD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).{8,24}$/
 export default function Login() {
-    const registerEmail = useRef();
-    const registerPsw = useRef();
+	const navigate = useNavigate()
+	const email = useRef()
+	const password = useRef()
 
-    //back <-> front <- formulario
-    // Administrador -> 
-    // Login
+	const getEmail = localStorage.getItem("emailData")
+	const getPassword = localStorage.getItem("passwordData")
 
-    // Navbar -> regitrarse / login
-    // comprar algo !login -> registrarte
+	const [showPsw, setShowPsw] = useState(false)
+	const { loginWithRedirect, user, isAuthenticated } = useAuth0()
 
-    // Nav -> (*) Usuario -> contraña, alias, imagen
-                // Admin  -> modificaciones pertinentes
-    
-    // MIEDO : cómo se guardan los datos al registrarse, dónde, cómo se conecta con el back
-    // Firebase: configuración front / + seguridad va en el back
-    
-    //  login-signin facebook
-    const handleSignIn = (e) =>{
-        e.preventDefault();
+	if (isAuthenticated) {
+		localStorage.setItem("userData", user)
+	}
 
-        try{
+	const handleSignIn = async (e) => {
+		e.preventDefault()
+		try {
+			const { data } = await axios.get("http://localhost:3001/ruser/login", {
+				params: {
+					email: email.current.value,
+					password: password.current.value,
+				},
+			})
 
-        } catch (error) {
-            console.log(error.message);
-        }
-    }
+			if (data) {
+				localStorage.setItem("emailData", email.current.value)
+				localStorage.setItem("passwordData", password.current.value)
+                localStorage.setItem("isAdmin", data.isAdmin)
 
-  return (
-    <div id="loginContainer">
-        <div className="loginLeft">
-            <h3>Create your account</h3>
-            <button className="loginBtn Facebook">Log in with Facebook</button>
-            <button className="loginBtn Twitter">Log in with Twitter</button>
-            <button className="loginBtn google">Log in with Google+</button>
-            <button className="loginBtn linkedin">Log in with LinkedIn+</button>
-        </div>
+                navigate("/home", { state: { localStorage } });
+			}
+		} catch (error) {
+			console.log(error.message)
+			Swal.fire({
+				title: "Usuario no encontrado",
+				showClass: {
+					popup: "animate__animated animate__fadeInDown",
+				},
+				hideClass: {
+					popup: "animate__animated animate__fadeOutUp",
+				},
+			})
+		}
+	}
 
-        <div className="loginRight">
-            <h2>Or use the classical way</h2>
-            <form class="form" onSubmit={(e) => handleSignIn(e)}>
-                <fieldset>
-                    <input type="text" placeholder='User' required />
-                </fieldset>
-                <fieldset>
-                    <input type="email" placeholder='E-mail' required />
-                </fieldset>
-                <fieldset>
-                    <input type="password" placeholder='Password' required />
-                </fieldset>
-                <button type='submit' className="submitBtn">Sign Up</button>
-            </form>
-        </div>
-    </div>
-  )
+	return (
+		<div>
+			<div id='loginContainer'>
+				<h2>Log In</h2>
+				{getEmail & getPassword ? (
+					<Home />
+				) : (
+					<form className='signInForm' onSubmit={handleSignIn}>
+						<fieldset>
+							<input type='text' placeholder='Email' ref={email} required />
+							<AiOutlineUser className='loginUsIc' />
+						</fieldset>
+						<fieldset>
+							<input
+								type={showPsw ? "text" : "password"}
+								placeholder='Password'
+								id='password'
+								ref={password}
+								required
+							/>
+							<div
+								className='loginEyeIcon'
+								onClick={() => setShowPsw(!showPsw)}
+							>
+								{showPsw ? (
+									<AiOutlineEye />
+								) : (
+									<AiOutlineEyeInvisible className='loginInIc' />
+								)}
+							</div>
+						</fieldset>
+						<div className='loginPsw'>
+							<p>Forgot Password?</p>
+						</div>
+						<button type='submit' className='submitBtn'>
+							Log In
+						</button>
+
+						<div className='loginGg'>
+							<p>Or sign In whith</p>
+						</div>
+						<div>
+							<AiOutlineGoogle size={30} className='signinGgIc' />
+						</div>
+						<button
+							className='loginBtn google'
+							onClick={() => loginWithRedirect()}
+						>
+							Log in with Google
+						</button>
+						<div className='loginAcc'>
+							<p>Don't you have an Account?</p>
+						</div>
+
+						<div className='loginSup'>
+							<NavLink to='/signup'>
+								<p>SIGN UP</p>
+							</NavLink>
+						</div>
+					</form>
+				)}
+			</div>
+		</div>
+	)
 }

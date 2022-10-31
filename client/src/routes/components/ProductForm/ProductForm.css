@@ -1,0 +1,65 @@
+/* HEADER -------------------------------------------------- */
+
+.prdHeader h2 {
+    margin: 0;
+    padding-top: 1rem;
+    font-size: 2rem;
+    text-align: center;
+}
+/* BODY ---------------------------------------------------- */
+.prdFormContiner {
+    height: 70vh;
+    width: 70vw;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 40px; 
+    border-radius: 10px;
+    background-color: rgb(255, 255, 255);
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
+}
+
+.prdGrid {
+    display: grid;
+    grid-template-columns: 50% 50%;
+    height: 100%;
+}
+
+.prdGrid div {
+    margin-bottom: 1em;
+}
+
+.prdFeatures, .prdValuation {
+    display: block;
+    margin-top: 3em;
+    margin-left: 1em;
+}
+
+.prdFeatures label {
+    background-color: pink;
+    width: 100px;
+    margin-right: 1em;
+}
+
+.prdFormType {
+    display: flex;
+    background-color: green;
+}
+
+.prdLefthand {
+    margin-left: 2em;
+}
+
+.prdFormBrand {
+    background-color: blue;
+}
+
+.prdFormModel {
+    background-color: brown;
+}
+
+.prdImgload {
+    display: flex;
+    background-color: yellow;
+    height: 50%;
+}

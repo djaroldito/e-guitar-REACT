@@ -1,5 +1,4 @@
-import { createSlice }  from "@reduxjs/toolkit";
-
+import { createSlice } from "@reduxjs/toolkit"
 
 export const productSlice = createSlice({
     name: "products",
@@ -60,18 +59,22 @@ export const productSlice = createSlice({
             state.filters = action.payload
         },
 
-        delOneFromCart: (state, action) => {
-           let elToDel = state.cart.find(el=> el.id === action.payload)
-           return elToDel.quantity > 1 ? {
-            ...state,
-            cart:state.cart.map(el=> el.id === action.payload ? {...el, quantity: el.quantity - 1}: el)
-
-           }
-           :{
-            ...state,
-            cart: state.cart.filter(el=> el.id !== action.payload)
-           }
-        },
+		delOneFromCart: (state, action) => {
+			let elToDel = state.cart.find((el) => el.id === action.payload)
+			return elToDel.quantity > 1
+				? {
+						...state,
+						cart: state.cart.map((el) =>
+							el.id === action.payload
+								? { ...el, quantity: el.quantity - 1 }
+								: el
+						),
+				  }
+				: {
+						...state,
+						cart: state.cart.filter((el) => el.id !== action.payload),
+				  }
+		},
 
         delAllFromCart: (state, action) => {
            return{
@@ -85,20 +88,22 @@ export const productSlice = createSlice({
 
 /* getFilteredProducts, createNewProduct */
 
-export const { getAllProducts, 
-               getProductById, 
-               getProductByBrand,
-               getProductFiltered,
-               clearCart,
-               getProductToCart,
-               delOneFromCart,
-               delAllFromCart,
-               getAllColors,
-               getAllBrands,
-               getAllTypes,
-               getByFilters,
+export const {
+	getAllProducts,
+	getProductById,
+	getProductByBrand,
+	getProductFiltered,
+	clearCart,
+	getProductToCart,
+	delOneFromCart,
+	delAllFromCart,
+	getAllColors,
+	getAllBrands,
+	getAllTypes,
+	getByFilters,
                setFilters,
-               delAllProductToCart } = productSlice.actions;
+	clearDetail,
+	delAllProductToCart,
+} = productSlice.actions
 
-
-export default productSlice.reducer;
+export default productSlice.reducer
