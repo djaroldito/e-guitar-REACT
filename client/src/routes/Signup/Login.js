@@ -26,7 +26,7 @@ export default function Login() {
 
 	const [showPsw, setShowPsw] = useState(false)
 	const { loginWithRedirect, user, isAuthenticated } = useAuth0()
-
+	
 	if (isAuthenticated) {
 		localStorage.setItem("userData", user)
 	}

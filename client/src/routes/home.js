@@ -22,23 +22,19 @@ const Home = () => {
   const dispatch = useDispatch();
   const products = useSelector((state) => state.products.products);
 
+  useEffect(() => {
+    if (products.length === 0) {
+      dispatch(getAllPrds());
+      dispatch(getTypes());
+      dispatch(getColors());
+      dispatch(getBrands());
+    }
+  }, []);
 
-
-useEffect(() => {if(products.length === 0)
-  {dispatch(getAllPrds())
-  dispatch(getTypes())
-  dispatch(getColors())
-  dispatch(getBrands())
-  }
-},[])
-
-
-
-
-const [currentPage, setCurrentPage] = useState(1)
-  const guitarsPerPage = 4
-  const firstIdx = (currentPage - 1) * guitarsPerPage
-  const lastIdx = firstIdx + guitarsPerPage
+  const [currentPage, setCurrentPage] = useState(1);
+  const guitarsPerPage = 4;
+  const firstIdx = (currentPage - 1) * guitarsPerPage;
+  const lastIdx = firstIdx + guitarsPerPage;
 
   let currentGuitars = products.slice(firstIdx, lastIdx);
 
@@ -57,28 +53,32 @@ const [currentPage, setCurrentPage] = useState(1)
       <img src={item.img} alt="" />
       <div className="text-cont">
         <h2>{item.brand}</h2>
-          <h3>{item.model}</h3>
-          <p>$ {item.price}</p>
-         
-          <Link to={`/home/${item.id}`}> <FaGuitar/> Show Details</Link>
-          <button className="cartbtn"><BsCart2/> Add Cart</button>
-        </div>
+        <h3>{item.model}</h3>
+        <p>$ {item.price}</p>
+
+        <Link to={`/home/${item.id}`}>
+          {" "}
+          <FaGuitar /> Show Details
+        </Link>
+        <button className="cartbtn">
+          <BsCart2 /> Add Cart
+        </button>
+      </div>
     </DivCont>
-  )
+  );
 
-  const constructorCart = ()=>{
-    if (!localStorage.getItem('carrito')){
-        localStorage.setItem('carrito','[]')
+  const constructorCart = () => {
+    if (!localStorage.getItem("carrito")) {
+      localStorage.setItem("carrito", "[]");
     }
-  }
+  };
 
-  constructorCart()
-  
-  const addCartItem =  async(item)=> {
-    dispatch(getProductToCart(item))
-   }
-  
-  
+  constructorCart();
+
+  const addCartItem = async (item) => {
+    dispatch(getProductToCart(item));
+  };
+
   return (
     <main>
       <Search>
@@ -99,25 +99,33 @@ const [currentPage, setCurrentPage] = useState(1)
           <AiOutlineSearch />
         </button>
       </Search>
-      <Filter />
-      <CardsCont>
-        {currentGuitars?.map((item) => (
-          <DivCont key={item.id}>
-            <img src={item.img} alt="" />
-            <div className="text-cont">
-              <h2>{item.brand}</h2>
-              <h3>{item.model}</h3>
-              <p>$ {item.price}</p>
-              {item.quantity?<p> <b>Quantity: </b>{item.quantity}.</p>: null}
-              <Link to={`/home/${item.id}`}> <FaGuitar/> Show Details</Link>
-              <button className="cartbtn" onClick={() => addCartItem(item)}><BsCart2/> Add Cart</button>
-            </div>
-          </DivCont>
-        ))}
-        {/* {Searched.length>0 ?
-          Searched.map((item) => ProductRender(item)) : currentGuitars.map((item) => ProductRender(item))
-          } */}
-      </CardsCont>
+      <ContainerDiv>
+        <Filter />
+        <CardsCont>
+          {currentGuitars?.map((item) => (
+            <DivCont key={item.id}>
+              <img src={item.img} alt="" />
+              <div className="text-cont">
+                <h2>{item.brand}</h2>
+                <h3>{item.model}</h3>
+                <p>$ {item.price}</p>
+                {item.quantity ? (
+                  <p>
+                    <b>Quantity: </b>
+                    {item.quantity}.
+                  </p>
+                ) : null}
+                <Link to={`/home/${item.id}`}>
+                  <FaGuitar /> Show Details
+                </Link>
+                <button className="cartbtn" onClick={() => dispatch(getProductToCart(item))}>
+                  <BsCart2 /> Add Cart
+                </button>
+              </div>
+            </DivCont>
+          ))}
+        </CardsCont>
+      </ContainerDiv>
       <Pagination
         handleChange={handlePageChange}
         totalCards={products.length}
@@ -143,7 +151,6 @@ const DivCont = styled.div`
   height: 350px;
   border: 1px solid gray;
   background-color: white;
-  margin-left: auto;
   margin-right: 10px;
   margin-top: 30px;
   text-align: center;
@@ -151,12 +158,10 @@ const DivCont = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;
-
   a {
     text-decoration: none;
     color: blue;
   }
-
   h2,
   h3 {
     font-weight: 400;
@@ -169,7 +174,6 @@ const DivCont = styled.div`
     margin-left: 15px;
     text-align: left;
   }
-
   img {
     min-width: 100px;
     width: 200px;
@@ -186,7 +190,6 @@ const DivCont = styled.div`
     width: 85%;
     cursor: pointer;
   }
-
   .cartbtn {
     background-color: rgb(41, 73, 143);
     color: whitesmoke;
@@ -203,8 +206,13 @@ const CardsCont = styled.div`
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  margin-left: auto;
   margin-right: 25px;
+`;
+
+const ContainerDiv = styled.div`
+  width: 100%;
+  display: flex;
+  flex-direction: row;
 `;
 
 export default Home;
