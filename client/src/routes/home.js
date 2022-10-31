@@ -9,6 +9,7 @@ import {Link} from 'react-router-dom'
 import { AiOutlineSearch } from 'react-icons/ai'
 import SearchBar from './components/searchbar'
 import Filter from "./components/filters";
+import { getProductToCart } from "../Redux/productSlice";
 
 
 const Home = () => {
@@ -63,7 +64,6 @@ const [currentPage, setCurrentPage] = useState(1)
   return (
     <main>
       
-      
       <Search>
               <div style={isActive ? {display: 'block', width:'30%'} : {display:'none', width:'30%'}}>
                   <SearchBar handler={SearchHandler} products={currentGuitars} Search={Search}/>
@@ -86,11 +86,13 @@ const [currentPage, setCurrentPage] = useState(1)
               <button className="cartbtn" onClick={() => dispatch(getProductToCart(item.id))}><BsCart2/> Add Cart</button>
             </div>
           </DivCont>
+
         ))}
       {/* {Searched.length>0 ?
           Searched.map((item) => ProductRender(item)) : currentGuitars.map((item) => ProductRender(item))
           } */}
       </CardsCont>
+      </ContainerDiv>
       <Pagination
           handleChange={handlePageChange}
           totalCards={products.length}
@@ -115,7 +117,6 @@ const DivCont = styled.div`
   height: 350px;
   border: 1px solid gray;
   background-color: white;
-  margin-left: auto;
   margin-right: 10px;
   margin-top: 30px;
   text-align: center;
@@ -175,7 +176,6 @@ const CardsCont = styled.div`
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  margin-left: auto;
   margin-right: 25px;
 `;
 
