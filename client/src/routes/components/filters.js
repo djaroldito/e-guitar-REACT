@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
 import { getByFilter } from "../../Redux/productActions";
-import { setFilters } from "../../Redux/productSlice";
+// import { setFilters } from "../../Redux/productSlice";
 
 const Filter = () => {
   const dispatch = useDispatch();
@@ -10,7 +10,6 @@ const Filter = () => {
   const brands = useSelector((state) => state.products.brands);
   const colors = useSelector((state) => state.products.colors);
   const types = useSelector((state) => state.products.types);
-  const filter = useSelector((state) => state.products.Filters);
 
   
 
@@ -27,7 +26,7 @@ const Filter = () => {
         })
     };
     useEffect(() => {dispatch(getByFilter(filtered))
-    dispatch(setFilters(filtered))
+    // dispatch(setFilters(filtered))
     }, [filtered,dispatch])
 
   return (
