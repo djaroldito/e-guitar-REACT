@@ -15,47 +15,52 @@ import { IoArrowBackOutline } from "react-icons/io5";
 import { BsCart2 } from "react-icons/bs";
 
 const GuitarDetail = () => {
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
-  const { id } = useParams();
+	const dispatch = useDispatch()
+	const navigate = useNavigate()
+	const { id } = useParams()
 
-  useEffect(() => {
-    dispatch(getById(id));
-    return () => {
-      dispatch(clearDetail());
-    };
-  }, [dispatch, id]);
+	useEffect(() => {
+		dispatch(getById(id))
+		return () => {
+			dispatch(clearDetail())
+		}
+	}, [dispatch, id])
 
-  const detail = useSelector((state) => state.products.detail);
+    const detail = useSelector((state) => state.products.detail)
 
-  const handleDeleteProduct = (id) => {
-    Swal.fire({
-      title: "Are you sure?",
-      text: "You won't be able to revert this!",
-      icon: "warning",
-      showCancelButton: true,
-      confirmButtonColor: "#3085d6",
-      cancelButtonColor: "#d33",
-      confirmButtonText: "Yes, delete it!",
-    }).then((result) => {
-      if (result.isConfirmed) {
-        axios
-          .delete(`http://localhost:3001/rguitars/${id}`)
-          .then((res) => {
-            if (res.status === 200) {
-              Swal.fire(
-                "Deleted!",
-                "Your product has been deleted.",
-                "success"
-              ).then((r) => navigate("/home"));
-            }
-          })
-          .catch((error) => {
-            Swal.fire("Error!", error.message, "error");
-          });
-      }
-    });
-  };
+	const handleDeleteProduct = () => {
+		if (localStorage.getItem("isAdmin")) {
+			Swal.fire({
+				title: "Are you sure?",
+				text: "You won't be able to revert this!",
+				icon: "warning",
+				showCancelButton: true,
+				confirmButtonText: "Yes, delete it!",
+				cancelButtonText: "No, cancel!",
+				reverseButtons: true,
+				confirmButtonColor: "#3085d6",
+				cancelButtonColor: "#d33",
+			}).then((result) => {
+				if (result.isConfirmed) {
+					axios
+						.delete(`http://localhost:3001/rguitars/${detail.id}`)
+						.then((res) => {
+							if (res.status === 200) {
+								Swal.fire(
+									"Deleted!",
+									"Your product has been deleted.",
+									"success"
+								).then((r) => navigate("/home"))
+							}
+						})
+						.catch((error) => {
+							Swal.fire("Error!", error.message, "error")
+							return false
+						})
+				}
+			})
+		}
+	}
 
   return (
     <section>
@@ -137,49 +142,48 @@ const GuitarDetail = () => {
 };
 
 const CountDiv = styled.div`
-  width: 700px;
-  max-width: 900px;
-  min-height: 400px;
-  margin: auto;
-  display: flex;
-  flex-direction: row;
-  margin-top: 75px;
-  background-color: white;
-  border: 1px solid rgb(40, 40, 40);
-  border-radius: 10px;
+	width: 700px;
+	max-width: 900px;
+	min-height: 300px;
+	margin: auto;
+	display: flex;
+	flex-direction: row;
+	margin-top: 75px;
+	background-color: white;
+	border: 1px solid rgb(40, 40, 40);
+	border-radius: 10px;
 
-  .imgcont {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100%;
-    max-width: 300px;
-    min-width: 250px;
-  }
+	.imgcont {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		height: 100%;
+	}
 
-  img {
-    max-width: 100%;
-    max-height: 400px;
-  }
+	img {
+		max-width: 100%;
+		max-height: 400px;
+	}
 
-  .mySwiper {
-    max-width: 300px;
-  }
-`;
+	.mySwiper {
+		max-width: 300px;
+	}
+`
 
 const TextCont = styled.div`
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-  margin-left: 50px;
-  height: 100%;
+	display: flex;
+	flex-direction: column;
+	width: 100%;
+	margin-left: 50px;
+	height: 1px;
+	height: 1px;
 
-  h2,
-  h3 {
-    font-weight: 400;
-    margin: 3px;
-  }
-`;
+	h2,
+	h3 {
+		font-weight: 400;
+		margin: 3px;
+	}
+`
 const LeftHand = styled.div`
   padding: 5px;
   border: 1px black solid;

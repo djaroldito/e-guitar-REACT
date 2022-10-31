@@ -1,8 +1,9 @@
 import styled from "styled-components";
-import { BsCart2 } from "react-icons/bs";
-import { FaGuitar } from "react-icons/fa";
-import { useDispatch, useSelector } from "react-redux";
+import {BsCart2} from 'react-icons/bs'
+import {FaGuitar} from 'react-icons/fa'
+import {useDispatch, useSelector} from 'react-redux'
 import { useEffect, useState } from "react";
+import { getProductToCart } from "../Redux/productSlice";
 import Pagination from "./components/Pagination/Pagination";
 import {
   getAllPrds,
@@ -38,13 +39,13 @@ const Home = () => {
 
   let currentGuitars = products.slice(firstIdx, lastIdx);
 
-  const handlePageChange = (pageNumber) => {
-    dispatch(setCurrentPage(pageNumber));
-  };
+ const handlePageChange = (pageNumber) => {
+  dispatch(setCurrentPage(pageNumber))
+  }
 
   const SearchHandler = (value) => {
-    setSearch(value);
-  };
+    setSearch(value)
+  }
   const handleClick = () => {
     setIsActive((current) => !current);
   };
@@ -142,20 +143,21 @@ const Home = () => {
 };
 
 const Search = styled.div`
-  padding: 14px 16px;
-  display: flex;
-  justify-content: center;
-  button {
-    background-color: transparent;
-    border: none;
-    font-size: 30px;
-  }
-`;
+    padding: 14px 16px;
+    display:flex;
+    justify-content: center;
+    button{
+      background-color:transparent;
+      border: none;
+      font-size:30px;
+    }
+`
 const DivCont = styled.div`
   width: 350px;
   height: 350px;
   border: 1px solid gray;
   background-color: white;
+  margin-left: auto;
   margin-right: 10px;
   margin-top: 30px;
   text-align: center;
@@ -215,13 +217,8 @@ const CardsCont = styled.div`
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
+  margin-left: auto;
   margin-right: 25px;
-`;
-
-const ContainerDiv = styled.div`
-  width: 100%;
-  display: flex;
-  flex-direction: row;
 `;
 
 export default Home;
