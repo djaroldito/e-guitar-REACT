@@ -11,8 +11,8 @@ import "swiper/css/pagination";
 import styled from "styled-components";
 import Swal from "sweetalert2";
 import { FaTrashAlt, FaEdit } from "react-icons/fa";
-import {IoArrowBackOutline} from 'react-icons/io5'
-import {BsCart2} from 'react-icons/bs'
+import { IoArrowBackOutline } from "react-icons/io5";
+import { BsCart2 } from "react-icons/bs";
 
 const GuitarDetail = () => {
   const dispatch = useDispatch();
@@ -80,7 +80,10 @@ const GuitarDetail = () => {
           <h3>${detail.price}</h3>
           <h3>model: {detail.model}</h3>
           <p>{detail.description}</p>
-          <p><b>Type: </b>{detail.type}</p>
+          <p>
+            <b>Type: </b>
+            {detail.type}
+          </p>
           {detail.leftHand ? <LeftHand>Left Hand Available</LeftHand> : null}
           <form>
             <ColorDiv>
@@ -116,18 +119,19 @@ const GuitarDetail = () => {
                 className="add-cart"
                 onClick={() => dispatch(getProductToCart(detail.id))}
               >
-               <BsCart2/>Add Cart
+                <BsCart2 />
+                Add Cart
               </button>
-                <Link to="/home">
-              <button className="back-home">
-              <IoArrowBackOutline/> Back Home  
-              </button>
-					</Link>
+              <Link to="/home">
+                <button className="back-home">
+                  <IoArrowBackOutline /> Back Home
+                </button>
+              </Link>
             </CustomButtons>
           )}
         </TextCont>
       </CountDiv>
-	  <AdInfo>aditional Information: {detail.aditionalInformation}</AdInfo>
+      <AdInfo>aditional Information: {detail.aditionalInformation}</AdInfo>
     </section>
   );
 };
@@ -228,14 +232,12 @@ const CustomButtons = styled.div`
     background-color: rgb(128, 60, 60);
     font-weight: 600;
   }
-`
+`;
 const AdInfo = styled.p`
-font-size: 12px;
-margin-left: auto;
-margin-right: auto;
-width: 700px;
-`
-
-;
+  font-size: 12px;
+  margin-left: auto;
+  margin-right: auto;
+  width: 700px;
+`;
 
 export default GuitarDetail;

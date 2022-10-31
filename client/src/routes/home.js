@@ -4,37 +4,37 @@ import { FaGuitar } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import Pagination from "./components/Pagination/Pagination";
-import {getAllPrds, getTypes, getColors, getBrands} from './../Redux/productActions'
-import {Link} from 'react-router-dom'
-import { AiOutlineSearch } from 'react-icons/ai'
-import SearchBar from './components/searchbar'
+import {
+  getAllPrds,
+  getTypes,
+  getColors,
+  getBrands,
+} from "./../Redux/productActions";
+import { Link } from "react-router-dom";
+import { AiOutlineSearch } from "react-icons/ai";
+import SearchBar from "./components/searchbar";
 import Filter from "./components/filters";
 import { getProductToCart } from "../Redux/productSlice";
 
-
 const Home = () => {
-const [isActive, setIsActive] = useState(false);
-const [Searched, setSearch] = useState([]);
-const dispatch = useDispatch()
-const products = useSelector(state => state.products.products)
+  const [isActive, setIsActive] = useState(false);
+  const [Searched, setSearch] = useState([]);
+  const dispatch = useDispatch();
+  const products = useSelector((state) => state.products.products);
 
+  useEffect(() => {
+    if (products.length === 0) {
+      dispatch(getAllPrds());
+      dispatch(getTypes());
+      dispatch(getColors());
+      dispatch(getBrands());
+    }
+  }, []);
 
-
-useEffect(() => {if(products.length === 0)
-  {dispatch(getAllPrds())
-  dispatch(getTypes())
-  dispatch(getColors())
-  dispatch(getBrands())
-  }
-},[])
-
-
-
-
-const [currentPage, setCurrentPage] = useState(1)
-  const guitarsPerPage = 4
-  const firstIdx = (currentPage - 1) * guitarsPerPage
-  const lastIdx = firstIdx + guitarsPerPage
+  const [currentPage, setCurrentPage] = useState(1);
+  const guitarsPerPage = 4;
+  const firstIdx = (currentPage - 1) * guitarsPerPage;
+  const lastIdx = firstIdx + guitarsPerPage;
 
   let currentGuitars = products.slice(firstIdx, lastIdx);
 
@@ -46,74 +46,97 @@ const [currentPage, setCurrentPage] = useState(1)
     setSearch(value);
   };
   const handleClick = () => {
-    setIsActive(current => !current)
-  }
-  const ProductRender = (item) =>
-    (
-      <DivCont key={item.id}>
-        <img src={item.img} alt="" />
-        <div className="text-cont">
+    setIsActive((current) => !current);
+  };
+  const ProductRender = (item) => (
+    <DivCont key={item.id}>
+      <img src={item.img} alt="" />
+      <div className="text-cont">
         <h2>{item.brand}</h2>
-          <h3>{item.model}</h3>
-          <p>$ {item.price}</p>
-         
-          <Link to={`/home/${item.id}`}> <FaGuitar/> Show Details</Link>
-          <button className="cartbtn"><BsCart2/> Add Cart</button>
-        </div>
+        <h3>{item.model}</h3>
+        <p>$ {item.price}</p>
+
+        <Link to={`/home/${item.id}`}>
+          {" "}
+          <FaGuitar /> Show Details
+        </Link>
+        <button className="cartbtn">
+          <BsCart2 /> Add Cart
+        </button>
+      </div>
     </DivCont>
-  )
+  );
 
-  const constructorCart = ()=>{
-    if (!localStorage.getItem('carrito')){
-        localStorage.setItem('carrito','[]')
+  const constructorCart = () => {
+    if (!localStorage.getItem("carrito")) {
+      localStorage.setItem("carrito", "[]");
     }
-  }
+  };
 
-  constructorCart()
-  
-  const addCartItem =  async(item)=> {
-    dispatch(getProductToCart(item))
-   }
-  
-  
+  constructorCart();
+
+  const addCartItem = async (item) => {
+    dispatch(getProductToCart(item));
+  };
+
   return (
     <main>
-      
       <Search>
-              <div style={isActive ? {display: 'block', width:'30%'} : {display:'none', width:'30%'}}>
-                  <SearchBar handler={SearchHandler} products={currentGuitars} Search={Search}/>
-              </div>
-          <button onClick={handleClick}>
-              <AiOutlineSearch/>
-          </button>
+        <div
+          style={
+            isActive
+              ? { display: "block", width: "30%" }
+              : { display: "none", width: "30%" }
+          }
+        >
+          <SearchBar
+            handler={SearchHandler}
+            products={currentGuitars}
+            Search={Search}
+          />
+        </div>
+        <button onClick={handleClick}>
+          <AiOutlineSearch />
+        </button>
       </Search>
       <ContainerDiv>
-      <Filter/>
-      <CardsCont>
-        {currentGuitars?.map((item) => (
-          <DivCont key={item.id}>
-             <img src={item.img} alt="" />
-            <div className="text-cont">
-           <h2>{item.brand}</h2>
-              <h3>{item.model}</h3>
-              <p>$ {item.price}</p>
-              {item.quantity?<p> <b>Quantity: </b>{item.quantity}.</p>: null}
-              <Link to={`/home/${item.id}`}> <FaGuitar/> Show Details</Link>
-              <button className="cartbtn" onClick={() => addCartItem(item)}><BsCart2/> Add Cart</button>
-            </div>
-          </DivCont>
-
-        ))}
-      {/* {Searched.length>0 ?
+        <Filter />
+        <CardsCont>
+          {currentGuitars?.map((item) => (
+            <DivCont key={item.id}>
+              <img src={item.img} alt="" />
+              <div className="text-cont">
+                <h2>{item.brand}</h2>
+                <h3>{item.model}</h3>
+                <p>$ {item.price}</p>
+                {item.quantity ? (
+                  <p>
+                    {" "}
+                    <b>Quantity: </b>
+                    {item.quantity}.
+                  </p>
+                ) : null}
+                <Link to={`/home/${item.id}`}>
+                  {" "}
+                  <FaGuitar /> Show Details
+                </Link>
+                <button className="cartbtn" onClick={() => addCartItem(item)}>
+                  <BsCart2 /> Add Cart
+                </button>
+              </div>
+            </DivCont>
+          ))}
+          {/* {Searched.length>0 ?
           Searched.map((item) => ProductRender(item)) : currentGuitars.map((item) => ProductRender(item))
           } */}
-      </CardsCont>
+        </CardsCont>
       </ContainerDiv>
       <Pagination
-          handleChange={handlePageChange}
-          totalCards={products.length}
-          currentPage={currentPage}
-          guitarsPerPage={guitarsPerPage}/>
+        handleChange={handlePageChange}
+        totalCards={products.length}
+        currentPage={currentPage}
+        guitarsPerPage={guitarsPerPage}
+      />
     </main>
   );
 };
@@ -180,9 +203,9 @@ const DivCont = styled.div`
     background-color: rgb(41, 73, 143);
     color: whitesmoke;
     font-weight: 600;
-    transition: .3s ease-out;
+    transition: 0.3s ease-out;
   }
-  .cartbtn:hover{
+  .cartbtn:hover {
     background-color: whitesmoke;
     color: rgb(41, 73, 143);
   }
