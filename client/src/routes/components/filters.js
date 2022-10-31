@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
 import { getByFilter } from "../../Redux/productActions";
+import { setFilters } from "../../Redux/productSlice";
 
 const Filter = () => {
   const dispatch = useDispatch();
@@ -9,6 +10,9 @@ const Filter = () => {
   const brands = useSelector((state) => state.products.brands);
   const colors = useSelector((state) => state.products.colors);
   const types = useSelector((state) => state.products.types);
+  const filter = useSelector((state) => state.products.Filters);
+
+  
 
   const [filtered,setFiltered] = useState({
     color: '',
@@ -22,16 +26,18 @@ const Filter = () => {
           [e.target.name]: e.target.value
         })
     };
-    useEffect(() => dispatch(getByFilter(filtered)), [filtered,dispatch])
+    useEffect(() => {dispatch(getByFilter(filtered))
+    dispatch(setFilters(filtered))
+    }, [filtered,dispatch])
 
   return (
     <section>
       <Filters>
         <form className="form">
         <select name='brand' onChange={handleChange} >
-          <option label="Brand"></option>
+          <option  label="Brand"></option>
           {brands?.map((item, pos) => (
-            <option  value={item} key={pos}>
+            <option value={item} key={pos}>
               {item}
             </option>
           ))}

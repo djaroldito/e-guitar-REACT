@@ -83,6 +83,9 @@ const Home = () => {
             </div>
           </DivCont>
         ))}
+      {/* {Searched.length>0 ?
+          Searched.map((item) => ProductRender(item)) : currentGuitars.map((item) => ProductRender(item))
+          } */}
       </CardsCont>
       </ContainerDiv>
       <Pagination 
