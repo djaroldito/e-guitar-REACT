@@ -25,35 +25,40 @@ const GuitarDetail = () => {
 		}
 	}, [dispatch, id])
 
-	const detail = useSelector((state) => state.products.detail)
+    const detail = useSelector((state) => state.products.detail)
 
-	const handleDeleteProduct = (id) => {
-		Swal.fire({
-			title: "Are you sure?",
-			text: "You won't be able to revert this!",
-			icon: "warning",
-			showCancelButton: true,
-			confirmButtonColor: "#3085d6",
-			cancelButtonColor: "#d33",
-			confirmButtonText: "Yes, delete it!",
-		}).then((result) => {
-			if (result.isConfirmed) {
-				axios
-					.delete(`http://localhost:3001/rguitars/${id}`)
-					.then((res) => {
-						if (res.status === 200) {
-							Swal.fire(
-								"Deleted!",
-								"Your product has been deleted.",
-								"success"
-							).then((r) => navigate("/home"))
-						}
-					})
-					.catch((error) => {
-						Swal.fire("Error!", error.message, "error")
-					})
-			}
-		})
+	const handleDeleteProduct = () => {
+		if (localStorage.getItem("isAdmin")) {
+			Swal.fire({
+				title: "Are you sure?",
+				text: "You won't be able to revert this!",
+				icon: "warning",
+				showCancelButton: true,
+				confirmButtonText: "Yes, delete it!",
+				cancelButtonText: "No, cancel!",
+				reverseButtons: true,
+				confirmButtonColor: "#3085d6",
+				cancelButtonColor: "#d33",
+			}).then((result) => {
+				if (result.isConfirmed) {
+					axios
+						.delete(`http://localhost:3001/rguitars/${detail.id}`)
+						.then((res) => {
+							if (res.status === 200) {
+								Swal.fire(
+									"Deleted!",
+									"Your product has been deleted.",
+									"success"
+								).then((r) => navigate("/home"))
+							}
+						})
+						.catch((error) => {
+							Swal.fire("Error!", error.message, "error")
+							return false
+						})
+				}
+			})
+		}
 	}
 
 	return (
@@ -94,7 +99,7 @@ const GuitarDetail = () => {
 							<button
 								type='button'
 								title='Delete product'
-								onClick={() => handleDeleteProduct(detail.id)}
+								onClick={handleDeleteProduct}
 							>
 								<FaTrashAlt />
 							</button>
