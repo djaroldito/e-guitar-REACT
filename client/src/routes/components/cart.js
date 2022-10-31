@@ -33,7 +33,6 @@ const Cart = () =>{
 
   const delFromCart = (item)=> {
     dispatch(delOneFromCart(item))
-
   }
  
   constructorCart()

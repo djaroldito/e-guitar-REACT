@@ -15,7 +15,6 @@ import { Link } from "react-router-dom";
 import { AiOutlineSearch } from "react-icons/ai";
 import SearchBar from "./components/searchbar";
 import Filter from "./components/filters";
-import { getProductToCart } from "../Redux/productSlice";
 
 const Home = () => {
   const [isActive, setIsActive] = useState(false);
@@ -121,7 +120,7 @@ const Home = () => {
                   {" "}
                   <FaGuitar /> Show Details
                 </Link>
-                <button className="cartbtn" onClick={() => addCartItem(item)}>
+                <button className="cartbtn" onClick={() => dispatch(getProductToCart(item))}>
                   <BsCart2 /> Add Cart
                 </button>
               </div>
@@ -143,21 +142,20 @@ const Home = () => {
 };
 
 const Search = styled.div`
-    padding: 14px 16px;
-    display:flex;
-    justify-content: center;
-    button{
-      background-color:transparent;
-      border: none;
-      font-size:30px;
-    }
-`
+  padding: 14px 16px;
+  display: flex;
+  justify-content: center;
+  button {
+    background-color: transparent;
+    border: none;
+    font-size: 30px;
+  }
+`;
 const DivCont = styled.div`
   width: 350px;
   height: 350px;
   border: 1px solid gray;
   background-color: white;
-  margin-left: auto;
   margin-right: 10px;
   margin-top: 30px;
   text-align: center;
@@ -165,12 +163,10 @@ const DivCont = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;
-
   a {
     text-decoration: none;
     color: blue;
   }
-
   h2,
   h3 {
     font-weight: 400;
@@ -183,7 +179,6 @@ const DivCont = styled.div`
     margin-left: 15px;
     text-align: left;
   }
-
   img {
     min-width: 100px;
     width: 200px;
@@ -200,14 +195,13 @@ const DivCont = styled.div`
     width: 85%;
     cursor: pointer;
   }
-
   .cartbtn {
     background-color: rgb(41, 73, 143);
     color: whitesmoke;
     font-weight: 600;
-    transition: 0.3s ease-out;
+    transition: .3s ease-out;
   }
-  .cartbtn:hover {
+  .cartbtn:hover{
     background-color: whitesmoke;
     color: rgb(41, 73, 143);
   }
@@ -217,8 +211,13 @@ const CardsCont = styled.div`
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  margin-left: auto;
   margin-right: 25px;
+`;
+
+const ContainerDiv = styled.div`
+  width: 100%;
+  display: flex;
+  flex-direction: row;
 `;
 
 export default Home;
