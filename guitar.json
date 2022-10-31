@@ -8,9 +8,7 @@
             "https://http2.mlstatic.com/D_NQ_NP_2X_748520-MLA50415595917_062022-F.webp",
             "https://http2.mlstatic.com/D_NQ_NP_2X_842296-MLA48982704770_012022-F.webp"
         ],
-        "color":[ 
-            "naranja", "natural"
-        ],
+        "color": [ "naranja, natural"],
         "price": 16.999,
         "strings": 6,
         "description": "Exelente guitarra para iniciar a tocar",
@@ -27,10 +25,7 @@
             "https://http2.mlstatic.com/D_NQ_NP_2X_688069-MLA44114804079_112020-F.webp",
             "https://http2.mlstatic.com/D_NQ_NP_2X_844728-MLA44114807092_112020-F.webp"
         ],
-        "color": [
-            "negro",
-            "natural"
-        ],
+        "color": ["negro, natural"],
         "price": 52.830,
         "strings": 6,
         "description": "Exelente guitarra para iniciar a tocar",
@@ -148,7 +143,7 @@
             "https://http2.mlstatic.com/D_NQ_NP_2X_762043-MLA47725448615_102021-F.webp"
         ],
         "color": [
-            "Marron claro"
+            "natural"
         ],
         "price": 13.677,
         "strings": 6,
@@ -206,8 +201,7 @@
             "https://http2.mlstatic.com/D_NQ_NP_622407-MLA48680123789_122021-O.webp, https://http2.mlstatic.com/D_NQ_NP_723793-MLA48680228384_122021-O.webp"
         ],
         "color": [
-            "negro",
-            "blanco"
+            "negro, blanco"
         ],
         "price": 37338,
         "strings": 6,
@@ -226,8 +220,7 @@
             "https://http2.mlstatic.com/D_NQ_NP_632217-MLA48786922827_012022-O.webp, https://http2.mlstatic.com/D_NQ_NP_729274-MLA51537199502_092022-O.webp"
         ],
         "color": [
-            "negro",
-            "roja"
+            "negro, roja"
         ],
         "price": 49990,
         "strings": 6,
@@ -246,7 +239,7 @@
             "https://http2.mlstatic.com/D_NQ_NP_669840-MLA46353231579_062021-O.webp, https://http2.mlstatic.com/D_NQ_NP_888651-MLA46352606590_062021-O.webp"
         ],
         "color": [
-            "Negro"   
+            "negro"   
         ],
         "price": 62074,
         "strings": 6,
@@ -265,8 +258,7 @@
             "https://http2.mlstatic.com/D_NQ_NP_625922-MLA48678794814_122021-O.webp, https://http2.mlstatic.com/D_NQ_NP_898081-MLA51375602262_092022-O.webp, https://http2.mlstatic.com/D_NQ_NP_779601-MLA51439631218_092022-O.webp"
         ],
         "color": [
-            "negro",
-            "blanco"
+            "negro, blanco"
         ],
         "price": 62674,
         "strings": 6,
@@ -285,8 +277,7 @@
             "https://http2.mlstatic.com/D_NQ_NP_635048-MLA48123653039_112021-O.webp, https://http2.mlstatic.com/D_NQ_NP_903661-MLA48123721123_112021-O.webp"
         ],
         "color": [
-            "azul",
-            "negro"
+            "azul, negro"
         ],
         "price": 62674,
         "strings": 6,
@@ -305,7 +296,7 @@
             "https://http2.mlstatic.com/D_NQ_NP_994438-MLA31586492212_072019-O.webp"
         ],
         "color": [
-            "Negro"
+            "negro"
         ],
         "price": 135815,
         "strings": 6,
@@ -381,8 +372,7 @@
             "https://http2.mlstatic.com/D_NQ_NP_760628-MLA48678675895_122021-O.webp, https://http2.mlstatic.com/D_NQ_NP_740895-MLA48678701559_122021-O.webp, https://http2.mlstatic.com/D_NQ_NP_672009-MLA48678794445_122021-O.webp"
         ],
         "color": [
-            "negro",
-            "azul"
+            "negro, azul"
         ],
         "price": 89.700,
         "strings": 6,
@@ -548,8 +538,7 @@
         ],
         "color": [
             
-            "natural",
-            "negro"
+            "natural, negro"
         ],
         "price": 29912,
         "strings": 6,
