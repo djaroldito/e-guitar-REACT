@@ -1,5 +1,6 @@
-import { useState, useEffect } from "react"
-import { FaTimes } from "react-icons/fa"
+import { useState, useEffect } from "react";
+import { FaTimes } from "react-icons/fa";
+import "./ProductForm.css";
 
 export const PreviewImage = ({ file, handleDelete }) => {
 	const [preview, setPreview] = useState("")
@@ -17,10 +18,10 @@ export const PreviewImage = ({ file, handleDelete }) => {
 	}, [file])
 
 	return (
-		<div style={{ display: "inline-block", position: "relative" }}>
+		<div className="prdImg"/* style={{ display: "inline-block", position: "relative"}} */>
 			{preview ? (
 				<>
-					<img src={preview} alt='Preview' width='200px' height='200px' />
+					<img src={preview} alt='Preview' width='100px' height='100px' />
 					<FaTimes
 						style={{ position: "absolute", zIndex: "1", cursor: "pointer" }}
 						onClick={handleDelete}
