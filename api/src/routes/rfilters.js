@@ -49,6 +49,7 @@ router.get('/colors',async (req, res) => {
        }
 })    
 
+
 router.get('/models',async (req, res) => {
     try {
         let allGuitars = await Product.findAll()
