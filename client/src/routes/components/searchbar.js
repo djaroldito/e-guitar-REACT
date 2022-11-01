@@ -1,5 +1,4 @@
 import { useState } from "react"
-import SuggestionCard from "./SuggestionCard/SuggestionCard"
 import { useDispatch } from "react-redux"
 import { getByName } from "../../Redux/productActions";
 import "./SuggestionCard/SuggestionCard.css"
@@ -14,8 +13,6 @@ const SearchBar = () =>{
         e.preventDefault();
        dispatch(getByName(name));
     }   
-    
-
     
     return(
         <div>
