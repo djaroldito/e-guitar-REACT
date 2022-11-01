@@ -21,21 +21,6 @@ router.get('/brands',async (req, res) => {
 
 })
 
-router.get('/fullName',async (req, res) => {
-    try {
-     let allGuitars = await Product.findAll()
-
-     let tempfull = allGuitars.map(el => el.fullName ? el.fullName : null).map(el => el && el.split(', '));
-     let full = [...new Set(tempfull.flat())];
-     const final = full.filter(el => el !== null)
-      
-     res.status(200).json(final)
-    } catch (error) {
-        res.status(404).send(error)
-    }
-
-})
-
 
 router.get('/types', async (req, res) => {
     try {
