@@ -28,6 +28,9 @@ const GuitarDetail = () => {
 
   const detail = useSelector((state) => state.products.detail);
   const carrito = useSelector(state => state.products.cart)
+
+  const isInCart = () => carrito.filter(el=> el.id === detail.id).length >= 1 
+  
   
 
   const handleDeleteProduct = (id) => {
@@ -117,7 +120,7 @@ const GuitarDetail = () => {
               <button
                 className="add-cart"
                 onClick={() => dispatch(getProductToCart(detail))}
-                disabled = {carrito.filter(el=> el.id === detail.id).length >= 1 ? true : false} 
+                disabled = {isInCart()} 
               >
                <BsCart2/>Add Cart
               </button>
