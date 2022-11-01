@@ -10,9 +10,10 @@ import {
 	getById,
 	postProductForm,
 	editProductForm,
-} from "../../../Redux/productActions"
-import { clearDetail } from "../../../Redux/productSlice"
-import { PreviewImage } from "./PreviewImage"
+} from "../../../Redux/productActions";
+import { clearDetail } from "../../../Redux/productSlice";
+import { PreviewImage } from "./PreviewImage";
+import "./ProductForm.css";
 
 export default function ProductForm() {
 	const { id } = useParams()
@@ -152,14 +153,13 @@ export default function ProductForm() {
 						<Form>
 							<div className='prdGrid'>
 								{!!status && <p>{status}</p>}
+								
 								<div className='prdFeatures'>
-									{" "}
-									{/* FEATURES ---------------- */}
+									{/* FEATURES ----------------------------------------------------- */}
 									<div className='prdFormType'>
-										{" "}
-										{/* Type & LHand ------------ */}
+										{/* Type & LHand --------------------------------------------- */}
 										<label htmlFor='type'>Type:</label>
-										<Field as='select' name='type'>
+										<Field className="prdSelect" as='select' name='type'>
 											<option value=''>Select type</option>
 											{types &&
 												types.map((x) => (
@@ -168,15 +168,12 @@ export default function ProductForm() {
 													</option>
 												))}
 										</Field>
-										<ErrorMessage name='type' component='div' />
-										<Field type='checkbox' name='leftHand' />
-										<label htmlFor='model'>Left-hand</label>
+										<ErrorMessage className="prdErrorMsj" name='type' component='div' />
 									</div>
-									<div className='prdFormBrand'>
-										{" "}
-										{/*Brand-------------------  */}
+
+									<div className='prdFormBrand'> {/*Brand-------------------  */}
 										<label htmlFor='brand'>Brand:</label>
-										<Field as='select' name='brand'>
+										<Field className="prdSelect" as='select' name='brand'>
 											<option value=''>Select a brand</option>
 											{brands &&
 												brands.map((x) => (
@@ -185,20 +182,18 @@ export default function ProductForm() {
 													</option>
 												))}
 										</Field>
-										<ErrorMessage name='brand' component='div' />
+										<ErrorMessage className="prdErrorMsj" name='brand' component='div' />
 									</div>
-									<div className='prdFormModel'>
-										{" "}
-										{/* Model ------------------ */}
+
+									<div className='prdFormModel'> {/* Model ------------------ */}
 										<label htmlFor='model'>Model:</label>
-										<Field type='text' name='model' />
-										<ErrorMessage name='model' component='div' />
+										<Field className="prdInput"  type='text' name='model' />
+										<ErrorMessage className="prdErrorMsj" name='model' component='div' />
 									</div>
-									<div className='prdColor'>
-										{" "}
-										{/* Color ---------------------- */}
+
+									<div className='prdColor'>{/* Color ---------------------- */}
 										<label htmlFor='color'>Color:</label>
-										<Field as='select' name='color'>
+										<Field className="prdSelect" as='select' name='color'>
 											<option value=''>Select a color</option>
 											{colors &&
 												colors.map((x) => (
@@ -207,16 +202,18 @@ export default function ProductForm() {
 													</option>
 												))}
 										</Field>
-										<ErrorMessage name='color' component='div' />
+										<ErrorMessage className="prdErrorMsj" name='color' component='div' />
 									</div>
-									<div className='prdStrings'>
-										{/* Strings ------------------ */}
+									
+									<div className='prdStrings'> {/* Strings ------------------ */}
 										<label htmlFor='strings'>Strings:</label>
 										<Field type='number' min='0' name='strings' />
-										<ErrorMessage name='strings' component='div' />
+										<Field type='checkbox' name='leftHand' />
+										<label htmlFor='model'>Left-hand</label>
+										<ErrorMessage className="prdErrorMsj" name='strings' component='div' />
 									</div>
-									<div className='prdImgload'>
-										{/* Img load ------------------ */}
+
+									<div className='ImgContainarrrrr'> 
 										<input
 											type='file'
 											ref={fileRef}
@@ -227,7 +224,7 @@ export default function ProductForm() {
 											}}
 										/>
 									</div>
-									<div>
+									<div className="prdImgload"> {/* Img load ----------------------- */}
 										{/* Render Images */}
 										{productImages.length > 0 &&
 											productImages.map((f, i) => (
@@ -238,63 +235,55 @@ export default function ProductForm() {
 												/>
 											))}
 									</div>
-									<button /*  Button ------------------------------------------ */
+									<button      /*  Button ------------------------------------------ */
 										type='button'
 										onClick={() => fileRef.current.click()}
 										disabled={productImages.length >= 3}
-										className='prdButton'
-									>
+										className='prdButtonImage'>
 										<BiPhotoAlbum /> Upload Image
 									</button>
 								</div>
 								{/* ----------------------------------------------------------------- */}
 
-								<div className='prdValuation'>
+								<div className='prdValuation'> {/* VALUATION -------------------- */}
 									{" "}
-									{/* VALUATION ------------- */}
-									<div className='prdPrice'>
+									<div className='prdPrice'> {/* Price ------------------------ */}
 										{" "}
-										{/* Price --------------------- */}
 										<label htmlFor='price'>Price: $</label>
-										<Field type='float' min='0' name='price' />
-										<ErrorMessage name='price' component='div' />
+										<Field className="prdInput" type='float' min='0' name='price' />
+										<ErrorMessage className="prdMarginError" name='price' component='div' />
 									</div>
-									<div className='prdDiscount'>
-										{" "}
-										{/* Discount ---------------- */}
-										<label htmlFor='discount'>
-											Discount:
-											<Field type='number' min='0' name='discount' /> %{" "}
-										</label>
-										<ErrorMessage name='discount' component='div' />
+
+									<div className='prdDiscount'> {/* Discount ------------------ */}								
+										<label htmlFor='discount'>Discount (%):</label>
+										<Field className="prdInput" type='number' min='0' name='discount' /> %{" "}
+										<ErrorMessage className="prdMarginError" name='discount' component='div' />
 									</div>
-									<div className='prdStock'>
-										{" "}
-										{/* Stock -----------------------*/}
+
+									<div className='prdStock'> {/* Stock -----------------------*/}
 										<label htmlFor='stock'>Stock:</label>
-										<Field type='number' min='0' name='stock' />
-										<ErrorMessage name='stock' component='div' />
+										<Field className="prdInput" type='number' min='0' name='stock' />
+										<ErrorMessage className="prdMarginError" name='stock' component='div' />
 									</div>
-									<div className='prdDescription'>
-										{" "}
-										{/* Description ----------- */}
+
+									<div className='prdDescription'> {/* Description ----------- */}
 										<label htmlFor='description'>Description:</label>
-										<Field as='textarea' name='description' />
-										<ErrorMessage name='description' component='div' />
+										<Field className="prdInput textArea" as='textarea' name='description' />
+										<ErrorMessage className="prdErrorMsj" name='description' component='div' />
 									</div>
-									<div className='prdAdInfo'>
-										{" "}
-										{/* Add Info ------------------- */}
+
+									<div className='prdAdInfo'> {/* Add Info ------------------- */}
 										<label htmlFor='aditionalInformation'>
 											Additional Information:
 										</label>
-										<Field as='textarea' name='aditionalInformation' />
-										<ErrorMessage name='aditionalInformation' component='div' />
+										<Field className="prdInput textArea" as='textarea' name='aditionalInformation' />
+										<ErrorMessage className="prdErrorMsj" name='aditionalInformation' component='div' />
 									</div>
+
 									<button
 										type='submit'
 										disabled={isSubmitting}
-										className='prdSubmit'
+										className="prdBtnSubmit"
 									>
 										{id ? "UPDATE" : "CREATE"}
 									</button>
