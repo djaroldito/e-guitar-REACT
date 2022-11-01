@@ -2,7 +2,7 @@ import axios from "axios"
 import {
 	getAllProducts,
 	getProductById,
-	getProductByBrand,
+	getProductByName,
 	getAllBrands,
 	getAllColors,
 	getByFilters,
@@ -21,11 +21,17 @@ export const getById = (id) => (dispatch) => {
 		.catch((err) => console.log(err))
 }
 
+export const getByName = (Name) => (dispatch) => {
+	axios(`http://localhost:3001/rguitars?fullName=${Name}`)
+		.then((res) => dispatch(getProductByName(res.data)))
+		.catch((err) => console.log(err))
+}
 export const getBrands = () => (dispatch) => {
 	axios(`http://localhost:3001/rfilters/brands`)
 		.then((res) => dispatch(getAllBrands(res.data)))
 		.catch((err) => console.log(err))
 }
+
 
 export const getColors = () => (dispatch) => {
 	axios(`http://localhost:3001/rfilters/colors`)

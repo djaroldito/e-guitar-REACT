@@ -75,9 +75,6 @@ const Home = () => {
 
   constructorCart();
 
-  const addCartItem = async (item) => {
-    dispatch(getProductToCart(item));
-  };
 
   return (
     <main>
@@ -108,7 +105,7 @@ const Home = () => {
               <div className="text-cont">
                 <h2>{item.brand}</h2>
                 <h3>{item.model}</h3>
-                <p>$ {item.price}</p>
+                <p>$ {item.price.toFixed(2)}</p>
                 {item.quantity ? (
                   <p>
                     {" "}
@@ -120,9 +117,7 @@ const Home = () => {
                   {" "}
                   <FaGuitar /> Show Details
                 </Link>
-                <button className="cartbtn" onClick={() => dispatch(getProductToCart(item))}>
-                  <BsCart2 /> Add Cart
-                </button>
+               
               </div>
             </DivCont>
           ))}
