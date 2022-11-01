@@ -1,25 +1,17 @@
 import { React } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import styled from "styled-components"
-import {delOneFromCart,delAllFromCart, clearCart, getProductToCart } from "../../Redux/productSlice"
+import {delOneFromCart, clearCart, getProductToCart } from "../../Redux/productSlice"
 import {AiOutlineDelete} from "react-icons/ai";
 import EmptyCart from "./Cart/EmptyCart";
 import {BsCart2} from 'react-icons/bs'
 import "./Cart/Cart.css";
+import Swal from 'sweetalert2'
 
 const Cart = () =>{
    const carrito = useSelector(state => state.products.cart)
 
    const dispatch = useDispatch()
-
-  //  const delFromCart = (id, all = false) =>{
-  //    if (all){
-  //     dispatch(delAllFromCart(id))
-  //   }else{
-  //     dispatch(delOneFromCart(id))
-  //   }
-
-  //  }
 
    const constructorCart = ()=>{
     if (!localStorage.getItem('carrito')){
@@ -36,16 +28,52 @@ const Cart = () =>{
   }
  
   constructorCart()
-  //console.log(getCart)
-   
-   return(
+ //funciones carteles de alerta
+  const preguntaTodo = ()=>{
+   Swal.fire({
+    title: 'Are you sure to delete the entire cart?',
+    text: "You won't be able to revert this!",
+    icon: 'warning',
+    showCancelButton: true,
+    confirmButtonColor: '#3085d6',
+    cancelButtonColor: '#d33',
+    confirmButtonText: 'Yes, delete it!'
+  }).then((result) => {
+    if (result.isConfirmed) {
+      dispatch(clearCart())
+      Swal.fire(
+        'Deleted!',
+        )
+    }
+     })
+
+}
+const preguntaUno = (item)=>{
+  Swal.fire({
+   title: 'Are you sure to delete this item from the cart?',
+   text: "You won't be able to revert this!",
+   icon: 'warning',
+   showCancelButton: true,
+   confirmButtonColor: '#3085d6',
+   cancelButtonColor: '#d33',
+   confirmButtonText: 'Yes, delete it!'
+ }).then((result) => {
+   if (result.isConfirmed) {
+    dispatch(delOneFromCart(item))
+     Swal.fire(
+       'Deleted!',      
+       )
+   }
+ })
+
+}
+
+  return(
   <main>
-    {carrito.length >= 1 ? <button onClick={() => dispatch(clearCart())}>Clear Cart</button> : <EmptyCart/> }
+    {carrito.length >= 1 ? <button onClick={preguntaTodo}>Clear Cart</button> : <EmptyCart/> }
   <div className="ProductCartContainer">
     <br/>
-        
-
-          {carrito.map((el, index)=>(
+           {carrito.map((el, index)=>(
             <div key={index} className="ProductCard">
               <ImgDiv>            
                 <img src={el.img} alt={carrito.brand}/>
@@ -58,18 +86,18 @@ const Cart = () =>{
             
             {el.discount?<p> <b>Discount: </b>{el.discount}.</p>: null}
             <div className="InputCartContainer">
-              <button  disabled= { el.quantity != 1 ? false : true} onClick={() => delFromCart(el)}>-</button>
+              <button  disabled= { el.quantity !== 1 ? false : true} onClick={() => delFromCart(el)}>-</button>
               <input placeholder={el.quantity} disabled></input>
               <button disabled= { el.quantity < el.stock ? false : true} onClick={() => addCartItem(el)} >+</button>
               {el.stock?<p> <b>disponibles {el.stock}</b>.</p>: null}
             </div>
-              {el.price?<p>$ {el.price}</p>: null}
-              <button onClick={() => delFromCart(el.id, true)}><AiOutlineDelete/></button>
+              {el.price?<p>$ {el.price ? el.price.toFixed(2) : null }</p>: null}
+              <button onClick={() => preguntaUno(el.id, true)}><AiOutlineDelete/></button>
               </div>
           ))}
             <Total>
               {carrito.length >= 1 ? <label >Total: </label> : null }
-              <h1> {carrito.length >= 1 ?  carrito.reduce((acc,prod)=>acc + (prod.price * prod.quantity) , 0):null}</h1>
+              <h1> {carrito.length >= 1 ?  carrito.reduce((acc,prod)=>acc + (prod.price.toFixed(2) * prod.quantity) , 0).toFixed(2):null}</h1>
             </Total>
           </div>
           {carrito.length >= 1 ? <button className="Purchasebutton"><BsCart2/>Completar Compra</button> : null}

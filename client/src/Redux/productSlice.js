@@ -18,13 +18,14 @@ export const productSlice = createSlice({
           },
     },
     reducers:{
+        
         getAllProducts: (state, action) =>{
             state.products = action.payload
         },
         getProductById: (state, action) =>{
             state.detail = action.payload
         },
-        getProductByBrand: (state, action) =>{
+        getProductByName: (state, action) =>{
             state.products = action.payload
         },
         getProductFiltered: (state, action) =>{
@@ -72,6 +73,7 @@ export const productSlice = createSlice({
             state.cart = []
             localStorage.setItem('carrito',JSON.stringify(state.cart))
         },
+        
         getAllColors: (state, action) =>{
             state.colors = action.payload
         },
@@ -97,7 +99,7 @@ export const productSlice = createSlice({
 
 export const { getAllProducts,
                getProductById,
-               getProductByBrand,
+               getProductByName,
                getProductFiltered,
                clearCart,
                getProductToCart,

@@ -28,6 +28,11 @@ const GuitarDetail = () => {
  
 
   const detail = useSelector((state) => state.products.detail);
+  const carrito = useSelector(state => state.products.cart)
+
+  const isInCart = () => carrito.filter(el=> el.id === detail.id).length >= 1 
+  
+  
 
   const handleDeleteProduct = (id) => {
     Swal.fire({
@@ -78,7 +83,7 @@ const GuitarDetail = () => {
         )}
         <TextCont>
           <h2>{detail.brand}</h2>
-          <h3>${detail.price}</h3>
+          <h3>${detail.price ? detail.price.toFixed(2) : null}</h3>
           <h3>model: {detail.model}</h3>
           <p>{detail.description}</p>
           <p><b>Type: </b>{detail.type}</p>
@@ -116,6 +121,7 @@ const GuitarDetail = () => {
               <button
                 className="add-cart"
                 onClick={() => dispatch(getProductToCart(detail))}
+                disabled = {isInCart()} 
               >
                <BsCart2/>Add Cart
               </button>

@@ -21,6 +21,7 @@ router.get('/brands',async (req, res) => {
 
 })
 
+
 router.get('/types', async (req, res) => {
     try {
         let allGuitars = await Product.findAll()
@@ -48,6 +49,7 @@ router.get('/colors',async (req, res) => {
            res.status(404).send(error)
        }
 })    
+
 
 router.get('/models',async (req, res) => {
     try {

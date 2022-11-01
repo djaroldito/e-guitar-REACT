@@ -11,18 +11,19 @@ const { Product } = require("../db.js")
 //  GET /rguitars?brand="..." &type="..." &color="..."
 router.get("/", async (req, res) => {
 	try {
-		const { brand, type, color } = req.query
+		const { brand, type, color, fullName } = req.query
 
 		// if no product load form json
 		await loadProductData()
 
 		// check if there are filter parameters
-		if (brand || type || color) {
+		if (brand || type || color || fullName ) {
 			const whereQuery = {}
 			// ilike trabaja entre mayusculas y minusculas y de cierta forma te acelera los procesos
 			if (brand) whereQuery.brand = { [sequelize.Op.iLike]: `%${brand}%` }
 			if (type) whereQuery.type = { [sequelize.Op.iLike]: `%${type}%` }
             if (color) whereQuery.color = { [sequelize.Op.iLike]: `%${color}%` }
+            if (fullName) whereQuery.fullName = { [sequelize.Op.iLike]: `%${fullName}%` }
 
 			const guitar = await Product.findAll({
 				where: whereQuery,
@@ -99,6 +100,7 @@ router.post("/", async (req, res) => {
 			type
         ) {
 			const newGuitar = await Product.create({
+				fullname: brand + ' ' + model,
 				brand,
 				model,
 				img,
@@ -154,6 +156,7 @@ router.put("/:idGuitar", async (req, res) => {
 		} else {
 			await Product.update(
 				{
+					fullName: brand + ' ' + model,
 					brand,
 					model,
 					img,
@@ -214,9 +217,10 @@ const loadProductData = async () => {
 				return {
 					brand: guitar.brand,
 					model: guitar.model,
+					fullName: guitar.fullName[0] + ' ' +guitar.fullName[1],
 					img: guitar.img.join(","),
 					color: guitar.color.join(","),
-					price: guitar.price,
+					price: guitar.price.toFixed(2),
 					strings: guitar.strings,
 					description: guitar.description,
 					stock: guitar.stock,
