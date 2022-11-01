@@ -217,7 +217,7 @@ const loadProductData = async () => {
 					fullName: guitar.fullName.join(", "),
 					img: guitar.img.join(","),
 					color: guitar.color.join(","),
-					price: guitar.price,
+					price: guitar.price.toFixed(2),
 					strings: guitar.strings,
 					description: guitar.description,
 					stock: guitar.stock,
