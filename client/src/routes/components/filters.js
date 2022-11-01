@@ -1,8 +1,8 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
 import { getByFilter } from "../../Redux/productActions";
-// import { setFilters } from "../../Redux/productSlice";
+import { setFilters } from "../../Redux/productSlice";
 
 const Filter = () => {
   const dispatch = useDispatch();
@@ -12,23 +12,12 @@ const Filter = () => {
   const types = useSelector((state) => state.products.types);
   const filter = useSelector((state) => state.products.Filters);
 
-  
-
-  const [filtered,setFiltered] = useState({
-    color: '',
-    type: '',
-    brand: ''
-  });
-
   const handleChange = (e) => {
-      setFiltered({
-          ...filtered,
-          [e.target.name]: e.target.value
-        })
+        dispatch(setFilters({...filter,[e.target.name]: e.target.value}))
     };
-    useEffect(() => {dispatch(getByFilter(filtered))
-    // dispatch(setFilters(filtered))
-    }, [filtered,dispatch])
+    useEffect(() => {
+      dispatch(getByFilter(filter))
+    }, [filter, dispatch])
 
     return (
       <section>
@@ -50,6 +39,7 @@ const Filter = () => {
                   onChange={handleChange}
                   value={item}
                   id={item}
+                  checked={filter.color === item? true: false}
                   name='color'
                   label={item}
                 />
