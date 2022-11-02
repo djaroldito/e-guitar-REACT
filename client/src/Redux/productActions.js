@@ -2,7 +2,6 @@ import axios from "axios"
 import {
 	getAllProducts,
 	getProductById,
-	getProductByName,
 	getAllBrands,
 	getAllColors,
 	getByFilters,
@@ -26,17 +25,16 @@ export const getById = (id) => (dispatch) => {
 		.then((res) => dispatch(getProductById(res.data)))
 		.catch((err) => console.log(err))
 }
-// INCLUIR  EL getByName CON getByFilter
-//---------------------------------------
-export const getByName = (Name, currentPage) => (dispatch) => {
-	axios(`http://localhost:3001/rguitars?fullName=${Name}&page=${currentPage}`)
-		.then((res) => {
-			dispatch(getProductByName(res.data.products))
-			dispatch(setCurrentPage(res.data.currentPage))
-			dispatch(setPageCount(res.data.pageCount))
-		})
-		.catch((err) => console.log(err))
-}
+
+// export const getByName = (Name, currentPage) => (dispatch) => {
+// 	axios(`http://localhost:3001/rguitars?fullName=${Name}&page=${currentPage}`)
+// 		.then((res) => {
+// 			dispatch(getProductByName(res.data.products))
+// 			dispatch(setCurrentPage(res.data.currentPage))
+// 			dispatch(setPageCount(res.data.pageCount))
+// 		})
+// 		.catch((err) => console.log(err))
+// }
 export const getBrands = () => (dispatch) => {
 	axios(`http://localhost:3001/rfilters/brands`)
 		.then((res) => dispatch(getAllBrands(res.data)))
@@ -53,10 +51,11 @@ export const getTypes = () => (dispatch) => {
 		.catch((err) => console.log(err))
 }
 
-export const getByFilter = (filtered, currentPage) => (dispatch) => {
-	const { color, brand, type } = filtered
+export const getByFilter = (filter, currentPage) => (dispatch) => {
+    const { color, brand, type, fullName } = filter
+
 	axios(
-		`http://localhost:3001/rguitars?color=${color}&brand=${brand}&type=${type}&page=${currentPage}`
+		`http://localhost:3001/rguitars?color=${color}&brand=${brand}&type=${type}&fullName=${fullName}&page=${currentPage}`
 	)
 		.then((res) => {
             dispatch(getByFilters(res.data.products))

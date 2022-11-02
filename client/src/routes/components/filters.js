@@ -1,9 +1,8 @@
-import { useEffect, useState } from "react"
+import { useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import styled from "styled-components"
 import { getByFilter } from "../../Redux/productActions"
-import { setCurrentPage } from "../../Redux/productSlice"
-// import { setFilters } from "../../Redux/productSlice";
+import { setFilters, setCurrentPage } from "../../Redux/productSlice"
 
 const Filter = () => {
 	const dispatch = useDispatch()
@@ -14,23 +13,13 @@ const Filter = () => {
 	const filter = useSelector((state) => state.products.Filters)
 	const currentPage = useSelector((state) => state.products.currentPage)
 
-	const [filtered, setFiltered] = useState({
-		color: "",
-		type: "",
-		brand: "",
-	})
-
 	const handleChange = (e) => {
-		setFiltered({
-			...filtered,
-			[e.target.name]: e.target.value,
-		})
+		dispatch(setFilters({ ...filter, [e.target.name]: e.target.value }))
 		dispatch(setCurrentPage(1))
 	}
 	useEffect(() => {
-		dispatch(getByFilter(filtered, currentPage))
-		// dispatch(setFilters(filtered))
-	}, [filtered, currentPage, dispatch])
+		dispatch(getByFilter(filter, currentPage))
+	}, [filter, dispatch, currentPage])
 
 	return (
 		<section>

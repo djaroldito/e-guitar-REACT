@@ -8,7 +8,14 @@ export const productSlice = createSlice({
 		cart: JSON.parse(localStorage.getItem("carrito")),
 		brands: [],
 		colors: [],
-		types: [],
+        types: [],
+        filter: [],
+        Filters:{
+            color: '',
+            type: '',
+            brand: '',
+            fullName: ''
+          },
         currentPage: 1,
         pageCount: 0,
 	},
@@ -19,9 +26,9 @@ export const productSlice = createSlice({
 		getProductById: (state, action) => {
 			state.detail = action.payload
 		},
-		getProductByName: (state, action) => {
-			state.products = action.payload
-		},
+		// getProductByName: (state, action) => {
+		// 	state.products = action.payload
+		// },
 		getProductFiltered: (state, action) => {
 			state.products = action.payload
 		},
@@ -76,6 +83,9 @@ export const productSlice = createSlice({
 		getByFilters: (state, action) => {
 			state.products = action.payload
         },
+        setFilters: (state, action)=>{
+            state.Filters = action.payload
+        },
         setCurrentPage(state, action) {
             state.currentPage = action.payload
 		},
@@ -90,7 +100,7 @@ export const productSlice = createSlice({
 export const {
 	getAllProducts,
 	getProductById,
-	getProductByName,
+	//getProductByName,
 	getProductFiltered,
 	clearCart,
 	getProductToCart,
@@ -101,7 +111,8 @@ export const {
 	getAllTypes,
 	getByFilters,
 	delAllProductToCart,
-	getCart,
+    getCart,
+    setFilters,
     clearDetail,
     setCurrentPage,
     setPageCount,
