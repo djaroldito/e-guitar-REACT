@@ -11,10 +11,6 @@ module.exports = (sequelize) => {
 				type: DataTypes.STRING,
 				allowNull: false,
 			},
-			fullName: {
-				type: DataTypes.STRING,
-				allowNull: false,
-			},
 			img: DataTypes.TEXT,
 			color: DataTypes.STRING,
 			price: {
@@ -34,7 +30,7 @@ module.exports = (sequelize) => {
 				type: DataTypes.INTEGER,
 				defaultValue: 0,
 			},
-			
+
 			type: DataTypes.STRING,
             leftHand: {
                 type: DataTypes.BOOLEAN,
