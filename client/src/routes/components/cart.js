@@ -116,7 +116,7 @@ const preguntaUno = (item)=>{
               <h1> {carrito.length >= 1 ?  carrito.reduce((acc,prod)=>acc + (prod.price.toFixed(2) * prod.quantity) , 0).toFixed(2):null}</h1>
             </Total>
           </div>
-          {carrito.length >= 1 ? <button className="Purchasebutton"><BsCart2/>Completar Compra</button> : null}
+          {carrito.length >= 1 ? <button onClick={() => completePayment(carrito)} className="Purchasebutton"><BsCart2/>Completar Compra</button> : null}
           < br/>
           <CustomButtons>
           <Link to="/home">
