@@ -1,4 +1,4 @@
-import { React } from "react"
+import { React, useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import styled from "styled-components"
 import {delOneFromCart, clearCart, getProductToCart } from "../../Redux/productSlice"
@@ -16,11 +16,19 @@ const Cart = () =>{
 
    const dispatch = useDispatch()
 
-   const constructorCart = ()=>{
+   useEffect(() => {
+   
     if (!localStorage.getItem('carrito')){
-        localStorage.setItem('carrito','[]')
-    }
+      localStorage.setItem('carrito','[]')
   }
+    
+  }, []);
+
+  //  const constructorCart = ()=>{
+  //   if (!localStorage.getItem('carrito')){
+  //       localStorage.setItem('carrito','[]')
+  //   }
+  // }
    const addCartItem = (item)=> {
     dispatch(getProductToCart(item))
 
@@ -35,7 +43,7 @@ const Cart = () =>{
     window.location.href = response;
   }
  
-  constructorCart()
+  // constructorCart()
  //funciones carteles de alerta
   const preguntaTodo = ()=>{
    Swal.fire({
