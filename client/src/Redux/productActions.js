@@ -7,11 +7,17 @@ import {
 	getAllColors,
 	getByFilters,
 	getAllTypes,
+	setCurrentPage,
+	setPageCount,
 } from "./productSlice"
 
 export const getAllPrds = () => (dispatch) => {
 	axios("http://localhost:3001/rguitars")
-		.then((res) => dispatch(getAllProducts(res.data)))
+		.then((res) => {
+			dispatch(getAllProducts(res.data.products))
+			dispatch(setCurrentPage(1))
+			dispatch(setPageCount(res.data.pageCount))
+		})
 		.catch((error) => console.log(error))
 }
 
@@ -20,10 +26,15 @@ export const getById = (id) => (dispatch) => {
 		.then((res) => dispatch(getProductById(res.data)))
 		.catch((err) => console.log(err))
 }
-
-export const getByName = (Name) => (dispatch) => {
-	axios(`http://localhost:3001/rguitars?fullName=${Name}`)
-		.then((res) => dispatch(getProductByName(res.data)))
+// INCLUIR  EL getByName CON getByFilter
+//---------------------------------------
+export const getByName = (Name, currentPage) => (dispatch) => {
+	axios(`http://localhost:3001/rguitars?fullName=${Name}&page=${currentPage}`)
+		.then((res) => {
+			dispatch(getProductByName(res.data.products))
+			dispatch(setCurrentPage(res.data.currentPage))
+			dispatch(setPageCount(res.data.pageCount))
+		})
 		.catch((err) => console.log(err))
 }
 export const getBrands = () => (dispatch) => {
@@ -31,32 +42,32 @@ export const getBrands = () => (dispatch) => {
 		.then((res) => dispatch(getAllBrands(res.data)))
 		.catch((err) => console.log(err))
 }
-
-
 export const getColors = () => (dispatch) => {
 	axios(`http://localhost:3001/rfilters/colors`)
 		.then((res) => dispatch(getAllColors(res.data)))
-		.catch((err) => console.log('colors',err))
+		.catch((err) => console.log("colors", err))
 }
-
 export const getTypes = () => (dispatch) => {
 	axios(`http://localhost:3001/rfilters/types`)
 		.then((res) => dispatch(getAllTypes(res.data)))
 		.catch((err) => console.log(err))
 }
 
-export const getByFilter =
-	({ color, brand, type }) =>
-	(dispatch) => {
-		axios(
-			`http://localhost:3001/rguitars?color=${color}&brand=${brand}&type=${type}`
-		)
-			.then((res) => dispatch(getByFilters(res.data)))
-			.catch((err) => console.log(err))
-	}
+export const getByFilter = (filtered, currentPage) => (dispatch) => {
+	const { color, brand, type } = filtered
+	axios(
+		`http://localhost:3001/rguitars?color=${color}&brand=${brand}&type=${type}&page=${currentPage}`
+	)
+		.then((res) => {
+            dispatch(getByFilters(res.data.products))
+            dispatch(setCurrentPage(res.data.currentPage))
+			dispatch(setPageCount(res.data.pageCount))
+		})
+		.catch((err) => console.log(err))
+}
 
 export const postProductForm = async (formData) => {
-    try {
+	try {
 		const { data: productCreated } = await axios.post(
 			"http://localhost:3001/rguitars/",
 			formData
@@ -68,7 +79,7 @@ export const postProductForm = async (formData) => {
 	}
 }
 export const editProductForm = async (formData) => {
-    try {
+	try {
 		const { data: productUpdated } = await axios.put(
 			`http://localhost:3001/rguitars/${formData.id}`,
 			formData

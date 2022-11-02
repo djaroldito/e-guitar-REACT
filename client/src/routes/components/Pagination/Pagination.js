@@ -9,12 +9,11 @@ import {
 
 export default function Pagination({
 	handleChange,
-	totalCards,
+	pagesCount,
 	currentPage,
-	guitarsPerPage,
 }) {
-	const pagesCount = Math.ceil(totalCards / guitarsPerPage)
-	if (pagesCount === 1) return null
+
+	if (pagesCount <= 1) return null
 
 	// range of numbers
 	let firstNumber = 1
