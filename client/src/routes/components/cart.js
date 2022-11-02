@@ -1,4 +1,4 @@
-import { React } from "react"
+import { React, useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import styled from "styled-components"
 import {delOneFromCart, clearCart, getProductToCart } from "../../Redux/productSlice"
@@ -16,11 +16,19 @@ const Cart = () =>{
 
    const dispatch = useDispatch()
 
-   const constructorCart = ()=>{
+   useEffect(() => {
+   
     if (!localStorage.getItem('carrito')){
-        localStorage.setItem('carrito','[]')
-    }
+      localStorage.setItem('carrito','[]')
   }
+    
+  }, []);
+
+  //  const constructorCart = ()=>{
+  //   if (!localStorage.getItem('carrito')){
+  //       localStorage.setItem('carrito','[]')
+  //   }
+  // }
    const addCartItem = (item)=> {
     dispatch(getProductToCart(item))
 
@@ -35,7 +43,7 @@ const Cart = () =>{
     window.location.href = response;
   }
  
-  constructorCart()
+  // constructorCart()
  //funciones carteles de alerta
   const preguntaTodo = ()=>{
    Swal.fire({
@@ -108,7 +116,7 @@ const preguntaUno = (item)=>{
               <h1> {carrito.length >= 1 ?  carrito.reduce((acc,prod)=>acc + (prod.price.toFixed(2) * prod.quantity) , 0).toFixed(2):null}</h1>
             </Total>
           </div>
-          {carrito.length >= 1 ? <button className="Purchasebutton"><BsCart2/>Completar Compra</button> : null}
+          {carrito.length >= 1 ? <button onClick={() => completePayment(carrito)} className="Purchasebutton"><BsCart2/>Completar Compra</button> : null}
           < br/>
           <CustomButtons>
           <Link to="/home">
