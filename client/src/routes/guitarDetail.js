@@ -101,7 +101,7 @@ const GuitarDetail = () => {
 							))}
 						</ColorDiv>
 					</form>
-					{localStorage.getItem("isAdmin") ? (
+					{localStorage.getItem("isAdmin") === "true" ? (
 						<CustomButtons>
 							<button
 								type='button'
