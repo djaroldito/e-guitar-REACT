@@ -7,6 +7,8 @@ import EmptyCart from "./Cart/EmptyCart";
 import {BsCart2} from 'react-icons/bs'
 import "./Cart/Cart.css";
 import Swal from 'sweetalert2'
+import { Link } from 'react-router-dom';
+import {IoArrowBackOutline} from 'react-icons/io5'
 
 const Cart = () =>{
    const carrito = useSelector(state => state.products.cart)
@@ -101,6 +103,14 @@ const preguntaUno = (item)=>{
             </Total>
           </div>
           {carrito.length >= 1 ? <button className="Purchasebutton"><BsCart2/>Completar Compra</button> : null}
+          < br/>
+          <CustomButtons>
+          <Link to="/home">
+              <button className="back-home">
+              <IoArrowBackOutline/> Back Home  
+              </button>
+					</Link>
+          </CustomButtons>
   </main>
   )
 }
@@ -125,4 +135,35 @@ const Total = styled.div`
   align-content: flex-end;
   align-items: center;
 `
+const CustomButtons = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: 250px;
+  position: relative;
+  margin-top: auto;
+  margin: 15px;
+  a {
+    color: whitesmoke;
+    text-decoration: none;
+  }
+  button {
+    border-radius: 5px;
+    padding: 10px;
+    border: none;
+    cursor: pointer;
+    margin: 5px;
+    width: 100%;
+    background-color: rgb(76, 49, 138);
+    color: whitesmoke;
+    font-weight: 600;
+    align-items: center;
+    display: flex;
+    justify-content: center;
+  }
+  .back-home {
+    background-color: rgb(128, 60, 60);
+    font-weight: 600;
+  }
+`
+
 export default Cart
