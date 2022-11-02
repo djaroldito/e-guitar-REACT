@@ -11,14 +11,13 @@ export const productSlice = createSlice({
         colors: [],
         types: [],
         filter: [],
-        Filters:{
+        Filters: {
             color: '',
             type: '',
             brand: ''
           },
     },
     reducers:{
-        
         getAllProducts: (state, action) =>{
             state.products = action.payload
         },
@@ -73,7 +72,6 @@ export const productSlice = createSlice({
             state.cart = []
             localStorage.setItem('carrito',JSON.stringify(state.cart))
         },
-        
         getAllColors: (state, action) =>{
             state.colors = action.payload
         },
