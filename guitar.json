@@ -3,6 +3,7 @@
         "id": "1",
         "brand": "Femmto",
         "model": "CG001-Azul",
+        "fullName": ["Femmto", "CG001-Azul"],
         "img": [
             "https://http2.mlstatic.com/D_NQ_NP_2X_607586-MLA50209395075_062022-F.webp",
             "https://http2.mlstatic.com/D_NQ_NP_2X_748520-MLA50415595917_062022-F.webp",
@@ -21,6 +22,7 @@
         "id": "2",
         "brand": "Yamaha",
         "model": "C40",
+        "fullName": ["Yamaha", "C40"],
         "img": [
             "https://http2.mlstatic.com/D_NQ_NP_2X_688069-MLA44114804079_112020-F.webp",
             "https://http2.mlstatic.com/D_NQ_NP_2X_844728-MLA44114807092_112020-F.webp"
@@ -39,6 +41,7 @@
         "id": "3",
         "brand": "Midiplus",
         "model": "Clásica con funda",
+        "fullName": ["Midiplus", "Clásica con funda"],
         "img": [
             "https://http2.mlstatic.com/D_NQ_NP_2X_994179-MLA48378987512_112021-F.webp"
         ],
@@ -58,6 +61,7 @@
         "id": "4",
         "brand": "Valencia",
         "model": "VC104K",
+        "fullName": ["Valencia", "VC104K"],
         "img": [
             "https://http2.mlstatic.com/D_NQ_NP_2X_911829-MLA44548355323_012021-F.webp",
             "https://http2.mlstatic.com/D_NQ_NP_2X_606025-MLA44548355345_012021-F.webp"
@@ -78,6 +82,7 @@
         "id": "5",
         "brand": "Parquer",
         "model": "GC109",
+        "fullName": ["Parquer", "GC109"],
         "img": [
             "https://http2.mlstatic.com/D_NQ_NP_2X_840527-MLA47886167183_102021-F.webp",
             "https://http2.mlstatic.com/D_NQ_NP_2X_968661-MLA45333535518_032021-F.webp"
@@ -98,6 +103,7 @@
         "id": "6",
         "brand": "La Alpujarra",
         "model": "70",
+        "fullName": ["La Alpujarra", "70"],
         "img": [
             "https://http2.mlstatic.com/D_NQ_NP_2X_973288-MLA50785418604_072022-F.webp",
             "https://http2.mlstatic.com/D_NQ_NP_2X_827027-MLA50785418603_072022-F.webp",
@@ -119,6 +125,7 @@
         "id": "7",
         "brand": "Famusic",
         "model": "Clásica",
+        "fullName": ["Famusic", "Clásica"],
         "img": [
             "https://http2.mlstatic.com/D_NQ_NP_2X_783640-MLA45683269322_042021-F.webp"
         ],
@@ -138,6 +145,7 @@
         "id": "8",
         "brand": "Parquer",
         "model": "GC109LBM",
+        "fullName": ["Parquer", "GC109LBM"],
         "img": [
             "https://http2.mlstatic.com/D_NQ_NP_2X_811362-MLA47725448613_102021-F.webp",
             "https://http2.mlstatic.com/D_NQ_NP_2X_762043-MLA47725448615_102021-F.webp"
@@ -158,6 +166,7 @@
         "id": "9",
         "brand": "Parquer",
         "model": "GC830",
+        "fullName": ["Parquer", "GC830"],
         "img": [
             "https://http2.mlstatic.com/D_NQ_NP_2X_659594-MLA49106206574_022022-F.webp",
             "https://http2.mlstatic.com/D_NQ_NP_2X_605632-MLA49106206565_022022-F.webp"
@@ -178,6 +187,7 @@
         "id": "10",
         "brand": "Parquer",
         "model": "GC830",
+        "fullName": ["Parquer", "GC830"],
         "img": [
             "https://http2.mlstatic.com/D_NQ_NP_2X_627109-MLA45642269637_042021-F.webp"
         ],
@@ -197,6 +207,7 @@
         "id": "11",
         "brand": "Parquer",
         "model": "Stratocaster",
+        "fullName": ["Parquer", "Stratocaster"],
         "img": [
             "https://http2.mlstatic.com/D_NQ_NP_622407-MLA48680123789_122021-O.webp, https://http2.mlstatic.com/D_NQ_NP_723793-MLA48680228384_122021-O.webp"
         ],
@@ -216,6 +227,7 @@
         "id": "12",
         "brand": "Dakota",
         "model": "Stratocaster",
+        "fullName": ["Dakota", "Stratocaster"],
         "img": [
             "https://http2.mlstatic.com/D_NQ_NP_632217-MLA48786922827_012022-O.webp, https://http2.mlstatic.com/D_NQ_NP_729274-MLA51537199502_092022-O.webp"
         ],
@@ -235,6 +247,7 @@
         "id": "13",
         "brand": "Epiphone",
         "model": "Les Paul",
+        "fullName": ["Epiphone", "Les Paul"],
         "img": [
             "https://http2.mlstatic.com/D_NQ_NP_669840-MLA46353231579_062021-O.webp, https://http2.mlstatic.com/D_NQ_NP_888651-MLA46352606590_062021-O.webp"
         ],
@@ -254,6 +267,7 @@
         "id": "14",
         "brand": "Cort",
         "model": "X100",
+        "fullName": ["Cort", "X100"],
         "img": [
             "https://http2.mlstatic.com/D_NQ_NP_625922-MLA48678794814_122021-O.webp, https://http2.mlstatic.com/D_NQ_NP_898081-MLA51375602262_092022-O.webp, https://http2.mlstatic.com/D_NQ_NP_779601-MLA51439631218_092022-O.webp"
         ],
@@ -273,6 +287,7 @@
         "id": "15",
         "brand": "SX",
         "model": "Telecaster",
+        "fullName": ["SX", "Telecaster"],
         "img": [
             "https://http2.mlstatic.com/D_NQ_NP_635048-MLA48123653039_112021-O.webp, https://http2.mlstatic.com/D_NQ_NP_903661-MLA48123721123_112021-O.webp"
         ],
@@ -292,6 +307,7 @@
         "id": "16",
         "brand": "Kramer",
         "model": "Vanguard",
+        "fullName": ["Kramer", "Vanguard"],
         "img": [
             "https://http2.mlstatic.com/D_NQ_NP_994438-MLA31586492212_072019-O.webp"
         ],
@@ -311,6 +327,7 @@
         "id": "17",
         "brand": "PRS",
         "model": "SE Custom",
+        "fullName": ["PRS", "SE Custom"],
         "img": [
             "https://http2.mlstatic.com/D_NQ_NP_783212-MLA48416164849_122021-O.webp, https://http2.mlstatic.com/D_NQ_NP_865065-MLA48416202595_122021-O.webp, https://http2.mlstatic.com/D_NQ_NP_823266-MLA48416279145_122021-O.webp"
         ],
@@ -330,6 +347,7 @@
         "id": "18",
         "brand": "Gretsch",
         "model": "Hollow G6136T",
+        "fullName": ["Gretsch", "Hollow G6136T"],
         "img": [
             "https://http2.mlstatic.com/D_NQ_NP_936630-MLA44189744930_112020-O.webp"
         ],
@@ -349,13 +367,14 @@
         "id": "19",
         "brand": "Cort",
         "model": "Explorer Vx-2V",
+        "fullName": ["Cort", "Explorer Vx-2V"],
         "img": [
             "https://http2.mlstatic.com/D_NQ_NP_664769-MLA48124486066_112021-O.webp"
         ],
         "color": [
             "negro"
         ],
-        "price": 126.732,
+        "price": 126.73,
         "strings": 6,
         "description": "Las formas agresivas del cuerpo del VX se complementan con pastillas EMG-HZ y trémolo de bloqueo doble. El VX-2X tiene un mástil reforzado de 5 piezas para mayor resistencia y estabilidad. Pastillas pasivas muy dinámicas con toneladas de salida y un aspecto tradicional de bobina abierta.",
         "stock": 12,
@@ -368,13 +387,14 @@
         "id": "20",
         "brand": "Ibanez",
         "model": "GSA60",
+        "fullName": ["Ibanez", "GSA60"],
         "img": [
             "https://http2.mlstatic.com/D_NQ_NP_760628-MLA48678675895_122021-O.webp, https://http2.mlstatic.com/D_NQ_NP_740895-MLA48678701559_122021-O.webp, https://http2.mlstatic.com/D_NQ_NP_672009-MLA48678794445_122021-O.webp"
         ],
         "color": [
             "negro, azul"
         ],
-        "price": 89.700,
+        "price": 89.70,
         "strings": 6,
         "description": "Si algo caracteriza a las guitarras de Ibanez es su estilo, con cuellos más delgados y diapasones más planos, electrónica de alta potencia y acabados coloridos. Esta marca es una de las más versátiles del mercado, ya que ofrece desde guitarras acústicas, eléctricas, bajos y amplificadores.",
         "stock": 5,
@@ -387,6 +407,7 @@
         "id": "21",
         "brand": "Gracia",
         "model": "M6",
+        "fullName": ["Gracia", "M6"],
         "img": [
             "https://http2.mlstatic.com/D_NQ_NP_2X_950354-MLA50448314181_062022-F.webp",
             "https://http2.mlstatic.com/D_NQ_NP_2X_947252-MLA50448012948_062022-F.webp"
@@ -407,6 +428,7 @@
         "id": "22",
         "brand": "Gracia",
         "model": "Fa01",
+        "fullName": ["Gracia", "Fa01"],
         "img": [
             "https://http2.mlstatic.com/D_NQ_NP_2X_999703-MLA48680702780_122021-F.webp"
         ],
@@ -426,6 +448,7 @@
         "id": "23",
         "brand": "Gracia",
         "model": "M10",
+        "fullName": ["Gracia", "M10"],
         "img": [
             "https://http2.mlstatic.com/D_NQ_NP_2X_956901-MLA50496713038_062022-F.webp",
             "https://http2.mlstatic.com/D_NQ_NP_2X_926158-MLA50496713046_062022-F.webp",
@@ -448,6 +471,7 @@
         "id": "24",
         "brand": "Gracia",
         "model": "345",
+        "fullName": ["Gracia", "345"],
         "img": [
             "https://http2.mlstatic.com/D_NQ_NP_2X_816596-MLA43833896132_102020-F.webp",
             "https://http2.mlstatic.com/D_NQ_NP_2X_630241-MLA43823487497_102020-F.webp",
@@ -470,6 +494,7 @@
         "id": "25",
         "brand": "Gracia",
         "model": "Niño Infantil Rosa",
+        "fullName": ["Gracia", "Niño Infantil Rosa"],
         "img": [
             "https://http2.mlstatic.com/D_NQ_NP_2X_734413-MLA41633975042_052020-F.webp",
             "https://http2.mlstatic.com/D_NQ_NP_2X_742521-MLA41633918797_052020-F.webp",
@@ -491,6 +516,7 @@
         "id": "26",
         "brand": "Fonseca",
         "model": "39Kec",
+        "fullName": ["Fonseca", "39Kec"],
         "img": [
             "https://http2.mlstatic.com/D_NQ_NP_2X_923136-MLA47729678658_102021-F.webp"
         ],
@@ -510,6 +536,7 @@
         "id": "27",
         "brand": "Fonseca",
         "model": "10",
+        "fullName": ["Fonseca", "10"],
         "img": [
             "https://http2.mlstatic.com/D_NQ_NP_2X_971931-MLA31062642705_062019-F.webp",
             "https://http2.mlstatic.com/D_NQ_NP_2X_648890-MLA26266343332_102017-F.webp",
@@ -531,6 +558,7 @@
         "id": "28",
         "brand": "Fonseca",
         "model": "25 de Estudio",
+        "fullName": ["Fonseca", "25 de Estudio"],
         "img": [
             "https://http2.mlstatic.com/D_NQ_NP_2X_612080-MLA43168277679_082020-F.webp",
             "https://http2.mlstatic.com/D_NQ_NP_2X_746560-MLA43168277692_082020-F.webp",
@@ -553,6 +581,7 @@
         "id": "29",
         "brand": "Fonseca",
         "model": "31",
+        "fullName": ["Fonseca", "31"],
         "img": [
             "https://http2.mlstatic.com/D_NQ_NP_2X_839515-MLA44373310655_122020-F.webp",
             "https://http2.mlstatic.com/D_NQ_NP_2X_945976-MLA47474505561_092021-F.webp",
@@ -574,6 +603,7 @@
         "id": "30",
         "brand": "Fonseca",
         "model": "65 Medio Concierto",
+        "fullName": ["Fonseca", "65 Medio Concierto"],
         "img": [
             "https://http2.mlstatic.com/D_NQ_NP_2X_789523-MLA40735270399_022020-F.webp",
             "https://http2.mlstatic.com/D_NQ_NP_2X_939881-MLA40735266485_022020-F.webp"

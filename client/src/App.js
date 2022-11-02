@@ -1,14 +1,15 @@
-import { Route, Routes } from 'react-router-dom';
-import NavBar from './routes/navbar';
-import LandingPage from './routes/components/LandingPage/LandingPage';
-import Home from './routes/home';
-import GuitarDetail from './routes/guitarDetail';
+import { Route, Routes } from "react-router-dom"
+import NavBar from "./routes/navbar"
+import LandingPage from "./routes/components/LandingPage/LandingPage"
+import Home from "./routes/home"
+import GuitarDetail from "./routes/guitarDetail"
 
 import Cart from './routes/components/cart';
 import Signup from './routes/Signup/Signup';
 import Login from './routes/Signup/Login';
 
 import ProductForm from './routes/components/ProductForm/ProductForm'
+import Footer from './routes/components/footer';
 
 
 function App() {
@@ -25,8 +26,9 @@ function App() {
     <Route path="/newProduct" element={<ProductForm />} />
     <Route path="/editProduct/:id" element={<ProductForm />} />
    </Routes>
+   <Footer/>
    </>
   );
 }
 
-export default App;
+export default App

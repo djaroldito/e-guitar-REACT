@@ -28,3 +28,9 @@ main, section{
   margin-right: auto;
 
 }
+
+footer{
+  max-width: 100%;
+  background-color: rgb(0, 0, 0);
+  min-height: 100px;
+}
