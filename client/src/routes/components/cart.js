@@ -2,6 +2,7 @@ import { React } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import styled from "styled-components"
 import {delOneFromCart, clearCart, getProductToCart } from "../../Redux/productSlice"
+import {payment} from '../../Redux/productActions';
 import {AiOutlineDelete} from "react-icons/ai";
 import EmptyCart from "./Cart/EmptyCart";
 import {BsCart2} from 'react-icons/bs'
@@ -25,6 +26,11 @@ const Cart = () =>{
 
   const delFromCart = (item)=> {
     dispatch(delOneFromCart(item))
+  }
+
+  const completePayment = async (cart) => {
+    const response = await payment(cart);
+    window.location.href = response;
   }
  
   constructorCart()
@@ -91,7 +97,7 @@ const preguntaUno = (item)=>{
               <button disabled= { el.quantity < el.stock ? false : true} onClick={() => addCartItem(el)} >+</button>
               {el.stock?<p> <b>disponibles {el.stock}</b>.</p>: null}
             </div>
-              {el.price?<p>$ {el.price ? el.price.toFixed(2) : null }</p>: null}
+              <p>${el.price.toFixed(2)}</p>
               <button onClick={() => preguntaUno(el.id, true)}><AiOutlineDelete/></button>
               </div>
           ))}
@@ -100,7 +106,7 @@ const preguntaUno = (item)=>{
               <h1> {carrito.length >= 1 ?  carrito.reduce((acc,prod)=>acc + (prod.price.toFixed(2) * prod.quantity) , 0).toFixed(2):null}</h1>
             </Total>
           </div>
-          {carrito.length >= 1 ? <button className="Purchasebutton"><BsCart2/>Completar Compra</button> : null}
+          {carrito.length >= 1 ? <button className="Purchasebutton" onClick={() => completePayment(carrito)}><BsCart2/>Completar Compra</button> : null}
   </main>
   )
 }
