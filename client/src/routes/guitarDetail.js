@@ -1,18 +1,18 @@
-import { useEffect } from "react";
-import axios from "axios";
-import { useDispatch, useSelector } from "react-redux";
-import { useParams, useNavigate, Link } from "react-router-dom";
-import {  getById } from "../Redux/productActions";
-import { clearDetail, getProductToCart } from "../Redux/productSlice";
-import { Swiper, SwiperSlide } from "swiper/react";
-import { Pagination } from "swiper";
-import "swiper/css";
-import "swiper/css/pagination";
-import styled from "styled-components";
-import Swal from "sweetalert2";
-import { FaTrashAlt, FaEdit } from "react-icons/fa";
-import {IoArrowBackOutline} from 'react-icons/io5'
-import {BsCart2} from 'react-icons/bs'
+import { useEffect } from "react"
+import axios from "axios"
+import { useDispatch, useSelector } from "react-redux"
+import { useParams, useNavigate, Link } from "react-router-dom"
+import { getById } from "../Redux/productActions"
+import { clearDetail, getProductToCart } from "../Redux/productSlice"
+import { Swiper, SwiperSlide } from "swiper/react"
+import { Pagination } from "swiper"
+import "swiper/css"
+import "swiper/css/pagination"
+import styled from "styled-components"
+import Swal from "sweetalert2"
+import { FaTrashAlt, FaEdit } from "react-icons/fa"
+import { IoArrowBackOutline } from "react-icons/io5"
+import { BsCart2 } from "react-icons/bs"
 
 const GuitarDetail = () => {
 	const dispatch = useDispatch()
@@ -29,9 +29,7 @@ const GuitarDetail = () => {
 	const detail = useSelector((state) => state.products.detail)
 	const carrito = useSelector((state) => state.products.cart)
 
-  const isInCart = () => carrito.filter(el=> el.id === detail.id).length >= 1
-
-
+	const isInCart = () => carrito.filter((el) => el.id === detail.id).length >= 1
 
 	const handleDeleteProduct = (id) => {
 		Swal.fire({
@@ -62,109 +60,114 @@ const GuitarDetail = () => {
 		})
 	}
 
-  return (
-    <section>
-      <CountDiv>
-        {detail.img?.split(",").length === 1 ? (
-          <div className="imgcont">
-            <img src={detail.img} alt="" />
-          </div>
-        ) : (
-          <Swiper pagination={true} modules={[Pagination]} className="mySwiper">
-            {detail.img?.split(",").map((item, pos) => (
-              <SwiperSlide key={pos}>
-                <div className="imgcont">
-                  <img src={item} alt="" />
-                </div>
-              </SwiperSlide>
-            ))}
-          </Swiper>
-        )}
-        <TextCont>
-          <h2>{detail.brand}</h2>
-          <h3>${detail.price ? detail.price.toFixed(2) : null}</h3>
-          <h3>model: {detail.model}</h3>
-          <p>{detail.description}</p>
-          <p><b>Type: </b>{detail.type}</p>
-          {detail.leftHand ? <LeftHand>Left Hand Available</LeftHand> : null}
-          <form>
-            <ColorDiv>
-              Colors:
-              {detail.color?.split(",").map((item) => (
-                <div className="color-div">
-                  <input name="color" type="radio" value={item} />
-                  <label htmlFor={item}>{item}</label>
-                </div>
-              ))}
-            </ColorDiv>
-          </form>
-          {localStorage.getItem("isAdmin") ? (
-            <CustomButtons>
-              <button
-                type="button"
-                title="Edit product"
-                onClick={() => navigate(`/editProduct/${detail.id}`)}
-              >
-                <FaEdit />
-              </button>
-              <button
-                type="button"
-                title="Delete product"
-                onClick={() => handleDeleteProduct(detail.id)}
-              >
-                <FaTrashAlt />
-              </button>
-            </CustomButtons>
-          ) : (
-            <CustomButtons>
-              <button
-                className="add-cart"
-                onClick={() => dispatch(getProductToCart(detail))}
-                disabled = {isInCart()}
-              >
-               <BsCart2/>Add Cart
-              </button>
-                <Link to="/home">
-              <button className="back-home">
-              <IoArrowBackOutline/> Back Home
-              </button>
-					</Link>
-            </CustomButtons>
-          )}
-        </TextCont>
-      </CountDiv>
-	  <AdInfo>aditional Information: {detail.aditionalInformation}</AdInfo>
-    </section>
-  );
-};
+	return (
+		<section>
+			<CountDiv className='shadow-xl'>
+				{detail.img?.split(",").length === 1 ? (
+					<div className='imgcont'>
+						<img src={detail.img} alt='' />
+					</div>
+				) : (
+					<Swiper pagination={true} modules={[Pagination]} className='mySwiper'>
+						{detail.img?.split(",").map((item, pos) => (
+							<SwiperSlide key={pos}>
+								<div className='imgcont'>
+									<img src={item} alt='' />
+								</div>
+							</SwiperSlide>
+						))}
+					</Swiper>
+				)}
+				<TextCont>
+					<h2>{detail.brand}</h2>
+					<h3>${detail.price ? detail.price.toFixed(2) : null}</h3>
+					<h3>model: {detail.model}</h3>
+					<p>{detail.description}</p>
+					<p>
+						<b>Type: </b>
+						{detail.type}
+					</p>
+					{detail.leftHand ? <LeftHand>Left Hand Available</LeftHand> : null}
+					<form>
+						<ColorDiv>
+							Colors:
+							{detail.color?.split(",").map((item, pos) => (
+								<div className='color-div' key={pos}>
+									<input name='color' type='radio' value={item} />
+									<label htmlFor={item}>{item}</label>
+								</div>
+							))}
+						</ColorDiv>
+					</form>
+					{localStorage.getItem("isAdmin") ? (
+						<CustomButtons>
+							<button
+								type='button'
+								title='Edit product'
+								onClick={() => navigate(`/editProduct/${detail.id}`)}
+							>
+								<FaEdit /> Edit
+							</button>
+							<button
+								className='delete'
+								type='button'
+								title='Delete product'
+								onClick={() => handleDeleteProduct(detail.id)}
+							>
+								<FaTrashAlt /> Delete
+							</button>
+						</CustomButtons>
+					) : (
+						<CustomButtons>
+							<button
+								className='add-cart'
+								onClick={() => dispatch(getProductToCart(detail))}
+								disabled={isInCart()}
+							>
+								<BsCart2 />
+								Add Cart
+							</button>
+							<Link to='/home'>
+								<button className='back-home'>
+									<IoArrowBackOutline /> Back Home
+								</button>
+							</Link>
+						</CustomButtons>
+					)}
+				</TextCont>
+			</CountDiv>
+			<AdInfo>aditional Information: {detail.aditionalInformation}</AdInfo>
+		</section>
+	)
+}
 
 const CountDiv = styled.div`
-  width: 700px;
-  max-width: 900px;
-  min-height: 400px;
-  margin: auto;
-  display: flex;
-  flex-direction: row;
-  margin-top: 75px;
-  background-color: white;
-  /* border: 1px solid rgb(40, 40, 40); */
-  border-radius: 10px;
-  .imgcont {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100%;
-    max-width: 300px;
-    min-width: 250px;
-  }
-  img {
-    max-width: 100%;
-    max-height: 400px;
-  }
-  .mySwiper {
-    max-width: 300px;
-  }
-`;
+	width: 700px;
+	max-width: 900px;
+	min-height: 400px;
+	margin: auto;
+	display: flex;
+	flex-direction: row;
+	margin-top: 75px;
+	background-color: white;
+	/* border: 1px solid rgb(40, 40, 40); */
+	border-radius: 10px;
+	.imgcont {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		height: 100%;
+		max-width: 300px;
+		min-width: 250px;
+	}
+	img {
+		max-width: 100%;
+		max-height: 400px;
+	}
+	.mySwiper {
+		max-width: 300px;
+	}
+`
 
 const TextCont = styled.div`
 	display: flex;
@@ -222,7 +225,8 @@ const CustomButtons = styled.div`
 		display: flex;
 		justify-content: center;
 	}
-	.back-home,.delete {
+	.back-home,
+	.delete {
 		background-color: rgb(128, 60, 60);
 		font-weight: 600;
 	}

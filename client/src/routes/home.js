@@ -8,11 +8,11 @@ import {
   getTypes,
   getColors,
   getBrands,
-  getByFilter,
 } from "./../Redux/productActions";
 import { AiOutlineSearch } from "react-icons/ai";
 import SearchBar from "./components/searchbar";
 import Filter from "./components/filters";
+import { setCurrentPage } from './../Redux/productSlice'
 
 const Home = () => {
 	const [isActive, setIsActive] = useState(false)
