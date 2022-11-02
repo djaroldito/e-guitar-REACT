@@ -10,7 +10,7 @@ export const productSlice = createSlice({
 		colors: [],
         types: [],
         filter: [],
-        Filters:{
+        Filters: {
             color: '',
             type: '',
             brand: '',

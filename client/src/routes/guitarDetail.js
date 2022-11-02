@@ -29,7 +29,9 @@ const GuitarDetail = () => {
 	const detail = useSelector((state) => state.products.detail)
 	const carrito = useSelector((state) => state.products.cart)
 
-	const isInCart = () => carrito.filter((el) => el.id === detail.id).length >= 1
+  const isInCart = () => carrito?.find(el=> el.id === detail.id)
+  
+  
 
 	const handleDeleteProduct = (id) => {
 		Swal.fire({
