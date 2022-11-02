@@ -26,7 +26,7 @@ function App() {
     <Route path="/newProduct" element={<ProductForm />} />
     <Route path="/editProduct/:id" element={<ProductForm />} />
    </Routes>
-   {/* <Footer/> */}
+   <Footer/>
    </>
   );
 }
