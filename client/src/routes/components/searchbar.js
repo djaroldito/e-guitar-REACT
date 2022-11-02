@@ -21,7 +21,7 @@ const SearchBar = () => {
     }
 
 	const handleChange = (e) => {
-		dispatch(setFilters({ ...Filters, fullName: e.target.value }))
+		dispatch(setFilters({ ...filter, fullName: e.target.value }))
 		dispatch(setCurrentPage(1))
 	}
     const handleClick = () => {
