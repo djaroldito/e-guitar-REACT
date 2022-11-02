@@ -2,6 +2,7 @@ import { Route, Routes } from 'react-router-dom';
 import NavBar from './routes/navbar';
 import LandingPage from './routes/components/LandingPage/LandingPage';
 import Home from './routes/home';
+import { Profile } from './routes/Signup/Profile';
 import GuitarDetail from './routes/guitarDetail';
 
 import Cart from './routes/components/cart';
@@ -19,6 +20,7 @@ function App() {
     <Route path='/' element={<LandingPage/>}/>
     <Route path='/home' element={<Home/>}/>
     <Route path='/home/:id' element={<GuitarDetail/>}/>
+    <Route path='/home/Profile' element={<Profile/>}/>
     <Route path='/cart' element={<Cart/>}/>
     <Route path="/signup" element={<Signup />} />
     <Route path="/login" element={<Login />} />

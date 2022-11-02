@@ -13,6 +13,9 @@ export const productSlice = createSlice({
 
     },
     reducers:{
+        addUser: (state, action) =>{
+            
+        },
         getAllProducts: (state, action) =>{
             state.products = action.payload
         },

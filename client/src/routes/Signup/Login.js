@@ -14,8 +14,7 @@ import Swal from "sweetalert2";
 import Home from "../home";
 import { useAuth0 } from "@auth0/auth0-react";
 
-const USER_REGEX = /^[A-z][A-z0-9-_]{3,23}$/
-const PWD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).{8,24}$/
+
 export default function Login() {
 	const navigate = useNavigate()
 	const email = useRef()
@@ -27,27 +26,37 @@ export default function Login() {
 	const [showPsw, setShowPsw] = useState(false)
 	const { loginWithRedirect, user, isAuthenticated } = useAuth0()
 	
-	if (isAuthenticated) {
-		localStorage.setItem("userData", user)
+	if(isAuthenticated){
+		sessionStorage.setItem("emailData", user.email)
+	}
+
+	const handleAuth0 = async () => {
+		
+		loginWithRedirect()
+		
 	}
 
 	const handleSignIn = async (e) => {
 		e.preventDefault()
 		try {
+			
 			const { data } = await axios.get("http://localhost:3001/ruser/login", {
 				params: {
 					email: email.current.value,
 					password: password.current.value,
 				},
 			})
-
+			
+			
 			if (data) {
-				localStorage.setItem("emailData", email.current.value)
-				localStorage.setItem("passwordData", password.current.value)
-                localStorage.setItem("isAdmin", data.isAdmin)
+				sessionStorage.setItem("emailData", email.current.value)
+				sessionStorage.setItem("passwordData", password.current.value)
+                sessionStorage.setItem("isAdmin", data.isAdmin)
+				
 
                 navigate("/home", { state: { localStorage } });
 			}
+			
         } catch (error) {
 			Swal.fire({
 				title: error.response.data,
@@ -107,7 +116,8 @@ export default function Login() {
 						</div>
 						<button
 							className='loginBtn google'
-							onClick={() => loginWithRedirect()}
+							onClick={() => handleAuth0()}
+							
 						>
 							Log in with Google
 						</button>

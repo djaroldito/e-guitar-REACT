@@ -44,6 +44,8 @@ const Filter = () => {
               </option>
             ))}
           </select>
+          {/* <input value="default" name="color" id="default" type="radio" onChange={handleChange} label="default" />
+          <label htmlFor="default" >All</label> */}
             {colors?.map((item, pos) => (
               <div className="contain" key={pos}>
                 <input
@@ -56,6 +58,7 @@ const Filter = () => {
                   name='color'
                   label={item}
                 />
+                
                 <label htmlFor={item}>{item}</label>
               </div>
             ))}

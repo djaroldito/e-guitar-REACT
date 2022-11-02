@@ -9,23 +9,24 @@ import { AiOutlineSearch } from "react-icons/ai";
 import "../index.css";
 import { useAuth0 } from "@auth0/auth0-react";
 import { LogoutButton } from "./Signup/Logout";
+import { Profile } from "./Signup/Profile";
 
 const NavBar = () => {
   const path = window.location.pathname;
   const { isAuthenticated } = useAuth0();
   const handleLog = () => {
-    localStorage.clear();
+    sessionStorage.clear();
     window.location.reload();
   };
   const email = localStorage.getItem("emailData");
   const isAdmin = localStorage.getItem("isAdmin");
-
+  
   return (
     <header className={path === "/" ? "headerLanding" : "header"}>
       <NavCont>
         <NavLink to="/home">Home</NavLink>
         <NavLink to="/">discount</NavLink>
-        {isAdmin && <NavLink to="/newProduct">Add Product</NavLink>}
+        {isAdmin === "true" ? <NavLink to="/newProduct">Add Product</NavLink> : null}
 
         <IconCont className={""}>
           {!isAuthenticated && !email ? (
@@ -47,7 +48,9 @@ const NavBar = () => {
           )}
 
           <UserCont className={"logged"}>
+            <NavLink to='/home/Profile'>
             <FaUserAlt />
+            </NavLink>
           </UserCont>
         </IconCont>
 
