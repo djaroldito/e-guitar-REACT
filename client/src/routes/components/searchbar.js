@@ -13,20 +13,27 @@ const SearchBar = () => {
 	)
 	const [isActive, setIsActive] = useState(false)
 
+    const Filters = {
+            color: '',
+            type: '',
+            brand: '',
+            fullName: ''
+    }
+
 	const handleChange = (e) => {
-		dispatch(setFilters({ ...filter, [e.target.name]: e.target.value }))
+		dispatch(setFilters({ ...Filters, fullName: e.target.value }))
 		dispatch(setCurrentPage(1))
 	}
     const handleClick = () => {
         if (isActive && filter.fullName)
-            dispatch(setFilters({ ...filter, fullName: "" }))
+            dispatch(setFilters({ Filters }))
 		setIsActive((current) => !current)
 	}
 	useEffect(() => {
         if (filter.fullName) {
             setIsActive(true)
         }
-    }, [filter]) //eslint-disable-line
+    }, [filter])
 
 	const handleSubmit = (e) => {
 		e.preventDefault()
