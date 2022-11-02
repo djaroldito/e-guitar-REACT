@@ -15,7 +15,9 @@ const NavBar = () => {
   const path = window.location.pathname;
   const { isAuthenticated } = useAuth0();
   const handleLog = () => {
-    sessionStorage.clear();
+    localStorage.removeItem('emailData');
+    localStorage.removeItem('isAdmin')
+    localStorage.removeItem('passwordData')
     window.location.reload();
   };
   const email = localStorage.getItem("emailData");

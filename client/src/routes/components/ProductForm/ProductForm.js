@@ -74,9 +74,7 @@ export default function ProductForm() {
 	return (
 		<>
 			<div className='prdHeader'>
-				{" "}
-				{/* HEADER ---------------------------------------------- */}
-				<h2>Create Product</h2>
+			<h2>Create Product</h2>
 			</div>
 
 			<div className='prdFormContiner'>
@@ -224,7 +222,7 @@ export default function ProductForm() {
 											}}
 										/>
 									</div>
-									<div className="prdImgload"> {/* Img load ----------------------- */}
+									<div /* className="prdImgload" */> {/* Img load ----------------------- */}
 										{/* Render Images */}
 										{productImages.length > 0 &&
 											productImages.map((f, i) => (
@@ -239,7 +237,7 @@ export default function ProductForm() {
 										type='button'
 										onClick={() => fileRef.current.click()}
 										disabled={productImages.length >= 3}
-										className='prdButtonImage'>
+										className='prdButtonImage' >
 										<BiPhotoAlbum /> Upload Image
 									</button>
 								</div>

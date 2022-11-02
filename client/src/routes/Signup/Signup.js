@@ -1,24 +1,24 @@
-import React, {useState, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { postSignupForm } from "../../Redux/SignupActios.js"
-import { AiOutlineEye, AiOutlineEyeInvisible, AiOutlineUser, AiOutlineMail } from "react-icons/ai";
+import { postSignupForm } from "../../Redux/SignupActions";
+import { AiOutlineEye, AiOutlineEyeInvisible, AiOutlineUser, AiOutlineMail, AiOutlineGoogle } from "react-icons/ai";
 import Swal from "sweetalert2";
 import "./Styles/Signup.css";
 import axios from 'axios';
 
 // Falta buscar si el usuario ya existe en la db
-// Sweet alert si se registró correctamente
 // Registrarte con goolge a partir de Auth0
 // Averiguar cómo hacer para enviar también los datos del carrito del localStorage
+// Enviar un mail de confirmación de usuario
 
 export default function Signup() {
+  const email = useRef();
+
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  
-  
-  const mail = useRef();
   const [showPsw, setShowPsw] = useState(false);
+  
   const [user, setUser] = useState({
     fullname: "",
     email: "",
@@ -27,6 +27,7 @@ export default function Signup() {
   });
   
   const [errors, setErrors] = useState({});
+  /* const [isSubmitting, setIsSubmitting] = useState(false); */
 
   function handleChange(e) {
     const { name, value } = e.target;
@@ -34,22 +35,28 @@ export default function Signup() {
       ...user,
       [name]: value
     });
+    setErrors(validate({
+      ...user,
+      [e.target.name]: e.target.value
+    }));
   };
 
   async function handleSubmit(e){
     e.preventDefault();
+
     // Corroborar que no exista ese mail registrado ------------------------------------------
-   
-       const { data } = await axios.get("http://localhost:3001/ruser/email", {
-        params: {
-          email: mail.current.value
-        }})
-        
-      if (data) return Swal.fire("El Email pertenece a un usuario registrado")
-        else{
+    const { data } = await axios.get("http://localhost:3001/ruser/email", {
+      params: {
+        email: email.current.value
+      }})
+
+    if (data) return Swal.fire("El Email pertenece a un usuario registrado")
+      else{
     // Dispatch del post ---------------------------------------------------------------------
-      dispatch(postSignupForm(user));
-    }
+        dispatch(postSignupForm(user));};
+        
+    /* setIsSubmitting(true); */
+    
     // Sweet Alert ---------------------------------------------------------------------------
     console.log(Swal.fire({
       position: 'center',
@@ -60,36 +67,44 @@ export default function Signup() {
     }));
     
     // cleanDetail  -------------------------------------------------------------------------
-    // Limpiar el estado --------------------------------------------------------------------
+    // Limpiar los estados ------------------------------------------------------------------
     setUser({
       fullname: "",
       email: "",
       password: "",
-      password2: "",
-    })
+      password2: ""
+    });
+
     // Retornar al home
-    navigate('/login');
+    navigate('/home');
   };
 
   // Errors ----------------------------------------------------------------------------------
 
-  if (!user.fullname.trim()) {
-    errors.fullname = 'Username required';
-  };
-  if (!user.email) {
-    errors.email = 'Email required';
-  } else if (!/\S+@\S+\.\S+/.test(user.email)) {
-    errors.email = 'Email address is invalid';
-  }
-  if (!user.password) {
-    errors.password = 'Password is required';
-  } else if (user.password.length < 6) {
-    errors.password = 'Password needs to be 6 characters or more';
-  }
-  if (!user.password2) {
-    errors.password2 = 'Password is required';
-  } else if (user.password2 !== user.password) {
-    errors.password2 = 'Passwords do not match';
+  function validate(user) {
+    let errors = {};
+
+    if (!user.fullname.trim()) {
+      errors.fullname = 'Es requerido un nombre de Usuario';
+    };
+    if (!user.email) {
+      errors.email = 'Es requerido un Email';
+    } else if (!/\S+@\S+\.\S+/.test(user.email)) {
+      errors.email = 'Es requerido un Email válido';
+    };
+
+    if (!user.password) {
+      errors.password = 'Es requerida una contraseña';
+    } else if (user.password.length < 8) {
+      errors.password = 'Debe tener un mínimo de 8 caracteres';
+    } 
+    if (!user.password2) {
+      errors.password2 = 'Es requerida una contraseña';
+    } else if (user.password2 !== user.password) {
+      errors.password2 = 'No coinciden las contraseñas';
+    }
+
+    return errors;
   }
 
   return (
@@ -105,8 +120,10 @@ export default function Signup() {
               placeholder='Usuario' 
               required />
               <AiOutlineUser className='loginUsIc' />
+              <div className='supEM'>
+              {errors.fullname && <p>{errors.fullname}</p>}
+              </div>
           </fieldset>
-          {/* {errors.fullname && <p>{errors.fullname}</p>} */}
 
           <fieldset>
             <input type="email" 
@@ -114,11 +131,12 @@ export default function Signup() {
               value={user.email}
               onChange={handleChange} 
               placeholder='Email' 
-              required
-              ref={mail} />
+              required />
               <AiOutlineMail className='loginUsIc' />
+              <div className='supEM'>
+                {errors.email && <p>{errors.email}</p>}
+              </div>
           </fieldset>
-          {/* {errors.email && <p>{errors.email}</p>} */}
 
           <fieldset>
             <input type={showPsw ? "text" : "password"} 
@@ -131,8 +149,10 @@ export default function Signup() {
             <div className='loginEyeIcon' onClick={() => setShowPsw(!showPsw)}>
              {showPsw ? <AiOutlineEye/> : <AiOutlineEyeInvisible className='loginInIc'/>}
             </div>
+            <div className='supEM'>
+              {errors.password && <p>{errors.password}</p>} 
+            </div>
           </fieldset>
-          {/* {errors.password && <p>{errors.password}</p>} */}
 
           <fieldset>
             <input type={showPsw ? "text" : "password"} 
@@ -145,10 +165,24 @@ export default function Signup() {
             <div className='loginEyeIcon' onClick={() => setShowPsw(!showPsw)}>
             {showPsw ? <AiOutlineEye/> : <AiOutlineEyeInvisible className='loginInIc'/>}
             </div>
+            <div className='supEM'>
+             {errors.password2 && <p>{errors.password2}</p>} 
+            </div>
           </fieldset>
-          {/* {errors.password2 && <p>{errors.password2}</p>} */}
         
         <button className='signupBtn'>Enviar</button>
+
+        <div className="signupGg">
+              <p>O ingresa con</p>
+            </div>
+            <div>
+                <AiOutlineGoogle size={30} className='loginGgIc'/> 
+            </div>
+            <button
+              className="loginBtn google"
+              /* onClick={() => loginWithRedirect()} */>
+              Log in with Google
+            </button>
       </form>
     </div>
   )

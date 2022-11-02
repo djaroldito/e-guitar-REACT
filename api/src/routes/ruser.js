@@ -81,6 +81,28 @@ router.post("/register", async (req, res) => {
 	}
 })
 
+router.get("/email", async (req,res) => {
+    try {
+        const {email} = req.query;
+        if(!email){
+            res.status(400).send("falta cargar el gmail")
+        } else {
+            const user = await User.findOne({
+                where: {
+                email,
+                }
+            })
+            if(user){
+                return res.status(200).json(user)
+            } else {
+                return res.status(200).json(user)
+            }
+        }
+    } catch (error){
+        res.status(400).send(error)
+     }
+})
+
 /**
  * load defaul admin user
  */

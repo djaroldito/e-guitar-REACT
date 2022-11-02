@@ -19,7 +19,10 @@ export const PreviewImage = ({ file, handleDelete }) => {
 
 	return (
 		<div className="prdImg">
+<<<<<<< HEAD
 			
+=======
+>>>>>>> dev
 				<>
 					<img
 						src={preview}

@@ -1,26 +1,23 @@
-import styled from "styled-components";
-import { BsCart2 } from "react-icons/bs";
-import { FaGuitar } from "react-icons/fa";
-import { useDispatch, useSelector } from "react-redux";
-import { useEffect, useState } from "react";
-import { getProductToCart } from "../Redux/productSlice";
-import Pagination from "./components/Pagination/Pagination";
+import styled from "styled-components"
+import { useDispatch, useSelector } from "react-redux"
+import { useEffect } from "react"
+import Pagination from "./components/Pagination/Pagination"
+import ProductCard from "./components/ProductCard/ProductCard"
 import {
   getAllPrds,
   getTypes,
   getColors,
   getBrands,
 } from "./../Redux/productActions";
-import { Link } from "react-router-dom";
-import { AiOutlineSearch } from "react-icons/ai";
 import SearchBar from "./components/searchbar";
 import Filter from "./components/filters";
+import { setCurrentPage } from './../Redux/productSlice'
 
 const Home = () => {
-  const [isActive, setIsActive] = useState(false);
-  const [Searched, setSearch] = useState([]);
-  const dispatch = useDispatch();
-  const products = useSelector((state) => state.products.products);
+	const dispatch = useDispatch()
+	const products = useSelector((state) => state.products.products)
+	const {currentPage, pageCount} = useSelector((state) => state.products)
+
 
   useEffect(() => {
     if (products.length === 0) {
@@ -29,190 +26,55 @@ const Home = () => {
       dispatch(getColors());
       dispatch(getBrands());
     }
-  }, []);
 
-  const [currentPage, setCurrentPage] = useState(1);
-  const guitarsPerPage = 4;
-  const firstIdx = (currentPage - 1) * guitarsPerPage;
-  const lastIdx = firstIdx + guitarsPerPage;
+  }, [dispatch, products]);
 
-  let currentGuitars = products.slice(firstIdx, lastIdx);
+	/// PAGINATION
+	const handlePageChange = (pageNumber) => {
+		dispatch(setCurrentPage(pageNumber))
+	}
 
-  const handlePageChange = (pageNumber) => {
-    dispatch(setCurrentPage(pageNumber));
-  };
+	const constructorCart = () => {
+		if (!localStorage.getItem("carrito")) {
+			localStorage.setItem("carrito", "[]")
+		}
+	}
 
-  const SearchHandler = (value) => {
-    setSearch(value);
-  };
-  const handleClick = () => {
-    setIsActive((current) => !current);
-  };
-  const ProductRender = (item) => (
-    <DivCont key={item.id}>
-      <img src={item.img} alt="" />
-      <div className="text-cont">
-        <h2>{item.brand}</h2>
-        <h3>{item.model}</h3>
-        <p>$ {item.price}</p>
+	constructorCart()
 
-        <Link to={`/home/${item.id}`}>
-          {" "}
-          <FaGuitar /> Show Details
-        </Link>
-        <button className="cartbtn">
-          <BsCart2 /> Add Cart
-        </button>
-      </div>
-    </DivCont>
-  );
+	return (
+		<main>
+			<SearchBar />
+			<ContainerDiv>
+				<Filter />
+				<CardsCont>
+					{products?.map((item) => (
+						<ProductCard key={item.id} item={item} />
+					))}
+				</CardsCont>
+			</ContainerDiv>
+			<Pagination
+				handleChange={handlePageChange}
+				pagesCount={pageCount}
+				currentPage={currentPage}
+				//guitarsPerPage={guitarsPerPage}
+			/>
+		</main>
+	)
+}
 
-  const constructorCart = () => {
-    if (!localStorage.getItem("carrito")) {
-      localStorage.setItem("carrito", "[]");
-    }
-  };
-
-  constructorCart();
-
-  const addCartItem = async (item) => {
-    dispatch(getProductToCart(item));
-  };
-
-  return (
-    <main>
-      <Search>
-        <div
-          style={
-            isActive
-              ? { display: "block", width: "30%" }
-              : { display: "none", width: "30%" }
-          }
-        >
-          <SearchBar
-            handler={SearchHandler}
-            products={currentGuitars}
-            Search={Search}
-          />
-        </div>
-        <button onClick={handleClick}>
-          <AiOutlineSearch />
-        </button>
-      </Search>
-      <ContainerDiv>
-        <Filter />
-        <CardsCont>
-          {currentGuitars?.map((item) => (
-            <DivCont key={item.id}>
-              <img src={item.img} alt="" />
-              <div className="text-cont">
-                <h2>{item.brand}</h2>
-                <h3>{item.model}</h3>
-                <p>$ {item.price}</p>
-                {item.quantity ? (
-                  <p>
-                    <b>Quantity: </b>
-                    {item.quantity}.
-                  </p>
-                ) : null}
-                <Link to={`/home/${item.id}`}>
-                  <FaGuitar /> Show Details
-                </Link>
-                <button className="cartbtn" onClick={() => dispatch(getProductToCart(item))}>
-                  <BsCart2 /> Add Cart
-                </button>
-              </div>
-            </DivCont>
-          ))}
-        </CardsCont>
-      </ContainerDiv>
-      <Pagination
-        handleChange={handlePageChange}
-        totalCards={products.length}
-        currentPage={currentPage}
-        guitarsPerPage={guitarsPerPage}
-      />
-    </main>
-  );
-};
-
-const Search = styled.div`
-  padding: 14px 16px;
-  display: flex;
-  justify-content: center;
-  button {
-    background-color: transparent;
-    border: none;
-    font-size: 30px;
-  }
-`;
-const DivCont = styled.div`
-  width: 350px;
-  height: 350px;
-  border: 1px solid gray;
-  background-color: white;
-  margin-right: 10px;
-  margin-top: 30px;
-  text-align: center;
-  border-radius: 5px;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  a {
-    text-decoration: none;
-    color: blue;
-  }
-  h2,
-  h3 {
-    font-weight: 400;
-    margin-top: 10px;
-    margin-bottom: 10px;
-    margin-left: 15px;
-    text-align: left;
-  }
-  p {
-    margin-left: 15px;
-    text-align: left;
-  }
-  img {
-    min-width: 100px;
-    width: 200px;
-    height: auto;
-    max-height: 300px;
-    object-fit: contain;
-  }
-  button {
-    background: none;
-    border: 1px solid black;
-    padding: 10px 7px;
-    margin-top: 7px;
-    border-radius: 10px;
-    width: 85%;
-    cursor: pointer;
-  }
-  .cartbtn {
-    background-color: rgb(41, 73, 143);
-    color: whitesmoke;
-    font-weight: 600;
-    transition: 0.3s ease-out;
-  }
-  .cartbtn:hover {
-    background-color: whitesmoke;
-    color: rgb(41, 73, 143);
-  }
-`;
 const CardsCont = styled.div`
-  width: 70%;
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  margin-right: 25px;
-`;
+	width: 70%;
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	margin-right: 25px;
+`
 
 const ContainerDiv = styled.div`
-  width: 100%;
-  display: flex;
-  flex-direction: row;
-`;
+	width: 100%;
+	display: flex;
+	flex-direction: row;
+`
 
-export default Home;
+export default Home

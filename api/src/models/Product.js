@@ -30,7 +30,7 @@ module.exports = (sequelize) => {
 				type: DataTypes.INTEGER,
 				defaultValue: 0,
 			},
-			
+
 			type: DataTypes.STRING,
             leftHand: {
                 type: DataTypes.BOOLEAN,
