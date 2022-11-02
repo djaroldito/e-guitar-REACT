@@ -110,6 +110,7 @@
 
 
 .ImgContainarrrrr {
+    position: relative;
     border: 1px solid rgb(223, 218, 218); 
     height: 12em;
     width: 23em;
@@ -121,6 +122,8 @@
     width: 90%;
     margin-left: auto;
     margin-right: auto;
+    margin-bottom: 220px;
+    background-color: yellow;
 }
 
 .prdButtonImage {
@@ -131,8 +134,7 @@
     background-color: white; 
     border: none;
     cursor: pointer;
-    margin-left: 7em;/* 
-    margin-top: 1em; */
+    margin-left: 7em;
     box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
 }
 
@@ -147,6 +149,7 @@
     align-items: center;
     margin-left: auto;
     margin-right: auto;
+    margin-bottom: 8em;
     background-color: pink;
 }
 

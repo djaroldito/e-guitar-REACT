@@ -1,6 +1,6 @@
 #signupContainer {
     display: flex;
-    margin-top: 20px; 
+    margin-top: 2em; 
     flex-direction: column;
     top: 50%;
     position: absolute;
@@ -8,7 +8,7 @@
     transform: translate(-50%, -50%);
     z-index: 1;
     width: 400px;
-    height: 550px;
+    height: 600px;
     border-radius: 10px;
     overflow: hidden;
     background-color: white;
@@ -17,11 +17,18 @@
 
 /* h2 ---------------------------------------------------------------------------- */
 #signupContainer h2 {
+    display: flex;
+    align-items:flex-end;
     height: 50px;
     margin-left: 80px;
-    margin-top: 60px;
+/*     margin-top: 1em; */
     margin-bottom: 0;
     font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif   
+}
+
+.signupGg p {
+    text-align: center;
+    margin-top: 15px;
 }
 
 /* Form ---------------------------------------------------------------------------  */
@@ -32,7 +39,8 @@
 .signupForm fieldset {
     border: none;
     position: relative;
-    margin-top: 15px;
+    margin-top: 20px;
+    height: 2em;
 }
 
 .signupForm input {
@@ -59,7 +67,7 @@
     text-decoration: none;
     margin-left: auto;
     margin-right: auto;
-    margin-top: 30px;
+    margin-top: 3em;
     border: none;
     border-radius: 5px;
     position: relative;
@@ -68,3 +76,30 @@
     font-weight: bold;
     font-size: 15px;
   }
+
+.signupBtn:hover{
+    background: rgb(121, 216, 121);
+}
+
+.loginGgIc {
+    color: white;
+    position: absolute;
+    margin-top: 10px;
+    margin-left: 90px;
+    z-index: 2;
+}
+
+.supEM {
+    margin: 0;
+    color: rgba(255, 0, 0, 0.466);
+    position: relative;
+    z-index: 2;
+    text-align:left;
+    font-size: 14px;
+    left: 4em;
+    padding-left: 10px;
+    width: 20em;
+    height: 2em;
+    display: flex;
+    align-items: center;
+}

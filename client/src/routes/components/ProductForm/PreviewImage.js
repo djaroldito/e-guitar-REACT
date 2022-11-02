@@ -19,7 +19,6 @@ export const PreviewImage = ({ file, handleDelete }) => {
 
 	return (
 		<div className="prdImg">
-			{preview ?? (
 				<>
 					<img
 						src={preview}
@@ -35,7 +34,7 @@ export const PreviewImage = ({ file, handleDelete }) => {
 						style={{ position: "absolute", zIndex: "1", cursor: "pointer" }}
 						onClick={handleDelete}
 					/>
-				</>)}
+				</>)
 		</div>
 	)
 }
