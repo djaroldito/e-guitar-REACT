@@ -9,6 +9,7 @@ import Signup from './routes/Signup/Signup';
 import Login from './routes/Signup/Login';
 
 import ProductForm from './routes/components/ProductForm/ProductForm'
+import Footer from './routes/components/footer';
 
 
 function App() {
@@ -25,6 +26,7 @@ function App() {
     <Route path="/newProduct" element={<ProductForm />} />
     <Route path="/editProduct/:id" element={<ProductForm />} />
    </Routes>
+   <Footer/>
    </>
   );
 }
