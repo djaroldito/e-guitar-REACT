@@ -10,12 +10,6 @@ export const productSlice = createSlice({
         brands: [],
         colors: [],
         types: [],
-        filter: [],
-        Filters:{
-            color: '',
-            type: '',
-            brand: ''
-          },
     },
     reducers:{
         
@@ -86,9 +80,6 @@ export const productSlice = createSlice({
         getByFilters: (state, action)=>{
             state.products = action.payload
         },
-        setFilters: (state, action)=>{
-            state.Filters = action.payload
-        }
 
        
 
@@ -111,7 +102,6 @@ export const { getAllProducts,
                getByFilters,
                delAllProductToCart,
                getCart,
-               setFilters,
                clearDetail } = productSlice.actions;
 
 export default productSlice.reducer;

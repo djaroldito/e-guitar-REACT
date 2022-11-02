@@ -8,7 +8,6 @@ import {
   getTypes,
   getColors,
   getBrands,
-  getByFilter,
 } from "./../Redux/productActions";
 import { AiOutlineSearch } from "react-icons/ai";
 import SearchBar from "./components/searchbar";
@@ -19,7 +18,6 @@ const Home = () => {
   const dispatch = useDispatch();
   const products = useSelector((state) => state.products.products);
 
-
   useEffect(() => {
     if (products.length === 0) {
       dispatch(getAllPrds());
@@ -27,8 +25,7 @@ const Home = () => {
       dispatch(getColors());
       dispatch(getBrands());
     }
-   
-  }, [dispatch, products]);
+  }, []);
 
   const [currentPage, setCurrentPage] = useState(1);
   const guitarsPerPage = 4;
