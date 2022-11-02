@@ -11,7 +11,9 @@
     display: flex;
     border:1px solid gray;
     border-radius: 5px;
+    align-items: center;
 }
+
 
 
 .InputCartContainer input{
