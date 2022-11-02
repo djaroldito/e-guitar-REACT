@@ -1,6 +1,6 @@
 import styled from "styled-components"
 import { useDispatch, useSelector } from "react-redux"
-import { useEffect, useState } from "react"
+import { useEffect } from "react"
 import Pagination from "./components/Pagination/Pagination"
 import ProductCard from "./components/ProductCard/ProductCard"
 import {
@@ -9,13 +9,11 @@ import {
   getColors,
   getBrands,
 } from "./../Redux/productActions";
-import { AiOutlineSearch } from "react-icons/ai";
 import SearchBar from "./components/searchbar";
 import Filter from "./components/filters";
 import { setCurrentPage } from './../Redux/productSlice'
 
 const Home = () => {
-	const [isActive, setIsActive] = useState(false)
 	const dispatch = useDispatch()
 	const products = useSelector((state) => state.products.products)
 	const {currentPage, pageCount} = useSelector((state) => state.products)
@@ -36,10 +34,6 @@ const Home = () => {
 		dispatch(setCurrentPage(pageNumber))
 	}
 
-	const handleClick = () => {
-		setIsActive((current) => !current)
-	}
-
 	const constructorCart = () => {
 		if (!localStorage.getItem("carrito")) {
 			localStorage.setItem("carrito", "[]")
@@ -50,20 +44,7 @@ const Home = () => {
 
 	return (
 		<main>
-			<Search>
-				<div
-					style={
-						isActive
-							? { display: "block", width: "30%" }
-							: { display: "none", width: "30%" }
-					}
-				>
-					<SearchBar />
-				</div>
-				<button onClick={handleClick}>
-					<AiOutlineSearch />
-				</button>
-			</Search>
+			<SearchBar />
 			<ContainerDiv>
 				<Filter />
 				<CardsCont>
@@ -81,17 +62,6 @@ const Home = () => {
 		</main>
 	)
 }
-
-const Search = styled.div`
-	padding: 14px 16px;
-	display: flex;
-	justify-content: center;
-	button {
-		background-color: transparent;
-		border: none;
-		font-size: 30px;
-	}
-`
 
 const CardsCont = styled.div`
 	width: 70%;
