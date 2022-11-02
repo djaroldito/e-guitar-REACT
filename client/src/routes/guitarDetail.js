@@ -1,8 +1,8 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams, useNavigate, Link } from "react-router-dom";
-import { getById } from "../Redux/productActions";
+import {  getById } from "../Redux/productActions";
 import { clearDetail, getProductToCart } from "../Redux/productSlice";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Pagination } from "swiper";
@@ -25,6 +25,7 @@ const GuitarDetail = () => {
       dispatch(clearDetail());
     };
   }, [dispatch, id]);
+ 
 
   const detail = useSelector((state) => state.products.detail);
   const carrito = useSelector(state => state.products.cart)
@@ -64,7 +65,7 @@ const GuitarDetail = () => {
 
   return (
     <section>
-      <CountDiv>
+      <CountDiv className="shadow-xl">
         {detail.img?.split(",").length === 1 ? (
           <div className="imgcont">
             <img src={detail.img} alt="" />
@@ -73,7 +74,7 @@ const GuitarDetail = () => {
           <Swiper pagination={true} modules={[Pagination]} className="mySwiper">
             {detail.img?.split(",").map((item, pos) => (
               <SwiperSlide key={pos}>
-                <div className="imgcont">
+                <div className="imgcont" key={pos}>
                   <img src={item} alt="" />
                 </div>
               </SwiperSlide>
@@ -90,8 +91,8 @@ const GuitarDetail = () => {
           <form>
             <ColorDiv>
               Colors:
-              {detail.color?.split(",").map((item) => (
-                <div className="color-div">
+              {detail.color?.split(",").map((item, pos) => (
+                <div className="color-div" key={pos}>
                   <input name="color" type="radio" value={item} />
                   <label htmlFor={item}>{item}</label>
                 </div>
@@ -147,7 +148,7 @@ const CountDiv = styled.div`
   flex-direction: row;
   margin-top: 75px;
   background-color: white;
-  border: 1px solid rgb(40, 40, 40);
+  /* border: 1px solid rgb(40, 40, 40); */
   border-radius: 10px;
   .imgcont {
     display: flex;
