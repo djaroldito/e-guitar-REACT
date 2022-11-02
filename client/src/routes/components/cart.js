@@ -46,12 +46,12 @@ const Cart = () =>{
     confirmButtonText: 'Yes, delete it!'
   }).then((result) => {
     if (result.isConfirmed) {
+      dispatch(clearCart())
       Swal.fire(
         'Deleted!',
-        dispatch(clearCart())
         )
     }
-  })
+     })
 
 }
 const preguntaUno = (item)=>{
@@ -65,9 +65,9 @@ const preguntaUno = (item)=>{
    confirmButtonText: 'Yes, delete it!'
  }).then((result) => {
    if (result.isConfirmed) {
+    dispatch(delOneFromCart(item))
      Swal.fire(
-       'Deleted!',
-       dispatch(delOneFromCart(item))
+       'Deleted!',      
        )
    }
  })
