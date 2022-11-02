@@ -20,6 +20,7 @@ export const getAllPrds = () => (dispatch) => {
 		.catch((error) => console.log(error))
 }
 
+
 export const getById = (id) => (dispatch) => {
 	axios(`http://localhost:3001/rguitars/${id}`)
 		.then((res) => dispatch(getProductById(res.data)))
@@ -86,6 +87,14 @@ export const editProductForm = async (formData) => {
 		return productUpdated
 	} catch (error) {
 		console.error("editProductForm:", error.message)
+		return { error: error.response ? error.response.data : error.message }
+	}
+}
+export const payment = async (cart) => {
+	try{
+		const {data: link} = await axios.post(`http://localhost:3001/payments/create-order`, cart)
+		return link;
+	} catch (error) {
 		return { error: error.response ? error.response.data : error.message }
 	}
 }

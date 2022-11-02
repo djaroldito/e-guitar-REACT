@@ -4,15 +4,15 @@ import { useEffect, useState } from "react"
 import Pagination from "./components/Pagination/Pagination"
 import ProductCard from "./components/ProductCard/ProductCard"
 import {
-	getAllPrds,
-	getTypes,
-	getColors,
-	getBrands,
-} from "./../Redux/productActions"
-import { setCurrentPage } from './../Redux/productSlice'
-import { AiOutlineSearch } from "react-icons/ai"
-import SearchBar from "./components/searchbar"
-import Filter from "./components/filters"
+  getAllPrds,
+  getTypes,
+  getColors,
+  getBrands,
+  getByFilter,
+} from "./../Redux/productActions";
+import { AiOutlineSearch } from "react-icons/ai";
+import SearchBar from "./components/searchbar";
+import Filter from "./components/filters";
 
 const Home = () => {
 	const [isActive, setIsActive] = useState(false)
@@ -20,14 +20,16 @@ const Home = () => {
 	const products = useSelector((state) => state.products.products)
 	const {currentPage, pageCount} = useSelector((state) => state.products)
 
-	useEffect(() => {
-		if (products.length === 0) {
-			dispatch(getAllPrds())
-			dispatch(getTypes())
-			dispatch(getColors())
-			dispatch(getBrands())
-		}
-	}, []) // eslint-disable-line
+
+  useEffect(() => {
+    if (products.length === 0) {
+      dispatch(getAllPrds());
+      dispatch(getTypes());
+      dispatch(getColors());
+      dispatch(getBrands());
+    }
+
+  }, [dispatch, products]);
 
 	/// PAGINATION
 	const handlePageChange = (pageNumber) => {

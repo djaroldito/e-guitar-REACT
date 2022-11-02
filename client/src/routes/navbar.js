@@ -14,7 +14,9 @@ const NavBar = () => {
   const path = window.location.pathname;
   const { isAuthenticated } = useAuth0();
   const handleLog = () => {
-    localStorage.clear();
+    localStorage.removeItem('emailData');
+    localStorage.removeItem('isAdmin')
+    localStorage.removeItem('passwordData')
     window.location.reload();
   };
   const email = localStorage.getItem("emailData");
@@ -25,7 +27,7 @@ const NavBar = () => {
       <NavCont>
         <NavLink to="/home">Home</NavLink>
         <NavLink to="/">discount</NavLink>
-        {isAdmin && <NavLink to="/newProduct">Add Product</NavLink>}
+        {isAdmin === "true" ? <NavLink to="/newProduct">Add Product</NavLink> : null}
 
         <IconCont className={""}>
           {!isAuthenticated && !email ? (
