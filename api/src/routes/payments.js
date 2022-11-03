@@ -55,7 +55,7 @@ router.post('/create-order', async (req, res) => {
         res.send(response.data.links[1].href);
     }
     catch (error){
-        res.status(500).send('Something Went Wrong');
+        res.status(500).send(error);
     }
 });
 
