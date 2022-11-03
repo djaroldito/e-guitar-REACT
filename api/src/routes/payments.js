@@ -13,7 +13,7 @@ router.post('/create-order', async (req, res) => {
                     amount:{
                         currency_code: "USD",
                         value: `${(product.price * product.quantity).toFixed(2)}`
-                    }
+                    },
                   
                 }
             )
