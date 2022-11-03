@@ -6,7 +6,14 @@ import { FaShieldAlt } from "react-icons/fa"
 import styled from "styled-components"
 import "./LandingPage.css"
 
+import React from "react"
+
+
+
+
 const LandingPage = () => {
+	
+	
 	return (
 		<div>
 			<video autoPlay loop muted className='LandingBg'>

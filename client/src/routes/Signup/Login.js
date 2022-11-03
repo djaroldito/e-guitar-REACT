@@ -1,16 +1,33 @@
-import React, { useRef, useState  } from "react";
+import React, { useEffect, useRef, useState  } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import "./Styles/Login.css";
 import { AiOutlineEye, AiOutlineEyeInvisible, AiOutlineUser, AiOutlineGoogle } from "react-icons/ai"
 import axios from "axios";
 import Swal from "sweetalert2";
 import Home from "../home";
-import { useAuth0 } from "@auth0/auth0-react";
+import {LoginButton} from "./LoginButton";
+import {gapi} from 'gapi-script'
+
 
 // !psw => mail con un link hacia un nuevo formulario para resetear contraseña => se borra la psw anterior, se crea una nueva y se guarda en la
 // !psw => 
+let client = "1071381556347-p8k8tg37ss2e9ag86088tvdds19dot5o.apps.googleusercontent.com"
 
 export default function Login() {
+
+
+  useEffect(()=>{
+    function start(){
+      gapi.client.init({
+        clientId:client,
+        scope:""
+      })
+    }
+    gapi.load('client:auth2', start)
+  })
+
+
+
   const navigate = useNavigate()
   const email = useRef();
   const password = useRef();
@@ -19,12 +36,8 @@ export default function Login() {
   const getPassword = localStorage.getItem("passwordData");
 
   const [showPsw, setShowPsw] = useState(false);
-  const { loginWithRedirect, user, isAuthenticated } = useAuth0();
-
-  if (isAuthenticated) {
-    localStorage.setItem("userData", user);
-  }
-
+  
+  
   const handleSignIn = async (e) => {
     e.preventDefault();
     try {
@@ -53,6 +66,8 @@ export default function Login() {
       }));
     }
   };
+
+
 
   return (
     <div>
@@ -86,12 +101,9 @@ export default function Login() {
             <div>
                     <AiOutlineGoogle size={30} className='signinGgIc'/> 
                 </div>
-            <button
-              className="loginBtn google"
-              onClick={() => loginWithRedirect()}
-            >
-              Log in with Google
-            </button>
+                <LoginButton/>
+            
+            
             <div className="loginAcc">
               <p>No tienes una cuenta?</p>
             </div>
