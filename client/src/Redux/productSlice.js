@@ -1,4 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit"
+//borrar
 
 export const productSlice = createSlice({
 	name: "products",
