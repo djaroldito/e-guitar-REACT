@@ -12,39 +12,25 @@ const path = require("path")
 // 	}
 // )
 
-const { PGUSER, PGPASSWORD, PGHOST, PGPORT,PGDATABASE } = process.env;
+const { DB_USER, DB_PASSWORD, DB_HOST,DB_NAME } = process.env;
 
-let sequelize = 
-// process.env.NODE_ENV === 'production'
-//     ? 
-	// new Sequelize({
-    //     database: PGDATABASE, 
-    //     dialect: 'postgres',
-    //     host: PGHOST,
-    //     port: PGPORT,
-    //     username: PGUSER,
-    //     password: PGPASSWORD,
-    //         pool: {
-    //         max: 3,
-    //         min: 1,
-    //         idle: 10000,
-    //     },
-    //     dialectOptions: {
-    //         ssl: {
-    //             require: true,
-    //             rejectUnauthorized: false,
-    //         },
-    //         keepAlive: true,
-    //     },
-    //     ssl: true,
-    // })
+let sequelize =  process.env.NODE_ENV === 'production'
+     ? 
+	 
 	new Sequelize(
 		`postgresql://postgres:Hb9YRGAgNZfk9Ts4si0O@containers-us-west-108.railway.app:7266/railway`,
 		{
 			logging: false, // set to console.log to see the raw SQL queries
 			native: false, // lets Sequelize know we can use pg-native for ~30% more speed
 		}
-	)
+	):
+	 new Sequelize(
+		  `postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/${DB_NAME}`,
+			{
+				logging: false, // set to console.log to see the raw SQL queries
+				native: false, // lets Sequelize know we can use pg-native for ~30% more speed
+			}
+		)
 
 
 
