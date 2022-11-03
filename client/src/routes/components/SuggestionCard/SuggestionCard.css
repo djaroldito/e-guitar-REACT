@@ -1,0 +1,48 @@
+.SCard{
+    width: 100%;
+    height: 10vw;
+    background-color: white;
+    border: 1px solid gray;
+    display:flex;
+    flex-direction: column;
+    align-content: flex-end;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    align-items: flex-end;
+    color:black;
+}
+.SCard:hover{
+    background-color: rgb(178, 178, 178);
+    
+}
+.SCard:hover img{
+    filter: invert(30%);
+    
+}
+
+.SContainer{
+    width: 28.5%;
+    position: absolute;
+    z-index: 3;
+
+}
+
+.Link{
+    text-decoration: none;
+}
+
+
+.ImgContainer{
+    max-height: 100%;
+    max-width: 30%;
+
+    overflow: hidden;
+    z-index: 1;
+}
+
+
+
+
+
+
+

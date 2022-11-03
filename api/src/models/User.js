@@ -3,19 +3,32 @@ module.exports = (sequelize) => {
 	sequelize.define(
 		"user",
 		{
-			username: DataTypes.STRING,
 			fullname: DataTypes.STRING,
+			avatar: DataTypes.STRING,
+			address: DataTypes.STRING,
+			province: DataTypes.STRING,
+			city: DataTypes.STRING,
+			zipcode: DataTypes.STRING,
+			phone: DataTypes.STRING,
 			email: {
-                type: DataTypes.STRING,
-                unique: 'userEmailIndex',
-                validate: {
-                    isEmail: true,
-                }
+				type: DataTypes.STRING,
+				allowNull: false,
+				unique: "emailIndex",
+				validate: {
+					isEmail: true,
+				},
 			},
 			password: {
-                type: DataTypes.STRING,
-                allowNull:false
-			}
+				type: DataTypes.STRING,
+				allowNull: false,
+			},
+			isAdmin: {
+				type: DataTypes.BOOLEAN,
+				defaultValue: false,
+			},
+		},
+		{
+			paranoid: true,
 		}
 	)
 }

@@ -6,41 +6,81 @@ const router = Router()
 
 const sequelize = require("sequelize")
 const { Product } = require("../db.js")
+const { where } = require("sequelize")
 
 //  GET /rguitars
 //  GET /rguitars?brand="..." &type="..." &color="..."
+// Pagination: limit=4 (items per page), page=1 (currentPage)
 router.get("/", async (req, res) => {
 	try {
-		const { brand, type, color } = req.query
+		const { brand, type, color, fullName, page=1, size=4 } = req.query
 
 		// if no product load form json
 		await loadProductData()
 
+		const whereQuery = {}
 		// check if there are filter parameters
-		if (brand || type || color) {
-			const whereQuery = {}
+		if (brand || type || color || fullName) {
+			const op = sequelize.Op
 			// ilike trabaja entre mayusculas y minusculas y de cierta forma te acelera los procesos
-			if (brand) whereQuery.brand = { [sequelize.Op.iLike]: `%${brand}%` }
-			if (type) whereQuery.type = { [sequelize.Op.iLike]: `%${type}%` }
-            if (color) whereQuery.color = { [sequelize.Op.iLike]: `%${color}%` }
-            
-			const guitar = await Product.findAll({
-				where: whereQuery,
-			})
-			// if found send guitar, else NOT FOUND
-			guitar.length
-				? res.status(200).send(guitar)
-				: res.status(404).send("NOT FOUND")
-		} else {
-			// return all guitars
-			let allGuitars = await Product.findAll()
-			res.status(200).json(allGuitars)
+			if (brand) whereQuery.brand = { [op.iLike]: `%${brand}%` }
+			if (type) whereQuery.type = { [op.iLike]: `%${type}%` }
+			if (color) whereQuery.color = { [op.iLike]: `%${color}%` }
+			if (fullName) {
+				whereQuery[op.or] = {
+					namesQuery: sequelize.where(
+						sequelize.fn(
+							"concat",
+							sequelize.col("brand"),
+							" ",
+							sequelize.col("model")
+						),
+						{
+							[op.iLike]: `%${fullName}%`,
+						}
+					),
+				}
+			}
 		}
+
+        // get values for query
+		const { limit, offset } = getPagination(page, size)
+        // find data and make object for frontend
+		Product.findAndCountAll({ where: whereQuery, limit, offset })
+			.then((data) => {
+                const response = getPagingData(data, page, limit)
+				res.send(response)
+			})
+			.catch((err) => {
+				res.status(500).send({
+					message:
+						err.message || "Some error occurred.",
+				})
+            })
+
 	} catch (error) {
 		console.error(error.message)
 		res.status(400).send(error.message)
 	}
 })
+
+
+const getPagination = (page, size) => {
+    let nPage = page-1
+	const limit = size ? +size : 4
+	const offset = nPage ? nPage * limit : 0
+
+	return { limit, offset }
+}
+const getPagingData = (data, page, limit) => {
+	const { count: totalItems, rows: products } = data
+	const currentPage = page ? +page : 1
+	const pageCount = Math.ceil(totalItems / limit)
+
+	return { products, pageCount, currentPage, totalItems }
+}
+
+
 
 // GET /rguitars/{idGuitar}
 router.get("/:idGuitar", async (req, res) => {
@@ -70,6 +110,7 @@ router.get("/:idGuitar", async (req, res) => {
 
 // POST /rguitars
 router.post("/", async (req, res) => {
+	//res.sendStatus(200)
 	const {
 		brand,
 		model,
@@ -95,13 +136,10 @@ router.post("/", async (req, res) => {
 			price &&
 			strings &&
 			description &&
-			stock &&
-			discount &&
-			type &&
-			leftHand &&
-			aditionalInformation
+			type
 		) {
 			const newGuitar = await Product.create({
+				fullname: brand + " " + model,
 				brand,
 				model,
 				img,
@@ -151,13 +189,13 @@ router.put("/:idGuitar", async (req, res) => {
 			!price ||
 			!strings ||
 			!description ||
-			!stock ||
 			!type
 		) {
 			res.status(400).send("Faltan parametros")
 		} else {
 			await Product.update(
 				{
+					fullName: brand + " " + model,
 					brand,
 					model,
 					img,
@@ -218,9 +256,10 @@ const loadProductData = async () => {
 				return {
 					brand: guitar.brand,
 					model: guitar.model,
+					fullName: guitar.fullName[0] + " " + guitar.fullName[1],
 					img: guitar.img.join(","),
 					color: guitar.color.join(","),
-					price: guitar.price,
+					price: guitar.price.toFixed(2),
 					strings: guitar.strings,
 					description: guitar.description,
 					stock: guitar.stock,
