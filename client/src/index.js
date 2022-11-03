@@ -7,6 +7,7 @@ import { Provider } from "react-redux";
 import store from "./Redux/store";
 import { Auth0Provider } from "@auth0/auth0-react";
 
+
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <Provider store={store}>
@@ -14,7 +15,7 @@ root.render(
       <Auth0Provider
         domain="dev-q3lf6u3rsoxtojfo.us.auth0.com"
         clientId="BRUwphkRYg0pwKaLw89cMDoMM9cAXZZT"
-        redirectUri={window.location.origin}
+        redirectUri="http://localhost:3000/home"
         
       >
         <App />
