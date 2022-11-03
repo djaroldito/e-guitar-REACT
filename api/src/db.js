@@ -12,7 +12,7 @@ const path = require("path")
 // 	}
 // )
 
-const { DB_USER, DB_PASSWORD, DB_HOST, DB_NAME } = process.env;
+const { PGUSER, PGPASSWORD, PGHOST, PGPORT,PGDATABASE } = process.env;
 
 let sequelize = 
 // process.env.NODE_ENV === 'production'
