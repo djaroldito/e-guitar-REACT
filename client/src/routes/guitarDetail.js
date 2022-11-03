@@ -45,7 +45,7 @@ const GuitarDetail = () => {
 		}).then((result) => {
 			if (result.isConfirmed) {
 				axios
-					.delete(`http://localhost:3001/rguitars/${id}`)
+					.delete(`/rguitars/${id}`)
 					.then((res) => {
 						if (res.status === 200) {
 							Swal.fire(

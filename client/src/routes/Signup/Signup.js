@@ -46,7 +46,7 @@ export default function Signup() {
     e.preventDefault();
 
     // Corroborar que no exista ese mail registrado ------------------------------------------
-    const { data } = await axios.get("http://localhost:3001/ruser/email", {
+    const { data } = await axios.get("/ruser/email", {
       params: {
         email: email.current.value
       }})

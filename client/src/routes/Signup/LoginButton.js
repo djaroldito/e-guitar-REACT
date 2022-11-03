@@ -7,7 +7,7 @@ export const LoginButton = () => {
   const dispatch = useDispatch();
 
   const onSuccess = async (res) => {
-    const { data } = await axios.get("http://localhost:3001/ruser/email", {
+    const { data } = await axios.get("/ruser/email", {
       params: {
         email: res.profileObj.email,
       },
