@@ -4,6 +4,7 @@ const path = require("path")
 const { Router } = require("express")
 const router = Router()
 
+
 const sequelize = require("sequelize")
 const { Product } = require("../db.js")
 const { where } = require("sequelize")
@@ -249,7 +250,7 @@ const loadProductData = async () => {
 		if (bdGuitar.length === 0) {
 			// read from guitarJson and bulk to database
 			const guitarJson = fs.readFileSync(
-				path.join(__dirname, "../../../guitar.json")
+				path.join(__dirname, '../../guitar.json')
 			)
 			const guitars = JSON.parse(guitarJson)
 			const products = guitars.map((guitar) => {
