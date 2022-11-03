@@ -45,7 +45,7 @@ const GuitarDetail = () => {
 		}).then((result) => {
 			if (result.isConfirmed) {
 				axios
-					.delete(`http://localhost:3001/rguitars/${id}`)
+					.delete(`/rguitars/${id}`)
 					.then((res) => {
 						if (res.status === 200) {
 							Swal.fire(
@@ -101,7 +101,7 @@ const GuitarDetail = () => {
 							))}
 						</ColorDiv>
 					</form>
-					{localStorage.getItem("isAdmin") ? (
+					{localStorage.getItem("isAdmin") === "true" ? (
 						<CustomButtons>
 							<button
 								type='button'
