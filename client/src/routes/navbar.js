@@ -27,7 +27,8 @@ const NavBar = () => {
       <NavCont>
         <NavLink to="/home">Home</NavLink>
         <NavLink to="/">discount</NavLink>
-        {isAdmin === "true" ? <NavLink to="/newProduct">Add Product</NavLink> : null}
+        <NavLink to="/dashboard">dashboard</NavLink>
+        {/* {isAdmin === "true" ? <NavLink to="/newProduct">Add Product</NavLink> : null} */}
 
         <IconCont className={""}>
           {!isAuthenticated && !email ? (

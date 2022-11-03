@@ -7,7 +7,7 @@ import { fetchAllProducts } from "../../../Redux/dashboardSlice"
 export default function ProductList() {
     const dispatch = useDispatch()
     const productList = useSelector( state => state.dashboard.productList)
-
+console.log('list')
     useEffect(() => {
         dispatch(fetchAllProducts())
     }, [dispatch]);
@@ -24,7 +24,7 @@ export default function ProductList() {
                   </tr>
           </thead>
           <tbody>
-              {productList.map(p => {
+              {productList?.map(p => {
                   return (
                       <tr key={p.id}>
                           <td >{ p.brand}</td>

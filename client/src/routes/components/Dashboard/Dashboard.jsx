@@ -1,10 +1,10 @@
 import React from "react"
-import NavBar from "./NavBar"
+import NavBar from "./AdminNavBar"
 import ProductList from "./ProductList"
 
 export default function Dashboard() {
-    // verificar logueo para renderizar login
-	return (
+
+    return (
 		<>
 			<NavBar />
 			<h3>Dashboard</h3>

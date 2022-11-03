@@ -36,7 +36,7 @@ export const fetchAllProducts = () => {
 	return async (dispatch) => {
 		try {
 			const { data } = await axios.get("http://localhost:3001/rguitars")
-			dispatch(setAllProducts(data))
+			dispatch(setAllProducts(data.product))
 		} catch (error) {
 			console.error("fetchAllProducts:", error.message)
 		}
