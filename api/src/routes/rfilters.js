@@ -20,6 +20,7 @@ router.get('/brands',async (req, res) => {
     }
 
 })
+//
 
 
 router.get('/types', async (req, res) => {
