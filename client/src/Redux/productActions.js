@@ -8,6 +8,7 @@ import {
 	getAllTypes,
 	setCurrentPage,
 	setPageCount,
+	fiterError
 } from "./productSlice"
 
 export const getAllPrds = () => (dispatch) => {
@@ -63,7 +64,7 @@ export const getByFilter = (filter, currentPage) => (dispatch) => {
             dispatch(setCurrentPage(res.data.currentPage))
 			dispatch(setPageCount(res.data.pageCount))
 		})
-		.catch((err) => console.log(err))
+		.catch(err => console.log(err))
 }
 
 export const postProductForm = async (formData) => {

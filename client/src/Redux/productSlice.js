@@ -94,6 +94,9 @@ export const productSlice = createSlice({
         setPageCount(state, action) {
             state.pageCount = action.payload
 		},
+		fiterError: (state, action) =>{
+			state.products = action.payload
+		}
 	},
 })
 
@@ -118,6 +121,7 @@ export const {
     clearDetail,
     setCurrentPage,
     setPageCount,
+	fiterError,
 } = productSlice.actions
 
 export default productSlice.reducer

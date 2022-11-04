@@ -13,6 +13,7 @@ import SearchBar from "./components/searchbar";
 import Filter from "./components/filters";
 import { setCurrentPage } from './../Redux/productSlice'
 import { useAuth0 } from "@auth0/auth0-react"
+import NoFound from "./components/nofound"
 
 const Home = () => {
 	const dispatch = useDispatch()
@@ -55,11 +56,11 @@ const Home = () => {
 			<SearchBar />
 			<ContainerDiv>
 				<Filter />
-				<CardsCont>
+				{products !== 'no found'?<CardsCont>
 					{products?.map((item) => (
 						<ProductCard key={item.id} item={item} />
 					))}
-				</CardsCont>
+				</CardsCont>: <NoFound/>}
 			</ContainerDiv>
 			<Pagination
 				handleChange={handlePageChange}
