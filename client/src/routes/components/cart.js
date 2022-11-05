@@ -16,13 +16,13 @@ const Cart = () =>{
 
    const dispatch = useDispatch()
 
-   useEffect(() => {
+  //  useEffect(() => {
    
-    if (!localStorage.getItem('carrito')){
-      localStorage.setItem('carrito','[]')
-  }
+  //   if (!localStorage.getItem('carrito')){
+  //     localStorage.setItem('carrito','[]')
+  // }
     
-  }, []);
+  // }, []);
 
   //  const constructorCart = ()=>{
   //   if (!localStorage.getItem('carrito')){

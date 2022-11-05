@@ -41,7 +41,7 @@ export default function Login() {
   const handleSignIn = async (e) => {
     e.preventDefault();
     try {
-      const { data } = await axios.get("http://localhost:3001/ruser/login", {
+      const { data } = await axios.get("/ruser/login", {
         params: {
           email: email.current.value,
           password: password.current.value,
