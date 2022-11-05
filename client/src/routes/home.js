@@ -56,17 +56,17 @@ const Home = () => {
 			<SearchBar />
 			<ContainerDiv>
 				<Filter />
-				{products !== 'no found'?<CardsCont>
+				 <CardsCont>
 					{products?.map((item) => (
 						<ProductCard key={item.id} item={item} />
 					))}
-				</CardsCont>: <NoFound/>}
+				{/* <NoFound/> */}
+				</CardsCont>
 			</ContainerDiv>
 			<Pagination
 				handleChange={handlePageChange}
 				pagesCount={pageCount}
 				currentPage={currentPage}
-				//guitarsPerPage={guitarsPerPage}
 			/>
 		</main>
 	)
@@ -78,6 +78,8 @@ const CardsCont = styled.div`
 	flex-direction: row;
 	flex-wrap: wrap;
 	margin-right: 25px;
+	margin-bottom: 25px;
+	min-height: 725px;
 `
 
 const ContainerDiv = styled.div`

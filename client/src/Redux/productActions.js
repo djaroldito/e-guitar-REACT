@@ -54,17 +54,17 @@ export const getTypes = () => (dispatch) => {
 }
 
 export const getByFilter = (filter, currentPage) => (dispatch) => {
-    const { color, brand, type, fullName } = filter
+    const { color, brand, type, fullName, minPrice, maxPrice } = filter
 
 	axios(
-		`/rguitars?color=${color}&brand=${brand}&type=${type}&fullName=${fullName}&page=${currentPage}`
+		`/rguitars?color=${color}&brand=${brand}&type=${type}&fullName=${fullName}&page=${currentPage}&minPrice${minPrice}&maxPrice${maxPrice}`
 	)
 		.then((res) => {
             dispatch(getByFilters(res.data.products))
             dispatch(setCurrentPage(res.data.currentPage))
 			dispatch(setPageCount(res.data.pageCount))
 		})
-		.catch(err => console.log(err))
+		.catch((err) => console.log(err))
 }
 
 export const postProductForm = async (formData) => {

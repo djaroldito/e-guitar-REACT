@@ -14,19 +14,22 @@ const { where } = require("sequelize")
 // Pagination: limit=4 (items per page), page=1 (currentPage)
 router.get("/", async (req, res) => {
 	try {
-		const { brand, type, color, fullName, page=1, size=4 } = req.query
-
-		// if no product load form json
+		const { brand, type, color, minPrice, maxPrice, fullName, Sort, page=1, size=4 } = req.query
 		await loadProductData()
 
 		const whereQuery = {}
+
 		// check if there are filter parameters
-		if (brand || type || color || fullName) {
+		if (brand || type || color || fullName || minPrice || maxPrice)  {
 			const op = sequelize.Op
+			console.log(op)
 			// ilike trabaja entre mayusculas y minusculas y de cierta forma te acelera los procesos
 			if (brand) whereQuery.brand = { [op.iLike]: `%${brand}%` }
 			if (type) whereQuery.type = { [op.iLike]: `%${type}%` }
 			if (color) whereQuery.color = { [op.iLike]: `%${color}%` }
+			if (minPrice && maxPrice) whereQuery.price = { [op.between]: [minPrice, maxPrice]}
+			if (Sort) Product.findAll({ order: [['price', Sort]]});
+			
 			if (fullName) {
 				whereQuery[op.or] = {
 					namesQuery: sequelize.where(
@@ -42,6 +45,7 @@ router.get("/", async (req, res) => {
 					),
 				}
 			}
+			
 		}
 
         // get values for query

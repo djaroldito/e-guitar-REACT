@@ -15,7 +15,9 @@ export const productSlice = createSlice({
             color: '',
             type: '',
             brand: '',
-            fullName: ''
+            fullName: '',
+			minPrice: 0,
+			maxPrice: 0
           },
         currentPage: 1,
         pageCount: 0,
