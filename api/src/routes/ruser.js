@@ -1,6 +1,6 @@
 const { Router } = require("express")
 const router = Router()
-const { User } = require("../db.js")
+const { User, Product } = require("../db.js")
 const bcrypt = require("bcrypt")
 const saltRounds = 10
 
@@ -18,7 +18,7 @@ router.get("/login", async (req, res) => {
 			const user = await User.findOne({
 				where: {
 					email,
-				},
+				}, include: Product
 			})
 			if (user) {
 				const match = await bcrypt.compare(password, user.password)
@@ -58,6 +58,7 @@ router.post("/register", async (req, res) => {
 	}
 })
 
+
 router.get("/email", async (req,res) => {
     try {
         const {email} = req.query;
@@ -94,6 +95,11 @@ const loadAdminUserData = async () => {
 				email: "admin@gmail.com",
 				password: hash,
 				isAdmin: true,
+			})
+			await User.create({
+				email: 'cliente@gmail.com',
+				password: hash,
+				isAdmin: false,
 			})
 		}
 	} catch (error) {

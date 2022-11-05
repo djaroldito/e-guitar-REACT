@@ -7,6 +7,7 @@ import Swal from "sweetalert2";
 import Home from "../home";
 import { useAuth0 } from "@auth0/auth0-react";
 
+
 // !psw => mail con un link hacia un nuevo formulario para resetear contraseña => se borra la psw anterior, se crea una nueva y se guarda en la
 // !psw => 
 
@@ -34,11 +35,12 @@ export default function Login() {
           password: password.current.value,
         },
       });
-
+      
       if (data) {
         localStorage.setItem("emailData", email.current.value);
-        localStorage.setItem("passwordData", password.current.value);
         localStorage.setItem("isAdmin", data.isAdmin);
+        localStorage.setItem("carrito", JSON.stringify(data.products));
+        localStorage.setItem("userId", data.id);
         navigate("/home", { state: { localStorage } });
       } 
     } catch (error) {

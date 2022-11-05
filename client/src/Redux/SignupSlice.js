@@ -9,9 +9,12 @@ export const signupSlice = createSlice({
     reducers: {
         addUser: (state, action) => {
             state.user = action.payload
+        }, 
+        getUser: (state, action) => {
+            state.user = action.payload
         }
     }
 });
 
-export const { setError, addUser } = signupSlice.actions;
+export const { setError, addUser, getUser } = signupSlice.actions;
 export default signupSlice.reducer;

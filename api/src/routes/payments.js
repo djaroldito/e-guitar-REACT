@@ -1,7 +1,9 @@
 const {Router} = require('express');
 const axios = require('axios');
+const { Order } = require("../db.js")
 const {PAYPAL_API, PAYPAL_API_SECRET, PAYPAL_API_CLIENT} = require('../paymentConfig.js');
 const router =  Router();
+
 
 
 router.post('/create-order', async (req, res) => {
@@ -12,9 +14,8 @@ router.post('/create-order', async (req, res) => {
                     reference_id: product.id,
                     amount:{
                         currency_code: "USD",
-                        value: `${product.price * product.quantity}`
-                    },
-                    description: product.description
+                        value: `${product.price * product.Cart.quantity}`
+                    }
                 }
             )
         );
@@ -43,14 +44,12 @@ router.post('/create-order', async (req, res) => {
                 password: PAYPAL_API_SECRET
             }
         })
-    
+
         const response = await axios.post(`${PAYPAL_API}/v2/checkout/orders`, order, {
             headers: {
                 Authorization: `Bearer ${access_token}`
             }
         })
-    
-        console.log(response.data);
     
         res.send(response.data.links[1].href);
     }
@@ -61,7 +60,7 @@ router.post('/create-order', async (req, res) => {
 
 router.get('/capture-order', async (req, res) => {
 
-    const {token} = req.query;
+    try{const {token} = req.query;
     
     const response = await axios.post(`${PAYPAL_API}/v2/checkout/orders/${token}/capture`, {}, {
             auth:{
@@ -69,12 +68,15 @@ router.get('/capture-order', async (req, res) => {
                 password: PAYPAL_API_SECRET
             }
         })
-        console.log(response.data.links);
-    res.send('Pago Completado');
+    
+    res.redirect('http://localhost:3000/payment/validation');}
+    catch(error){
+        res.redirect('http://localhost:3000/payment/validation');
+    }
 })
 
 router.get('/cancel-order', (req, res) => {
-    res.send('cancel-order');
+    res.redirect('http://localhost:3000/home');
 })
 
 module.exports = router;

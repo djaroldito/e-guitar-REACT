@@ -1,5 +1,5 @@
 import axios from "axios";
-import { addUser } from "./SignupSlice";
+import { addUser, getUser } from "./SignupSlice";
 
 export const postSignupForm = (supData) => (dispatch) => {
     try {
@@ -10,4 +10,13 @@ export const postSignupForm = (supData) => (dispatch) => {
     } catch (error) {
         console.log("Esto tira userCreated:", error.message)
     }
-};
+}
+
+export const getUserDB = (email) => (dispatch) => {
+    
+        axios(`http://localhost:3001/ruser/email?email=${email}`)
+        .then(res => dispatch(getUser(res.data)))
+        .catch(error => console.log(error));
+    
+}
+

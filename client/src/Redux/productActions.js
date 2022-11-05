@@ -8,6 +8,7 @@ import {
 	getAllTypes,
 	setCurrentPage,
 	setPageCount,
+	getCart
 } from "./productSlice"
 
 export const getAllPrds = () => (dispatch) => {
@@ -97,4 +98,24 @@ export const payment = async (cart) => {
 	} catch (error) {
 		return { error: error.response ? error.response.data : error.message }
 	}
+}
+
+export const validation = async (token) => {
+	try{
+		const {data} = await axios.post(`http://localhost:3001/payments/capture-order?token=${token}`)
+		return data;
+	} catch (error) {
+		return { error: error.response ? error.response.data : error.message }
+	}
+}
+export const addCartToDB = async (cart, userID) => {
+	try{
+		await axios.post(`http://localhost:3001/cart?userID=${userID}`, cart)
+	} catch (error) {
+		return { error: error.response ? error.response.data : error.message }
+	}
+}
+export const getCartFromDB = async (userID)  => {
+	const {data: cart} = await axios(`http://localhost:3001/cart?userID=${userID}`);
+	return cart;
 }

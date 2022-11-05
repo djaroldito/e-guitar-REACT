@@ -5,10 +5,13 @@ import {useAuth0} from '@auth0/auth0-react';
 
 export const LogoutButton = () => {
     const {logout} = useAuth0();
-    localStorage.removeItem('userData')
+    const OnLogOut = () => {
+        localStorage.removeItem('userData')
+        logout({returnTo: window.location.origin})
+    }
      return (
      <LogoutButtonContainer>
-         <button onClick={() => logout({returnTo: window.location.origin})}><BiLogOut/></button>
+         <button onClick={() => OnLogOut()}><BiLogOut/></button>
      </LogoutButtonContainer>)
 }
 

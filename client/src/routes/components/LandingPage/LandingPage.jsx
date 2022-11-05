@@ -1,8 +1,5 @@
 import movie from "../../../vid/StockVideo.mp4"
 import { NavLink } from "react-router-dom"
-import { AiOutlineCreditCard } from "react-icons/ai"
-import { MdOutlineLocalShipping } from "react-icons/md"
-import { FaShieldAlt } from "react-icons/fa"
 import styled from "styled-components"
 import "./LandingPage.css"
 
@@ -22,22 +19,6 @@ const LandingPage = () => {
 					Guitar <br /> Shop
 				</h1>
 			</div>
-			<footer className='footerLandingPage'>
-				<Container>
-					<AiOutlineCreditCard />
-				</Container>
-				<Link href='#'>
-					<p>Pagá con tarjeta en cuotas</p>
-				</Link>
-				<Container>
-					<MdOutlineLocalShipping />
-				</Container>
-				<p>Envios Gratis a todo el país</p>
-				<Container>
-					<FaShieldAlt />
-				</Container>
-				<p>Compra Segura</p>
-			</footer>
 		</div>
 	)
 }
