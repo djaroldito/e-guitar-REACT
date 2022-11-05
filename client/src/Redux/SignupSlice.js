@@ -1,5 +1,5 @@
 import { createSlice }  from "@reduxjs/toolkit";
-import thunk from 'redux-thunk';
+
 
 export const signupSlice = createSlice({
     name: "signup",
