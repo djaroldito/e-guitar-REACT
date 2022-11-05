@@ -22,6 +22,7 @@ const NavBar = () => {
   };
   const email = localStorage.getItem("emailData");
   const isAdmin = localStorage.getItem("isAdmin");
+  const userData = localStorage.getItem("userData")
 
   return (
     <header className={path === "/" ? "headerLanding" : "header"}>
@@ -36,7 +37,7 @@ const NavBar = () => {
         ) : null}
         <LogoutButton />
         <IconCont className={""}>
-          {!email ? (
+          {!userData ||!email ? (
             <UserCont>
               <NavLink to="/login">
                 <BiLogIn />
