@@ -8,25 +8,55 @@ const router = Router()
 const sequelize = require("sequelize")
 const { Product } = require("../db.js")
 const { where } = require("sequelize")
+const { Console } = require("console")
 
+// router.get("/sort", async (req, res) => {
+	
+// 	let Data;
+// 	try {
+// 		let {cond} = req.query
+// 	  Data = await Product.findAll({
+// 		order: [["price", cond]],
+// 		raw: true,
+// 		attributes: ["id", "brand",'price','type', 'color'],
+// 	  });
+// 	} catch (error) {
+// 	  console.log(error);
+// 	}
+// 	res.status(200).send(Data);
+//   });
 //  GET /rguitars
 //  GET /rguitars?brand="..." &type="..." &color="..."
 // Pagination: limit=4 (items per page), page=1 (currentPage)
 router.get("/", async (req, res) => {
 	try {
-		const { brand, type, color, fullName, page=1, size=4 } = req.query
+		const { brand, type, color, fullName, page=1, size=4, sortPrice, sortBrand, minPrice, maxPrice  } = req.query
 
 		// if no product load form json
 		await loadProductData()
 
 		const whereQuery = {}
+		let orderBy = []
+		//let orderByBrand = []
 		// check if there are filter parameters
-		if (brand || type || color || fullName) {
+		if (brand || type || color || fullName || sortPrice || sortBrand || minPrice || maxPrice  ) {
 			const op = sequelize.Op
 			// ilike trabaja entre mayusculas y minusculas y de cierta forma te acelera los procesos
 			if (brand) whereQuery.brand = { [op.iLike]: `%${brand}%` }
 			if (type) whereQuery.type = { [op.iLike]: `%${type}%` }
 			if (color) whereQuery.color = { [op.iLike]: `%${color}%` }
+			if (minPrice && maxPrice) whereQuery.price = { [op.between]: [minPrice, maxPrice]}
+			if (sortPrice) {
+				orderBy = [
+					["price", sortPrice],
+						]  
+					}
+			if (sortBrand) {
+				orderBy = [
+					["brand", sortBrand],
+						]  
+				}
+
 			if (fullName) {
 				whereQuery[op.or] = {
 					namesQuery: sequelize.where(
@@ -47,7 +77,7 @@ router.get("/", async (req, res) => {
         // get values for query
 		const { limit, offset } = getPagination(page, size)
         // find data and make object for frontend
-		Product.findAndCountAll({ where: whereQuery, limit, offset })
+		Product.findAndCountAll({ where: whereQuery, limit, offset, order: orderBy })
 			.then((data) => {
                 const response = getPagingData(data, page, limit)
 				res.send(response)
