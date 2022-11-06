@@ -3,10 +3,9 @@
   display: flex;
   margin-top: 20px; 
   flex-direction: column;
-  top: 50%;
-  position: absolute;
-  left: 50%;
-  transform: translate(-50%, -50%);
+  position: relative;
+  margin-left: 50%;
+  transform: translateX(-50%);
   z-index: 1;
   width: 400px;
   height: 550px;
@@ -89,13 +88,6 @@
   position: absolute;
 }
 
-.signinGgIc {
-  color: white;
-  position: absolute;
-  margin-top: 25px;
-  margin-left: 90px;
-  z-index: 2;
-}
 
 /* Buttons --------------------------------------------------------- */
     

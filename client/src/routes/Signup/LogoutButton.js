@@ -9,6 +9,7 @@ export const LogoutButton = () => {
     sessionStorage.removeItem("emailGoogle");
     localStorage.removeItem('carrito');
     sessionStorage.removeItem('userId');
+    sessionStorage.removeItem('imageURL');
     console.log("Log out successFull!");
     navigate("/login", { state: { sessionStorage, localStorage } });
   };
