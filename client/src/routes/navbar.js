@@ -9,7 +9,6 @@ import { LogoutButton } from "./Signup/LogoutButton.js";
 import "../index.css";
 
 const NavBar = () => {
-  const path = window.location.pathname;
 
   const handleLog = () => {
     sessionStorage.removeItem("emailData");
@@ -22,9 +21,9 @@ const NavBar = () => {
   const email = sessionStorage.getItem("emailData");
   const isAdmin = sessionStorage.getItem("isAdmin");
   const emailGoogle = sessionStorage.getItem("emailGoogle");
-
+  const userImage = sessionStorage.getItem("imageURL");
   return (
-    <header className={path === "/" ? "headerLanding" : "header"}>
+    <header className={"header"}>
       <NavCont>
         <NavLink to="/home">Home</NavLink>
         <NavLink to="/">discount</NavLink>
@@ -51,10 +50,8 @@ const NavBar = () => {
             </UserCont>
           )}
           
-          <UserCont className={"logged"}>
-            <NavLink to="/home/Profile">
-              <FaUserAlt />
-            </NavLink>
+          <UserCont>
+              {userImage ? (<img src={userImage}></img>) : (<FaUserAlt style={{color: "whitesmoke"}}/>)}
           </UserCont>
         </IconCont>
 
@@ -92,9 +89,12 @@ const NavCont = styled.div`
 
 const UserCont = styled.div`
   font-size: 20px;
-  border-radius: 50%;
-  padding: 4px 6px;
   color: rgb(10, 20, 11);
+  img{
+    border-radius: 50%;
+    width: 40px;
+    height:40px;
+  }
 `;
 
 const IconCont = styled.div`
@@ -104,9 +104,7 @@ const IconCont = styled.div`
   width: 100px;
   justify-content: space-between;
 
-  .logged {
-    background-color: white;
-  }
+  
 `;
 
 export default NavBar;

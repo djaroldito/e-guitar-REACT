@@ -100,13 +100,8 @@ export default function Login() {
 
             <div className="loginGg">
               <p>O ingresa con</p>
+              <LoginButton/>
             </div>
-            <div>
-                    <AiOutlineGoogle size={30} className='signinGgIc'/> 
-                </div>
-                <LoginButton/>
-            
-            
             <div className="loginAcc">
               <p>No tienes una cuenta?</p>
             </div>

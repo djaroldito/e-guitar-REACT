@@ -15,12 +15,9 @@ code {
 
 .header{
   max-width: 100%;
-  background-color: rgb(0, 0, 0);
+  background-color: rgb(0, 0, 0, .8);
 }
-.headerLanding{
-  max-width: 100%;
-  background-color: rgb(0, 0, 0, .5);
-}
+
 
 main, section{
   max-width: 1200px;
