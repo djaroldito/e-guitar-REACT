@@ -295,7 +295,7 @@ const loadProductData = async () => {
 					description: guitar.description,
 					stock: guitar.stock,
 					discount: guitar.discount.replace("%", ""),
-					type: guitar.type.toLowerCase(),
+					type: guitar.type,
 					leftHand: guitar["left-hand"],
 					aditionalInformation: guitar["Additional-information"],
 				}
