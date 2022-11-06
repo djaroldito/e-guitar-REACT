@@ -32,7 +32,7 @@ const GuitarDetail = () => {
   const isInCart = () => carrito?.find(el=> el.id === detail.id)
   const addToCart = async (detail) => {
 	dispatch(getProductToCart(detail));
-	await addCartToDB(JSON.parse(localStorage.getItem('carrito')), localStorage.getItem('userId'));
+	await addCartToDB(JSON.parse(localStorage.getItem('carrito')), sessionStorage.getItem('userId'));
   }
   
 
@@ -48,7 +48,7 @@ const GuitarDetail = () => {
 		}).then((result) => {
 			if (result.isConfirmed) {
 				axios
-					.delete(`http://localhost:3001/rguitars/${id}`)
+					.delete(`/rguitars/${id}`)
 					.then((res) => {
 						if (res.status === 200) {
 							Swal.fire(

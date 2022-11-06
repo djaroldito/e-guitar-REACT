@@ -16,29 +16,16 @@ const Cart = () =>{
 
    const dispatch = useDispatch()
 
-   useEffect(() => {
-   
-    if (!localStorage.getItem('carrito')){
-      localStorage.setItem('carrito','[]')
-  }
-    
-  }, []);
-
-  //  const constructorCart = ()=>{
-  //   if (!localStorage.getItem('carrito')){
-  //       localStorage.setItem('carrito','[]')
-  //   }
-  // }
   
 
    const addCartItem = async (item)=> {
     dispatch(getProductToCart(item))
-    await addCartToDB(JSON.parse(localStorage.getItem('carrito')), localStorage.getItem('userId'));
+    await addCartToDB(JSON.parse(localStorage.getItem('carrito')), sessionStorage.getItem('userId'));
   }
 
   const delFromCart = async (item)=> {
      dispatch(delOneFromCart(item))
-    await addCartToDB(JSON.parse(localStorage.getItem('carrito')), localStorage.getItem('userId'));
+    await addCartToDB(JSON.parse(localStorage.getItem('carrito')), sessionStorage.getItem('userId'));
   }
 
   const completePayment = async (cart) => {
@@ -79,7 +66,7 @@ const preguntaUno = async (item)=>{
  }).then(async (result) => {
    if (result.isConfirmed) {
     dispatch(delOneFromCart(item))
-    await addCartToDB(JSON.parse(localStorage.getItem('carrito')), localStorage.getItem('userId'));
+    await addCartToDB(JSON.parse(localStorage.getItem('carrito')), sessionStorage.getItem('userId'));
      Swal.fire(
        'Deleted!',      
        )

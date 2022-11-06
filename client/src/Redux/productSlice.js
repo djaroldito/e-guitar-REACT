@@ -1,11 +1,12 @@
 import { createSlice } from "@reduxjs/toolkit"
+//borrar
 
 export const productSlice = createSlice({
 	name: "products",
 	initialState: {
 		products: [],
 		detail: {},
-		cart: JSON.parse(localStorage.getItem("carrito")),
+		cart: localStorage.getItem('carrito') ?  JSON.parse(localStorage.getItem("carrito")): [],
 		brands: [],
 		colors: [],
         types: [],
@@ -66,6 +67,7 @@ export const productSlice = createSlice({
 		clearDetail: (state) => {
 			state.detail = {}
 		},
+		
 		clearCart: (state, action) => {
 			state.cart = []
 			localStorage.setItem("carrito", JSON.stringify(state.cart))

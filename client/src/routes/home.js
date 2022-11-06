@@ -13,6 +13,7 @@ import SearchBar from "./components/searchbar";
 import Filter from "./components/filters";
 import { setCurrentPage } from './../Redux/productSlice'
 
+
 const Home = () => {
 	const dispatch = useDispatch()
 	const products = useSelector((state) => state.products.products)
@@ -25,6 +26,7 @@ const Home = () => {
       dispatch(getTypes());
       dispatch(getColors());
       dispatch(getBrands());
+	  
     }
 
   }, [dispatch, products]);
@@ -34,13 +36,13 @@ const Home = () => {
 		dispatch(setCurrentPage(pageNumber))
 	}
 
-	const constructorCart = () => {
-		if (!localStorage.getItem("carrito")) {
-			localStorage.setItem("carrito", "[]")
-		}
-	}
+	// const constructorCart = () => {
+	// 	if (!localStorage.getItem("carrito")) {
+	// 		localStorage.setItem("carrito", "[]")
+	// 	}
+	// }
 
-	constructorCart()
+	// constructorCart()
 
 	return (
 		<main>

@@ -14,8 +14,9 @@ router.post('/create-order', async (req, res) => {
                     reference_id: product.id,
                     amount:{
                         currency_code: "USD",
-                        value: `${product.price * product.Cart.quantity}`
-                    }
+                        value: `${(product.price * product.Cart.quantity).toFixed(2)}`
+                    },
+                    description: product.description
                 }
             )
         );
@@ -54,7 +55,7 @@ router.post('/create-order', async (req, res) => {
         res.send(response.data.links[1].href);
     }
     catch (error){
-        res.status(500).send('Something Went Wrong');
+        res.status(500).send(error);
     }
 });
 

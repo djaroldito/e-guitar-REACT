@@ -3,7 +3,14 @@ import { NavLink } from "react-router-dom"
 import styled from "styled-components"
 import "./LandingPage.css"
 
+import React from "react"
+
+
+
+
 const LandingPage = () => {
+	
+	
 	return (
 		<div>
 			<video autoPlay loop muted className='LandingBg'>
