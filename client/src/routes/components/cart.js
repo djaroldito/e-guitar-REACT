@@ -1,8 +1,8 @@
 import { React, useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import styled from "styled-components"
-import {delOneFromCart, clearCart, getProductToCart } from "../../Redux/productSlice"
-import {payment} from '../../Redux/productActions';
+import {delOneFromCart, clearCart, getProductToCart} from "../../Redux/productSlice"
+import {payment, addCartToDB} from '../../Redux/productActions';
 import {AiOutlineDelete} from "react-icons/ai";
 import EmptyCart from "./Cart/EmptyCart";
 import {BsCart2} from 'react-icons/bs'
@@ -16,26 +16,16 @@ const Cart = () =>{
 
    const dispatch = useDispatch()
 
-  //  useEffect(() => {
-   
-  //   if (!localStorage.getItem('carrito')){
-  //     localStorage.setItem('carrito','[]')
-  // }
-    
-  // }, []);
+  
 
-  //  const constructorCart = ()=>{
-  //   if (!localStorage.getItem('carrito')){
-  //       localStorage.setItem('carrito','[]')
-  //   }
-  // }
-   const addCartItem = (item)=> {
+   const addCartItem = async (item)=> {
     dispatch(getProductToCart(item))
-
+    await addCartToDB(JSON.parse(localStorage.getItem('carrito')), sessionStorage.getItem('userId'));
   }
 
-  const delFromCart = (item)=> {
-    dispatch(delOneFromCart(item))
+  const delFromCart = async (item)=> {
+     dispatch(delOneFromCart(item))
+    await addCartToDB(JSON.parse(localStorage.getItem('carrito')), sessionStorage.getItem('userId'));
   }
 
   const completePayment = async (cart) => {
@@ -64,7 +54,7 @@ const Cart = () =>{
      })
 
 }
-const preguntaUno = (item)=>{
+const preguntaUno = async (item)=>{
   Swal.fire({
    title: 'Are you sure to delete this item from the cart?',
    text: "You won't be able to revert this!",
@@ -73,9 +63,10 @@ const preguntaUno = (item)=>{
    confirmButtonColor: '#3085d6',
    cancelButtonColor: '#d33',
    confirmButtonText: 'Yes, delete it!'
- }).then((result) => {
+ }).then(async (result) => {
    if (result.isConfirmed) {
     dispatch(delOneFromCart(item))
+    await addCartToDB(JSON.parse(localStorage.getItem('carrito')), sessionStorage.getItem('userId'));
      Swal.fire(
        'Deleted!',      
        )
@@ -100,11 +91,11 @@ const preguntaUno = (item)=>{
                 </div>
               </ImgDiv>
             
-            {el.discount?<p> <b>Discount: </b>{el.discount}.</p>: null}
+            {el.discount? <p> <b>Discount: </b>{el.discount}.</p>: null}
             <div className="InputCartContainer">
-              <button  disabled= { el.quantity !== 1 ? false : true} onClick={() => delFromCart(el)}>-</button>
-              <input placeholder={el.quantity} disabled></input>
-              <button disabled= { el.quantity < el.stock ? false : true} onClick={() => addCartItem(el)} >+</button>
+              <button  disabled= { el.Cart.quantity !== 1 ? false : true} onClick={() => delFromCart(el)}>-</button>
+              <input placeholder={el.Cart.quantity} disabled></input>
+              <button disabled= { el.Cart.quantity < el.stock ? false : true} onClick={() => addCartItem(el)} >+</button>
               {el.stock?<p> <b>disponibles {el.stock}</b>.</p>: null}
             </div>
               <p>${el.price.toFixed(2)}</p>
@@ -113,7 +104,7 @@ const preguntaUno = (item)=>{
           ))}
             <Total>
               {carrito.length >= 1 ? <label >Total: </label> : null }
-              <h1> {carrito.length >= 1 ?  carrito.reduce((acc,prod)=>acc + (prod.price.toFixed(2) * prod.quantity) , 0).toFixed(2):null}</h1>
+              <h1> {carrito.length >= 1 ?  carrito.reduce((acc,prod)=>acc + (prod.price.toFixed(2) * prod.Cart.quantity) , 0).toFixed(2):null}</h1>
             </Total>
           </div>
           {carrito.length >= 1 ? <button onClick={() => completePayment(carrito)} className="Purchasebutton"><BsCart2/>Completar Compra</button> : null}

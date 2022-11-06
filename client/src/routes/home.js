@@ -12,18 +12,12 @@ import {
 import SearchBar from "./components/searchbar";
 import Filter from "./components/filters";
 import { setCurrentPage } from './../Redux/productSlice'
-import { useAuth0 } from "@auth0/auth0-react"
+
 
 const Home = () => {
 	const dispatch = useDispatch()
 	const products = useSelector((state) => state.products.products)
 	const {currentPage, pageCount} = useSelector((state) => state.products)
-
-	const {isAuthenticated, user} = useAuth0()
-	if (isAuthenticated) {
-		localStorage.setItem("emailData", user.email);
-		localStorage.setItem("userData", user.name)
-	  } 
 
 
   useEffect(() => {
