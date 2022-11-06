@@ -1,11 +1,16 @@
 import React from "react";
-
 import { GoogleLogout } from "react-google-login";
+import { useNavigate } from "react-router-dom";
 
 export const LogoutButton = () => {
+  const navigate = useNavigate();
   const onSuccess = () => {
-    localStorage.removeItem("UserData");
+    sessionStorage.removeItem("UserData");
+    sessionStorage.removeItem("emailGoogle");
+    localStorage.removeItem('carrito');
+    sessionStorage.removeItem('userId');
     console.log("Log out successFull!");
+    navigate("/login", { state: { sessionStorage, localStorage } });
   };
 
   return (

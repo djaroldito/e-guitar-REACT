@@ -12,14 +12,16 @@ const NavBar = () => {
   const path = window.location.pathname;
 
   const handleLog = () => {
-    localStorage.removeItem("emailData");
-    localStorage.removeItem("isAdmin");
-    localStorage.removeItem("passwordData");
+    sessionStorage.removeItem("emailData");
+    sessionStorage.removeItem("isAdmin");
+    sessionStorage.removeItem("passwordData");
+    localStorage.removeItem('carrito');
+    sessionStorage.removeItem('userId');
     window.location.reload();
   };
-  const email = localStorage.getItem("emailData");
-  const isAdmin = localStorage.getItem("isAdmin");
-  const userData = localStorage.getItem("userData")
+  const email = sessionStorage.getItem("emailData");
+  const isAdmin = sessionStorage.getItem("isAdmin");
+  const emailGoogle = sessionStorage.getItem("emailGoogle");
 
   return (
     <header className={path === "/" ? "headerLanding" : "header"}>
@@ -29,9 +31,9 @@ const NavBar = () => {
         {isAdmin === "true" ? (
           <NavLink to="/newProduct">Add Product</NavLink>
         ) : null}
-        <LogoutButton />
+        {emailGoogle ? (<div><LogoutButton/></div>) : (<div style={{display: "none"}}><LogoutButton/></div>)}
         <IconCont className={""}>
-          {!userData ||!email ? (
+          {!email && !emailGoogle ? (
             <UserCont>
               <NavLink to="/login">
                 <BiLogIn />
@@ -39,10 +41,13 @@ const NavBar = () => {
             </UserCont>
           ) : (
             <UserCont>
-              
-              <button onClick={handleLog}>
-                <BiLogOut />
-              </button>
+              {email &&
+              (
+                <button onClick={handleLog}>
+                  <BiLogOut />
+                </button> 
+              )
+              }
             </UserCont>
           )}
           
