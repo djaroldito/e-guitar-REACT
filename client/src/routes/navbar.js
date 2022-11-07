@@ -7,6 +7,8 @@ import { FaUserAlt } from "react-icons/fa";
 import { AiOutlineShoppingCart } from "react-icons/ai";
 import { LogoutButton } from "./Signup/LogoutButton.js";
 import "../index.css";
+import guitarIco from './../pics/guitar.png'
+import {useSelector} from 'react-redux'
 
 const NavBar = () => {
 
@@ -26,6 +28,9 @@ const NavBar = () => {
   return (
     <header className={"header"}>
       <NavCont>
+        <Title>
+          <img src={guitarIco} alt='guitar code title'/>
+        </Title>
         <NavLink to="/home">Home</NavLink>
         <NavLink to="/">discount</NavLink>
 
@@ -54,11 +59,12 @@ const NavBar = () => {
           <UserCont>
               {userImage ? (<img src={userImage} alt='user'></img>) : (<FaUserAlt style={{color: "whitesmoke"}}/>)}
           </UserCont>
-        </IconCont>
-
+          <div className="cart">
         <NavLink to="/cart">
           <AiOutlineShoppingCart />
         </NavLink>
+          </div>
+        </IconCont>
       </NavCont>
     </header>
   );
@@ -85,6 +91,7 @@ const NavCont = styled.div`
   }
   a:hover {
     background-color: #eb984e;
+    border-radius: 25%;
   }
 `;
 
@@ -107,5 +114,11 @@ const IconCont = styled.div`
 
 
 `;
+
+const Title = styled.div`
+img{width: 135px;
+}
+margin-right: 15px;
+  `
 
 export default NavBar;

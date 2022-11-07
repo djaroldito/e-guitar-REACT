@@ -1,7 +1,7 @@
 import { Route, Routes } from 'react-router-dom';
 import LandingPage from './routes/components/LandingPage/LandingPage';
 import Home from './routes/home';
-import { Profile } from './routes/Signup/Profile';
+import Profile  from './routes/Signup/Profile';
 import GuitarDetail from './routes/guitarDetail';
 import Payment from "./routes/components/Payment/Payment";
 import Error from "./routes/components/Payment/Error";

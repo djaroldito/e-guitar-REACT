@@ -8,7 +8,7 @@ const EmptyCart = () => {
             <Empty>
                 <p>El carrito esta vacío  <HiOutlineEmojiSad/></p>
                 <p>haga click en el siguiente botón para ver el catálogo</p>
-                <Link to='/home'><button className="Purchasebutton">Volver</button></Link>
+                {/* <Link to='/home'><button className="Purchasebutton">Volver</button></Link> */}
             </Empty>
         )
     }
@@ -16,6 +16,7 @@ const Empty = styled.div`
     text-align: center;
     color: gray;
     font-size:30px;
+   
 `
 
 export default EmptyCart;
