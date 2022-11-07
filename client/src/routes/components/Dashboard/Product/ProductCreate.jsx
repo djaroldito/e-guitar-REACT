@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react"
 import {
-	Edit,
+	Create,
 	SimpleForm,
 	TextInput,
 	SelectInput,
@@ -36,7 +36,6 @@ import { Box } from "@mui/material"
 import { FaChevronLeft } from "react-icons/fa"
 import Autocomplete, { createFilterOptions } from "@mui/material/Autocomplete"
 
-import { useParams } from "react-router-dom"
 import { useDispatch, useSelector } from "react-redux"
 import {
 	getTypes,
@@ -45,14 +44,14 @@ import {
 } from "../../../../Redux/productActions"
 // import Swal from "sweetalert2"
 
-const ProductEdit = (props) => {
+const ProductCreate = (props) => {
 	const filter = createFilterOptions()
 	const dispatch = useDispatch()
-	const { id } = useParams()
-	const { isLoading, data } = useGetOne("product", { id })
+	// const { id } = useParams()
+	//const { isLoading, data } = useGetOne("product", { id })
 
-	const [typeField, setTypeField] = useState(isLoading ? null : data.type)
-	const [brandField, setBrandField] = useState(isLoading ? null : data.brand)
+	const [typeField, setTypeField] = useState(null)
+	const [brandField, setBrandField] = useState(null)
 	const { types, colors, brands } = useSelector((state) => state.products)
 
 	useEffect(() => {
@@ -108,31 +107,29 @@ const ProductEdit = (props) => {
 		return <ImageField record={record} source={source} />
 	}
 
-	// transform before submit
+	//transform before submit
 	const transform = (data) => ({
 		...data,
 		type: typeField.name ? typeField.name : data.type,
 		brand: brandField.name ? brandField.name : data.brand,
 	})
 
-	if (isLoading) return null
+	//if (isLoading) return null
 	return (
 		<>
-			{isLoading ? (
-				""
-			) : (
-				<Edit
+
+				<Create
 					actions={<TopToolbarActions />}
 					transform={transform}
 					submitOnEnter={false}
-					title='Edit Product'
+					title='Create New Product'
 					{...props}
 				>
 					<SimpleForm toolbar={<ToolbarActions />}>
 						<Box display={{ xs: "block", sm: "flex", width: "100%" }}>
 							<Box flex={1} mr={{ xs: 0, sm: "0.5em" }}>
-								<Autocomplete
-									value={typeField}
+                            <Autocomplete
+                                value={typeField}
 									onChange={(e, newValue) => {
 										if (typeof newValue === "string") {
 											setTypeField({
@@ -194,8 +191,8 @@ const ProductEdit = (props) => {
 								/>
 							</Box>
 							<Box flex={1} mr={{ xs: 0, sm: "0.5em" }}>
-								<Autocomplete
-									value={brandField}
+                            <Autocomplete
+                                value={brandField}
 									onChange={(e, newValue) => {
 										if (typeof newValue === "string") {
 											setBrandField({
@@ -287,7 +284,7 @@ const ProductEdit = (props) => {
 								/>
 							</Box>
 							<Box flex={1} mr={{ xs: 0, sm: "0.5em" }}>
-                                 <SelectArrayInput source='color' choices={colorChoices} />
+                                <SelectArrayInput source='color' choices={colorChoices} />
 							</Box>
 							<Box flex={1} mr={{ xs: 0, sm: "0.3em" }}>
 								<TextInput
@@ -350,10 +347,10 @@ const ProductEdit = (props) => {
 							</ImageInput>
 						</Box>
 					</SimpleForm>
-				</Edit>
-			)}
+				</Create>
+
 		</>
 	)
 }
 
-export default ProductEdit
+export default ProductCreate

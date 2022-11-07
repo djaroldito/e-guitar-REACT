@@ -1,10 +1,16 @@
 import React from 'react'
-import { List, Datagrid, TextField, DateField, EditButton, DeleteButton } from 'react-admin'
+import { List, Datagrid, TextField, DateField, EditButton, DeleteButton, TextInput } from 'react-admin'
 
 
 const ProductList = (props) => {
+
+    const filters = [
+        <TextInput label="Type" source="type" />,
+        <TextInput label="Brand" source="brand" />,
+    ];
+
     return (
-        <List {...props}>
+        <List filters={filters} {...props}>
             <Datagrid>
                 <TextField source='id' />
                 <TextField source='type'/>
