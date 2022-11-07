@@ -11,6 +11,8 @@ import Layout from "./routes/Layout"
 import DashboardRoute from "./routes/components/Dashboard/DashboardRoute"
 import Dashboard from './routes/components/Dashboard/Dashboard'
 
+import ProductForm from "./routes/components/ProductForm/ProductForm"
+
 function App() {
 	return (
 		<>
@@ -22,13 +24,13 @@ function App() {
 					<Route path='/cart' element={<Cart />} />
 					<Route path='/signup' element={<Signup />} />
 					<Route path='/login' element={<Login />} />
-					{/* <Route path='/newProduct' element={<ProductForm />} />
-                    <Route path='/editProduct/:id' element={<ProductForm />} /> */}
+					 <Route path='/newProduct' element={<ProductForm />} />
+                    <Route path='/editProduct/:id' element={<ProductForm />} />
 				</Route>
 
 				{/* PROTECTED ROUTES FOR ADMIN DASHBOARD */}
 				<Route
-					path='/dashboard'
+					path='/dashboard/*'
 					element={
 						<DashboardRoute>
 							<Dashboard />

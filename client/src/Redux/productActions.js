@@ -11,7 +11,7 @@ import {
 } from "./productSlice"
 
 export const getAllPrds = () => (dispatch) => {
-	axios("http://localhost:3001/rguitars")
+	axios("/rguitars")
 		.then((res) => {
 			dispatch(getAllProducts(res.data.products))
 			dispatch(setCurrentPage(1))
@@ -22,7 +22,7 @@ export const getAllPrds = () => (dispatch) => {
 
 
 export const getById = (id) => (dispatch) => {
-	axios(`http://localhost:3001/rguitars/${id}`)
+	axios(`/rguitars/${id}`)
 		.then((res) => dispatch(getProductById(res.data)))
 		.catch((err) => console.log(err))
 }
@@ -37,17 +37,17 @@ export const getById = (id) => (dispatch) => {
 // 		.catch((err) => console.log(err))
 // }
 export const getBrands = () => (dispatch) => {
-	axios(`http://localhost:3001/rfilters/brands`)
+	axios(`/rfilters/brands`)
 		.then((res) => dispatch(getAllBrands(res.data)))
 		.catch((err) => console.log(err))
 }
 export const getColors = () => (dispatch) => {
-	axios(`http://localhost:3001/rfilters/colors`)
+	axios(`/rfilters/colors`)
 		.then((res) => dispatch(getAllColors(res.data)))
 		.catch((err) => console.log("colors", err))
 }
 export const getTypes = () => (dispatch) => {
-	axios(`http://localhost:3001/rfilters/types`)
+	axios(`/rfilters/types`)
 		.then((res) => dispatch(getAllTypes(res.data)))
 		.catch((err) => console.log(err))
 }
@@ -56,7 +56,7 @@ export const getByFilter = (filter, currentPage) => (dispatch) => {
     const { color, brand, type, fullName } = filter
 
 	axios(
-		`http://localhost:3001/rguitars?color=${color}&brand=${brand}&type=${type}&fullName=${fullName}&page=${currentPage}`
+		`/rguitars?color=${color}&brand=${brand}&type=${type}&fullName=${fullName}&page=${currentPage}`
 	)
 		.then((res) => {
             dispatch(getByFilters(res.data.products))
@@ -69,7 +69,7 @@ export const getByFilter = (filter, currentPage) => (dispatch) => {
 export const postProductForm = async (formData) => {
 	try {
 		const { data: productCreated } = await axios.post(
-			"http://localhost:3001/rguitars/",
+			"/rguitars/",
 			formData
 		)
 		return productCreated
@@ -81,7 +81,7 @@ export const postProductForm = async (formData) => {
 export const editProductForm = async (formData) => {
 	try {
 		const { data: productUpdated } = await axios.put(
-			`http://localhost:3001/rguitars/${formData.id}`,
+			`/rguitars/${formData.id}`,
 			formData
 		)
 		return productUpdated
@@ -92,7 +92,7 @@ export const editProductForm = async (formData) => {
 }
 export const payment = async (cart) => {
 	try{
-		const {data: link} = await axios.post(`http://localhost:3001/payments/create-order`, cart)
+		const {data: link} = await axios.post(`/payments/create-order`, cart)
 		return link;
 	} catch (error) {
 		return { error: error.response ? error.response.data : error.message }

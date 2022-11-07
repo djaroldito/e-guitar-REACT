@@ -139,7 +139,6 @@ router.post("/", async (req, res) => {
 			type
 		) {
 			const newGuitar = await Product.create({
-				fullname: brand + " " + model,
 				brand,
 				model,
 				img,
@@ -195,7 +194,6 @@ router.put("/:idGuitar", async (req, res) => {
 		} else {
 			await Product.update(
 				{
-					fullName: brand + " " + model,
 					brand,
 					model,
 					img,
@@ -256,7 +254,6 @@ const loadProductData = async () => {
 				return {
 					brand: guitar.brand,
 					model: guitar.model,
-					fullName: guitar.fullName[0] + " " + guitar.fullName[1],
 					img: guitar.img.join(","),
 					color: guitar.color.join(","),
 					price: guitar.price.toFixed(2),

@@ -30,8 +30,6 @@ const GuitarDetail = () => {
 	const carrito = useSelector((state) => state.products.cart)
 
   const isInCart = () => carrito?.find(el=> el.id === detail.id)
-  
-  
 
 	const handleDeleteProduct = (id) => {
 		Swal.fire({
@@ -60,7 +58,7 @@ const GuitarDetail = () => {
 					})
 			}
 		})
-	}
+    }
 
 	return (
 		<section>
@@ -84,7 +82,7 @@ const GuitarDetail = () => {
 					<h2>{detail.brand}</h2>
 					<h3>${detail.price ? detail.price.toFixed(2) : null}</h3>
 					<h3>model: {detail.model}</h3>
-					<p>{detail.description}</p>
+                    <p><div dangerouslySetInnerHTML={{__html: `${detail.description}`}}></div></p>
 					<p>
 						<b>Type: </b>
 						{detail.type}
@@ -138,7 +136,7 @@ const GuitarDetail = () => {
 					)}
 				</TextCont>
 			</CountDiv>
-			<AdInfo>aditional Information: {detail.aditionalInformation}</AdInfo>
+			<AdInfo>aditional Information: <span dangerouslySetInnerHTML={{__html: `${detail.aditionalInformation}`}}></span></AdInfo>
 		</section>
 	)
 }
