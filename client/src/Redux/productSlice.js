@@ -17,7 +17,8 @@ export const productSlice = createSlice({
             brand: '',
             fullName: '',
 			minPrice: 0,
-			maxPrice: 0
+			maxPrice: 150000,
+			sortPrice: ' '
           },
         currentPage: 1,
         pageCount: 0,
@@ -29,9 +30,6 @@ export const productSlice = createSlice({
 		getProductById: (state, action) => {
 			state.detail = action.payload
 		},
-		// getProductByName: (state, action) => {
-		// 	state.products = action.payload
-		// },
 		getProductFiltered: (state, action) => {
 			state.products = action.payload
 		},
@@ -85,7 +83,7 @@ export const productSlice = createSlice({
 			state.types = action.payload
 		},
 		getByFilters: (state, action) => {
-			state.products = action.payload
+			state.products = action.payload.length > 0? action.payload: 'ERROR'
         },
         setFilters: (state, action)=>{
             state.Filters = action.payload
@@ -96,13 +94,10 @@ export const productSlice = createSlice({
         setPageCount(state, action) {
             state.pageCount = action.payload
 		},
-		fiterError: (state, action) =>{
-			state.products = action.payload
-		}
+	
 	},
 })
 
-/* getFilteredProducts, createNewProduct */
 
 export const {
 	getAllProducts,
@@ -123,7 +118,7 @@ export const {
     clearDetail,
     setCurrentPage,
     setPageCount,
-	fiterError,
+
 } = productSlice.actions
 
 export default productSlice.reducer

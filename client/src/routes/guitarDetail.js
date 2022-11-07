@@ -64,7 +64,7 @@ const GuitarDetail = () => {
 
 	return (
 		<section>
-			<CountDiv className='shadow-xl'>
+			<CountDiv>
 				{detail.img?.split(",").length === 1 ? (
 					<div className='imgcont'>
 						<img src={detail.img} alt='' />
@@ -144,7 +144,7 @@ const GuitarDetail = () => {
 }
 
 const CountDiv = styled.div`
-	width: 700px;
+	width: 740px;
 	max-width: 900px;
 	min-height: 400px;
 	margin: auto;
@@ -152,8 +152,8 @@ const CountDiv = styled.div`
 	flex-direction: row;
 	margin-top: 75px;
 	background-color: white;
-	/* border: 1px solid rgb(40, 40, 40); */
 	border-radius: 10px;
+	align-items: center;
 	.imgcont {
 		display: flex;
 		justify-content: center;
@@ -168,6 +168,7 @@ const CountDiv = styled.div`
 	}
 	.mySwiper {
 		max-width: 300px;
+		height: 100%;
 	}
 `
 
@@ -176,6 +177,7 @@ const TextCont = styled.div`
 	flex-direction: column;
 	width: 100%;
 	margin-left: 50px;
+	margin-top: 10px;
 	height: 100%;
 	h2,
 	h3 {

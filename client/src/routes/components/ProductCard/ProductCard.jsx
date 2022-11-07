@@ -17,10 +17,11 @@ const ProductCard = ({item}) => {
                     {item.quantity}.
                   </p>
                 ) : null}
+                <div className="Linkcont">
                 <Link to={`/home/${item.id}`}>
-                  {" "}
                   <FaGuitar /> Show Details
                 </Link>
+                </div>
                
               </div>
             </Card>
@@ -28,9 +29,10 @@ const ProductCard = ({item}) => {
      
 }
 const Card = styled.div`
-  width: 350px;
-  height: 350px;
-  border: 1px solid gray;
+  min-width: 350px;
+  min-height: 350px;
+  max-height: 350px;
+  box-shadow: 0px 0px 0px 1px rgba(0, 0, 0, 0.2);
   background-color: white;
   margin-right: 10px;
   margin-top: 30px;
@@ -41,7 +43,10 @@ const Card = styled.div`
   align-items: center;
   a {
     text-decoration: none;
-    color: blue;
+    color: whitesmoke;
+    background-color: rgb(82, 54, 139);
+    padding: 10px;
+    border-radius: 7px;
   }
   h2,
   h3 {
@@ -80,6 +85,9 @@ const Card = styled.div`
   .cartbtn:hover{
     background-color: whitesmoke;
     color: rgb(41, 73, 143);
+  }
+  .Linkcont{
+    margin-top: 50px;
   }
 `;
 

@@ -19,49 +19,43 @@ const Home = () => {
 	const dispatch = useDispatch()
 	const products = useSelector((state) => state.products.products)
 	const {currentPage, pageCount} = useSelector((state) => state.products)
-
+	
 	const {isAuthenticated, user} = useAuth0()
 	if (isAuthenticated) {
 		localStorage.setItem("emailData", user.email);
 		localStorage.setItem("userData", user.name)
-	  } 
-
-
-  useEffect(() => {
-    if (products.length === 0) {
-      dispatch(getAllPrds());
-      dispatch(getTypes());
-      dispatch(getColors());
-      dispatch(getBrands());
-	  
-    }
-
-  }, [dispatch, products]);
-
+	} 
+	
+	
+	useEffect(() => {
+		if (products.length === 0 && products !== 'ERROR') {
+			dispatch(getAllPrds())
+			dispatch(getTypes());
+			dispatch(getColors());
+			dispatch(getBrands());
+		}
+		
+	}, [dispatch, products]);
+	
+	console.log(products)
 	/// PAGINATION
 	const handlePageChange = (pageNumber) => {
 		dispatch(setCurrentPage(pageNumber))
 	}
 
-	// const constructorCart = () => {
-	// 	if (!localStorage.getItem("carrito")) {
-	// 		localStorage.setItem("carrito", "[]")
-	// 	}
-	// }
-
-	// constructorCart()
 
 	return (
 		<main>
 			<SearchBar />
 			<ContainerDiv>
 				<Filter />
+				{ products !== 'ERROR'?
 				 <CardsCont>
 					{products?.map((item) => (
 						<ProductCard key={item.id} item={item} />
-					))}
-				{/* <NoFound/> */}
-				</CardsCont>
+						))}
+				</CardsCont> :
+				<NoFound/>}
 			</ContainerDiv>
 			<Pagination
 				handleChange={handlePageChange}
@@ -77,9 +71,10 @@ const CardsCont = styled.div`
 	display: flex;
 	flex-direction: row;
 	flex-wrap: wrap;
+	justify-content: center;
 	margin-right: 25px;
 	margin-bottom: 25px;
-	min-height: 725px;
+	min-height: 775px;
 `
 
 const ContainerDiv = styled.div`
