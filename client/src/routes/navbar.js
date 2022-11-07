@@ -20,14 +20,16 @@ const NavBar = () => {
   };
   const email = sessionStorage.getItem("emailData");
   const isAdmin = sessionStorage.getItem("isAdmin");
-  const emailGoogle = sessionStorage.getItem("emailGoogle");
-  const userImage = sessionStorage.getItem("imageURL");
+    const emailGoogle = sessionStorage.getItem("emailGoogle");
+    const userImage = sessionStorage.getItem("imageURL");
+
   return (
     <header className={"header"}>
       <NavCont>
         <NavLink to="/home">Home</NavLink>
         <NavLink to="/">discount</NavLink>
-        <NavLink to="/dashboard">dashboard</NavLink>
+
+        {isAdmin ? <NavLink to="/dashboard">Dashboard</NavLink> : ''}
 
         {emailGoogle ? (<div><LogoutButton/></div>) : (<div style={{display: "none"}}><LogoutButton/></div>)}
         <IconCont className={""}>
@@ -50,7 +52,7 @@ const NavBar = () => {
           )}
 
           <UserCont>
-              {userImage ? (<img src={userImage}></img>) : (<FaUserAlt style={{color: "whitesmoke"}}/>)}
+              {userImage ? (<img src={userImage} alt='user'></img>) : (<FaUserAlt style={{color: "whitesmoke"}}/>)}
           </UserCont>
         </IconCont>
 

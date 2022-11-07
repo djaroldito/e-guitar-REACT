@@ -2,7 +2,7 @@ import { Navigate } from "react-router-dom"
 import styled from "styled-components"
 
 export default function DashboardRoute({ children }) {
-	return localStorage.isAdmin ? <DashboardContainter> {children} </DashboardContainter> : <Navigate to={"/home"} replace />
+	return sessionStorage.isAdmin ? <DashboardContainter> {children} </DashboardContainter> : <Navigate to={"/home"} replace />
 }
 
 const DashboardContainter = styled.div`

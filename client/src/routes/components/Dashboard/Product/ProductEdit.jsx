@@ -134,7 +134,6 @@ const ProductEdit = (props) => {
 								<Autocomplete
 									value={typeField}
 									onChange={(e, newValue) => {
-										console.log(e)
 										if (typeof newValue === "string") {
 											setTypeField({
 												name: newValue,

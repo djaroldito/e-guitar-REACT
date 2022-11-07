@@ -14,8 +14,6 @@ import Layout from "./routes/Layout"
 import DashboardRoute from "./routes/components/Dashboard/DashboardRoute"
 import Dashboard from './routes/components/Dashboard/Dashboard'
 
-//import ProductForm from "./routes/components/ProductForm/ProductForm"
-
 function App() {
   return (
    <>
