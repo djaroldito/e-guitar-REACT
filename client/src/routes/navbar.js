@@ -20,16 +20,17 @@ const NavBar = () => {
   };
   const email = sessionStorage.getItem("emailData");
   const isAdmin = sessionStorage.getItem("isAdmin");
-  const emailGoogle = sessionStorage.getItem("emailGoogle");
-  const userImage = sessionStorage.getItem("imageURL");
+    const emailGoogle = sessionStorage.getItem("emailGoogle");
+    const userImage = sessionStorage.getItem("imageURL");
+
   return (
     <header className={"header"}>
       <NavCont>
         <NavLink to="/home">Home</NavLink>
         <NavLink to="/">discount</NavLink>
-        {isAdmin === "true" ? (
-          <NavLink to="/newProduct">Add Product</NavLink>
-        ) : null}
+
+        {isAdmin ? <NavLink to="/dashboard">Dashboard</NavLink> : ''}
+
         {emailGoogle ? (<div><LogoutButton/></div>) : (<div style={{display: "none"}}><LogoutButton/></div>)}
         <IconCont className={""}>
           {!email && !emailGoogle ? (
@@ -44,14 +45,14 @@ const NavBar = () => {
               (
                 <button onClick={handleLog}>
                   <BiLogOut />
-                </button> 
+                </button>
               )
               }
             </UserCont>
           )}
-          
+
           <UserCont>
-              {userImage ? (<img src={userImage}></img>) : (<FaUserAlt style={{color: "whitesmoke"}}/>)}
+              {userImage ? (<img src={userImage} alt='user'></img>) : (<FaUserAlt style={{color: "whitesmoke"}}/>)}
           </UserCont>
         </IconCont>
 
@@ -104,7 +105,7 @@ const IconCont = styled.div`
   width: 100px;
   justify-content: space-between;
 
-  
+
 `;
 
 export default NavBar;

@@ -9,14 +9,11 @@ import {LoginButton} from "./LoginButton";
 import {gapi} from 'gapi-script'
 
 
-
-
 // !psw => mail con un link hacia un nuevo formulario para resetear contraseña => se borra la psw anterior, se crea una nueva y se guarda en la
-// !psw => 
+// !psw =>
 let client = "1071381556347-p8k8tg37ss2e9ag86088tvdds19dot5o.apps.googleusercontent.com"
 
 export default function Login() {
-
 
   useEffect(()=>{
     function start(){
@@ -38,8 +35,8 @@ export default function Login() {
 
 
   const [showPsw, setShowPsw] = useState(false);
-  
-  
+
+
   const handleSignIn = async (e) => {
     e.preventDefault();
     try {
@@ -49,14 +46,14 @@ export default function Login() {
           password: password.current.value,
         },
       });
-      
+
       if (data) {
         sessionStorage.setItem("emailData", email.current.value);
         sessionStorage.setItem("isAdmin", data.isAdmin);
         localStorage.setItem("carrito", JSON.stringify(data.products));
         sessionStorage.setItem("userId", data.id);
         navigate("/home", { state: { sessionStorage, localStorage } });
-      } 
+      }
     } catch (error) {
       console.log(error.message, Swal.fire({
         title: "Usuario no encontrado",
@@ -89,7 +86,7 @@ export default function Login() {
                 <div className='loginEyeIcon' onClick={() => setShowPsw(!showPsw)}>
                     {showPsw ? <AiOutlineEye/> : <AiOutlineEyeInvisible className='loginInIc'/>}
                 </div>
-              
+
             </fieldset>
             <div className="loginPsw">
               <p>Olvidaste tu contraseña?</p>

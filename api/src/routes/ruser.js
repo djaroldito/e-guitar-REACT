@@ -35,7 +35,7 @@ router.get("/login", async (req, res) => {
   router.get("/registerGoogle", async (req, res) => {
 	try {
 	  const { email,userName } = req.query;
-  
+
 	  if (!email || !userName) {
 		res.status(400).send("faltan cargar datos");
 	  } else {
@@ -45,7 +45,7 @@ router.get("/login", async (req, res) => {
 			userName
 		  },
 		});
-  
+
 		if (user) {
 		  return res.status(200).json(user);
 		} else {
@@ -93,7 +93,7 @@ router.get("/email", async (req, res) => {
 			email,
 		  }, include: Product
 		});
-		
+
 		if (user) {
 		  return res.status(200).json(user);
 		} else {

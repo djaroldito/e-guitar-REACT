@@ -11,7 +11,7 @@ const { where } = require("sequelize")
 const { Console } = require("console")
 
 // router.get("/sort", async (req, res) => {
-	
+
 // 	let Data;
 // 	try {
 // 		let {cond} = req.query
@@ -30,7 +30,7 @@ const { Console } = require("console")
 // Pagination: limit=4 (items per page), page=1 (currentPage)
 router.get("/", async (req, res) => {
 	try {
-		const { brand, type, color, fullName, page=1, size=4, sortPrice, sortBrand, minPrice, maxPrice  } = req.query
+		const { brand, type, color, fullName, page=1, size=6, sortPrice, sortBrand, minPrice, maxPrice  } = req.query
 
 		// if no product load form json
 		await loadProductData()
@@ -49,12 +49,12 @@ router.get("/", async (req, res) => {
 			if (sortPrice) {
 				orderBy = [
 					["price", sortPrice],
-						]  
+						]
 					}
 			if (sortBrand) {
 				orderBy = [
 					["brand", sortBrand],
-						]  
+						]
 				}
 
 			if (fullName) {
@@ -98,7 +98,7 @@ router.get("/", async (req, res) => {
 
 const getPagination = (page, size) => {
     let nPage = page-1
-	const limit = size ? +size : 4
+	const limit = size ? +size : 6
 	const offset = nPage ? nPage * limit : 0
 
 	return { limit, offset }
@@ -170,7 +170,6 @@ router.post("/", async (req, res) => {
 			type
 		) {
 			const newGuitar = await Product.create({
-				fullname: brand + " " + model,
 				brand,
 				model,
 				img,
@@ -226,7 +225,6 @@ router.put("/:idGuitar", async (req, res) => {
 		} else {
 			await Product.update(
 				{
-					fullName: brand + " " + model,
 					brand,
 					model,
 					img,
@@ -287,7 +285,6 @@ const loadProductData = async () => {
 				return {
 					brand: guitar.brand,
 					model: guitar.model,
-					fullName: guitar.fullName[0] + " " + guitar.fullName[1],
 					img: guitar.img.join(","),
 					color: guitar.color.join(","),
 					price: guitar.price.toFixed(2),
