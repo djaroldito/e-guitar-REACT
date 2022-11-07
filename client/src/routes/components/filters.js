@@ -50,7 +50,7 @@ const Filter = () => {
 						</div>
 					))}
 					<select name='type' onChange={handleChange} value={filter.type}>
-						<option label='type'></option>
+						<option label='Type'></option>
 						{types?.map((item, pos) => (
 							<option value={item} key={pos}>
 								{item}

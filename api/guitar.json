@@ -2,21 +2,21 @@
     {
         "id": "1",
         "brand": "Femmto",
-        "model": "CG001-Azul",
-        "fullName": ["Femmto", "CG001-Azul"],
+        "model": "Cg001-blue",
+        "fullName": ["Femmto", "CG001-blue"],
         "img": [
             "https://http2.mlstatic.com/D_NQ_NP_2X_607586-MLA50209395075_062022-F.webp",
             "https://http2.mlstatic.com/D_NQ_NP_2X_748520-MLA50415595917_062022-F.webp",
             "https://http2.mlstatic.com/D_NQ_NP_2X_842296-MLA48982704770_012022-F.webp"
         ],
-        "color": [ "naranja, natural"],
-        "price": 16355.99,
+        "color": [ "orange, natural"],
+        "price": 54.51,
         "strings": 6,
-        "description": "Disfrutá con esta guitarra Femmto de la conexión con la música. Está diseñada para aficionados y profesionales. Con este instrumento descubrirás nuevos acordes.",
+        "description": "Enjoy with this Femmto guitar the connection with music. It is designed for amateurs and professionals. With this instrument you will discover new chords.",
         "stock": 5,
         "discount": "0%",
-        "type": "Criolla",
-        "Additional-information": "Hacemos envios a todo el pais"
+        "type": "Creole",
+        "Additional-information": "Color tone may vary depending on the manufacturer, 6 month warranty. We issue invoice."
     },
     {
         "id": "2",
@@ -27,20 +27,20 @@
             "https://http2.mlstatic.com/D_NQ_NP_2X_688069-MLA44114804079_112020-F.webp",
             "https://http2.mlstatic.com/D_NQ_NP_2X_844728-MLA44114807092_112020-F.webp"
         ],
-        "color": ["negro, natural"],
-        "price": 52321.30,
+        "color": ["black, natural"],
+        "price": 174.40,
         "strings": 6,
-        "description": "Acabado en laca brillante, clavijero tipo lira de perfecta afinación y suave funcionamiento, Está diseñada para aficionados y profesionales.",
+        "description": "Glossy lacquer finish, lyre-type machine heads for perfect tuning and smooth operation, It is designed for amateurs and professionals.",
         "stock": 5,
         "discount": "0%",
-        "type": "Criolla",
+        "type": "Creole",
         "left-hand": false,
-        "Additional-information": "Hacemos envios a todo el pais"
+        "Additional-information": "Color tone may vary depending on the manufacturer, 6 month warranty. We issue invoice."
     },
     {
         "id": "3",
         "brand": "Midiplus",
-        "model": "Clásica con funda",
+        "model": "Classic with cover",
         "fullName": ["Midiplus", "Clásica con funda"],
         "img": [
             "https://http2.mlstatic.com/D_NQ_NP_2X_994179-MLA48378987512_112021-F.webp"
@@ -48,19 +48,19 @@
         "color": [
             "natural"
         ],
-        "price": 12464.30,
+        "price": 41.64,
         "strings": 6,
-        "description": "Guitarra con la altura de cuerdas justa, ideal para aprender, recomendada por profesores.",
+        "description": "Guitar with the right string height, ideal for learning, recommended by teachers.",
         "stock": 4,
         "discount": "0%",
-        "type": "Criolla",
+        "type": "Creole",
         "left-hand": true,
-        "Additional-information": "Hacemos envios a todo el pais"
+        "Additional-information": "Color tone may vary depending on the manufacturer, 6 month warranty. We issue invoice."
     },
     {
         "id": "4",
         "brand": "Valencia",
-        "model": "VC104K",
+        "model": "Vc104k",
         "fullName": ["Valencia", "VC104K"],
         "img": [
             "https://http2.mlstatic.com/D_NQ_NP_2X_911829-MLA44548355323_012021-F.webp",
@@ -69,35 +69,35 @@
         "color": [
             "natural"
         ],
-        "price": 28541.35,
+        "price": 95.13,
         "strings": 6,
-        "description": "La longitud de la escala del mástil le permite tocar con el estilo clásico; justo lo que necesita para desarrollar la técnica adecuada.",
+        "description": "The scale length of the neck allows you to play in the classic style; just what you need to develop proper technique.",
         "stock": 4,
         "discount": "0%",
-        "type": "Criolla",
+        "type": "Creole",
         "left-hand": false,
-        "Additional-information": "Hacemos envios a todo el pais"
+        "Additional-information": "Color tone may vary depending on the manufacturer, 6 month warranty. We issue invoice."
     },
     {
         "id": "5",
         "brand": "Parquer",
-        "model": "GC109",
+        "model": "Gc109",
         "fullName": ["Parquer", "GC109"],
         "img": [
             "https://http2.mlstatic.com/D_NQ_NP_2X_840527-MLA47886167183_102021-F.webp",
             "https://http2.mlstatic.com/D_NQ_NP_2X_968661-MLA45333535518_032021-F.webp"
         ],
         "color": [
-            "negro"
+            "black"
         ],
-        "price": 16529,
+        "price": 55.09,
         "strings": 6,
-        "description": "Al ser una guitarra semisólida, y a pesar de su escaso espesor (unos 5 cm.) posee gran resonancia y un sonido muy calido.",
+        "description": "Being a semi-solid guitar, and despite its low thickness (about 5 cm.), it has great resonance and a very warm sound.",
         "stock": 6,
         "discount": "0%",
-        "type": "Criolla",
+        "type": "Creole",
         "left-hand": false,
-        "Additional-information": "Hacemos envios a todo el pais"
+        "Additional-information": "Color tone may vary depending on the manufacturer, 6 month warranty. We issue invoice."
     },
     {
         "id": "6",
@@ -112,39 +112,39 @@
         "color": [
             "natural"
         ],
-        "price": 53999.41,
+        "price": 179.99,
         "strings": 6,
-        "description": "Exelente guitarra para iniciar a tocar, El instrumento en su totalidad tiene una terminación muy cuidada, un mango muy cómodo y un satinado de primera",
+        "description": "Excellent guitar to start playing, The instrument as a whole has a very careful finish, a very comfortable handle and a first class satin.",
         "stock": 3,
         "discount": "0%",
-        "type": "Criolla",
+        "type": "Creole",
         "left-hand": false,
-        "Additional-information": "Hacemos envios a todo el pais"
+        "Additional-information": "Color tone may vary depending on the manufacturer, 6 month warranty. We issue invoice."
     },
     {
         "id": "7",
         "brand": "Famusic",
-        "model": "Clásica",
+        "model": "Clasic",
         "fullName": ["Famusic", "Clásica"],
         "img": [
             "https://http2.mlstatic.com/D_NQ_NP_2X_783640-MLA45683269322_042021-F.webp"
         ],
         "color": [
-            "negro"
+            "black"
         ],
-        "price": 10999,
+        "price": 36.66,
         "strings": 6,
-        "description": "Exelente guitarra para iniciar a tocar, Parquer entrega los mejores instrumentos a personas apasionadas de todo el mundo",
+        "description": "Excellent guitar to start playing, Parquer delivers the best instruments to passionate people around the world.",
         "stock": 8,
         "discount": "0%",
-        "type": "Criolla",
+        "type": "Creole",
         "left-hand": false,
-        "Additional-information": "Hacemos envios a todo el pais"
+        "Additional-information": "Color tone may vary depending on the manufacturer, 6 month warranty. We issue invoice."
     },
     {
         "id": "8",
         "brand": "Parquer",
-        "model": "GC109LBM",
+        "model": "Gc109lbh",
         "fullName": ["Parquer", "GC109LBM"],
         "img": [
             "https://http2.mlstatic.com/D_NQ_NP_2X_811362-MLA47725448613_102021-F.webp",
@@ -153,55 +153,55 @@
         "color": [
             "natural"
         ],
-        "price": 13677,
+        "price": 45.59,
         "strings": 6,
-        "description": "Exelente guitarra para iniciar a tocar, Está diseñada para aficionados y profesionales.",
+        "description": "Excellent guitar to start playing, Parquer delivers the best instruments to passionate people around the world.",
         "stock": 15,
         "discount": "0%",
-        "type": "Criolla",
+        "type": "Creole",
         "left-hand": false,
-        "Additional-information": "Hacemos envios a todo el pais"
+        "Additional-information": "Color tone may vary depending on the manufacturer, 6 month warranty. We issue invoice."
     },
     {
         "id": "9",
         "brand": "Parquer",
-        "model": "GC830",
+        "model": "Gc830",
         "fullName": ["Parquer", "GC830"],
         "img": [
             "https://http2.mlstatic.com/D_NQ_NP_2X_659594-MLA49106206574_022022-F.webp",
             "https://http2.mlstatic.com/D_NQ_NP_2X_605632-MLA49106206565_022022-F.webp"
         ],
         "color": [
-            "roja"
+            "red"
         ],
-        "price": 19726.40,
+        "price": 65.75,
         "strings": 6,
-        "description": "Exelente guitarra para iniciar a tocar, Parquer entrega los mejores instrumentos a personas apasionadas de todo el mundo",
+        "description": "Excellent guitar to start playing, Parquer delivers the best instruments to passionate people around the world",
         "stock": 9,
         "discount": "10%",
-        "type": "Criolla",
+        "type": "Creole",
         "left-hand": true,
-        "Additional-information": "Hacemos envios a todo el pais"
+        "Additional-information": "Color tone may vary depending on the manufacturer, 6 month warranty. We issue invoice."
     },
     {
         "id": "10",
         "brand": "Parquer",
-        "model": "GC830",
+        "model": "Gc830",
         "fullName": ["Parquer", "GC830"],
         "img": [
             "https://http2.mlstatic.com/D_NQ_NP_2X_627109-MLA45642269637_042021-F.webp"
         ],
         "color": [
-            "azul"
+            "blue"
         ],
-        "price": 19726.30,
+        "price": 65.75,
         "strings": 6,
-        "description": "Exelente guitarra para iniciar a tocar, Disfrutá con esta guitarra Custom de la conexión con la música",
+        "description": "Excellent guitar to start playing, Parquer delivers the best instruments to passionate people around the world",
         "stock": 7,
         "discount": "0%",
-        "type": "Criolla",
+        "type": "Creole",
         "left-hand": false,
-        "Additional-information": "Hacemos envios a todo el pais"
+        "Additional-information": "Color tone may vary depending on the manufacturer, 6 month warranty. We issue invoice."
     },
     {
         "id": "11",
@@ -212,16 +212,16 @@
             "https://http2.mlstatic.com/D_NQ_NP_622407-MLA48680123789_122021-O.webp, https://http2.mlstatic.com/D_NQ_NP_723793-MLA48680228384_122021-O.webp"
         ],
         "color": [
-            "negro, blanco"
+            "black, white"
         ],
-        "price": 37338,
+        "price":124.46,
         "strings": 6,
-        "description": "Disfrutá con esta guitarra Parquer Custom de la conexión con la música. Con este instrumento descubrirás nuevos acordes, entonarás tus canciones y disfrutarás de la vida musical.",
+        "description": "Enjoy the connection with music with this Parquer Custom guitar. With this instrument you will discover new chords, sing your songs and enjoy musical life.",
         "stock": 15,
         "discount": "0%",
-        "type": "Electrica",
+        "type": "Electric",
         "left-hand": false,
-        "Additional-information": "Material versátil: su madera de caoba la hace un producto versátil y popular."
+        "Additional-information": "Color tone may vary depending on the manufacturer, 6 month warranty. We issue invoice."
     },
     {
         "id": "12",
@@ -232,16 +232,16 @@
             "https://http2.mlstatic.com/D_NQ_NP_632217-MLA48786922827_012022-O.webp, https://http2.mlstatic.com/D_NQ_NP_729274-MLA51537199502_092022-O.webp"
         ],
         "color": [
-            "negro, roja"
+            "black, red"
         ],
-        "price": 49990,
+        "price": 166.63,
         "strings": 6,
-        "description": "Fabricada íntegramente en madera (aliso+ arce). Es un producto importado, de primera calidad y la más completa del mercado: incluye bolso con cierre y accesorios!",
+        "description": "Made entirely of wood (alder + maple). It is an imported product, of the highest quality and the most complete on the market: it includes a bag with a zipper and accessories!",
         "stock": 8,
         "discount": "0%",
-        "type": "Electrica",
+        "type": "Electric",
         "left-hand": false,
-        "Additional-information": "Marca: DAKOTA, Tipo: Stratocaster, Pastillas: 3 bobinas simples, Controles: 1 Volumen, 2 Tonos, Incluye: Funda para transporte, Cable para conectar, Palanca trémolo, Llaves Allen"
+        "Additional-information": "Color tone may vary depending on the manufacturer, 6 month warranty. We issue invoice."
     },
     {
         "id": "13",
@@ -252,16 +252,16 @@
             "https://http2.mlstatic.com/D_NQ_NP_669840-MLA46353231579_062021-O.webp, https://http2.mlstatic.com/D_NQ_NP_888651-MLA46352606590_062021-O.webp"
         ],
         "color": [
-            "negro"   
+            "black"   
         ],
-        "price": 62074,
+        "price": 206.91,
         "strings": 6,
-        "description": "Esta Les Paul cuenta con pastillas, tono independiente y controles de volumen para cada elemento, lo que produce distintos resultados. El punto fuerte en su sonido es ser distorsionado, denso, contundente, potente y redondo.",
+        "description": "This Les Paul features separate pickups, tone, and volume controls for each element, producing different results. The strong point in their sound is being distorted, dense, forceful, powerful and round.",
         "stock": 7,
         "discount": "0%",
-        "type": "Electrica",
+        "type": "Electric",
         "left-hand": true,
-        "Additional-information": "Marca: DAKOTA, Tipo: Stratocaster, Pastillas: 3 bobinas simples, Controles: 1 Volumen, 2 Tonos, Incluye: Funda para transporte, Cable para conectar, Palanca trémolo, Llaves Allen"
+        "Additional-information": "Color tone may vary depending on the manufacturer, 6 month warranty. We issue invoice."
     },
     {
         "id": "14",
@@ -272,16 +272,16 @@
             "https://http2.mlstatic.com/D_NQ_NP_625922-MLA48678794814_122021-O.webp, https://http2.mlstatic.com/D_NQ_NP_898081-MLA51375602262_092022-O.webp, https://http2.mlstatic.com/D_NQ_NP_779601-MLA51439631218_092022-O.webp"
         ],
         "color": [
-            "negro, blanco"
+            "black, white"
         ],
-        "price": 62674,
+        "price": 208.91,
         "strings": 6,
-        "description": "Cort entrega los mejores instrumentos a personas apasionadas de todo el mundo. Trabaja bajo cuidadosos estándares de selección y pulido de madera y cada uno de los elementos que componen sus guitarras",
+        "description": "Cort delivers the best instruments to passionate people around the world. He works under careful standards of selection and polishing of wood and each of the elements that make up his guitars.",
         "stock": 10,
         "discount": "0%",
-        "type": "Electrica",
+        "type": "Electric",
         "left-hand": false,
-        "Additional-information": "Selector de micrófonos: 3 posiciones, Cantidad de trastes: 24, Con palanca: Sí, Construcción del mástil: Bolt-on, Tipo de micrófono puente: Humbucker Powersound, Tipo de puente: Tremolo"
+        "Additional-information": "Color tone may vary depending on the manufacturer, 6 month warranty. We issue invoice."
     },
     {
         "id": "15",
@@ -292,16 +292,16 @@
             "https://http2.mlstatic.com/D_NQ_NP_635048-MLA48123653039_112021-O.webp, https://http2.mlstatic.com/D_NQ_NP_903661-MLA48123721123_112021-O.webp"
         ],
         "color": [
-            "azul, negro"
+            "blue, black"
         ],
-        "price": 62674,
+        "price": 208.91,
         "strings": 6,
-        "description": "Con esta Telecaster tocá las mejores canciones de country y rock. Cuenta con dos pastillas que tienen un diseño casi microfónico y le permiten captar con riqueza todos los matices y armónicos.",
+        "description": "With this Telecaster play the best country and rock songs. It features two pickups that have an almost microphonic design and allow you to richly capture all the nuances and harmonics.",
         "stock": 16,
         "discount": "0%",
-        "type": "Electrica",
+        "type": "Electric",
         "left-hand": true,
-        "Additional-information": "Selector de micrófonos: 3 posiciones, Cantidad de trastes: 21, Con palanca: Sí, Construcción del mástil: Bolt-on, Tipos de control: Selector de micrófonos, Tono, Volumen, Tipo de micrófono mástil: Single Coil"
+        "Additional-information": "Color tone may vary depending on the manufacturer, 6 month warranty. We issue invoice."
     },
     {
         "id": "16",
@@ -312,56 +312,56 @@
             "https://http2.mlstatic.com/D_NQ_NP_994438-MLA31586492212_072019-O.webp"
         ],
         "color": [
-            "negro"
+            "black"
         ],
-        "price": 135815,
+        "price": 452.71,
         "strings": 6,
-        "description": "Puente de trémolo Floyd Rose empotrado. 2 humbuckers de Alnico V. Volumen sangrado mod. 1 vol. 1 tono con división de bobina push-pull. Interruptor de selección de 3 vías.",
+        "description": "Recessed Floyd Rose tremolo bridge. 2 Alnico V humbuckers. Volume bleed mod. 1 vol. 1 tone with push-pull coil split. 3 way selector switch.",
         "stock": 5,
         "discount": "0%",
-        "type": "Electrica",
+        "type": "Electric",
         "left-hand": false,
-        "Additional-information": "Hacemos envios a todo el pais"
+        "Additional-information": "Color tone may vary depending on the manufacturer, 6 month warranty. We issue invoice."
     },
     {
         "id": "17",
         "brand": "PRS",
-        "model": "SE Custom",
+        "model": "Se Custom",
         "fullName": ["PRS", "SE Custom"],
         "img": [
             "https://http2.mlstatic.com/D_NQ_NP_783212-MLA48416164849_122021-O.webp, https://http2.mlstatic.com/D_NQ_NP_865065-MLA48416202595_122021-O.webp, https://http2.mlstatic.com/D_NQ_NP_823266-MLA48416279145_122021-O.webp"
         ],
         "color": [
-            "negro"
+            "black"
         ],
-        "price": 532627,
+        "price": 1775.42,
         "strings": 6,
-        "description": " la guitarra icónica que comenzó todo en 1985. La Custom 24-08 mantiene todas las especificaciones fundamentales del instrumento, al tiempo que lleva la plataforma Custom a nuevos territorios sonoros.",
+        "description": "The iconic guitar that started it all in 1985. The Custom 24-08 maintains all of the fundamental specifications of the instrument, while taking the Custom platform into new sonic territories.",
         "stock": 5,
         "discount": "0%",
-        "type": "Electrica",
+        "type": "Electric",
         "left-hand": false,
-        "Additional-information": "Número de trastes: 24, Micrófono del mango: TCI “S”, Micrófono del puente: TCI “S”, Controles: volumen y tono con llave selectora de 3 vías y switch individuales para convertir los humbuckers en sigle coils"
+        "Additional-information": "Color tone may vary depending on the manufacturer, 6 month warranty. We issue invoice."
     },
     {
         "id": "18",
         "brand": "Gretsch",
-        "model": "Hollow G6136T",
+        "model": "Hollow g6136t",
         "fullName": ["Gretsch", "Hollow G6136T"],
         "img": [
             "https://http2.mlstatic.com/D_NQ_NP_936630-MLA44189744930_112020-O.webp"
         ],
         "color": [
-            "blanco"
+            "white"
         ],
-        "price": 292117,
+        "price": 973.72,
         "strings": 6,
-        "description": "Guitarra Eléctrica GRETSCH WHITE FALCON MODELO 6136T Con estuche y papelería, certificado de autenticidad",
+        "description": "Electric Guitar GRETSCH WHITE FALCON MODEL 6136T With case and stationery, certificate of authenticity",
         "stock": 5,
         "discount": "0%",
-        "type": "Electrica",
+        "type": "Electric",
         "left-hand": false,
-        "Additional-information": "Hacemos envios a todo el pais"
+        "Additional-information": "Color tone may vary depending on the manufacturer, 6 month warranty. We issue invoice."
     },
     {
         "id": "19",
@@ -372,36 +372,36 @@
             "https://http2.mlstatic.com/D_NQ_NP_664769-MLA48124486066_112021-O.webp"
         ],
         "color": [
-            "negro"
+            "black"
         ],
-        "price": 12673,
+        "price": 42.24,
         "strings": 6,
-        "description": "Las formas agresivas del cuerpo del VX se complementan con pastillas EMG-HZ y trémolo de bloqueo doble. El VX-2X tiene un mástil reforzado de 5 piezas para mayor resistencia y estabilidad.",
+        "description": "The aggressive body shapes of the VX are complemented by EMG-HZ pickups and a double locking tremolo. The VX-2X has a reinforced 5-piece mast for added strength and stability.",
         "stock": 12,
         "discount": "0%",
-        "type": "Electrica",
+        "type": "Electric",
         "left-hand": false,
-        "Additional-information": "Construcción: Atornillado, Cuerpo: Agathis, Diapasón: Palisandro, Radio de 12 pulgadas,  Puente: Tune-o-matic bridge (LP2) & stop tailpiece,  Pastillas: EMG-HZ SA1 (F) y TB1 (R) (HH)."
+        "Additional-information": "Color tone may vary depending on the manufacturer, 6 month warranty. We issue invoice."
     },
     {
         "id": "20",
         "brand": "Ibanez",
-        "model": "GSA60",
+        "model": "Gsa60",
         "fullName": ["Ibanez", "GSA60"],
         "img": [
             "https://http2.mlstatic.com/D_NQ_NP_760628-MLA48678675895_122021-O.webp, https://http2.mlstatic.com/D_NQ_NP_740895-MLA48678701559_122021-O.webp, https://http2.mlstatic.com/D_NQ_NP_672009-MLA48678794445_122021-O.webp"
         ],
         "color": [
-            "negro, azul"
+            "black, blue"
         ],
-        "price": 8970,
+        "price": 29.90,
         "strings": 6,
-        "description": "Si algo caracteriza a las guitarras de Ibanez es su estilo, con cuellos más delgados y diapasones más planos, electrónica de alta potencia y acabados coloridos. Esta marca es una de las más versátiles del mercado.",
+        "description": "If something characterizes Ibanez guitars, it is their style, with thinner necks and flatter fingerboards, high-power electronics and colorful finishes. This brand is one of the most versatile on the market.",
         "stock": 5,
         "discount": "0%",
-        "type": "Electrica",
+        "type": "Electric",
         "left-hand": false,
-        "Additional-information": "Con palanca: Sí, Cantidad de micrófonos: 3, Cantidad de trastes: 22, Tipo de micrófono mástil: Infinity RS (S), Tipo de micrófono puente: Infinity R (H), Tipos de micrófonos: Humbucker, Simple."
+        "Additional-information": "Color tone may vary depending on the manufacturer, 6 month warranty. We issue invoice."
     },
     {
         "id": "21",
@@ -415,14 +415,14 @@
         "color": [
             "natural"
         ],
-        "price": 30272,
+        "price": 100.90,
         "strings": 6,
-        "description": "Material del daipasón: nogal, Color: natural, Orientación de la mano: diestro, Tipo de guitarra: clásica, Material de la tapa: Saúco, Con corte: sí, Cantidad de cuerdas: 6, Materiales del fondo: -",
+        "description": "Daipason Material: Walnut, Colour: Natural, Hand Orientation: Right Handed, Guitar Type: Classical, Top Material: Elderberry, Cutaway: Yes, Number of Strings: 6.",
         "stock": 5,
         "discount": "0%",
-        "type": "Criolla",
+        "type": "Creole",
         "left-hand": false,
-        "Additional-information": "Con un toque artesanal único plasmado en sus materiales, Gracia acompaña a la historia musical desde el año 1870. Sus guitarras poseen alcance internacional."
+        "Additional-information": "Color tone may vary depending on the manufacturer, 6 month warranty. We issue invoice."
     },
     {
         "id": "22",
@@ -435,14 +435,14 @@
         "color": [
             "natural"
         ],
-        "price": 29638.75,
+        "price": 98.79,
         "strings": 6,
-        "description": "GUITARRA CLASICA CRIOLLA PARA ZURDOS GRACIA FA01, Tamaño: Normal, Modelo para zurdos, Caja: Abedul sin cenefas, Mástil: Cedro paraguayo, Diapasón: Nogal, Entrastadura: Bronce, Clavijero: Niquelado grabado, Color Natural Ó ESFUMADO",
+        "description": "Size: Normal, Left handed model, Body: Birch without bindings, Neck: Paraguayan Cedar, Fingerboard: Walnut, Fretboard: Bronze, Pegs: Engraved nickel plated.",
         "stock": 6,
         "discount": "0%",
-        "type": "Criolla",
+        "type": "Creole",
         "left-hand": true,
-        "Additional-information": "Todos los productos en Oferta, Outlet y/o SALE%, han estado en exhibición y poseen detalles estéticos que no afectan el normal funcionamiento, Packaging deteriorado y/o pueden NO tener la caja original."
+        "Additional-information": "Color tone may vary depending on the manufacturer, 6 month warranty. We issue invoice."
     },
     {
         "id": "23",
@@ -458,14 +458,14 @@
         "color": [
             "natural"
         ],
-        "price": 50348,
+        "price": 167.82,
         "strings": 6,
-        "description": "Guitarra Clásica Criolla C/Mic Gracia M10 EQ Afinador, Medio concierto, Caja con corte, madera de Nogal 4/4., Tapa de Pino importado, Mango de Cedro Paraguayo, Trastera de Nogal seleccionado, Entrastadura de Bronce.",
+        "description": "Creole Classical Guitar W/Mic Gracia M10 EQ Tuner, Medium concert, Cutaway body, 4/4 Walnut wood, Imported Pine top, Paraguayan Cedar neck, Selected Walnut fretboard, Bronze fretboard.",
         "stock": 5,
         "discount": "0%",
-        "type": "Criolla",
+        "type": "Creole",
         "left-hand": false,
-        "Additional-information": "Todos los productos en Oferta, Outlet y/o SALE%, han estado en exhibición y poseen detalles estéticos que no afectan el normal funcionamiento, Packaging deteriorado y/o pueden NO tener la caja original."
+        "Additional-information": "Color tone may vary depending on the manufacturer, 6 month warranty. We issue invoice."
     },
     {
         "id": "24",
@@ -481,36 +481,36 @@
         "color": [
             "natural"
         ],
-        "price": 76486.59,
+        "price": 254.95,
         "strings": 6,
-        "description": "Color: natural, Orientación de la mano: diestro, Tipo de guitarra: acústica, Material de la tapa: caoba, Materiales de fondo: caoba, Materiales de los laterales: caoba, Con corte: sí, Cantidad de cuerdas: -",
+        "description": "Creole Classical Guitar W/Mic Gracia M10 EQ Tuner, Medium concert, Cutaway body, 4/4 Walnut wood, Imported Pine top, Paraguayan Cedar neck, Selected Walnut fretboard, Bronze fretboard.",
         "stock": 4,
         "discount": "0%",
-        "type": "Criolla",
+        "type": "Creole",
         "left-hand": false,
-        "Additional-information": "Con un toque artesanal único plasmado en sus materiales, Gracia acompaña a la historia musical desde el año 1870. Sus guitarras poseen alcance internacional y son utilizadas tantos por principiantes como por grandes referentes de la música."
+        "Additional-information": "Color tone may vary depending on the manufacturer, 6 month warranty. We issue invoice."
     },
     {
         "id": "25",
         "brand": "Gracia",
-        "model": "Niño Infantil Rosa",
-        "fullName": ["Gracia", "Niño Infantil Rosa"],
+        "model": "Child pink",
+        "fullName": ["Gracia", "Niño Infantil pink"],
         "img": [
             "https://http2.mlstatic.com/D_NQ_NP_2X_734413-MLA41633975042_052020-F.webp",
             "https://http2.mlstatic.com/D_NQ_NP_2X_742521-MLA41633918797_052020-F.webp",
             "https://http2.mlstatic.com/D_NQ_NP_2X_912902-MLA41633970121_052020-F.webp"
         ],
         "color": [
-            "rosa"
+            "pink"
         ],
-        "price": 22159.07,
+        "price": 73.86,
         "strings": 6,
-        "description": "Caracteristicas TAMAÑO: 1/2, CAJA: Abedul, BRAZO: Cedro Paraguayo, DIAPASON: Nogal, ENTRASTADURA: Bronce, CLAVIJERO: Niquelado grabado, MEDIDAS DE LA GUITARRA: Largo total 88,5 cm, Ancho de caja 30,5 cm, Largo de Caja 42 cm, Ancho de Diapasón 4,5 cm, Largo de Diapasón 36 cm, Largo de Puente 17 cm",
+        "description": "Imitation Pine top, Birch back and sides, Cedar neck, Walnut fingerboard, Engraved lyre headstock, Natural or faded color, available depending on stock",
         "stock": 5,
         "discount": "0%",
-        "type": "Criolla",
+        "type": "Creole",
         "left-hand": false,
-        "Additional-information": "Emitimos factura A y B. Si solicita factura A y su CUIT es de la provincia de Bs As puede tener un ajuste en el monto facturado con el concepto de percepción de IBB. Somos Agentes de retención y el porcentaje dependerá de su condición como contribuyente ante ARBA."
+        "Additional-information": "Color tone may vary depending on the manufacturer, 6 month warranty."
     },
     {
         "id": "26",
@@ -521,16 +521,16 @@
             "https://http2.mlstatic.com/D_NQ_NP_2X_923136-MLA47729678658_102021-F.webp"
         ],
         "color": [
-            "negro"
+            "black"
         ],
-        "price": 51021.25,
+        "price": 170.07,
         "strings": 6,
-        "description": "Fonseca Modelo 39Kec, Guitarra de estudio con Corte (Cutaway) y Ecualizador de 4 bandas más volumen y afinador. Características Tapa: Imitación Pino, Aros: Abedul Macizo, Fondo: Abedul Laminado, Corte: Si, Mástil: Cedro, Diapasón: Guayubira, Trastes: Alpaca, Clavijero: Niquelado Grabado, Lustre: Color Negro Brillante",
+        "description": "Studio guitar with Cutaway and 4-band EQ plus volume and tuner. Characteristics Top: Imitation Pine, Sides: Solid Birch, Back: Laminated Birch, Cut: Yes, Neck: Cedar.",
         "stock": 5,
         "discount": "0%",
-        "type": "Criolla",
+        "type": "Creole",
         "left-hand": false,
-        "Additional-information": "*( El tono de la tapa o mastil puede variar en tono oscuro o claro dependiendo del fabricante )."
+        "Additional-information": "Color tone may vary depending on the manufacturer, 6 month warranty.."
     },
     {
         "id": "27",
@@ -545,14 +545,14 @@
         "color": [
             "natural"
         ],
-        "price": 34757.26,
+        "price": 115.85,
         "strings": 6,
-        "description": "Guitarra criolla medio concierto tamaño mediano ideal para chicos de entre 6 y 12 años - industria argentina, guitarra criolla tamaño 3/4 -, fonseca, modelo:10, estudio superior para niños de 6 a 12 años",
+        "description": "Medium size Creole half concert guitar ideal for children between 6 and 12 years old - Argentine industry, 3/4 size Creole guitar -, fonseca, model: 10, superior study for children between 6 and 12 years old",
         "stock": 2,
         "discount": "0%",
-        "type": "Criolla",
+        "type": "Creole",
         "left-hand": false,
-        "Additional-information": "Cuando clickeas en “comprar” asumis el compromiso de compra. Por lo tanto te recomendamos que antes: 1. Estés seguro de querer adquirir el artículo., 2. Consultes el saldo disponible de tu tarjeta de crédito, 3."
+        "Additional-information": "6 month warranty, free shipping ."
     },
     {
         "id": "28",
@@ -566,16 +566,16 @@
         ],
         "color": [
             
-            "natural, negro"
+            "natural, black"
         ],
-        "price": 29912,
+        "price": 99.70,
         "strings": 6,
-        "description": "Guitarra Clasica Criolla Fonseca Modelo 25 De Estudio, Guitarra Criolla Clásica Fonseca, Modelo: 25 de Estudio, Tapa imitacion Pino, Aros y fondo de abedul, Mastil de Cedro, Diapason de nogal, Clavijero lira grabado, Color Natural o esfumado, disponibles según stock.",
+        "description": "Imitation Pine top, Birch back and sides, Cedar neck, Walnut fingerboard, Engraved lyre headstock, Natural or faded color, available depending on stock.",
         "stock": 3,
         "discount": "0%",
-        "type": "Criolla",
+        "type": "Creole",
         "left-hand": false,
-        "Additional-information": "Todos los productos en Oferta, Outlet y/o SALE%, han estado en exhibición y poseen detalles estéticos que no afectan el normal funcionamiento, Packaging deteriorado y/o pueden NO tener la caja original."
+        "Additional-information": "6 month warranty, free shipping ."
     },
     {
         "id": "29",
@@ -590,19 +590,19 @@
         "color": [
             "natural"
         ],
-        "price": 39999,
+        "price": 133.33,
         "strings": 6,
-        "description": "GUITARRA CRIOLLA, Marca Fonseca, Modelo 31, Tapa de pino abeto laminado, Aros de nogal macizo, Fondo de nogal laminado, Ornamentos de doble filete negro, Mástil de cedro, Diapasón de nogal, Traste de bronce, Clavijero niquelado grabado, Lustre natural mate, Cuerdas de nylon.",
+        "description": "Laminated spruce pine top, Solid walnut sides, Laminated walnut back, Black double-jointed ornaments, Cedar neck, Walnut fingerboard, Bronze fret, Engraved nickel-plated pegs, Matte natural lustre, Nylon strings.",
         "stock": 3,
         "discount": "0%",
-        "type": "Criolla",
+        "type": "Creole",
         "left-hand": false,
-        "Additional-information": "Las IMÁGENES en la presente publicación usualmente son provistas por los proveedores por lo que son a modo ilustrativo y pueden ser modificadas por los fabricantes/importadores sin previo aviso."
+        "Additional-information": "6 month warranty, free shipping ."
     },
     {
         "id": "30",
         "brand": "Fonseca",
-        "model": "65 Medio Concierto",
+        "model": "65 Half Concert",
         "fullName": ["Fonseca", "65 Medio Concierto"],
         "img": [
             "https://http2.mlstatic.com/D_NQ_NP_2X_789523-MLA40735270399_022020-F.webp",
@@ -611,61 +611,61 @@
         "color": [
             "natural"
         ],
-        "price": 54944.04,
+        "price": 183.14,
         "strings": 6,
-        "description": "Guitarra Fonseca 65 Características: Tapa: Pino Abeto Laminado con Mosaicos, Aros: Algarrobo Macizo, Fondo: Algarrobo Laminado, Ornamentos: Doble Filete de Palo Blanco; Cenefa Central en el Fondo, Mástil: Cedro, Diapasón: Nogal, Trastes: Alpaca, Clavijero: Dorado Grabado, Lustre: Natural Brillante",
+        "description": "Fonseca 65 Guitar Characteristics: Top: Laminated Spruce Pine with Mosaics, Sides: Solid Carob, Back: Laminated Carob, Ornaments: Double Whitewood Fillet; Central Border on the Back, Neck: Cedar",
         "stock": 7,
         "discount": "0%",
-        "type": "Criolla",
+        "type": "Creole",
         "left-hand": false,
-        "Additional-information": "Importante: Cuando clickeas en “comprar” asumis el compromiso de compra. Por lo tanto te recomendamos que antes: 1. Estés seguro de querer adquirir el artículo., 2. Consultes el saldo disponible de tu tarjeta de crédito, 3."
+        "Additional-information": "6 month warranty, free shipping ."
     }
 
     ,
     {
         "id": "31",
         "brand": "Newen",
-        "model": "TL",
+        "model": "Tl",
         "fullName": ["Fonseca", "65 Medio Concierto"],
         "img": [
             "https://http2.mlstatic.com/D_NQ_NP_850084-MLA51714111515_092022-O.webp",
             "https://http2.mlstatic.com/D_NQ_NP_704471-MLA51714111568_092022-O.webp"
         ],
-        "color": [ "blanco, azul"],
-        "price": 78944.04,
+        "color": [ "white, blue"],
+        "price": 263.14,
         "strings": 6,
-        "description": "Disfrutá con esta guitarra Newen de la conexión con la música. Con este instrumento descubrirás nuevos acordes, entonarás tus canciones y disfrutarás de la vida musical. Explorá, amplificá tu creatividad y desarrollá tu pasión.",
+        "description": "Enjoy the connection with music with this Newen guitar. With this instrument you will discover new chords, sing your songs and enjoy musical life. Explore, amplify your creativity and develop your passion.",
         "stock": 7,
         "discount": "0%",
-        "type": "Electrica",
+        "type": "Electric",
         "left-hand": false,
-        "Additional-information": "Importante: Cuando clickeas en “comprar” asumis el compromiso de compra. Por lo tanto te recomendamos que antes: 1. Estés seguro de querer adquirir el artículo., 2. Consultes el saldo disponible de tu tarjeta de crédito, 3."
+        "Additional-information": "6 month warranty, free shipping."
     }
     ,
     {
         "id": "32",
         "brand": "Femmto",
-        "model": "AG003",
+        "model": "Ag003",
         "fullName": ["Fonseca", "65 Medio Concierto"],
         "img": [
             "https://http2.mlstatic.com/D_NQ_NP_794399-MLA51258924308_082022-O.webp",
             "https://http2.mlstatic.com/D_NQ_NP_683434-MLA51258901443_082022-O.webp"
         ],
-        "color": [ "naranja, azul"],
-        "price": 18700.00,
+        "color": [ "orange, blue"],
+        "price": 62.33,
         "strings": 6,
-        "description": "Disfrutá con esta guitarra Femmto de la conexión con la música. Está diseñada para aficionados y profesionales. Con este instrumento descubrirás nuevos acordes, entonarás tus canciones y disfrutarás de la vida musical.",
+        "description": "Enjoy with this Femmto guitar the connection with music. It is designed for amateurs and professionals. With this instrument you will discover new chords, sing your songs and enjoy musical life.",
         "stock": 15,
         "discount": "15%",
-        "type": "Electroacústica",
+        "type": "Electro Acoustic",
         "left-hand": false,
-        "Additional-information": "Importante: Cuando clickeas en “comprar” asumis el compromiso de compra. Por lo tanto te recomendamos que antes: 1. Estés seguro de querer adquirir el artículo., 2. Consultes el saldo disponible de tu tarjeta de crédito, 3."
+        "Additional-information": "6 month warranty, free shipping "
     }
     ,
     {
         "id": "33",
         "brand": "Sigma",
-        "model": "DME",
+        "model": "Dme",
         "fullName": ["Fonseca", "65 Medio Concierto"],
         "img": [
             "https://http2.mlstatic.com/D_NQ_NP_673794-MLA46517661576_062021-O.webp"
@@ -674,35 +674,35 @@
         "color": [
             "natural"
         ],
-        "price": 86355.30,
+        "price": 287.85,
         "strings": 6,
-        "description": "Sigma es algo más que una marca de guitarras. Desde 1970, acompaña el sueño de un sinfín de personas en el arte de componer sonidos. Su calidad y adaptabilidad la vuelven ideal para ser utilizada en todo momento.",
+        "description": "Sigma is more than just a guitar brand. Since 1970, he has accompanied the dreams of countless people in the art of composing sounds. Its quality and adaptability make it ideal to be used at all times.",
         "stock": 15,
         "discount": "0%",
-        "type": "Electroacústica",
+        "type": "Electro Acoustic",
         "left-hand": true,
-        "Additional-information": "Las IMÁGENES en la presente publicación usualmente son provistas por los proveedores por lo que son a modo ilustrativo y pueden ser modificadas por los fabricantes/importadores sin previo aviso."
+        "Additional-information": "6 month warranty, free shipping "
     }
     ,
     {
         "id": "34",
         "brand": "Fender",
-        "model": "CC-60SCE",
+        "model": "Cc-60sce",
         "fullName": ["Fonseca", "65 Medio Concierto"],
         "img": [
             "https://http2.mlstatic.com/D_NQ_NP_792046-MLA40694915541_022020-O.webp",
             "https://http2.mlstatic.com/D_NQ_NP_940268-MLA40694915557_022020-O.webp"
         ],
            
-        "color": ["negro, natural"],
-        "price": 170958.90,
+        "color": ["black, natural"],
+        "price": 569.86,
         "strings": 6,
-        "description": "Guitarras prácticas y funcionales, para aficionados y profesionales. Fender es una empresa que transforma la música en todo el mundo y atraviesa una gran variedad de géneros. Es el mayor fabricante internacional y sus productos representan un ícono cultural.",
+        "description": "Practical and functional guitars, for amateurs and professionals. Fender is a company that transforms music around the world and spans a wide variety of genres. It is the largest international manufacturer and its products represent a cultural icon.",
         "stock": 26,
         "discount": "5%",
-        "type": "Electroacústica",
+        "type": "Electro Acoustic",
         "left-hand": true,
-        "Additional-information": "Las IMÁGENES en la presente publicación usualmente son provistas por los proveedores por lo que son a modo ilustrativo y pueden ser modificadas por los fabricantes/importadores sin previo aviso."
+        "Additional-information": "6 month warranty, free shipping "
     }
     ,
     {
@@ -717,14 +717,14 @@
         "color": [
             "natural"
         ],
-        "price": 32978.90,
+        "price": 109.92,
         "strings": 6,
-        "description": "Guitarra Electroacústica Sunset Fk60 con Corte y EQ2BANDAS, Sunset Fk-60 es una guitarra electroacústica , con cuerdas de acero , construida en madera de alta calidad, viene con Ecualizador de 2 bandas con un piezo eléctrico integrado en la guitarra con salida plug 6.5 mm.",
+        "description": "Sunset Fk60 Electro Acoustic Guitar with Cutaway and EQ2BANDS, Sunset Fk-60 is an Electro Acoustic guitar, with steel strings, made of high quality wood, it comes with a 2-band equalizer with a piezoelectric integrated in the guitar with a 6.5 plug output hmm.",
         "stock": 14,
         "discount": "0%",
-        "type": "Electroacústica",
+        "type": "Electro Acoustic",
         "left-hand": false,
-        "Additional-information": "Realizamos envíos gratis en el día en CABA Y GBA comprando antes de las 12 hs con flete propio."
+        "Additional-information": "6 month warranty, free shipping "
     }
     ,
     {
@@ -737,16 +737,16 @@
         ],
            
         "color": [
-            "caoba"
+            "mahogany"
         ],
-        "price": 54893.90,
+        "price": 182.97,
         "strings": 6,
-        "description": "Guitarra electroacústica Sunset FK 1000, Esta excelente guitarra de cuerdas acero ofrece una tapa en caoba de gran tono y calidad en su sonido .Su pre amplificador ecualizador de 5 bandas con display LCD + afinador ofrece un control total en graves , agudos , medios1,medios2 y presencia .",
+        "description": "Electro Acoustic Sunset FK 1000 Guitar, This excellent steel-string guitar offers a mahogany top with great tone and quality sound. Its 5-band equalizer preamplifier with LCD display + tuner offers total control in bass, treble, mids1, media2 and presence.",
         "stock": 14,
         "discount": "10%",
-        "type": "Electroacústica",
+        "type": "Electro Acoustic",
         "left-hand": true,
-        "Additional-information": "Somos una tienda de instrumentos musicales conformada por técnicos y músicos para darte la mejor atención y servicio."
+        "Additional-information": "6 month warranty, free shipping "
     }
     ,
     {
@@ -759,15 +759,15 @@
             "https://http2.mlstatic.com/D_NQ_NP_625779-MLA43814681210_102020-O.webp"
         ],
            
-        "color": ["roja, negro"],
-        "price": 203616.60,
+        "color": ["red, black"],
+        "price": 678.72,
         "strings": 6,
-        "description": "Guitarras prácticas y funcionales, para aficionados y profesionales. Fender es una empresa que transforma la música en todo el mundo y atraviesa una gran variedad de géneros. Es el mayor fabricante internacional y sus productos representan un ícono cultural.",
+        "description": "Practical and functional guitars, for amateurs and professionals. Fender is a company that transforms music around the world and spans a wide variety of genres. It is the largest international manufacturer and its products represent a cultural icon.",
         "stock": 8,
         "discount": "0%",
-        "type": "Electroacústica",
+        "type": "Electro Acoustic",
         "left-hand": false,
-        "Additional-information": "Somos una tienda de instrumentos musicales conformada por técnicos y músicos para darte la mejor atención y servicio."
+        "Additional-information": "6 month warranty, free shipping "
     }
     ,
     {
@@ -780,22 +780,22 @@
         ],
            
         "color": [
-            "blanco"
+            "white"
         ],
-        "price": 205608.60,
+        "price": 685.36,
         "strings": 6,
-        "description": "Calidad que se hace notar, Las cuerdas de metal se caracterizan por su bajo estiramiento y resistencia a la corrosión y abrasión. Son más duraderas, sólidas y generan un sonido brillante y claro.",
+        "description": "Quality that stands out, Metal ropes are characterized by their low stretch and resistance to corrosion and abrasion. They are more durable, solid and produce a bright and clear sound.",
         "stock": 8,
         "discount": "0%",
-        "type": "Electroacústica",
+        "type": "Electro Acoustic",
         "left-hand": true,
-        "Additional-information": "Somos una tienda de instrumentos musicales conformada por técnicos y músicos para darte la mejor atención y servicio."
+        "Additional-information": "6 month warranty, free shipping "
     },
 
     {
         "id": "39",
         "brand": "Gracia",
-        "model": "G10 EQ",
+        "model": "G10 eq",
         "fullName": ["Fonseca", "65 Medio Concierto"],
         "img": [
             "https://http2.mlstatic.com/D_NQ_NP_947031-MLA45098678257_032021-O.webp"
@@ -804,14 +804,14 @@
         "color": [
             "natural"
         ],
-        "price": 48744.04,
+        "price": 162.48,
         "strings": 6,
-        "description": "Nuevo Modelo!!!!! La linea de guitarras G10 cuenta con una serie de caracteristicas unicas de este modelo como su cuerpo de CAOBA con Corte, trastes de ALPACA, Refuerzo de pala en NOGAL y 2 pines para colgar correa tradicional.",
+        "description": "New model!!!!! The G10 line of guitars has a series of unique characteristics of this model such as its mahogany body with Cutaway, ALPACA frets, WALNUT headstock reinforcement and 2 pins to hang traditional strap.",
         "stock": 18,
         "discount": "0%",
-        "type": "Electrocriolla",
+        "type": "Electro Creole",
         "left-hand": true,
-        "Additional-information": "Somos una tienda de instrumentos musicales conformada por técnicos y músicos para darte la mejor atención y servicio."
+        "Additional-information": "6 month warranty, free shipping "
     }
 
     ,
@@ -819,22 +819,22 @@
     {
         "id": "40",
         "brand": "Romulo Garcia",
-        "model": "CG100EQ",
+        "model": "Cg100eq",
         "fullName": ["Fonseca", "65 Medio Concierto"],
         "img": [
             "https://http2.mlstatic.com/D_NQ_NP_767517-MLA49170780655_022022-O.webp",
             "https://http2.mlstatic.com/D_NQ_NP_688876-MLA51633923214_092022-O.webp"
         ],
            
-        "color": ["naranja, negro"],
-        "price": 16566.50,
+        "color": ["orange, black"],
+        "price": 55.22,
         "strings": 6,
-        "description": "Guitarra electrocriolla romulo garcia cg100eq + funda + puas + - tamaño adulto - ecualizador 2 bandas tono/volume",
+        "description": "Electro Creole guitar romulo garcia cg100eq + case + picks + - adult size - equalizer 2 bands tone/volume",
         "stock": 18,
         "discount": "0%",
-        "type": "Electrocriolla",
+        "type": "Electro Creole",
         "left-hand": false,
-        "Additional-information": "Garantia 6 meses, envios sin cargo a todo el pais"
+        "Additional-information": "6 month warranty, free shipping "
     }
     ,
 
@@ -850,34 +850,34 @@
         "color": [
             "natural"
         ],
-        "price": 113315.40,
+        "price": 377.71,
         "strings": 6,
-        "description": "Guitarra de Estudio con Corte ( Cutaway).vCaracterísticasvTapa: Pino Abeto LaminadovAros: Caoba o Nogal MacizovFondo: Caoba o Nogal LaminadovOrnamentos: Doble Filete NegrovCorte: SivMástil: CedrovDiapasón",
+        "description": "Studio Guitar with Cutaway.vCharacteristicsvTop: Laminated Spruce PinevSides: mahogany or Solid WalnutvBack: mahogany or Laminated WalnutvOrnaments: Double black",
         "stock": 8,
         "discount": "7%",
-        "type": "Electrocriolla",
+        "type": "Electro Creole",
         "left-hand": false,
-        "Additional-information": "Garantia 6 meses, envios sin cargo a todo el pais"
+        "Additional-information": "6 month warranty, free shipping"
     },
     {
         "id": "42",
         "brand": "Superior",
-        "model": "c47",
+        "model": "C47",
         "fullName": ["Fonseca", "65 Medio Concierto"],
         "img": [
             "https://http2.mlstatic.com/D_NQ_NP_658410-MLA44627532925_012021-O.webp",
             "https://http2.mlstatic.com/D_NQ_NP_889018-MLA44627570236_012021-O.webp"
         ],
            
-        "color": ["azul, negro"],
-        "price": 14719.20,
+        "color": ["blue, black"],
+        "price": 49.06,
         "strings": 6,
-        "description": "Tamaño adulto estándar 4/4 39, Construida en madera genuina, Trastes en bronce, Acabado en laca brillante, Encordado completo calidad superior",
+        "description": "Standard adult size 4/4 39, Real wood construction, Bronze frets, Glossy lacquer finish, Superior quality full string",
         "stock": 30,
         "discount": "0%",
-        "type": "Electrocriolla",
+        "type": "Electro Creole",
         "left-hand": true,
-        "Additional-information": "Cualquier duda o consulta estamos a tu disposición, Gracias por visitar esta publicación"
+        "Additional-information":"Any questions or queries we are at your disposal, Thank you for visiting this publication"
     }
     ,
     {
@@ -892,14 +892,14 @@
         "color": [
             "natural"
         ],
-        "price": 103232.20,
+        "price": 344.10,
         "strings": 6,
-        "description": "Tamaño adulto estándar 4/4 39, Construida en madera genuina, Trastes en bronce, Acabado en laca brillante, Encordado completo calidad superior",
+        "description": "Standard adult size 4/4 39, Real wood construction, Bronze frets, Glossy lacquer finish, Superior quality full string",
         "stock": 30,
         "discount": "0%",
-        "type": "Electrocriolla",
+        "type": "Electro Creole",
         "left-hand": true,
-        "Additional-information": "Cualquier duda o consulta estamos a tu disposición, Gracias por visitar esta publicación"
+        "Additional-information":"Any questions or queries we are at your disposal, Thank you for visiting this publication"
     }
     ,
     {
@@ -913,16 +913,16 @@
         ],
            
         "color": [
-            "natural, negro"
+            "natural, black"
         ],
-        "price": 19490.00,
+        "price": 64.96,
         "strings": 6,
-        "description": "Guitarra electrocriolla romulo garcia cg100eq + funda + cable + puas + tamaño adulto - ecualizador 2 bandas tono/volume",
+        "description": "Electro Creole guitar romulo garcia cg100eq + case + cable + picks + adult size - equalizer 2 bands tone/volume",
         "stock": 8,
         "discount": "5%",
-        "type": "Electrocriolla",
+        "type": "Electro Creole",
         "left-hand": false,
-        "Additional-information": "Cualquier duda o consulta estamos a tu disposición, Gracias por visitar esta publicación"
+        "Additional-information":"Any questions or queries we are at your disposal, Thank you for visiting this publication"
     }
     ,
     {
@@ -936,22 +936,22 @@
         ],
            
         "color": [
-            "dorada"
+            "golden"
         ],
-        "price": 67449.00,
+        "price": 224.83,
         "strings": 6,
-        "description": "Guitarra electrocriolla romulo garcia cg100eq + funda + cable + puas + tamaño adulto - ecualizador 2 bandas tono/volume",
+        "description": "Electro Creole guitar romulo garcia cg100eq + case + cable + picks + adult size - equalizer 2 bands tone/volume",
         "stock": 28,
         "discount": "5%",
-        "type": "Electrocriolla",
+        "type": "Electro Creole",
         "left-hand": true,
-        "Additional-information": "Cualquier duda o consulta estamos a tu disposición, Gracias por visitar esta publicación"
+        "Additional-information":"Any questions or queries we are at your disposal, Thank you for visiting this publication"
     }
     ,
     {
         "id": "46",
         "brand": "Estudio ",
-        "model": "Niños",
+        "model": "Childs",
         "fullName": ["Fonseca", "65 Medio Concierto"],
         "img": [
             "https://http2.mlstatic.com/D_NQ_NP_875287-MLA43018506594_082020-O.webp",
@@ -961,43 +961,43 @@
         ],
            
         "color": [
-            "caoba, natural"
+            "mahogany, natural"
         ],
-        "price": 44593.15,
+        "price": 148.64,
         "strings": 6,
-        "description": "La Serie Valencia 100 nos ofrece una guitarra de cuerda de nylon con todas las características para estudiar y tocar el instrumento.",
+        "description": "The Valencia 100 Series offers us a nylon string guitar with all the features to study and play the instrument.",
         "stock": 28,
         "discount": "15%",
-        "type": "Electrocriolla",
+        "type": "Electro Creole",
         "left-hand": false,
-        "Additional-information": "Cualquier duda o consulta estamos a tu disposición, Gracias por visitar esta publicación"
+        "Additional-information":"Any questions or queries we are at your disposal, Thank you for visiting this publication"
     }
     ,
     {
         "id": "47",
         "brand": "Cort",
-        "model": "AF510",
+        "model": "Af510",
         "fullName": ["Fonseca", "65 Medio Concierto"],
         "img": [
            "https://http2.mlstatic.com/D_NQ_NP_839258-MLA43784419538_102020-O.webp",
            "https://http2.mlstatic.com/D_NQ_NP_983077-MLA43784374543_102020-O.webp"            
         ],
            
-        "color": ["caoba, natural"],
-        "price": 52249.15,
+        "color": ["mahogany, natural"],
+        "price": 174.16,
         "strings": 6,
-        "description": "Calidad que se hace notar, Las cuerdas de metal se caracterizan por su bajo estiramiento y resistencia a la corrosión y abrasión.",
+        "description": "Quality that stands out, Metal ropes are characterized by their low stretch and resistance to corrosion and abrasion.",
         "stock": 8,
         "discount": "0%",
-        "type": "Electroacústica",
+        "type": "Electro Acoustic",
         "left-hand": false,
-        "Additional-information": "Cualquier duda o consulta estamos a tu disposición, Gracias por visitar esta publicación"
+        "Additional-information":"Any questions or queries we are at your disposal, Thank you for visiting this publication"
     }
     ,
     {
         "id": "48",
         "brand": "Parquer",
-        "model": "AC209TBBLEQ4",
+        "model": "Ac209tbblEq4",
         "fullName": ["Fonseca", "65 Medio Concierto"],
         "img": [
            "https://http2.mlstatic.com/D_NQ_NP_752332-MLA41220506983_032020-O.webp",
@@ -1005,43 +1005,43 @@
         ],
            
         "color": [
-            "azul"
+            "blue"
         ],
-        "price": 62887.50,
+        "price": 209.62,
         "strings": 6,
-        "description": "La tapa de tilo tiene un peso y una densidad que te ofrecen un sonido con más cuerpo. Esta madera presenta un buen equilibrio de graves, por lo que suena con más peso rítmico y un tono suave.",
+        "description": "The basswood top has a weight and density that gives you a fuller sound. This wood has a good balance of bass, so it sounds with more rhythmic weight and a smooth tone.",
         "stock": 16,
         "discount": "0%",
-        "type": "Electroacústica",
+        "type": "Electro Acoustic",
         "left-hand": false,
-        "Additional-information": "Cualquier duda o consulta estamos a tu disposición, Gracias por visitar esta publicación"
+        "Additional-information":"Any questions or queries we are at your disposal, Thank you for visiting this publication"
     }
     ,
     {
         "id": "49",
         "brand": "Yamaha",
-        "model": "FX370C",
+        "model": "Fx370c",
         "fullName": ["Fonseca", "65 Medio Concierto"],
         "img": [
            "https://http2.mlstatic.com/D_NQ_NP_999887-MLA43823811094_102020-O.webp",
            "https://http2.mlstatic.com/D_NQ_NP_969478-MLA43823811016_102020-O.webp"            
         ],
            
-        "color": ["negro, dorada"],
-        "price": 62887.50,
+        "color": ["black, golden"],
+        "price": 209.62,
         "strings": 6,
-        "description": "Calidad que se hace notar, Las cuerdas de metal se caracterizan por su bajo estiramiento y resistencia a la corrosión y abrasión. Son más duraderas, sólidas y generan un sonido brillante y claro.",
+        "description": "Quality that stands out, Metal ropes are characterized by their low stretch and resistance to corrosion and abrasion. They are more durable, solid and produce a bright and clear sound.",
         "stock": 6,
         "discount": "10%",
-        "type": "Electroacústica",
+        "type": "Electro Acoustic",
         "left-hand": true,
-        "Additional-information": "Cualquier duda o consulta estamos a tu disposición, Gracias por visitar esta publicación"
+        "Additional-information":"Any questions or queries we are at your disposal, Thank you for visiting this publication"
     }
     ,
     {
         "id": "50",
         "brand": "Gracia",
-        "model": "Caoba",
+        "model": "Mahogany",
         "fullName": ["Fonseca", "65 Medio Concierto"],
         "img": [
            "https://http2.mlstatic.com/D_NQ_NP_918127-MLA46518329963_062021-O.webp",
@@ -1049,16 +1049,16 @@
         ],
            
         "color": [
-            "caoba"
+            "mahogany"
         ],
-        "price": 69687.59,
+        "price": 232.29,
         "strings": 6,
-        "description": "Con un toque artesanal único plasmado en sus materiales, Gracia acompaña a la historia musical desde el año 1870. Sus guitarras poseen alcance internacional y son utilizadas tantos por principiantes como por grandes referentes de la música.",
+        "description": "With a unique handcrafted touch embodied in its materials, Gracia has accompanied musical history since 1870. Its guitars have an international reach and are used by both beginners and great references in music.",
         "stock": 26,
         "discount": "18%",
-        "type": "Electrocriolla",
+        "type": "Electro Creole",
         "left-hand": false,
-        "Additional-information": "Cualquier duda o consulta estamos a tu disposición, Gracias por visitar esta publicación"
+        "Additional-information": "Any questions or queries we are at your disposal, Thank you for visiting this publication"
     }
 
 
