@@ -4,6 +4,7 @@ import signup from "./SignupSlice";
 /* import favourites from "./favouritesSlice"; */
 import dashboard from './dashboardSlice'
 
+
 const store = configureStore({
     reducer:{
         products: products,

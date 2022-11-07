@@ -37,9 +37,8 @@ return(
 }
 
 const ConDiv = styled.div`
-max-width: 1200px;
+max-width: 100%;
 color: whitesmoke;
-min-height: 300px;
 margin-left: auto;
 margin-right: auto;
 display: flex;

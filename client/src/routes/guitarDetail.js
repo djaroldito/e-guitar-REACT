@@ -2,7 +2,7 @@ import { useEffect } from "react"
 import axios from "axios"
 import { useDispatch, useSelector } from "react-redux"
 import { useParams, useNavigate, Link } from "react-router-dom"
-import { getById } from "../Redux/productActions"
+import { getById, addCartToDB } from "../Redux/productActions"
 import { clearDetail, getProductToCart } from "../Redux/productSlice"
 import { Swiper, SwiperSlide } from "swiper/react"
 import { Pagination } from "swiper"
@@ -30,6 +30,11 @@ const GuitarDetail = () => {
 	const carrito = useSelector((state) => state.products.cart)
 
   const isInCart = () => carrito?.find(el=> el.id === detail.id)
+  const addToCart = async (detail) => {
+	dispatch(getProductToCart(detail));
+	await addCartToDB(JSON.parse(localStorage.getItem('carrito')), sessionStorage.getItem('userId'));
+  }
+
 
 	const handleDeleteProduct = (id) => {
 		Swal.fire({
@@ -43,7 +48,7 @@ const GuitarDetail = () => {
 		}).then((result) => {
 			if (result.isConfirmed) {
 				axios
-					.delete(`http://localhost:3001/rguitars/${id}`)
+					.delete(`/rguitars/${id}`)
 					.then((res) => {
 						if (res.status === 200) {
 							Swal.fire(
@@ -99,7 +104,7 @@ const GuitarDetail = () => {
 							))}
 						</ColorDiv>
 					</form>
-					{localStorage.getItem("isAdmin") ? (
+					{localStorage.getItem("isAdmin") === "true" ? (
 						<CustomButtons>
 							<button
 								type='button'
@@ -121,7 +126,7 @@ const GuitarDetail = () => {
 						<CustomButtons>
 							<button
 								className='add-cart'
-								onClick={() => dispatch(getProductToCart(detail))}
+								onClick={() => addToCart(detail)}
 								disabled={isInCart()}
 							>
 								<BsCart2 />

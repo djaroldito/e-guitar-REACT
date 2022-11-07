@@ -6,6 +6,7 @@ import { AiOutlineEye, AiOutlineEyeInvisible, AiOutlineUser, AiOutlineMail, AiOu
 import Swal from "sweetalert2";
 import "./Styles/Signup.css";
 import axios from 'axios';
+import GoogleLogin from 'react-google-login';
 
 // Falta buscar si el usuario ya existe en la db
 // Registrarte con goolge a partir de Auth0
@@ -45,7 +46,7 @@ export default function Signup() {
     e.preventDefault();
 
     // Corroborar que no exista ese mail registrado ------------------------------------------
-    const { data } = await axios.get("http://localhost:3001/ruser/email", {
+    const { data } = await axios.get("/ruser/email", {
       params: {
         email: email.current.value
       }})
@@ -131,7 +132,9 @@ export default function Signup() {
               value={user.email}
               onChange={handleChange} 
               placeholder='Email' 
-              required />
+              required 
+              ref={email}
+              />
               <AiOutlineMail className='loginUsIc' />
               <div className='supEM'>
                 {errors.email && <p>{errors.email}</p>}
@@ -178,13 +181,8 @@ export default function Signup() {
             <div>
                 <AiOutlineGoogle size={30} className='loginGgIc'/> 
             </div>
-            <button
-              className="loginBtn google"
-              /* onClick={() => loginWithRedirect()} */>
-              Log in with Google
-            </button>
+            <GoogleLogin/>
       </form>
     </div>
   )
 }
-

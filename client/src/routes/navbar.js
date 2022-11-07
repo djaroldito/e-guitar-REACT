@@ -3,35 +3,35 @@ import { NavLink } from "react-router-dom";
 import styled from "styled-components";
 import { BiLogIn, BiLogOut } from "react-icons/bi";
 import { FaUserAlt } from "react-icons/fa";
-import Cart from "./components/cart";
+
 import { AiOutlineShoppingCart } from "react-icons/ai";
-import { AiOutlineSearch } from "react-icons/ai";
+import { LogoutButton } from "./Signup/LogoutButton.js";
 import "../index.css";
-import { useAuth0 } from "@auth0/auth0-react";
-import { LogoutButton } from "./Signup/Logout";
 
 const NavBar = () => {
-  const path = window.location.pathname;
-  const { isAuthenticated } = useAuth0();
+
   const handleLog = () => {
-    localStorage.removeItem('emailData');
-    localStorage.removeItem('isAdmin')
-    localStorage.removeItem('passwordData')
+    sessionStorage.removeItem("emailData");
+    sessionStorage.removeItem("isAdmin");
+    sessionStorage.removeItem("passwordData");
+    localStorage.removeItem('carrito');
+    sessionStorage.removeItem('userId');
     window.location.reload();
   };
-  const email = localStorage.getItem("emailData");
-  const isAdmin = localStorage.getItem("isAdmin");
-
+  const email = sessionStorage.getItem("emailData");
+  const isAdmin = sessionStorage.getItem("isAdmin");
+  const emailGoogle = sessionStorage.getItem("emailGoogle");
+  const userImage = sessionStorage.getItem("imageURL");
   return (
-    <header className={path === "/" ? "headerLanding" : "header"}>
+    <header className={"header"}>
       <NavCont>
         <NavLink to="/home">Home</NavLink>
         <NavLink to="/">discount</NavLink>
         <NavLink to="/dashboard">dashboard</NavLink>
-        {/* {isAdmin === "true" ? <NavLink to="/newProduct">Add Product</NavLink> : null} */}
 
+        {emailGoogle ? (<div><LogoutButton/></div>) : (<div style={{display: "none"}}><LogoutButton/></div>)}
         <IconCont className={""}>
-          {!isAuthenticated && !email ? (
+          {!email && !emailGoogle ? (
             <UserCont>
               <NavLink to="/login">
                 <BiLogIn />
@@ -39,18 +39,18 @@ const NavBar = () => {
             </UserCont>
           ) : (
             <UserCont>
-              {isAuthenticated ? (
-                <LogoutButton />
-              ) : (
+              {email &&
+              (
                 <button onClick={handleLog}>
                   <BiLogOut />
                 </button>
-              )}
+              )
+              }
             </UserCont>
           )}
 
-          <UserCont className={"logged"}>
-            <FaUserAlt />
+          <UserCont>
+              {userImage ? (<img src={userImage}></img>) : (<FaUserAlt style={{color: "whitesmoke"}}/>)}
           </UserCont>
         </IconCont>
 
@@ -88,9 +88,12 @@ const NavCont = styled.div`
 
 const UserCont = styled.div`
   font-size: 20px;
-  border-radius: 50%;
-  padding: 4px 6px;
   color: rgb(10, 20, 11);
+  img{
+    border-radius: 50%;
+    width: 40px;
+    height:40px;
+  }
 `;
 
 const IconCont = styled.div`
@@ -100,9 +103,7 @@ const IconCont = styled.div`
   width: 100px;
   justify-content: space-between;
 
-  .logged {
-    background-color: white;
-  }
+
 `;
 
 export default NavBar;
