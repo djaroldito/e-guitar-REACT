@@ -60,7 +60,7 @@ sequelize.models = Object.fromEntries(capsEntries)
 
 // En sequelize.models están todos los modelos importados como propiedades
 // Para relacionarlos hacemos un destructuring
-const { Product, User, Order, OrderDetail, Review } = sequelize.models
+const { Product, User, Order, OrderDetail, Review, Cart } = sequelize.models
 
 User.hasMany(Order)
 Order.hasMany(OrderDetail)
@@ -73,18 +73,7 @@ User.belongsToMany(Product, { through: WishList })
 Product.belongsToMany(User, { through: Review })
 User.belongsToMany(Product, { through: Review })
 // cart
-const Cart = sequelize.define(
-	"cart",
-    {
-        quantity: {
-            type: DataTypes.INTEGER,
-            defaultValue: 1
-        }
-    },
-	{
-		freezeTableName: true,
-	}
-)
+
 Product.belongsToMany(User, { through: Cart })
 User.belongsToMany(Product, { through: Cart })
 

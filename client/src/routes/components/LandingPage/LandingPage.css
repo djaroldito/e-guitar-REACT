@@ -5,7 +5,7 @@
     width: 100vw;
     height: 100vh;
     object-fit: cover;
-    position: fixed;
+    position: absolute;
     left: 0;
     right: 0;
     top: 0;
@@ -97,4 +97,14 @@
 .footerLandingPage p{
     font-size: 20px;
     color: white;   
+}
+.about{
+    background-color: white;
+    padding-top:64px;
+    padding-bottom:64px;
+}
+.offers{
+    display: block;
+    height: auto;
+    max-width: 100%
 }

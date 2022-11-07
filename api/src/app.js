@@ -3,6 +3,7 @@ const cookieParser = require("cookie-parser");
 const bodyParser = require("body-parser");
 const morgan = require("morgan");
 const routes = require("./routes/index.js");
+const adminRoutes = require("./routes/adminDashboard/index.js");
 
 
 const server = express();
@@ -26,5 +27,6 @@ server.use((req, res, next) => {
   next();
 });
 server.use("/", routes);
+server.use("/admin", adminRoutes);
 
 module.exports = server;

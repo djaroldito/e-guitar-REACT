@@ -10,11 +10,10 @@ import {gapi} from 'gapi-script'
 
 
 // !psw => mail con un link hacia un nuevo formulario para resetear contraseña => se borra la psw anterior, se crea una nueva y se guarda en la
-// !psw => 
+// !psw =>
 let client = "1071381556347-p8k8tg37ss2e9ag86088tvdds19dot5o.apps.googleusercontent.com"
 
 export default function Login() {
-
 
   useEffect(()=>{
     function start(){
@@ -32,28 +31,29 @@ export default function Login() {
   const email = useRef();
   const password = useRef();
 
-  const getEmail = localStorage.getItem("emailData");
-  const getPassword = localStorage.getItem("passwordData");
+  const getEmail = sessionStorage.getItem("emailGoogle");
+
 
   const [showPsw, setShowPsw] = useState(false);
-  
-  
+
+
   const handleSignIn = async (e) => {
     e.preventDefault();
     try {
       const { data } = await axios.get("/ruser/login", {
         params: {
-          email: email.current.value,
+          email: email.current.value ? email.current.value : getEmail,
           password: password.current.value,
         },
       });
 
       if (data) {
-        localStorage.setItem("emailData", email.current.value);
-        localStorage.setItem("passwordData", password.current.value);
-        localStorage.setItem("isAdmin", data.isAdmin);
-        navigate("/home", { state: { localStorage } });
-      } 
+        sessionStorage.setItem("emailData", email.current.value);
+        sessionStorage.setItem("isAdmin", data.isAdmin);
+        localStorage.setItem("carrito", JSON.stringify(data.products));
+        sessionStorage.setItem("userId", data.id);
+        navigate("/home", { state: { sessionStorage, localStorage } });
+      }
     } catch (error) {
       console.log(error.message, Swal.fire({
         title: "Usuario no encontrado",
@@ -73,7 +73,7 @@ export default function Login() {
     <div>
       <div id="loginContainer">
       <h2>Log In</h2>
-        {getEmail & getPassword ? (
+        {getEmail ? (
           <Home />
         ) : (
           <form className="signInForm" onSubmit={handleSignIn}>
@@ -86,7 +86,7 @@ export default function Login() {
                 <div className='loginEyeIcon' onClick={() => setShowPsw(!showPsw)}>
                     {showPsw ? <AiOutlineEye/> : <AiOutlineEyeInvisible className='loginInIc'/>}
                 </div>
-              
+
             </fieldset>
             <div className="loginPsw">
               <p>Olvidaste tu contraseña?</p>
@@ -97,13 +97,8 @@ export default function Login() {
 
             <div className="loginGg">
               <p>O ingresa con</p>
+              <LoginButton/>
             </div>
-            <div>
-                    <AiOutlineGoogle size={30} className='signinGgIc'/> 
-                </div>
-                <LoginButton/>
-            
-            
             <div className="loginAcc">
               <p>No tienes una cuenta?</p>
             </div>

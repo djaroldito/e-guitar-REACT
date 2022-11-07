@@ -2,7 +2,7 @@ import { useEffect } from "react"
 import axios from "axios"
 import { useDispatch, useSelector } from "react-redux"
 import { useParams, useNavigate, Link } from "react-router-dom"
-import { getById } from "../Redux/productActions"
+import { getById, addCartToDB } from "../Redux/productActions"
 import { clearDetail, getProductToCart } from "../Redux/productSlice"
 import { Swiper, SwiperSlide } from "swiper/react"
 import { Pagination } from "swiper"
@@ -18,7 +18,7 @@ const GuitarDetail = () => {
 	const dispatch = useDispatch()
 	const navigate = useNavigate()
 	const { id } = useParams()
-
+	const userId = sessionStorage.getItem('userId');
 	useEffect(() => {
 		dispatch(getById(id))
 		return () => {
@@ -30,8 +30,12 @@ const GuitarDetail = () => {
 	const carrito = useSelector((state) => state.products.cart)
 
   const isInCart = () => carrito?.find(el=> el.id === detail.id)
-  
-  
+  const addToCart = async (detail) => {
+	dispatch(getProductToCart(detail));
+	if(userId)
+	await addCartToDB(JSON.parse(localStorage.getItem('carrito')), userId);
+  }
+
 
 	const handleDeleteProduct = (id) => {
 		Swal.fire({
@@ -60,7 +64,7 @@ const GuitarDetail = () => {
 					})
 			}
 		})
-	}
+    }
 
 	return (
 		<section>
@@ -84,7 +88,7 @@ const GuitarDetail = () => {
 					<h2>{detail.brand}</h2>
 					<h3>${detail.price ? detail.price.toFixed(2) : null}</h3>
 					<h3>model: {detail.model}</h3>
-					<p>{detail.description}</p>
+                    <p><div dangerouslySetInnerHTML={{__html: `${detail.description}`}}></div></p>
 					<p>
 						<b>Type: </b>
 						{detail.type}
@@ -123,7 +127,7 @@ const GuitarDetail = () => {
 						<CustomButtons>
 							<button
 								className='add-cart'
-								onClick={() => dispatch(getProductToCart(detail))}
+								onClick={() => addToCart(detail)}
 								disabled={isInCart()}
 							>
 								<BsCart2 />
@@ -138,7 +142,7 @@ const GuitarDetail = () => {
 					)}
 				</TextCont>
 			</CountDiv>
-			<AdInfo>aditional Information: {detail.aditionalInformation}</AdInfo>
+			<AdInfo>aditional Information: <span dangerouslySetInnerHTML={{__html: `${detail.aditionalInformation}`}}></span></AdInfo>
 		</section>
 	)
 }
