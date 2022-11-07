@@ -12,20 +12,22 @@ import { Link } from 'react-router-dom';
 import {IoArrowBackOutline} from 'react-icons/io5'
 
 const Cart = () =>{
-   const carrito = useSelector(state => state.products.cart)
-
-   const dispatch = useDispatch()
+    const carrito = useSelector(state => state.products.cart)
+    const userId = sessionStorage.getItem('userId');
+    const dispatch = useDispatch()
 
   
 
    const addCartItem = async (item)=> {
     dispatch(getProductToCart(item))
-    await addCartToDB(JSON.parse(localStorage.getItem('carrito')), sessionStorage.getItem('userId'));
+    if(userId)
+    await addCartToDB(JSON.parse(localStorage.getItem('carrito')), userId);
   }
 
   const delFromCart = async (item)=> {
      dispatch(delOneFromCart(item))
-    await addCartToDB(JSON.parse(localStorage.getItem('carrito')), sessionStorage.getItem('userId'));
+     if(userId)
+      await addCartToDB(JSON.parse(localStorage.getItem('carrito')), userId);
   }
 
   const completePayment = async (cart) => {
@@ -66,7 +68,8 @@ const preguntaUno = async (item)=>{
  }).then(async (result) => {
    if (result.isConfirmed) {
     dispatch(delOneFromCart(item))
-    await addCartToDB(JSON.parse(localStorage.getItem('carrito')), sessionStorage.getItem('userId'));
+    if(userId)
+    await addCartToDB(JSON.parse(localStorage.getItem('carrito')), userId);
      Swal.fire(
        'Deleted!',      
        )

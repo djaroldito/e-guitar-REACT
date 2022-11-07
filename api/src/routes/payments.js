@@ -28,8 +28,8 @@ router.post('/create-order', async (req, res) => {
                 brand_name: "E-commerce Guitar",
                 landing_page: "LOGIN",
                 user_action: "PAY_NOW",
-                return_url: "http://localhost:3001/payments/capture-order",
-                cancel_url: "http://localhost:3001/payments/cancel-order"
+                return_url: "/payments/capture-order",
+                cancel_url: "/payments/cancel-order"
             }
         }
     
@@ -77,7 +77,7 @@ router.get('/capture-order', async (req, res) => {
 })
 
 router.get('/cancel-order', (req, res) => {
-    res.redirect('http://localhost:3000/home');
+    res.redirect('/home');
 })
 
 module.exports = router;

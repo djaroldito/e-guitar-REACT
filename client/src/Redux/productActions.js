@@ -102,7 +102,7 @@ export const payment = async (cart) => {
 
 export const validation = async (token) => {
 	try{
-		const {data} = await axios.post(`http://localhost:3001/payments/capture-order?token=${token}`)
+		const {data} = await axios.post(`/payments/capture-order?token=${token}`)
 		return data;
 	} catch (error) {
 		return { error: error.response ? error.response.data : error.message }
@@ -110,13 +110,13 @@ export const validation = async (token) => {
 }
 export const addCartToDB = async (cart, userID) => {
 	try{
-		await axios.post(`http://localhost:3001/cart?userID=${userID}`, cart)
+		await axios.post(`/cart?userID=${userID}`, cart)
 	} catch (error) {
 		return { error: error.response ? error.response.data : error.message }
 	}
 }
 export const getCartFromDB = async (userID)  => {
-	const {data: cart} = await axios(`http://localhost:3001/cart?userID=${userID}`);
+	const {data: cart} = await axios(`/cart?userID=${userID}`);
 	console.log(cart);
 	return cart;
 }

@@ -18,7 +18,7 @@ const GuitarDetail = () => {
 	const dispatch = useDispatch()
 	const navigate = useNavigate()
 	const { id } = useParams()
-
+	const userId = sessionStorage.getItem('userId');
 	useEffect(() => {
 		dispatch(getById(id))
 		return () => {
@@ -32,7 +32,8 @@ const GuitarDetail = () => {
   const isInCart = () => carrito?.find(el=> el.id === detail.id)
   const addToCart = async (detail) => {
 	dispatch(getProductToCart(detail));
-	await addCartToDB(JSON.parse(localStorage.getItem('carrito')), sessionStorage.getItem('userId'));
+	if(userId)
+	await addCartToDB(JSON.parse(localStorage.getItem('carrito')), userId);
   }
 
 
