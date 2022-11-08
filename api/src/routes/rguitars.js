@@ -4,27 +4,10 @@ const path = require("path")
 const { Router } = require("express")
 const router = Router()
 
-
 const sequelize = require("sequelize")
 const { Product } = require("../db.js")
-const { where } = require("sequelize")
-const { Console } = require("console")
 
-// router.get("/sort", async (req, res) => {
 
-// 	let Data;
-// 	try {
-// 		let {cond} = req.query
-// 	  Data = await Product.findAll({
-// 		order: [["price", cond]],
-// 		raw: true,
-// 		attributes: ["id", "brand",'price','type', 'color'],
-// 	  });
-// 	} catch (error) {
-// 	  console.log(error);
-// 	}
-// 	res.status(200).send(Data);
-//   });
 //  GET /rguitars
 //  GET /rguitars?brand="..." &type="..." &color="..."
 // Pagination: limit=4 (items per page), page=1 (currentPage)
