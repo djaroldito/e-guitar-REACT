@@ -8,8 +8,6 @@ import Error from "./routes/components/Payment/Error";
 import Cart from './routes/components/cart';
 import Signup from './routes/Signup/Signup';
 import Login from './routes/Signup/Login';
-import Activate from "./routes/Signup/Activate";
-
 import ProductForm from './routes/components/ProductForm/ProductForm'
 
 import Layout from "./routes/Layout"
@@ -34,7 +32,6 @@ function App() {
                   <Route path='/editProduct/:id' element={<ProductForm />} />
                   <Route path="/payment/validation" element={<Payment/>}/>
                     <Route path="/payment/error" element={<Error/>}/>
-                    <Route path="/activate" element={<Activate />} />
 				</Route>
 
 				{/* PROTECTED ROUTES FOR ADMIN DASHBOARD */}
