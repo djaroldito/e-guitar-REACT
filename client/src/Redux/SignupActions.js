@@ -13,7 +13,7 @@ export const postSignupForm = (supData) => (dispatch) => {
 }
 export const getUserDB = (email) => (dispatch) => {
     
-    axios(`http://localhost:3001/ruser/email?email=${email}`)
+    axios(`/ruser/email?email=${email}`)
     .then(res => dispatch(getUser(res.data)))
     .catch(error => console.log(error));
 

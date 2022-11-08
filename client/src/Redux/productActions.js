@@ -28,15 +28,7 @@ export const getById = (id) => (dispatch) => {
 		.catch((err) => console.log(err))
 }
 
-// export const getByName = (Name, currentPage) => (dispatch) => {
-// 	axios(`http://localhost:3001/rguitars?fullName=${Name}&page=${currentPage}`)
-// 		.then((res) => {
-// 			dispatch(getProductByName(res.data.products))
-// 			dispatch(setCurrentPage(res.data.currentPage))
-// 			dispatch(setPageCount(res.data.pageCount))
-// 		})
-// 		.catch((err) => console.log(err))
-// }
+
 export const getBrands = () => (dispatch) => {
 	axios(`/rfilters/brands`)
 		.then((res) => dispatch(getAllBrands(res.data)))
@@ -54,17 +46,18 @@ export const getTypes = () => (dispatch) => {
 }
 
 export const getByFilter = (filter, currentPage) => (dispatch) => {
-    const { color, brand, type, fullName } = filter
+    const { color, brand, type, fullName, minPrice, maxPrice, sortPrice } = filter
+
 
 	axios(
-		`/rguitars?color=${color}&brand=${brand}&type=${type}&fullName=${fullName}&page=${currentPage}`
+		`/rguitars?color=${color}&brand=${brand}&type=${type}&fullName=${fullName}&page=${currentPage}&minPrice=${minPrice}&maxPrice=${maxPrice}&sortPrice=${sortPrice}`
 	)
 		.then((res) => {
             dispatch(getByFilters(res.data.products))
             dispatch(setCurrentPage(res.data.currentPage))
 			dispatch(setPageCount(res.data.pageCount))
 		})
-		.catch((err) => console.log(err))
+		.catch(err => console.log(err) )
 }
 
 export const postProductForm = async (formData) => {
@@ -102,7 +95,7 @@ export const payment = async (cart) => {
 
 export const validation = async (token) => {
 	try{
-		const {data} = await axios.post(`http://localhost:3001/payments/capture-order?token=${token}`)
+		const {data} = await axios.post(`/payments/capture-order?token=${token}`)
 		return data;
 	} catch (error) {
 		return { error: error.response ? error.response.data : error.message }
@@ -110,13 +103,13 @@ export const validation = async (token) => {
 }
 export const addCartToDB = async (cart, userID) => {
 	try{
-		await axios.post(`http://localhost:3001/cart?userID=${userID}`, cart)
+		await axios.post(`/cart?userID=${userID}`, cart)
 	} catch (error) {
 		return { error: error.response ? error.response.data : error.message }
 	}
 }
 export const getCartFromDB = async (userID)  => {
-	const {data: cart} = await axios(`http://localhost:3001/cart?userID=${userID}`);
+	const {data: cart} = await axios(`/cart?userID=${userID}`);
 	console.log(cart);
 	return cart;
 }
