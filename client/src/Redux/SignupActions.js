@@ -1,9 +1,5 @@
 import axios from "axios";
-<<<<<<< HEAD
-import { addUser, activateUser } from "./SignupSlice";
-=======
 import { addUser, getUser } from "./SignupSlice";
->>>>>>> dev
 
 export const postSignupForm = (supData) => (dispatch) => {
     try {
