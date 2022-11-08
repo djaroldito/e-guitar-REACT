@@ -14,18 +14,18 @@ const getPagingData = (data, page, limit) => {
 }
 
 const updateOrCreate = async (model, where, newItem) => {
-	try {
+    try {
 		if (where) {
 			// First try to find the record
-			const foundItem = await model.findOne({ where })
-			if (!foundItem) {
+            const foundItem = await model.findOne({ where })
+			if (foundItem) {
 				// Found an item, update it
 				await model.update(newItem, { where })
 				return { data: foundItem, created: false }
 			}
-		} else {
+        } else {
 			// Item not found, create a new one
-			const item = await model.create({ newItem })
+			const item = await model.create( newItem )
 			return { data: item, created: true }
 		}
 	} catch (error) {
