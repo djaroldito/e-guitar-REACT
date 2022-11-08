@@ -31,15 +31,14 @@ return(
             <a href='#'><TfiLocationPin/> Evergreen Terrace 742, Springfield</a>
             </ColumDiv>
          </ConDiv>
-            <CopyDiv>© Guitar Commers, 2022. Todos los derechos reservados</CopyDiv>
+            <CopyDiv>All rights reserved © Guitar Commers, 2022.</CopyDiv>
     </footer>
 )
 }
 
 const ConDiv = styled.div`
-max-width: 1200px;
+max-width: 100%;
 color: whitesmoke;
-min-height: 300px;
 margin-left: auto;
 margin-right: auto;
 display: flex;
@@ -60,6 +59,13 @@ h4, p, a{
    color: whitesmoke;
    text-decoration: none;
 }
+a{
+   margin-top: 10px;
+   margin-bottom: 25px;
+}
+h4{
+   margin-bottom: 40px;
+}
 `
 const CopyDiv = styled.div`
 margin-left: auto;
@@ -67,6 +73,7 @@ margin-right: auto;
 width: 500px;
 color: whitesmoke;
 margin-top: 25px;
+padding: 20px;
 `
 
 export default Footer

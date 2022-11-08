@@ -5,7 +5,7 @@
     width: 100vw;
     height: 100vh;
     object-fit: cover;
-    position: fixed;
+    position: absolute;
     left: 0;
     right: 0;
     top: 0;
@@ -50,8 +50,8 @@
     transform: rotate(45deg);
     border-color: orange;
     height: 120%;
-    
-   
+
+
 }
 .Arrow:hover::before {
     border-color: orange;
@@ -59,7 +59,7 @@
 }
 
 .Arrow .ArrowContent{
-    position: absolute; 
+    position: absolute;
     display: block;
     color:white;
     right:100%;
@@ -74,10 +74,9 @@
 
 .title{
     font-size:4vw;
-    font-family: "Atomic Age"; 
+    font-family: 'Fjalla One';
     color: #EB984E;
     text-align: center;
-    
 }
 .title p {
     line-height: 1.5;
@@ -92,9 +91,19 @@
     background-color: rgb(0, 0, 0, .5);
     display: flex;
     align-items: center;
-    justify-content: center; 
+    justify-content: center;
 }
 .footerLandingPage p{
     font-size: 20px;
-    color: white;   
+    color: white;
+}
+.about{
+    background-color: white;
+    padding-top:64px;
+    padding-bottom:64px;
+}
+.offers{
+    display: block;
+    height: auto;
+    max-width: 100%
 }

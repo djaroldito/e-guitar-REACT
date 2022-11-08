@@ -1,20 +1,22 @@
 const {Router} = require('express');
 const axios = require('axios');
+const { Order } = require("../db.js")
 const {PAYPAL_API, PAYPAL_API_SECRET, PAYPAL_API_CLIENT} = require('../paymentConfig.js');
 const router =  Router();
 
 
+
 router.post('/create-order', async (req, res) => {
     const products = req.body;
+
     const productsMapped = products.map(product => 
         (
                 {   
-                    reference_id: product.id,
+                    reference_id: product.Cart.productId,
                     amount:{
                         currency_code: "USD",
-                        value: `${(product.price * product.quantity).toFixed(2)}`
-                    },
-                   /*  description: product.description */
+                        value: `${(product.price * product.Cart.quantity).toFixed(2)}`
+                    }
                 }
             )
         );
@@ -26,8 +28,8 @@ router.post('/create-order', async (req, res) => {
                 brand_name: "E-commerce Guitar",
                 landing_page: "LOGIN",
                 user_action: "PAY_NOW",
-                return_url: "http://localhost:3001/payments/capture-order",
-                cancel_url: "http://localhost:3001/payments/cancel-order"
+                return_url: "http://localhost:3000/payments/capture-order",
+                cancel_url: "http://localhost:3000/payments/cancel-order"
             }
         }
     
@@ -43,25 +45,23 @@ router.post('/create-order', async (req, res) => {
                 password: PAYPAL_API_SECRET
             }
         })
-    
+
         const response = await axios.post(`${PAYPAL_API}/v2/checkout/orders`, order, {
             headers: {
                 Authorization: `Bearer ${access_token}`
             }
         })
     
-        console.log(response.data);
-    
         res.send(response.data.links[1].href);
     }
     catch (error){
-        res.status(500).send('Something Went Wrong');
+        res.status(500).send(error);
     }
 });
 
 router.get('/capture-order', async (req, res) => {
 
-    const {token} = req.query;
+    try{const {token} = req.query;
     
     const response = await axios.post(`${PAYPAL_API}/v2/checkout/orders/${token}/capture`, {}, {
             auth:{
@@ -69,12 +69,15 @@ router.get('/capture-order', async (req, res) => {
                 password: PAYPAL_API_SECRET
             }
         })
-        console.log(response.data.links);
-    res.send('Pago Completado');
+    
+    res.redirect('http://localhost:3000/payment/validation');}
+    catch(error){
+        res.redirect('http://localhost:3000/payment/validation');
+    }
 })
 
 router.get('/cancel-order', (req, res) => {
-    res.send('cancel-order');
+    res.redirect('/home');
 })
 
 module.exports = router;

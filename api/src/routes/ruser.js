@@ -1,6 +1,6 @@
 const { Router } = require("express")
 const router = Router()
-const { User } = require("../db.js")
+const { User, Product } = require("../db.js")
 const bcrypt = require("bcrypt")
 const nodemailer = require("nodemailer");
 const saltRounds = 10;
@@ -90,22 +90,6 @@ router.post("/register", async (req, res) => {
 		const mailReg = await mailRegisterConfirm({toUser: newPendingUser, hash: hash})	
 		console.log("Esto es mailRegisterConfirm: ", mailRegisterConfirm);
 
-		/* console.log("Esto es pendingUser: ", newPendingUser)
-		 {
-			console.log("Entramos al if de newPending")
-			const user = await User.findAll({
-				where: {
-				password: hash,
-				isActive: false
-				}
-				}); 
-				console.log("Esto es User", user);
-			if(user){
-				console.log("Entramos al if final")
-				user.isActive = true;
-				User.save(user);	
-			}
-		} */
 		if (newPendingUser) return res.status(200).json({message: `User has been activated!`});
 	} catch (error) {
 		res.status(400).send(error.message);
@@ -117,12 +101,6 @@ router.post("/register", async (req, res) => {
  	const { hash, email } = req.params;
 		console.log("esto es email: ", email);
 
-/* 	 function eliminarSlash(hash) {
-		const nuevoHash = hash.replace("/", "*");
-		return nuevoHash;
-	  }
-	  const hashSeguro = eliminarSlash(hash); */
-
 	try {
  	 	const user = await User.update({
 			isActive: true
@@ -133,12 +111,6 @@ router.post("/register", async (req, res) => {
 			}
 		}); 
 		console.log("Esto es User", user);
-/* 		if (user) {
-			user.isActive = true;
-			console.log("Esto no es User: ", user);
-			console.log("Esto es userIsActive: ", user.isActive)
-			User.save(user);
-			}  */
 
 		res.redirect(`http://localhost:3000/activate`);
  	} catch (error) {
@@ -148,27 +120,54 @@ router.post("/register", async (req, res) => {
 }) 
  
 
-router.get("/email", async (req,res) => {
-    try {
-        const {email} = req.query;
-        if(!email){
-            res.status(400).send("falta cargar el gmail")
-        } else {
-            const user = await User.findOne({
-                where: {
-                email,
-                }
-            })
-            if(user){
-                return res.status(200).json(user)
-            } else {
-                return res.status(200).json(user)
-            }
-        }
-    } catch (error){
-        res.status(400).send(error)
-     }
-})
+  router.get("/registerGoogle", async (req, res) => {
+	try {
+	  const { email,userName } = req.query;
+
+	  if (!email || !userName) {
+		res.status(400).send("faltan cargar datos");
+	  } else {
+		const user = await User.findOne({
+		  where: {
+			email,
+			userName
+		  },
+		});
+
+		if (user) {
+		  return res.status(200).json(user);
+		} else {
+		  return res.status(200).json(user);
+		}
+	  }
+	} catch (error) {
+	  res.status(400).send(error);
+	}
+  });
+
+
+router.get("/email", async (req, res) => {
+	try {
+	  const { email } = req.query;
+	  if (!email) {
+		res.status(400).send("falta cargar el gmail");
+	  } else {
+		const user = await User.findOne({
+		  where: {
+			email,
+		  }, include: Product
+		});
+
+		if (user) {
+		  return res.status(200).json(user);
+		} else {
+		  return res.status(200).json(user);
+		}
+	  }
+	} catch (error) {
+	  res.status(400).send(error);
+	}
+  });
 
 /**  GET /rusers/login */
 router.get("/login", async (req, res) => {
@@ -177,6 +176,7 @@ router.get("/login", async (req, res) => {
 
 		// if no users load defaul
 		await loadAdminUserData()
+
 		if (!email || !password) {
 			res.status(400).send("Faltan parametros")
 		} else {
@@ -184,8 +184,9 @@ router.get("/login", async (req, res) => {
 				where: {
 					email,
 					isActive: true
-				},
-			})
+				}, include: Product
+			});
+
 			if (user) {
 				const match = await bcrypt.compare(password, user.password)
 				if (match) {
@@ -205,19 +206,24 @@ router.get("/login", async (req, res) => {
 const loadAdminUserData = async () => {
 	try {
 		// get all users from database
-		let dbUsers = await User.findAll()
+		let dbUsers = await User.findAll();
 		// if no users loaded
 		if (dbUsers.length === 0) {
-			const hash = bcrypt.hashSync("admin", saltRounds)
-			await User.create({
-				email: "admin@gmail.com",
-				password: hash,
-				isAdmin: true,
-			})
+		  const hash = bcrypt.hashSync("admin", saltRounds);
+		  await User.create({
+			email: "admin@gmail.com",
+			password: hash,
+			isAdmin: true,
+		  })
+		  await User.create({
+			email: 'cliente@gmail.com',
+			password: hash,
+			isAdmin: false,
+		})
 		}
 	} catch (error) {
 		throw new Error(error.message)
 	}
 }
 
-module.exports = router
+module.exports = router;

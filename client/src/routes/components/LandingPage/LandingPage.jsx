@@ -1,10 +1,9 @@
 import movie from "../../../vid/StockVideo.mp4"
 import { NavLink } from "react-router-dom"
-import { AiOutlineCreditCard } from "react-icons/ai"
-import { MdOutlineLocalShipping } from "react-icons/md"
-import { FaShieldAlt } from "react-icons/fa"
 import styled from "styled-components"
 import "./LandingPage.css"
+import React from "react"
+
 
 const LandingPage = () => {
 	return (
@@ -14,30 +13,29 @@ const LandingPage = () => {
 			</video>
 			<NavLink to='/home'>
 				<div className='Arrow'>
-					<h2 className='ArrowContent'>Ver Catalogo</h2>
+					<h2 className='ArrowContent'>CATALOG</h2>
 				</div>
 			</NavLink>
 			<div className='title'>
 				<h1>
-					Guitar <br /> Shop
+					{ '{ GUITAR CODE }' }
 				</h1>
 			</div>
-			<footer className='footerLandingPage'>
-				<Container>
-					<AiOutlineCreditCard />
-				</Container>
-				<Link href='#'>
-					<p>Pagá con tarjeta en cuotas</p>
-				</Link>
-				<Container>
-					<MdOutlineLocalShipping />
-				</Container>
-				<p>Envios Gratis a todo el país</p>
-				<Container>
-					<FaShieldAlt />
-				</Container>
-				<p>Compra Segura</p>
-			</footer>
+			<div className='offers'>
+				{/* {offers.map(product => {
+						return (<div>
+							<img src={product.img}></img>
+							<p>{product.brand}</p>
+							<p>{product.model}</p>
+						</div>)
+					}
+				)} */}
+			</div>
+			{/* <div className="about">
+				<h2>Acerca de nosotros</h2>
+				<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla vestibulum sit amet velit quis blandit. Curabitur libero nibh, varius ac pellentesque non, tristique maximus ipsum. In sollicitudin, tellus quis hendrerit porttitor, risus libero semper turpis, nec pharetra tellus purus fermentum lectus. Duis fringilla ultrices nunc. Proin ultrices mi non libero placerat fringilla. Integer eros nibh, accumsan a imperdiet vitae, convallis nec sapien. Aenean at rhoncus urna.
+				Morbi porta risus at congue feugiat. Fusce tempus pulvinar porta. Donec vulputate porta mi. Vivamus at velit arcu. Nam auctor mauris nisl, eu dictum elit vestibulum quis. Fusce in nisl nec ligula iaculis tristique. Fusce orci mauris, bibendum id massa in, interdum porttitor turpis. Morbi semper eleifend erat, sit amet aliquam ex mollis non. Sed placerat aliquet ex eget venenatis. Nulla varius vulputate blandit. Fusce molestie cursus risus at euismod. Sed sit amet turpis at arcu congue porta a in ante. Integer facilisis est felis, a consectetur risus rutrum sit amet.</p>
+			</div> */}
 		</div>
 	)
 }

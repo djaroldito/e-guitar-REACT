@@ -2,7 +2,7 @@ import { useEffect } from "react"
 import axios from "axios"
 import { useDispatch, useSelector } from "react-redux"
 import { useParams, useNavigate, Link } from "react-router-dom"
-import { getById } from "../Redux/productActions"
+import { getById, addCartToDB } from "../Redux/productActions"
 import { clearDetail, getProductToCart } from "../Redux/productSlice"
 import { Swiper, SwiperSlide } from "swiper/react"
 import { Pagination } from "swiper"
@@ -18,7 +18,7 @@ const GuitarDetail = () => {
 	const dispatch = useDispatch()
 	const navigate = useNavigate()
 	const { id } = useParams()
-
+	const userId = sessionStorage.getItem('userId');
 	useEffect(() => {
 		dispatch(getById(id))
 		return () => {
@@ -30,8 +30,12 @@ const GuitarDetail = () => {
 	const carrito = useSelector((state) => state.products.cart)
 
   const isInCart = () => carrito?.find(el=> el.id === detail.id)
-  
-  
+  const addToCart = async (detail) => {
+	dispatch(getProductToCart(detail));
+	if(userId)
+	await addCartToDB(JSON.parse(localStorage.getItem('carrito')), userId);
+  }
+
 
 	const handleDeleteProduct = (id) => {
 		Swal.fire({
@@ -45,7 +49,7 @@ const GuitarDetail = () => {
 		}).then((result) => {
 			if (result.isConfirmed) {
 				axios
-					.delete(`http://localhost:3001/rguitars/${id}`)
+					.delete(`/rguitars/${id}`)
 					.then((res) => {
 						if (res.status === 200) {
 							Swal.fire(
@@ -60,11 +64,11 @@ const GuitarDetail = () => {
 					})
 			}
 		})
-	}
+    }
 
 	return (
 		<section>
-			<CountDiv className='shadow-xl'>
+			<CountDiv>
 				{detail.img?.split(",").length === 1 ? (
 					<div className='imgcont'>
 						<img src={detail.img} alt='' />
@@ -84,7 +88,7 @@ const GuitarDetail = () => {
 					<h2>{detail.brand}</h2>
 					<h3>${detail.price ? detail.price.toFixed(2) : null}</h3>
 					<h3>model: {detail.model}</h3>
-					<p>{detail.description}</p>
+                    <p><div dangerouslySetInnerHTML={{__html: `${detail.description}`}}></div></p>
 					<p>
 						<b>Type: </b>
 						{detail.type}
@@ -101,7 +105,7 @@ const GuitarDetail = () => {
 							))}
 						</ColorDiv>
 					</form>
-					{localStorage.getItem("isAdmin") ? (
+					{localStorage.getItem("isAdmin") === "true" ? (
 						<CustomButtons>
 							<button
 								type='button'
@@ -123,7 +127,7 @@ const GuitarDetail = () => {
 						<CustomButtons>
 							<button
 								className='add-cart'
-								onClick={() => dispatch(getProductToCart(detail))}
+								onClick={() => addToCart(detail)}
 								disabled={isInCart()}
 							>
 								<BsCart2 />
@@ -138,13 +142,13 @@ const GuitarDetail = () => {
 					)}
 				</TextCont>
 			</CountDiv>
-			<AdInfo>aditional Information: {detail.aditionalInformation}</AdInfo>
+			<AdInfo>aditional Information: <span dangerouslySetInnerHTML={{__html: `${detail.aditionalInformation}`}}></span></AdInfo>
 		</section>
 	)
 }
 
 const CountDiv = styled.div`
-	width: 700px;
+	width: 740px;
 	max-width: 900px;
 	min-height: 400px;
 	margin: auto;
@@ -152,8 +156,8 @@ const CountDiv = styled.div`
 	flex-direction: row;
 	margin-top: 75px;
 	background-color: white;
-	/* border: 1px solid rgb(40, 40, 40); */
 	border-radius: 10px;
+	align-items: center;
 	.imgcont {
 		display: flex;
 		justify-content: center;
@@ -168,6 +172,7 @@ const CountDiv = styled.div`
 	}
 	.mySwiper {
 		max-width: 300px;
+		height: 100%;
 	}
 `
 
@@ -176,6 +181,7 @@ const TextCont = styled.div`
 	flex-direction: column;
 	width: 100%;
 	margin-left: 50px;
+	margin-top: 10px;
 	height: 100%;
 	h2,
 	h3 {

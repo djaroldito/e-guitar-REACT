@@ -2,15 +2,37 @@ require("dotenv").config()
 const { Sequelize, DataTypes } = require("sequelize")
 const fs = require("fs")
 const path = require("path")
-const { DB_USER, DB_PASSWORD, DB_HOST, DB_NAME } = process.env
+// const { DB_USER, DB_PASSWORD, DB_HOST, DB_NAME } = process.env
+// const { DB_HOST, DB_NAME, DB_PASSWORD, DB_USER, DB_PORT} = require ('./config.js')
+// let sequelize = new Sequelize(
+// 	`postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/${DB_NAME}`,
+// 	{
+// 		logging: false, // set to console.log to see the raw SQL queries
+// 		native: false, // lets Sequelize know we can use pg-native for ~30% more speed
+// 	}
+// )
 
-let sequelize = new Sequelize(
-	`postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/${DB_NAME}`,
-	{
-		logging: false, // set to console.log to see the raw SQL queries
-		native: false, // lets Sequelize know we can use pg-native for ~30% more speed
-	}
-)
+const { DB_USER, DB_PASSWORD, DB_HOST,DB_NAME } = process.env;
+
+let sequelize =  process.env.NODE_ENV === 'production'
+     ? 
+	 
+	new Sequelize(
+		`postgresql://postgres:Hb9YRGAgNZfk9Ts4si0O@containers-us-west-108.railway.app:7266/railway`,
+		{
+			logging: false, // set to console.log to see the raw SQL queries
+			native: false, // lets Sequelize know we can use pg-native for ~30% more speed
+		}
+	):
+	 new Sequelize(
+		  `postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/${DB_NAME}`,
+			{
+				logging: false, // set to console.log to see the raw SQL queries
+				native: false, // lets Sequelize know we can use pg-native for ~30% more speed
+			}
+		)
+
+
 
 const basename = path.basename(__filename)
 
@@ -38,7 +60,7 @@ sequelize.models = Object.fromEntries(capsEntries)
 
 // En sequelize.models están todos los modelos importados como propiedades
 // Para relacionarlos hacemos un destructuring
-const { Product, User, Order, OrderDetail, Review, } = sequelize.models
+const { Product, User, Order, OrderDetail, Review, Cart } = sequelize.models
 
 User.hasMany(Order)
 Order.hasMany(OrderDetail)
@@ -51,18 +73,7 @@ User.belongsToMany(Product, { through: WishList })
 Product.belongsToMany(User, { through: Review })
 User.belongsToMany(Product, { through: Review })
 // cart
-const Cart = sequelize.define(
-	"cart",
-    {
-        quantity: {
-            type: DataTypes.INTEGER,
-            defaultValue: 1
-        }
-    },
-	{
-		freezeTableName: true,
-	}
-)
+
 Product.belongsToMany(User, { through: Cart })
 User.belongsToMany(Product, { through: Cart })
 

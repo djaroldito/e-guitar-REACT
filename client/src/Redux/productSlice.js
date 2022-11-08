@@ -1,11 +1,12 @@
 import { createSlice } from "@reduxjs/toolkit"
+//borrar
 
 export const productSlice = createSlice({
 	name: "products",
 	initialState: {
 		products: [],
 		detail: {},
-		cart: JSON.parse(localStorage.getItem("carrito")),
+		cart: localStorage.getItem('carrito') ?  JSON.parse(localStorage.getItem("carrito")): [],
 		brands: [],
 		colors: [],
         types: [],
@@ -14,7 +15,10 @@ export const productSlice = createSlice({
             color: '',
             type: '',
             brand: '',
-            fullName: ''
+            fullName: '',
+			minPrice: 0,
+			maxPrice: 150000,
+			sortPrice: ' '
           },
         currentPage: 1,
         pageCount: 0,
@@ -26,9 +30,6 @@ export const productSlice = createSlice({
 		getProductById: (state, action) => {
 			state.detail = action.payload
 		},
-		// getProductByName: (state, action) => {
-		// 	state.products = action.payload
-		// },
 		getProductFiltered: (state, action) => {
 			state.products = action.payload
 		},
@@ -37,9 +38,9 @@ export const productSlice = createSlice({
 				(item) => item.id === action.payload.id
 			)
 			if (cartIndex >= 0) {
-				state.cart[cartIndex].quantity += 1
+				state.cart[cartIndex].Cart.quantity += 1
 			} else {
-				let tempProduct = { ...action.payload, quantity: 1 }
+				let tempProduct = { ...action.payload, Cart: {quantity: 1, productId:action.payload.id, userId: parseInt(localStorage.getItem('userId'))}}
 				state.cart.push(tempProduct)
 			}
 			localStorage.setItem("carrito", JSON.stringify(state.cart))
@@ -50,7 +51,7 @@ export const productSlice = createSlice({
 				(item) => item.id === action.payload.id
 			)
 			if (elToDel >= 0) {
-				state.cart[elToDel].quantity -= 1
+				state.cart[elToDel].Cart.quantity -= 1
 			} else {
 				state.cart = state.cart.filter((el) => el.id !== action.payload)
 			}
@@ -66,11 +67,14 @@ export const productSlice = createSlice({
 		clearDetail: (state) => {
 			state.detail = {}
 		},
+		
 		clearCart: (state, action) => {
 			state.cart = []
 			localStorage.setItem("carrito", JSON.stringify(state.cart))
 		},
-
+		getCart: (state, action) =>{
+			state.cart = action.payload
+		},
 		getAllColors: (state, action) => {
 			state.colors = action.payload
 		},
@@ -81,7 +85,7 @@ export const productSlice = createSlice({
 			state.types = action.payload
 		},
 		getByFilters: (state, action) => {
-			state.products = action.payload
+			state.products = action.payload.length > 0? action.payload: 'ERROR'
         },
         setFilters: (state, action)=>{
             state.Filters = action.payload
@@ -92,10 +96,10 @@ export const productSlice = createSlice({
         setPageCount(state, action) {
             state.pageCount = action.payload
 		},
+	
 	},
 })
 
-/* getFilteredProducts, createNewProduct */
 
 export const {
 	getAllProducts,
@@ -116,6 +120,7 @@ export const {
     clearDetail,
     setCurrentPage,
     setPageCount,
+
 } = productSlice.actions
 
 export default productSlice.reducer
