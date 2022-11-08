@@ -29,7 +29,7 @@ router.get("/", async (req, res) => {
                 const products = data.rows.map(x => {
                     return {
                         ...x.dataValues,
-                        color: x.dataValues.color.split(',')
+                        color: x.dataValues.color.split(/\s*(?:,|$)\s*/)
                     }
                 })
 				res.send({ data: products, total: data.count })
@@ -55,9 +55,11 @@ router.get("/:id", async (req, res) => {
 			},
 		})
         if (product) {
-            // add images array for visualization
-            product.dataValues.img = product.img.split(',').map(x => { return { src: x } })
-            product.dataValues.color = product.color.split(',')
+            // add images array for visualization - regex for trim spaces
+            if(product.dataValues.img){
+                product.dataValues.img = product.img.split(/\s*(?:,|$)\s*/).map(x => { return { src: x } })
+            }
+            product.dataValues.color = product.color.split(/\s*(?:,|$)\s*/)
 			return res.status(200).json(product)
 		} else {
 			return res.status(404).send("NOT FOUND")
