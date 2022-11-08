@@ -70,7 +70,7 @@ export default function Login() {
 
 
   return (
-    <div className="loginBody">
+    <div>
       <div id="loginContainer">
       <h2>Log In</h2>
         {getEmail ? (
@@ -89,23 +89,23 @@ export default function Login() {
 
             </fieldset>
             <div className="loginPsw">
-              <p>Forgot your Password?</p>
+              <p>Olvidaste tu contraseña?</p>
             </div>
             <button type="submit" className="submitBtn">
               Log In
             </button>
 
             <div className="loginGg">
-              <p>O log in with: </p>
+              <p>O ingresa con</p>
               <LoginButton/>
             </div>
             <div className="loginAcc">
-              <p>You don't have an account?</p>
+              <p>No tienes una cuenta?</p>
             </div>
 
             <div className="loginSup">
               <NavLink to="/signup">
-                <p>Sign up</p>
+                <p>Regístrate</p>
               </NavLink>
             </div>
           </form>
