@@ -1,10 +1,10 @@
 import { createSlice }  from "@reduxjs/toolkit";
 
-
 export const signupSlice = createSlice({
     name: "signup",
     initialState: {
-        user: {}
+        user: {},
+        activate: true,
     },
     reducers: {
         addUser: (state, action) => {

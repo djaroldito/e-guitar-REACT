@@ -4,7 +4,7 @@ module.exports = (sequelize) => {
 		"user",
 		{
 			fullname: DataTypes.STRING,
-			avatar: DataTypes.STRING,
+			avatar: DataTypes.STRING, 
 			address: DataTypes.STRING,
 			province: DataTypes.STRING,
 			city: DataTypes.STRING,
@@ -22,10 +22,14 @@ module.exports = (sequelize) => {
 				type: DataTypes.STRING,
 				allowNull: false,
 			},
-			isAdmin: {
+ 			isAdmin: {
 				type: DataTypes.BOOLEAN,
 				defaultValue: false,
-			},
+			},  
+			isActive: {
+				type: DataTypes.BOOLEAN,
+				defaultValue: false,
+			}  
 		},
 		{
 			paranoid: true,
