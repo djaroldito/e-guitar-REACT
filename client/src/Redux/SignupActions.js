@@ -1,5 +1,5 @@
 import axios from "axios";
-import { addUser } from "./SignupSlice";
+import { addUser, activateUser } from "./SignupSlice";
 
 export const postSignupForm = (supData) => (dispatch) => {
     try {

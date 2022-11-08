@@ -1,3 +1,7 @@
+.signupBody {
+    height: 40em;
+}
+
 #signupContainer {
     display: flex;
     margin-top: 2em; 

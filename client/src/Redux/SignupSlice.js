@@ -1,17 +1,17 @@
 import { createSlice }  from "@reduxjs/toolkit";
-import thunk from 'redux-thunk';
 
 export const signupSlice = createSlice({
     name: "signup",
     initialState: {
-        user: {}
+        user: {},
+        activate: true,
     },
     reducers: {
         addUser: (state, action) => {
             state.user = action.payload
-        }
-    }
+        },
+    },
 });
 
-export const { setError, addUser } = signupSlice.actions;
+export const { addUser, activateUser } = signupSlice.actions;
 export default signupSlice.reducer;

@@ -7,6 +7,7 @@ import GuitarDetail from "./routes/guitarDetail"
 import Cart from './routes/components/cart';
 import Signup from './routes/Signup/Signup';
 import Login from './routes/Signup/Login';
+import Activate from "./routes/Signup/Activate";
 
 import ProductForm from './routes/components/ProductForm/ProductForm'
 import Footer from './routes/components/footer';
@@ -25,6 +26,7 @@ function App() {
     <Route path="/login" element={<Login />} />
     <Route path="/newProduct" element={<ProductForm />} />
     <Route path="/editProduct/:id" element={<ProductForm />} />
+    <Route path="/activate" element={<Activate />} />
    </Routes>
    <Footer/>
    </>

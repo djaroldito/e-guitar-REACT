@@ -1,5 +1,5 @@
-import React, { useEffect, useRef, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import React, { useRef, useState } from 'react';
+import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { postSignupForm } from "../../Redux/SignupActions";
 import { AiOutlineEye, AiOutlineEyeInvisible, AiOutlineUser, AiOutlineMail, AiOutlineGoogle } from "react-icons/ai";
@@ -7,10 +7,9 @@ import Swal from "sweetalert2";
 import "./Styles/Signup.css";
 import axios from 'axios';
 
-// Falta buscar si el usuario ya existe en la db
 // Registrarte con goolge a partir de Auth0
-// Averiguar cómo hacer para enviar también los datos del carrito del localStorage
 // Enviar un mail de confirmación de usuario
+// Que el swAlert diga que chequee mails
 
 export default function Signup() {
   const email = useRef();
@@ -58,13 +57,7 @@ export default function Signup() {
     /* setIsSubmitting(true); */
     
     // Sweet Alert ---------------------------------------------------------------------------
-    console.log(Swal.fire({
-      position: 'center',
-      icon: 'success',
-      title: 'Usuario registrado exitosamente',
-      showConfirmButton: false,
-      timer: 1500
-    }));
+    console.log(Swal.fire("Please, check your E-mail to complete the activation"));
     
     // cleanDetail  -------------------------------------------------------------------------
     // Limpiar los estados ------------------------------------------------------------------
@@ -85,31 +78,32 @@ export default function Signup() {
     let errors = {};
 
     if (!user.fullname.trim()) {
-      errors.fullname = 'Es requerido un nombre de Usuario';
+      errors.fullname = 'A username is required';
     };
     if (!user.email) {
-      errors.email = 'Es requerido un Email';
+      errors.email = 'An e-mail is required';
     } else if (!/\S+@\S+\.\S+/.test(user.email)) {
-      errors.email = 'Es requerido un Email válido';
+      errors.email = 'An valid e-mail is required';
     };
 
     if (!user.password) {
-      errors.password = 'Es requerida una contraseña';
+      errors.password = 'Password is required';
     } else if (user.password.length < 8) {
-      errors.password = 'Debe tener un mínimo de 8 caracteres';
+      errors.password = 'Password must have at least 8 characters';
     } 
     if (!user.password2) {
-      errors.password2 = 'Es requerida una contraseña';
+      errors.password2 = 'Password is required';
     } else if (user.password2 !== user.password) {
-      errors.password2 = 'No coinciden las contraseñas';
+      errors.password2 = 'Passwords do not match';
     }
 
     return errors;
   }
 
   return (
+    <div className='signupBody'>
     <div id='signupContainer'>
-      <h2>Regítrate</h2>
+      <h2>Sign Up</h2>
         
       <form className='signupForm' onSubmit={handleSubmit}>
           <fieldset>
@@ -117,7 +111,7 @@ export default function Signup() {
               name="fullname" 
               value={user.fullname}
               onChange={handleChange} 
-              placeholder='Usuario' 
+              placeholder='User' 
               required />
               <AiOutlineUser className='loginUsIc' />
               <div className='supEM'>
@@ -130,7 +124,8 @@ export default function Signup() {
               name="email" 
               value={user.email}
               onChange={handleChange} 
-              placeholder='Email' 
+              placeholder='Email'
+              ref={email} 
               required />
               <AiOutlineMail className='loginUsIc' />
               <div className='supEM'>
@@ -160,7 +155,7 @@ export default function Signup() {
               name="password2"
               value={user.password2} 
               onChange={handleChange} 
-              placeholder='Confirma Contraseña' 
+              placeholder='Confirm your Password' 
               required />
             <div className='loginEyeIcon' onClick={() => setShowPsw(!showPsw)}>
             {showPsw ? <AiOutlineEye/> : <AiOutlineEyeInvisible className='loginInIc'/>}
@@ -170,10 +165,10 @@ export default function Signup() {
             </div>
           </fieldset>
         
-        <button className='signupBtn'>Enviar</button>
+        <button className='signupBtn'>Sign Up</button>
 
         <div className="signupGg">
-              <p>O ingresa con</p>
+              <p>Or login with: </p>
             </div>
             <div>
                 <AiOutlineGoogle size={30} className='loginGgIc'/> 
@@ -184,6 +179,7 @@ export default function Signup() {
               Log in with Google
             </button>
       </form>
+    </div>
     </div>
   )
 }
