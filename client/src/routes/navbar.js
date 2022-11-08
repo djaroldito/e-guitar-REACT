@@ -7,7 +7,8 @@ import { FaUserAlt } from "react-icons/fa";
 import { AiOutlineShoppingCart } from "react-icons/ai";
 import { LogoutButton } from "./Signup/LogoutButton.js";
 import "../index.css";
-import guitarIco from './../pics/guitar.png'
+//import guitarIco from './../pics/guitar.png'
+import guitarIco from './../pics/guitarcode_white.png'
 import {useSelector} from 'react-redux'
 
 const NavBar = () => {

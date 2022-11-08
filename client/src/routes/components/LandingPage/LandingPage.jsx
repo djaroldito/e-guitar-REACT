@@ -5,8 +5,6 @@ import "./LandingPage.css"
 import React from "react"
 
 
-
-
 const LandingPage = () => {
 	return (
 		<div>
@@ -15,12 +13,12 @@ const LandingPage = () => {
 			</video>
 			<NavLink to='/home'>
 				<div className='Arrow'>
-					<h2 className='ArrowContent'>Ver Catalogo</h2>
+					<h2 className='ArrowContent'>CATALOG</h2>
 				</div>
 			</NavLink>
 			<div className='title'>
 				<h1>
-					Guitar <br /> Shop
+					{ '{ GUITAR CODE }' }
 				</h1>
 			</div>
 			<div className='offers'>
