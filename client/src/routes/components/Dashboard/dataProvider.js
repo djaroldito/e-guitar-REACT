@@ -2,7 +2,7 @@ import { fetchUtils } from "react-admin"
 import { stringify } from "query-string"
 import axios from "axios"
 
-const apiUrl = "http://localhost:3001/admin"
+const apiUrl = "/admin"
 const httpClient = fetchUtils.fetchJson
 
 const dataProvider = {
