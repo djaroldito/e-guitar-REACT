@@ -19,7 +19,7 @@ export default function Login() {
     function start(){
       gapi.client.init({
         clientId:client,
-        scope:""
+        scope:"email"
       })
     }
     gapi.load('client:auth2', start)
