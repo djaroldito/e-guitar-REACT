@@ -26,7 +26,7 @@ export const LoginButton = () => {
       let supData = {
         email: res.profileObj.email,
         fullname: res.profileObj.name,
-        password: Math.random().toString(36).slice(2) + Math.random().toString(36).toUpperCase().slice(2)
+        password: Math.random().toString(36).slice(2) + Math.random().toString(36).toUpperCase().slice(2),
       };
       dispatch(postSignupForm(supData));
       navigate("/home", { state: { sessionStorage } });

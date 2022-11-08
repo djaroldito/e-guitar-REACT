@@ -35,7 +35,7 @@ const NavBar = () => {
         <NavLink to="/home">Home</NavLink>
         <NavLink to="/">discount</NavLink>
 
-        {isAdmin ? <NavLink to="/dashboard">Dashboard</NavLink> : ''}
+        {isAdmin=== "true" ? <NavLink to="/dashboard">Dashboard</NavLink> : ''}
 
         {emailGoogle ? (<div><LogoutButton/></div>) : (<div style={{display: "none"}}><LogoutButton/></div>)}
         <IconCont className={""}>
