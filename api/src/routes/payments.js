@@ -8,15 +8,15 @@ const router =  Router();
 
 router.post('/create-order', async (req, res) => {
     const products = req.body;
+
     const productsMapped = products.map(product => 
         (
                 {   
-                    reference_id: product.id,
+                    reference_id: product.Cart.productId,
                     amount:{
                         currency_code: "USD",
                         value: `${(product.price * product.Cart.quantity).toFixed(2)}`
-                    },
-                    description: product.description
+                    }
                 }
             )
         );
@@ -28,8 +28,8 @@ router.post('/create-order', async (req, res) => {
                 brand_name: "E-commerce Guitar",
                 landing_page: "LOGIN",
                 user_action: "PAY_NOW",
-                return_url: "/payments/capture-order",
-                cancel_url: "/payments/cancel-order"
+                return_url: "http://localhost:3000/payments/capture-order",
+                cancel_url: "http://localhost:3000/payments/cancel-order"
             }
         }
     

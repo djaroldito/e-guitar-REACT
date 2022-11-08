@@ -33,6 +33,7 @@ const Cart = () =>{
 
   const completePayment = async (cart) => {
     const response = await payment(cart);
+    console.log(response);
     window.location.href = response;
   };
 
