@@ -128,25 +128,27 @@ router.get("/registerGoogle", async (req, res) => {
  * POST /ruser/register
  */
 router.post("/register", async (req, res) => {
-  try {
-    const { email, fullname, password  } = req.body;
+    try {
+      console.log(req.body)
+    const { email, fullname, password, avatar='', isActive=false  } = req.body;
 
     const hash = bcrypt.hashSync(password, saltRounds);
-    console.log("Esta es la password hash: ", hash);
+    //console.log("Esta es la password hash: ", hash);
     const newPendingUser = await User.create({
       fullname,
         email,
         avatar,
-      isActive,
-      password: hash,
+        isActive,
+        password: hash,
     });
     const mailReg = await mailRegisterConfirm({
       toUser: newPendingUser,
       hash: hash,
     });
-      console.log("Esto es mailRegisterConfirm: ", mailRegisterConfirm);
+      //console.log("Esto es mailRegisterConfirm: ", mailReg);
       return res.status(200).json(newPendingUser);
-  } catch (error) {
+    } catch (error) {
+        console.log(error.message)
     res.status(400).send(error.message);
   }
 });

@@ -1,6 +1,7 @@
 import React from "react"
 import { GoogleLogout } from "react-google-login"
 import { useNavigate } from "react-router-dom"
+import { BiLogOut } from "react-icons/bi"
 
 export const LogoutButton = () => {
 	const navigate = useNavigate()
@@ -22,9 +23,7 @@ export const LogoutButton = () => {
 				buttonText={"Logout"}
 				onLogoutSuccess={onSuccess}
 				render={(renderProps) => (
-					<button onClick={renderProps.onClick} disabled={renderProps.disabled}>
-						Logout
-					</button>
+					<BiLogOut style={{ cursor: 'pointer' }} title="LogOut" onClick={renderProps.onClick} disabled={renderProps.disabled}/>
 				)}
 			/>
 		</div>

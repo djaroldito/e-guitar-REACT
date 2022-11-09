@@ -1,16 +1,13 @@
-import React from "react";
-import { NavLink, Link } from "react-router-dom";
-import styled from "styled-components";
-import { BiLogIn, BiLogOut } from "react-icons/bi";
-import { FaUserAlt } from "react-icons/fa";
-import { AiOutlineShoppingCart } from "react-icons/ai";
-import { LogoutButton } from "./Signup/LogoutButton.js";
-import "../index.css";
+import React from "react"
+import { NavLink, Link } from "react-router-dom"
+import styled from "styled-components"
+import { BiLogIn, BiLogOut } from "react-icons/bi"
+import { FaUserAlt } from "react-icons/fa"
+import { AiOutlineShoppingCart } from "react-icons/ai"
+import { LogoutButton } from "./Signup/LogoutButton.js"
+import "../index.css"
 //import guitarIco from './../pics/guitar.png'
-import guitarIco from './../pics/guitarcode_white.png'
-import {useSelector} from 'react-redux'
-import { BsWindowSidebar } from "react-icons/bs";
-
+import guitarIco from "./../pics/guitarcode_white.png"
 
 const NavBar = () => {
 	const handleLog = () => {
@@ -46,22 +43,30 @@ const NavBar = () => {
 						</NavLink>
 					) : (
 						<>
+							<div className='Dropdown user-icon'>
+								{userImage !== "null" && userImage ? (
+									<img
+										src={userImage}
+										alt='user'
+										referrerPolicy='no-referrer'
+										width={30}
+									></img>
+								) : (
+									<FaUserAlt />
+                                    )}
+                                    <div className="Dropdown-Content">
+                                        {!isAdmin ?
+                                            <p onClick = { ()=> {window.location.href = '/orders'}}>orders</p> : ''
+                                        }
+                                    </div>
+							</div>
 							{email ? (
-								<>
-									<div className='user-icon'>
-										{userImage !== 'null' ? (
-											<img src={userImage} alt='user' width={20}></img>
-										) : (
-											<FaUserAlt />
-                                            )}
-									</div>
-									<NavLink to='/home' onClick={handleLog} title='Log Out'>
-										<BiLogOut />
-									</NavLink>
-								</>
+								<NavLink to='/home' onClick={handleLog} title='Log Out'>
+									<BiLogOut />
+								</NavLink>
 							) : (
 								emailGoogle && (
-									<div className='user-icon'>
+									<div className="guser">
 										<LogoutButton />
 									</div>
 								)
@@ -90,7 +95,7 @@ const NavCont = styled.div`
 	justify-content: center;
 
 	a,
-	.user-icon {
+	.user-icon, .guser {
 		color: whitesmoke;
 		text-decoration: none;
 		font-weight: 500;
@@ -98,27 +103,27 @@ const NavCont = styled.div`
 		padding: 15px;
 		transition: 0.4s ease;
 	}
-	a:hover {
+	a:hover, .guser:hover {
 		background-color: #eb984e;
 	}
 `
 
-const DropDownMenu = styled.div`
-  display: none;
-  position: absolute;
-  width: 100%;
-  overflow: auto;
-  box-shadow: 0px 10px 10px 0px rgba(0,0,0,0.4);
-`
+// const DropDownMenu = styled.div`
+// 	display: none;
+// 	position: absolute;
+// 	width: 100%;
+// 	overflow: auto;
+// 	box-shadow: 0px 10px 10px 0px rgba(0, 0, 0, 0.4);
+// `
 
 const IconCont = styled.div`
-  margin-left: auto;
-  display: flex;
-  flex-direction: row;
-  width: 100px;
-  justify-content: space-between;
-  align-items: center;
-`;
+	margin-left: auto;
+	display: flex;
+	flex-direction: row;
+	width: 200px;
+	justify-content: space-evenly;
+	align-items: center;
+`
 
 const Logo = styled.div`
 	margin-right: 15px;
