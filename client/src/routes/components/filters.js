@@ -18,13 +18,12 @@ const Filter = () => {
     dispatch(setFilters({ ...filters, [e.target.name]: e.target.value }));
     dispatch(setCurrentPage(1));
   };
-  console.log(filters)
 
   useEffect(() => {
     dispatch(getByFilter(filters, currentPage));
   }, [filters, dispatch, currentPage]);
 
- 
+
   return (
     <section>
       <Filters>
@@ -103,7 +102,7 @@ const Filter = () => {
                 )
               } className="priceButton"><RiDeleteBin6Line/></button>: null}
             </div>
-        
+
         {filters.color ? (
           <FilterDiv>
             <div>
@@ -123,7 +122,7 @@ const Filter = () => {
         ) : null}
         {filters.brand ? (
           <FilterDiv>
-            <div>{filters.brand}</div>          
+            <div>{filters.brand}</div>
             <button
               onClick={() =>
                 dispatch(
