@@ -83,7 +83,7 @@ router.get("/login", async (req, res) => {
       const user = await User.findOne({
         where: {
           email,
-		  isActive: true	
+		  isActive: true
         },
         include: Product,
       });
@@ -99,6 +99,7 @@ router.get("/login", async (req, res) => {
     res.status(400).send(error);
   }
 });
+//controla que el mail este registrado
 router.get("/registerGoogle", async (req, res) => {
   try {
     const { email, userName } = req.query;
@@ -108,8 +109,7 @@ router.get("/registerGoogle", async (req, res) => {
     } else {
       const user = await User.findOne({
         where: {
-          email,
-          userName,
+          email
         },
       });
 
@@ -128,24 +128,27 @@ router.get("/registerGoogle", async (req, res) => {
  * POST /ruser/register
  */
 router.post("/register", async (req, res) => {
-  try {
-    const { email, fullname, password } = req.body;
+    try {
+      console.log(req.body)
+    const { email, fullname, password, avatar='', isActive=false  } = req.body;
 
     const hash = bcrypt.hashSync(password, saltRounds);
-    console.log("Esta es la password hash: ", hash);
-
+    //console.log("Esta es la password hash: ", hash);
     const newPendingUser = await User.create({
       fullname,
-      email,
-      password: hash,
+        email,
+        avatar,
+        isActive,
+        password: hash,
     });
     const mailReg = await mailRegisterConfirm({
       toUser: newPendingUser,
       hash: hash,
     });
-      console.log("Esto es mailRegisterConfirm: ", mailRegisterConfirm);
-      return res.status(200).json({ message: "User has been activated!" });
-  } catch (error) {
+      //console.log("Esto es mailRegisterConfirm: ", mailReg);
+      return res.status(200).json(newPendingUser);
+    } catch (error) {
+        console.log(error.message)
     res.status(400).send(error.message);
   }
 });
@@ -190,11 +193,11 @@ const loadAdminUserData = async () => {
         isAdmin: true,
 		isActive:true
       });
-      await User.create({
-        email: "cliente@gmail.com",
-        password: hash,
-        isAdmin: false,
-      });
+    //   await User.create({
+    //     email: "cliente@gmail.com",
+    //     password: hash,
+    //     isAdmin: false,
+    //   });
     }
   } catch (error) {
     throw new Error(error.message);

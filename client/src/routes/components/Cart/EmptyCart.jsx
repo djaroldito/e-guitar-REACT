@@ -6,16 +6,22 @@ import { Link } from "react-router-dom";
 const EmptyCart = () => {
     return(
             <Empty>
-                <p>El carrito esta vacío  <HiOutlineEmojiSad/></p>
-                <p>haga click en el siguiente botón para ver el catálogo</p>
-                {/* <Link to='/home'><button className="Purchasebutton">Volver</button></Link> */}
+                <div>
+				<h1>Empty Cart! </h1>
+				<img
+					src='https://www.seamwork.com/assets/cart-empty-0642206d80ee53cff984a7bcd293d372e084e371597f8cae290b57283e0f3d8c.png'
+					alt='carrito'
+				></img>
+			</div>
             </Empty>
         )
     }
 const Empty = styled.div`
     text-align: center;
-    color: gray;
-    font-size:30px;
+    color: black;
+    img{
+        margin-top: 5px;
+    }
    
 `
 

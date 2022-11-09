@@ -49,7 +49,8 @@ export default function Login() {
 
       if (data) {
         sessionStorage.setItem("emailData", email.current.value);
-        sessionStorage.setItem("isAdmin", data.isAdmin);
+          sessionStorage.setItem("isAdmin", data.isAdmin);
+          sessionStorage.setItem("imageURL", data.avatar);
         localStorage.setItem("carrito", JSON.stringify(data.products));
         sessionStorage.setItem("userId", data.id);
         navigate("/home", { state: { sessionStorage, localStorage } });

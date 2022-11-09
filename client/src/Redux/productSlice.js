@@ -9,6 +9,7 @@ export const productSlice = createSlice({
 		cart: localStorage.getItem('carrito') ?  JSON.parse(localStorage.getItem("carrito")): [],
 		brands: [],
 		colors: [],
+		orders: [],
         types: [],
         filter: [],
         Filters: {
@@ -65,7 +66,9 @@ export const productSlice = createSlice({
 			}
 			localStorage.setItem("carrito", JSON.stringify(state.cart))
 		},
-
+		getOrder: (state, action) => {
+			state.orders = action.payload
+		},
 		delAllFromCart: (state, action) => {
 			return {
 				...state,
@@ -128,6 +131,7 @@ export const {
     clearDetail,
     setCurrentPage,
     setPageCount,
+	getOrder
 
 } = productSlice.actions
 

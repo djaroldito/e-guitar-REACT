@@ -15,6 +15,9 @@ import {AiOutlineClear} from 'react-icons/ai'
 const Cart = () =>{
     const carrito = useSelector(state => state.products.cart)
     const userId = sessionStorage.getItem('userId');
+    const mail = sessionStorage.getItem('emailData') ? sessionStorage.getItem('emailData') : sessionStorage.getItem('emailGoogle') ;
+    console.log(mail);
+    
     const dispatch = useDispatch()
     console.log(carrito)
 
@@ -32,8 +35,8 @@ const Cart = () =>{
       await addCartToDB(JSON.parse(localStorage.getItem('carrito')), userId);
   }
 
-  const completePayment = async (cart) => {
-    const response = await payment(cart);
+  const completePayment = async (cart, mail) => {
+    const response = await payment(cart, mail);
     console.log(response);
     window.location.href = response;
   };
@@ -113,7 +116,7 @@ const preguntaUno = async (item)=>{
               <h1> {carrito.length >= 1 ?  carrito.reduce((acc,prod)=>acc + (prod.price.toFixed(2) * prod.quantity) , 0).toFixed(2):null}</h1>
             </Total>
           </div>
-          {carrito.length >= 1 ? <button onClick={() => completePayment(carrito)} className="Purchasebutton"><BsCart2/>Completar Compra</button> : null}
+          {carrito.length >= 1 ? <button onClick={() => completePayment(carrito, mail)} className="Purchasebutton"><BsCart2/>Completar Compra</button> : null}
           < br/>
           <CustomButtons>
           <Link to="/home">

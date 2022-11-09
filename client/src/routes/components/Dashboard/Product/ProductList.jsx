@@ -27,7 +27,6 @@ const ProductList = (props) => {
 					<TextField source='price' title='Price $' sx={{ fontSize: "12px" }} />
 					<TextField source='discount' sx={{ fontSize: "12px" }} />
 					<TextField source='stock' sx={{ fontSize: "12px" }} />
-					<DateField source='createdAt' sx={{ fontSize: "12px" }} />
 					<EditButton basepath='/product' sx={{ fontSize: "12px" }} />
 					<DeleteButton basepath='/product' sx={{ fontSize: "12px" }} />
 				</Datagrid>
