@@ -100,7 +100,7 @@ router.get("/login", async (req, res) => {
   }
 });
 //controla que el mail este registrado
-/* router.get("/registerGoogle", async (req, res) => {
+router.get("/registerGoogle", async (req, res) => {
   try {
     const { email, userName } = req.query;
 
@@ -122,7 +122,7 @@ router.get("/login", async (req, res) => {
   } catch (error) {
     res.status(400).send(error);
   }
-}); */
+});
 
 /**
  * POST /ruser/register
@@ -130,9 +130,6 @@ router.get("/login", async (req, res) => {
 router.post("/register", async (req, res) => {
   try {
     const { email, fullname, password  } = req.body;
-
-    const { domain } = req.header.host
-    console.log(domain)
 
     const hash = bcrypt.hashSync(password, saltRounds);
     console.log("Esta es la password hash: ", hash);
