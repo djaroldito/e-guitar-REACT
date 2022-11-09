@@ -71,7 +71,7 @@ const Filter = () => {
             type="number"
             min="0"
             max={filters.maxPrice}
-            step="1000"
+            step="100"
             onChange={handleChange}
             name="minPrice"
             value={filters.minPrice}
@@ -88,14 +88,14 @@ const Filter = () => {
           <input
             type="number"
             min={filters.minPrice}
-            max="150000"
-            step='1000'
+            max="5000"
+            step='100'
             onChange={handleChange}
             className='priceInput'
             name="maxPrice"
             value={filters.maxPrice}
             />
-           { filters.maxPrice !== 150000? <button  onClick={() =>
+           { filters.maxPrice !== 5000? <button  onClick={() =>
                 dispatch(
                   setFilters({ ...filters, maxPrice: 150000 }),
                   dispatch(setCurrentPage(1))

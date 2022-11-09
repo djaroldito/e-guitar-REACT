@@ -19,6 +19,7 @@ const Cart = () =>{
     console.log(mail);
     
     const dispatch = useDispatch()
+    console.log(carrito)
 
   
 
@@ -101,9 +102,9 @@ const preguntaUno = async (item)=>{
             
             {el.discount? <p> <b>Discount: </b>{el.discount}.</p>: null}
             <div className="InputCartContainer">
-              <button  disabled= { el.Cart.quantity !== 1 ? false : true} onClick={() => delFromCart(el)}>-</button>
-              <input placeholder={el.Cart.quantity} disabled></input>
-              <button disabled= { el.Cart.quantity < el.stock ? false : true} onClick={() => addCartItem(el)} >+</button>
+              <button  disabled= { el.quantity !== 1 ? false : true} onClick={() => delFromCart(el)}>-</button>
+              <input placeholder={el.quantity} disabled></input>
+              <button disabled= { el.quantity < el.stock ? false : true} onClick={() => addCartItem(el)} >+</button>
               {el.stock?<p> <b>disponibles {el.stock}</b>.</p>: null}
             </div>
               <p>${el.price.toFixed(2)}</p>
@@ -112,7 +113,7 @@ const preguntaUno = async (item)=>{
           ))}
             <Total>
               {carrito.length >= 1 ? <label >Total: </label> : null }
-              <h1> {carrito.length >= 1 ?  carrito.reduce((acc,prod) => acc + (prod.price.toFixed(2) * prod.Cart.quantity) , 0).toFixed(2):null}</h1>
+              <h1> {carrito.length >= 1 ?  carrito.reduce((acc,prod)=>acc + (prod.price.toFixed(2) * prod.quantity) , 0).toFixed(2):null}</h1>
             </Total>
           </div>
           {carrito.length >= 1 ? <button onClick={() => completePayment(carrito, mail)} className="Purchasebutton"><BsCart2/>Completar Compra</button> : null}

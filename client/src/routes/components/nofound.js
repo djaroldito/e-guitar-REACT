@@ -1,6 +1,6 @@
 import { useDispatch } from "react-redux";
 import styled from "styled-components";
-import { setFilters } from "../../Redux/productSlice";
+import { getAllProducts, setFilters } from "../../Redux/productSlice";
 
 const NoFound = () => {
   const dispatch = useDispatch();
@@ -14,13 +14,13 @@ const NoFound = () => {
   };
   return (
     <NoDiv>
-      <h2>no se encontro nada mi ciela</h2>
+      <h2>Product No Found</h2>
       <img
         src={`https://images.unsplash.com/photo-1522008224169-e5992bed5fae?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8OXx8YnJva2VuJTIwZ3VpdGFyfGVufDB8fDB8fA%3D%3D&w=1000&q=80`}
         alt="no guitar found "
       />
       <div className="buttonCont">
-        <button onClick={() => dispatch(setFilters(Filters))}>TRY AGAIN</button>
+        <button onClick={() => dispatch(setFilters(Filters), getAllProducts())}>TRY AGAIN</button>
       </div>
     </NoDiv>
   );

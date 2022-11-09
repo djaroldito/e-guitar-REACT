@@ -18,7 +18,7 @@ export const productSlice = createSlice({
             brand: '',
             fullName: '',
 			minPrice: 0,
-			maxPrice: 150000,
+			maxPrice: 5000,
 			sortPrice: ' '
           },
         currentPage: 1,
@@ -35,13 +35,21 @@ export const productSlice = createSlice({
 			state.products = action.payload
 		},
 		getProductToCart: (state, action) => {
-			let cartIndex = state.cart.findIndex(
-				(item) => item.id === action.payload.id
-			)
-			if (cartIndex >= 0) {
-				state.cart[cartIndex].Cart.quantity += 1
+			// let cartIndex = state.cart.findIndex(
+			// 	(item) => item.id === action.payload.id
+			// )
+			// if (cartIndex >= 0) {
+			// 	state.cart[cartIndex].Cart.quantity += 1
+			// } else {
+			// 	let tempProduct = { ...action.payload, Cart: {quantity: 1, productId:action.payload.id, userId: parseInt(localStorage.getItem('userId'))}}
+			// 	state.cart.push(tempProduct)
+			// }
+			// localStorage.setItem("carrito", JSON.stringify(state.cart))
+			let productFind = state.cart.find(item => item.id === action.payload.id)
+			if(productFind){
+				productFind.quantity += 1
 			} else {
-				let tempProduct = { ...action.payload, Cart: {quantity: 1, productId:action.payload.id, userId: parseInt(localStorage.getItem('userId'))}}
+				let tempProduct = {...action.payload, userId: parseInt(localStorage.getItem('userId')) }
 				state.cart.push(tempProduct)
 			}
 			localStorage.setItem("carrito", JSON.stringify(state.cart))
@@ -52,7 +60,7 @@ export const productSlice = createSlice({
 				(item) => item.id === action.payload.id
 			)
 			if (elToDel >= 0) {
-				state.cart[elToDel].Cart.quantity -= 1
+				state.cart[elToDel].quantity -= 1
 			} else {
 				state.cart = state.cart.filter((el) => el.id !== action.payload)
 			}
