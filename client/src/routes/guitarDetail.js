@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react"
 import axios from "axios"
 import { useDispatch, useSelector } from "react-redux"
-import { useParams, useNavigate, Link } from "react-router-dom"
+import { useParams, useNavigate, Link, createPath } from "react-router-dom"
 import { getById, addCartToDB } from "../Redux/productActions"
 import { clearDetail, getProductToCart } from "../Redux/productSlice"
 import { Swiper, SwiperSlide } from "swiper/react"
@@ -25,13 +25,17 @@ const GuitarDetail = () => {
             dispatch(clearDetail())
         }
     }, [dispatch, id])
-
+    
     const detail = useSelector((state) => state.products.detail)
     const carrito = useSelector((state) => state.products.cart)
+    const colors = detail.color?.split(',')
+    
     const [input, setinput] = useState({
-        color:''
-        });
-		//
+        color: '',
+        quantity: 1,
+        leftHand: false
+    });
+    
     const newItem = {
         id: detail.id,
         img: detail.img,
@@ -40,37 +44,36 @@ const GuitarDetail = () => {
         color: input.color,
         stock: detail.stock,
         price: detail.price,
+        quantity: input.quantity,
+        leftHand: input.leftHand
     }
     console.log(newItem)
-
-  const isInCart = () => carrito?.find(el=> el.id === detail.id)
-  const addToCart = async (detail) => {
     
-    
-      Swal.fire({
-          title: 'Product added to cart!',
+    const isInCart = () => carrito?.find(el=> el.id === detail.id)
+    const addToCart = async (detail) => {
+        Swal.fire({
+            title: 'Product added to cart!',
           icon: 'success',
           confirmButtonText: 'Ok'
         })
-    dispatch(getProductToCart(newItem)) 
-    if(userId)
-    await addCartToDB(JSON.parse(localStorage.getItem('carrito')), userId);
-  }
-
+        dispatch(getProductToCart(newItem)) 
+        if(userId)
+        await addCartToDB(JSON.parse(localStorage.getItem('carrito')), userId);
+    } 
     
-  const handleColor = (e)=>{
-    setinput({[e.target.color]:e.target.value})
-
-  }
-
-
+    const handleChange = (e) => {
+      setinput({...input,[e.target.name]:e.target.value})
+    }
+console.log(newItem)
 
 
-    const handleDeleteProduct = (id) => {
-        Swal.fire({
-            title: "Are you sure?",
-            text: "You won't be able to revert this!",
-            icon: "warning",
+
+
+const handleDeleteProduct = (id) => {
+    Swal.fire({
+        title: "Are you sure?",
+        text: "You won't be able to revert this!",
+        icon: "warning",
             showCancelButton: true,
             confirmButtonColor: "#3085d6",
             cancelButtonColor: "#d33",
@@ -98,6 +101,7 @@ const GuitarDetail = () => {
     return (
         <section>
             <CountDiv>
+                <div className="Centrado">
                 {detail.img?.split(",").length === 1 ? (
                     <div className='imgcont'>
                         <img src={detail.img} alt='' />
@@ -113,6 +117,7 @@ const GuitarDetail = () => {
                         ))}
                     </Swiper>
                 )}
+                </div>
                 <TextCont>
                     <h2>{detail.brand}</h2>
                     <h3>${detail.price ? detail.price.toFixed(2) : null}</h3>
@@ -123,18 +128,22 @@ const GuitarDetail = () => {
                         {detail.type}
                     </p>
                     {detail.leftHand ? <LeftHand>Left Hand Available</LeftHand> : null}
-                    <form>
+                  
                         <ColorDiv>
                             Colors:
-                            {detail.color?.split(",").map((item, pos) => (
+                            {colors?.map((item, pos) => (
                                 <div className='color-div' key={pos}>
-                                    <input onChange={handleColor} name='color' type='radio' checked value={input.color}  />
+                                    <input onChange={handleChange} name='color' defaultChecked={pos === 0} type='radio' value={item}/>
                                     <label htmlFor={item}>{item}</label>
-
                                 </div>
                             ))}
                         </ColorDiv>
-                    </form>
+                        {/* <NumbersDiv> */}
+                        <div>
+                               Quantity: <input type='number' name="quantity" onChange={handleChange} value={input.quantity} min='1' max={detail.stock} />
+                        </div>
+                        {/* </NumbersDiv> */}
+                    
                     {localStorage.getItem("isAdmin") === "true" ? (
                         <CustomButtons>
                             <button
@@ -155,14 +164,22 @@ const GuitarDetail = () => {
                         </CustomButtons>
                     ) : (
                         <CustomButtons>
+                           {carrito?.find(item => detail.id === item.id)?
+                               <Link to='/cart'>
+                           <button className="include">
+                           <BsCart2 /> This product is in your cart
+                           </button> 
+                                </Link>
+                            : <div>
                             <button
-                                className='add-cart'
-                                onClick={() => addToCart(detail)}
-                                disabled={isInCart()}
-                            >
-                                <BsCart2 />
-                                Add Cart
-                            </button>
+                                 className='add-cart'
+                                 onClick={() => addToCart(newItem)}
+                                 disabled={isInCart()}
+                                 >
+                                 <BsCart2 />
+                                 Add Cart
+                             </button>
+                            </div> }
                             <Link to='/home'>
                                 <button className='back-home'>
                                     <IoArrowBackOutline /> Back Home
@@ -188,11 +205,15 @@ const CountDiv = styled.div`
     background-color: white;
     border-radius: 10px;
     align-items: center;
+
+    .centrado{
+
+    }
+
     .imgcont {
         display: flex;
         justify-content: center;
-        align-items: center;
-        height: 100%;
+        /* height: 100%; */
         max-width: 300px;
         min-width: 250px;
     }
@@ -229,7 +250,7 @@ const LeftHand = styled.div`
     border-radius: 5px;
     width: 140px;
 `
-const ColorDiv = styled.div`
+const ColorDiv = styled.form`
     display: flex;
     flex-direction: row;
     padding: 15px;
@@ -248,6 +269,7 @@ const CustomButtons = styled.div`
     a {
         color: whitesmoke;
         text-decoration: none;
+        
     }
     button {
         border-radius: 5px;
@@ -270,6 +292,9 @@ const CustomButtons = styled.div`
     }
     svg {
         padding: 0 8px;
+    }
+    .include{
+        background-color: green;
     }
 `
 const AdInfo = styled.p`
