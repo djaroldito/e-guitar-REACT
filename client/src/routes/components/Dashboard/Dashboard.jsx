@@ -9,6 +9,9 @@ import ProductList from "./Product/ProductList"
 import ProductCreate from "./Product/ProductCreate"
 import ProductEdit from "./Product/ProductEdit"
 
+import UserList from "./User/UserList"
+import UserEdit from "./User/UserEdit"
+
 export default function Dashboard() {
 	const theme = {
 		...defaultTheme,
@@ -34,6 +37,11 @@ export default function Dashboard() {
 					list={ProductList}
 					create={ProductCreate}
 					edit={ProductEdit}
+				/>
+				<Resource
+					name='user'
+					list={UserList}
+                    edit={UserEdit}
 				/>
 			</Admin>
 		</>
