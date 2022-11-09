@@ -63,8 +63,9 @@ sequelize.models = Object.fromEntries(capsEntries)
 const { Product, User, Order, OrderDetail, Review, Cart } = sequelize.models
 
 User.hasMany(Order)
-Order.hasMany(OrderDetail)
-Product.hasMany(OrderDetail)
+
+Product.belongsToMany(User, { through: OrderDetail })
+Order.belongsToMany(Product, { through: OrderDetail })
 // wishlist
 const WishList = sequelize.define("wishlist", {})
 Product.belongsToMany(User, { through: WishList })
@@ -73,6 +74,8 @@ User.belongsToMany(Product, { through: WishList })
 Product.belongsToMany(User, { through: Review })
 User.belongsToMany(Product, { through: Review })
 // cart
+
+
 
 Product.belongsToMany(User, { through: Cart })
 User.belongsToMany(Product, { through: Cart })

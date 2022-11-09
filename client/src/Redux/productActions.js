@@ -1,15 +1,15 @@
 import axios from "axios";
 import {
-  getAllProducts,
-  getProductById,
-  getAllBrands,
-  getAllColors,
-  getByFilters,
-  getAllTypes,
-  setCurrentPage,
-  setPageCount,
-  getCart,
-} from "./productSlice";
+	getAllProducts,
+	getProductById,
+	getAllBrands,
+	getAllColors,
+	getByFilters,
+	getAllTypes,
+	setCurrentPage,
+	setPageCount,
+	getOrder
+} from "./productSlice"
 
 export const getAllPrds = () => (dispatch) => {
   axios("/rguitars")
@@ -68,25 +68,25 @@ export const postProductForm = async (formData) => {
   }
 };
 export const editProductForm = async (formData) => {
-  try {
-    const { data: productUpdated } = await axios.put(
-      `/rguitars/${formData.id}`,
-      formData
-    );
-    return productUpdated;
-  } catch (error) {
-    console.error("editProductForm:", error.message);
-    return { error: error.response ? error.response.data : error.message };
-  }
-};
-export const payment = async (cart) => {
-  try {
-    const { data: link } = await axios.post(`/payments/create-order`, cart);
-    return link;
-  } catch (error) {
-    return { error: error.response ? error.response.data : error.message };
-  }
-};
+	try {
+		const { data: productUpdated } = await axios.put(
+			`/rguitars/${formData.id}`,
+			formData
+		)
+		return productUpdated
+	} catch (error) {
+		console.error("editProductForm:", error.message)
+		return { error: error.response ? error.response.data : error.message }
+	}
+}
+export const payment = async (cart, mail) => {
+	try{
+		const {data: link} = await axios.post(`/payments/create-order?mail=${mail}`, cart)
+		return link;
+	} catch (error) {
+		return { error: error.response ? error.response.data : error.message }
+	}
+}
 
 export const validation = async (token) => {
   try {
@@ -97,14 +97,19 @@ export const validation = async (token) => {
   }
 };
 export const addCartToDB = async (cart, userID) => {
-  try {
-    await axios.post(`/cart?userID=${userID}`, cart);
-  } catch (error) {
-    return { error: error.response ? error.response.data : error.message };
-  }
-};
-export const getCartFromDB = async (userID) => {
-  const { data: cart } = await axios(`/cart?userID=${userID}`);
-  console.log(cart);
-  return cart;
-};
+	try{
+		await axios.post(`/cart?userID=${userID}`, cart)
+	} catch (error) {
+		return { error: error.response ? error.response.data : error.message }
+	}
+}
+export const getCartFromDB = async (userID)  => {
+	const {data: cart} = await axios(`/cart?userID=${userID}`);
+	console.log(cart);
+	return cart;
+}
+export const getOrderDB = (userID) => (dispatch) => {
+	axios(`/order?userId=${userID}`)
+	.then((res) => dispatch(getOrder(res.data)))
+	
+}
