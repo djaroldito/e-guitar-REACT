@@ -10,6 +10,7 @@ import "../index.css";
 //import guitarIco from './../pics/guitar.png'
 import guitarIco from './../pics/guitarcode_white.png'
 import {useSelector} from 'react-redux'
+import { BsWindowSidebar } from "react-icons/bs";
 
 const NavBar = () => {
 
@@ -58,7 +59,18 @@ const NavBar = () => {
           )}
 
           <UserCont>
+            <div className="Dropdown">
               {userImage ? (<img src={userImage} alt='user'></img>) : (<FaUserAlt style={{color: "whitesmoke"}}/>)}
+              {(email || emailGoogle) && (
+                <div className="Dropdown-Content">
+                <p onClick={()=>{window.location.href = '/orders'}}>orders</p>
+                  {/* <p><BiLogOut /> log out</p> */}
+                </div>
+              )}
+              
+              
+            </div>
+            
           </UserCont>
           <div className="cart">
         <NavLink to="/cart">
@@ -92,7 +104,6 @@ const NavCont = styled.div`
   }
   a:hover {
     background-color: #eb984e;
-    border-radius: 25%;
   }
 `;
 
@@ -106,14 +117,21 @@ const UserCont = styled.div`
   }
 `;
 
+const DropDownMenu = styled.div`
+  display: none;
+  position: absolute;
+  width: 100%;
+  overflow: auto;
+  box-shadow: 0px 10px 10px 0px rgba(0,0,0,0.4);
+`
+
 const IconCont = styled.div`
   margin-left: auto;
   display: flex;
   flex-direction: row;
   width: 100px;
   justify-content: space-between;
-
-
+  align-items: center;
 `;
 
 const Title = styled.div`

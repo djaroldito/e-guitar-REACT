@@ -8,7 +8,7 @@ import {
 	getAllTypes,
 	setCurrentPage,
 	setPageCount,
-	getCart
+	getOrder
 } from "./productSlice"
 
 export const getAllPrds = () => (dispatch) => {
@@ -84,9 +84,9 @@ export const editProductForm = async (formData) => {
 		return { error: error.response ? error.response.data : error.message }
 	}
 }
-export const payment = async (cart) => {
+export const payment = async (cart, mail) => {
 	try{
-		const {data: link} = await axios.post(`/payments/create-order`, cart)
+		const {data: link} = await axios.post(`/payments/create-order?mail=${mail}`, cart)
 		return link;
 	} catch (error) {
 		return { error: error.response ? error.response.data : error.message }
@@ -112,4 +112,9 @@ export const getCartFromDB = async (userID)  => {
 	const {data: cart} = await axios(`/cart?userID=${userID}`);
 	console.log(cart);
 	return cart;
+}
+export const getOrderDB = (userID) => (dispatch) => {
+	axios(`/order?userId=${userID}`)
+	.then((res) => dispatch(getOrder(res.data)))
+	
 }
