@@ -1,4 +1,5 @@
 import { Admin, Resource, defaultTheme, Title } from "react-admin"
+import { NavLink } from "react-router-dom"
 import dataProvider from "./dataProvider"
 import Card from "@mui/material/Card"
 import CardContent from "@mui/material/CardContent"
@@ -51,6 +52,10 @@ export default function Dashboard() {
 const AdminDashboard = () => (
 	<Card>
 		<Title title={"{GUITAR CODE}"} />
-		<CardContent> Wellcome to Admin Dashboard</CardContent>
+        <CardContent sx={{textAlign: 'center'}}>
+            <h2>Wellcome to Admin Dashboard</h2>
+
+            <NavLink to='/home'>Go to Home</NavLink>
+        </CardContent>
 	</Card>
 )

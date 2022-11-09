@@ -22,10 +22,17 @@ export const LoginButton = () => {
       navigate("/home", { state: { sessionStorage } });
       console.log("LOGIN SUCCESS! res: ", res.profileObj);
     } else {
+      sessionStorage.setItem("UserData", JSON.stringify(res.profileObj));
+      sessionStorage.setItem("emailGoogle", res.profileObj.email);
+      sessionStorage.setItem("userId", data.id);
+      localStorage.setItem("carrito", JSON.stringify(data.products));
+      sessionStorage.setItem("imageURL", res.profileObj.imageUrl);
       console.log("LOGIN SUCCESS! res: ", res.profileObj);
       let supData = {
         email: res.profileObj.email,
         fullname: res.profileObj.name,
+          avatar: res.profileObj.imageUrl,
+        isActive: true,
         password: Math.random().toString(36).slice(2) + Math.random().toString(36).toUpperCase().slice(2),
       };
       dispatch(postSignupForm(supData));

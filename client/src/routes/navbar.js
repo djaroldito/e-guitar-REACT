@@ -43,21 +43,26 @@ const NavBar = () => {
 						</NavLink>
 					) : (
 						<>
-							{email && (
+							{email ? (
 								<>
-									<NavLink to='/home' onClick={handleLog} title='Log Out'>
-										<BiLogOut />
-									</NavLink>
-									<div className="user-icon">
+									<div className='user-icon'>
 										{userImage ? (
 											<img src={userImage} alt='user' width={20}></img>
 										) : (
 											<FaUserAlt />
 										)}
 									</div>
+									<NavLink to='/home' onClick={handleLog} title='Log Out'>
+										<BiLogOut />
+									</NavLink>
 								</>
+							) : (
+								emailGoogle && (
+									<div className='user-icon'>
+										<LogoutButton />
+									</div>
+								)
 							)}
-							{emailGoogle && <LogoutButton />}
 						</>
 					)}
 
@@ -81,7 +86,8 @@ const NavCont = styled.div`
 	align-items: center;
 	justify-content: center;
 
-	a, .user-icon {
+	a,
+	.user-icon {
 		color: whitesmoke;
 		text-decoration: none;
 		font-weight: 500;

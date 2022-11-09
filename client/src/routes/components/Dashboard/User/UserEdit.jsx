@@ -59,22 +59,41 @@ const UserEdit = (props) => {
 					{...props}
 				>
 					<SimpleForm>
-						<Box display={{ xs: "block", sm: "flex", width: "100%" }}>
-							<Box display={{ xs: "block", sm: "flex", width: "80%" }}>
-								<Box flex={1} mr={{ xs: 0, sm: "0.5em" }}>
-									<TextInput
-										source='email'
-										validate={validateEmail}
-										sx={{ width: "100%" }}
-									/>
-								</Box>
+						<Box display={{ xs: "block", sm: "flex", width: "100%" }} sx={{flexDirection:'row'}}>
+							<Box display={{ xs: "block", sm: "flex", width: "80%" }} sx={{flexDirection:'column'}}>
+								<Box display={{ xs: "block", sm: "flex", width: "100%" }} sx={{flexDirection:'row'}}>
+									<Box flex={1} mr={{ xs: 0, sm: "0.5em" }}>
+										<TextInput
+											source='email'
+											validate={validateEmail}
+											sx={{ width: "100%" }}
+										/>
+									</Box>
 
-								<Box flex={1} mr={{ xs: 0, sm: "0.8em" }}>
-									<TextInput
-										source='fullname'
-										sx={{ width: "100%" }}
-										required
-									/>
+									<Box flex={1} mr={{ xs: 0, sm: "0.8em" }}>
+										<TextInput
+											source='fullname'
+											sx={{ width: "100%" }}
+											required
+										/>
+									</Box>
+								</Box>
+								<Box display={{ xs: "block", sm: "flex", width: "100%" }}>
+									<Box flex={1} mr={{ xs: 0, sm: "0.5em" }}>
+										<BooleanInput
+											source='isActive'
+											label='Active'
+											labelplacement='top'
+										/>
+									</Box>
+
+									<Box flex={1} mr={{ xs: 0, sm: "0.8em" }}>
+										<BooleanInput
+											source='isAdmin'
+											label='Admin'
+											labelplacement='top'
+										/>
+									</Box>
 								</Box>
 							</Box>
 

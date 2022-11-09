@@ -83,7 +83,7 @@ router.get("/login", async (req, res) => {
       const user = await User.findOne({
         where: {
           email,
-		  isActive: true	
+		  isActive: true
         },
         include: Product,
       });
@@ -101,15 +101,14 @@ router.get("/login", async (req, res) => {
 });
 router.get("/registerGoogle", async (req, res) => {
   try {
-    const { email, userName } = req.query;
+    const { email, userName, avatar } = req.query;
 
     if (!email || !userName) {
       res.status(400).send("faltan cargar datos");
     } else {
       const user = await User.findOne({
         where: {
-          email,
-          userName,
+          email
         },
       });
 
@@ -129,14 +128,16 @@ router.get("/registerGoogle", async (req, res) => {
  */
 router.post("/register", async (req, res) => {
   try {
-    const { email, fullname, password } = req.body;
+    const { email, fullname, password, avatar='', isActive=false } = req.body;
 
     const hash = bcrypt.hashSync(password, saltRounds);
     console.log("Esta es la password hash: ", hash);
 
     const newPendingUser = await User.create({
       fullname,
-      email,
+        email,
+        avatar,
+      isActive,
       password: hash,
     });
     const mailReg = await mailRegisterConfirm({
@@ -190,11 +191,11 @@ const loadAdminUserData = async () => {
         isAdmin: true,
 		isActive:true
       });
-      await User.create({
-        email: "cliente@gmail.com",
-        password: hash,
-        isAdmin: false,
-      });
+    //   await User.create({
+    //     email: "cliente@gmail.com",
+    //     password: hash,
+    //     isAdmin: false,
+    //   });
     }
   } catch (error) {
     throw new Error(error.message);

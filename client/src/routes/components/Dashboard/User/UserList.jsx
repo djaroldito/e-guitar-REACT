@@ -30,7 +30,8 @@ const UserList = (props) => {
 				<BooleanField source='isActive' sx={{ fontSize: "12px" }} />
 				<BooleanField source='isAdmin' sx={{ fontSize: "12px" }} />
 				<DateField source='createdAt' sx={{ fontSize: "12px" }} />
-				<EditButton basepath='/user' sx={{ fontSize: "12px" }} />
+                <EditButton basepath='/user' sx={{ fontSize: "12px" }} />
+                <DeleteButton basepath='/user' sx={{ fontSize: "12px" }} />
 			</Datagrid>
 		</List>
 	)
