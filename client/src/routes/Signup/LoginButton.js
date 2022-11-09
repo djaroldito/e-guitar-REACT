@@ -7,6 +7,7 @@ import axios from "axios";
 export const LoginButton = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate()
+ 
   const onSuccess = async (res) => {
     const { data } = await axios.get("/ruser/email", {
       params: {
@@ -35,9 +36,16 @@ export const LoginButton = () => {
         isActive: true,
         password: Math.random().toString(36).slice(2) + Math.random().toString(36).toUpperCase().slice(2),
       };
+      sessionStorage.setItem("UserData", JSON.stringify(res.profileObj));
+      sessionStorage.setItem("emailGoogle", res.profileObj.email);
       dispatch(postSignupForm(supData));
-      navigate("/home", { state: { sessionStorage } });
-    }
+    /* console.log("userddd")
+     sessionStorage.setItem("userId", userId.id)
+ */
+     navigate("/home", { state: { sessionStorage } });
+    } 
+      
+    
   };
 
   const onFailure = (res) => {

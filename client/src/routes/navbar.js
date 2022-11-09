@@ -1,11 +1,15 @@
-import React from "react"
-import { NavLink, Link } from "react-router-dom"
-import styled from "styled-components"
-import { BiLogIn, BiLogOut } from "react-icons/bi"
-import { FaUserAlt } from "react-icons/fa"
-
-import { AiOutlineShoppingCart } from "react-icons/ai"
-import { LogoutButton } from "./Signup/LogoutButton.js"
+import React from "react";
+import { NavLink } from "react-router-dom";
+import styled from "styled-components";
+import { BiLogIn, BiLogOut } from "react-icons/bi";
+import { FaUserAlt } from "react-icons/fa";
+import { AiOutlineShoppingCart } from "react-icons/ai";
+import { LogoutButton } from "./Signup/LogoutButton.js";
+import "../index.css";
+//import guitarIco from './../pics/guitar.png'
+import guitarIco from './../pics/guitarcode_white.png'
+import {useSelector} from 'react-redux'
+import { BsWindowSidebar } from "react-icons/bs";
 
 import guitarIco from "./../pics/guitarcode_white.png"
 
@@ -100,13 +104,22 @@ const NavCont = styled.div`
 	}
 `
 
-const IconCont = styled.div`
-	margin-left: auto;
-	display: flex;
-	flex-direction: row;
-	width: 120px;
-	justify-content: space-between;
+const DropDownMenu = styled.div`
+  display: none;
+  position: absolute;
+  width: 100%;
+  overflow: auto;
+  box-shadow: 0px 10px 10px 0px rgba(0,0,0,0.4);
 `
+
+const IconCont = styled.div`
+  margin-left: auto;
+  display: flex;
+  flex-direction: row;
+  width: 100px;
+  justify-content: space-between;
+  align-items: center;
+`;
 
 const Logo = styled.div`
 	margin-right: 15px;

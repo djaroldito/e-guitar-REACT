@@ -7,7 +7,7 @@ module.exports = (sequelize) => {
 			orderDate: DataTypes.DATEONLY,
 			orderStatus: {
 				type: DataTypes.ENUM,
-				values: ['OPEN','CLOSED','CANCELED'],
+				values: ['PAYMENT COMPLETED','AWAITING PAYMENT','CLOSED','CANCELED'],
 			},
 			deliveryStatus: {
 				type: DataTypes.ENUM,

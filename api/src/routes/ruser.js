@@ -99,9 +99,10 @@ router.get("/login", async (req, res) => {
     res.status(400).send(error);
   }
 });
-router.get("/registerGoogle", async (req, res) => {
+//controla que el mail este registrado
+/* router.get("/registerGoogle", async (req, res) => {
   try {
-    const { email, userName, avatar } = req.query;
+    const { email, userName } = req.query;
 
     if (!email || !userName) {
       res.status(400).send("faltan cargar datos");
@@ -121,18 +122,20 @@ router.get("/registerGoogle", async (req, res) => {
   } catch (error) {
     res.status(400).send(error);
   }
-});
+}); */
 
 /**
  * POST /ruser/register
  */
 router.post("/register", async (req, res) => {
   try {
-    const { email, fullname, password, avatar='', isActive=false } = req.body;
+    const { email, fullname, password  } = req.body;
+
+    const { domain } = req.header.host
+    console.log(domain)
 
     const hash = bcrypt.hashSync(password, saltRounds);
     console.log("Esta es la password hash: ", hash);
-
     const newPendingUser = await User.create({
       fullname,
         email,
@@ -145,7 +148,7 @@ router.post("/register", async (req, res) => {
       hash: hash,
     });
       console.log("Esto es mailRegisterConfirm: ", mailRegisterConfirm);
-      return res.status(200).json({ message: "User has been activated!" });
+      return res.status(200).json(newPendingUser);
   } catch (error) {
     res.status(400).send(error.message);
   }

@@ -1,12 +1,11 @@
 import axios from "axios";
-import { addUser, getUser } from "./SignupSlice";
+import { getUser } from "./SignupSlice";
 
-export const postSignupForm = (supData) => (dispatch) => {
+export const postSignupForm = async (supData) => {
     try {
-        const response = axios.post("/ruser/register", supData)
-        console.log("Registrado: ", supData)
-        .then((res) => dispatch(addUser(res.data)))
-        return response;
+        const response = await axios.post("/ruser/register", supData)
+        console.log("Registrado: ", response.data)
+        return response.data;
     } catch (error) {
         console.log("Esto tira userCreated:", error.message)
     }
@@ -19,13 +18,3 @@ export const getUserDB = (email) => (dispatch) => {
 
 }
 
-/* export const postRegisterGoogle = (supData) => (dispatch) => {
-    try {
-        const response = axios.post("http://localhost:3001/ruser/registerGoogle", supData)
-        console.log("Registrado: ", supData)
-        .then((res) => dispatch(addUser(res.data)))
-        return response;        
-    } catch (error) {
-        console.log("Esto tira userCreated:", error.message)
-    }
-}; */

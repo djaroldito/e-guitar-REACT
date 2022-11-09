@@ -5,14 +5,15 @@ import Profile from "./routes/Signup/Profile";
 import GuitarDetail from "./routes/guitarDetail";
 import Payment from "./routes/components/Payment/Payment";
 import Error from "./routes/components/Payment/Error";
-import Cart from "./routes/components/cart";
-import Signup from "./routes/Signup/Signup";
-import Login from "./routes/Signup/Login";
-import ProductForm from "./routes/components/ProductForm/ProductForm";
+import Cart from './routes/components/cart';
+import Signup from './routes/Signup/Signup';
+import Login from './routes/Signup/Login';
+import ProductForm from './routes/components/ProductForm/ProductForm'
+import Order from "./routes/components/Order/Order";
 import Activate from "./routes/Signup/activate.js"
-import Layout from "./routes/Layout";
-import DashboardRoute from "./routes/components/Dashboard/DashboardRoute";
-import Dashboard from "./routes/components/Dashboard/Dashboard";
+import Layout from "./routes/Layout"
+import DashboardRoute from "./routes/components/Dashboard/DashboardRoute"
+import Dashboard from './routes/components/Dashboard/Dashboard'
 
 function App() {
   return (
@@ -25,6 +26,7 @@ function App() {
           <Route path="/home/Profile" element={<Profile />} />
           <Route path="/activate" element={<Activate />} />
           <Route path="/cart" element={<Cart />} />
+          <Route path="/orders" element={<Order />} />
           <Route path="/signup" element={<Signup />} />
           <Route path="/login" element={<Login />} />
           <Route path="/newProduct" element={<ProductForm />} />
