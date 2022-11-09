@@ -1,5 +1,5 @@
 import React from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, Link } from "react-router-dom";
 import styled from "styled-components";
 import { BiLogIn, BiLogOut } from "react-icons/bi";
 import { FaUserAlt } from "react-icons/fa";
@@ -11,7 +11,6 @@ import guitarIco from './../pics/guitarcode_white.png'
 import {useSelector} from 'react-redux'
 import { BsWindowSidebar } from "react-icons/bs";
 
-import guitarIco from "./../pics/guitarcode_white.png"
 
 const NavBar = () => {
 	const handleLog = () => {
@@ -50,11 +49,11 @@ const NavBar = () => {
 							{email ? (
 								<>
 									<div className='user-icon'>
-										{userImage ? (
+										{userImage !== 'null' ? (
 											<img src={userImage} alt='user' width={20}></img>
 										) : (
 											<FaUserAlt />
-										)}
+                                            )}
 									</div>
 									<NavLink to='/home' onClick={handleLog} title='Log Out'>
 										<BiLogOut />
