@@ -3,7 +3,6 @@ import { NavLink } from "react-router-dom";
 import styled from "styled-components";
 import { BiLogIn, BiLogOut } from "react-icons/bi";
 import { FaUserAlt } from "react-icons/fa";
-
 import { AiOutlineShoppingCart } from "react-icons/ai";
 import { LogoutButton } from "./Signup/LogoutButton.js";
 import "../index.css";
@@ -26,6 +25,7 @@ const NavBar = () => {
   const isAdmin = sessionStorage.getItem("isAdmin");
     const emailGoogle = sessionStorage.getItem("emailGoogle");
     const userImage = sessionStorage.getItem("imageURL");
+
 
   return (
     <header className={"header"}>
@@ -64,7 +64,7 @@ const NavBar = () => {
               {(email || emailGoogle) && (
                 <div className="Dropdown-Content">
                 <p onClick={()=>{window.location.href = '/orders'}}>orders</p>
-                  {/* <p><BiLogOut /> log out</p> */}
+                  { <p><BiLogOut /><LogoutButton/></p> }
                 </div>
               )}
               
