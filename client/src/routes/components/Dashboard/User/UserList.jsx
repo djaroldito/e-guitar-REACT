@@ -22,13 +22,13 @@ const UserList = (props) => {
 
 	return (
 		<List title='List of Users' filters={filters} {...props}>
-			<Datagrid>
-				<TextField source='id' sx={{ fontSize: "12px" }} />
-                <ImageField source='avatar' defaultValue='' sx={{"& .RaImageField-image": { width: "40px", height:"40px" }}} />
+			<Datagrid bulkActionButtons={false}>
+				{/* <TextField source='id' sx={{ fontSize: "12px" }} /> */}
 				<TextField source='email' sx={{ fontSize: "12px" }} />
 				<TextField source='fullname' sx={{ fontSize: "12px" }} />
-				<BooleanField source='isActive' sx={{ fontSize: "12px" }} />
-				<BooleanField source='isAdmin' sx={{ fontSize: "12px" }} />
+                <ImageField source='avatar' defaultValue='' sx={{"& .RaImageField-image": { width: "40px", height:"40px" }}} />
+				<BooleanField label='Active' source='isActive' sx={{ fontSize: "12px" }} />
+				<BooleanField label='Admin' source='isAdmin' sx={{ fontSize: "12px" }} />
 				<DateField source='createdAt' sx={{ fontSize: "12px" }} />
                 <EditButton basepath='/user' sx={{ fontSize: "12px" }} />
                 <DeleteButton basepath='/user' sx={{ fontSize: "12px" }} />

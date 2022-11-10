@@ -23,13 +23,14 @@ router.get("/", async (req, res) => {
 			where: whereQuery,
 			limit,
 			offset,
-			order: orderQuery,
+            order: orderQuery,
+            paranoid:false,
 		})
 			.then((data) => {
                 const products = data.rows.map(x => {
                     return {
                         ...x.dataValues,
-                        color: x.dataValues.color.split(/\s*(?:,|$)\s*/)
+                        color: x.dataValues.color?.split(/\s*(?:,|$)\s*/)
                     }
                 })
 				res.send({ data: products, total: data.count })
@@ -52,7 +53,8 @@ router.get("/:id", async (req, res) => {
 		const product = await Product.findOne({
 			where: {
 				id: id.toUpperCase(),
-			},
+            },
+            paranoid:false,
 		})
         if (product) {
             // add images array for visualization - regex for trim spaces

@@ -19,14 +19,14 @@ export default function Signup() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [showPsw, setShowPsw] = useState(false);
-  
+
   const [user, setUser] = useState({
     fullname: "",
     email: "",
     password: "",
     password2: ""
   });
-  
+
   const [errors, setErrors] = useState({});
   /* const [isSubmitting, setIsSubmitting] = useState(false); */
 
@@ -55,9 +55,9 @@ export default function Signup() {
       else{
     // Dispatch del post ---------------------------------------------------------------------
         dispatch(postSignupForm(user));};
-        
+
     /* setIsSubmitting(true); */
-    
+
     // Sweet Alert ---------------------------------------------------------------------------
     console.log(Swal.fire({
       position: 'center',
@@ -66,7 +66,7 @@ export default function Signup() {
       showConfirmButton: false,
       timer: 1500
     }));
-    
+
     // cleanDetail  -------------------------------------------------------------------------
     // Limpiar los estados ------------------------------------------------------------------
     setUser({
@@ -98,7 +98,7 @@ export default function Signup() {
       errors.password = 'Es requerida una contraseña';
     } else if (user.password.length < 8) {
       errors.password = 'Debe tener un mínimo de 8 caracteres';
-    } 
+    }
     if (!user.password2) {
       errors.password2 = 'Es requerida una contraseña';
     } else if (user.password2 !== user.password) {
@@ -111,14 +111,14 @@ export default function Signup() {
   return (
     <div id='signupContainer'>
       <h2>Regítrate</h2>
-        
+
       <form className='signupForm' onSubmit={handleSubmit}>
           <fieldset>
-            <input type="text" 
-              name="fullname" 
+            <input type="text"
+              name="fullname"
               value={user.fullname}
-              onChange={handleChange} 
-              placeholder='Usuario' 
+              onChange={handleChange}
+              placeholder='Usuario'
               required />
               <AiOutlineUser className='loginUsIc' />
               <div className='supEM'>
@@ -127,12 +127,12 @@ export default function Signup() {
           </fieldset>
 
           <fieldset>
-            <input type="email" 
-              name="email" 
+            <input type="email"
+              name="email"
               value={user.email}
-              onChange={handleChange} 
-              placeholder='Email' 
-              required 
+              onChange={handleChange}
+              placeholder='Email'
+              required
               ref={email}
               />
               <AiOutlineMail className='loginUsIc' />
@@ -142,44 +142,44 @@ export default function Signup() {
           </fieldset>
 
           <fieldset>
-            <input type={showPsw ? "text" : "password"} 
-              id="password" 
-              name="password" 
+            <input type={showPsw ? "text" : "password"}
+              id="password"
+              name="password"
               value={user.password}
-              onChange={handleChange} 
-              placeholder='Password' 
+              onChange={handleChange}
+              placeholder='Password'
               required />
             <div className='loginEyeIcon' onClick={() => setShowPsw(!showPsw)}>
              {showPsw ? <AiOutlineEye/> : <AiOutlineEyeInvisible className='loginInIc'/>}
             </div>
             <div className='supEM'>
-              {errors.password && <p>{errors.password}</p>} 
+              {errors.password && <p>{errors.password}</p>}
             </div>
           </fieldset>
 
           <fieldset>
-            <input type={showPsw ? "text" : "password"} 
-              id="password2" 
+            <input type={showPsw ? "text" : "password"}
+              id="password2"
               name="password2"
-              value={user.password2} 
-              onChange={handleChange} 
-              placeholder='Confirma Contraseña' 
+              value={user.password2}
+              onChange={handleChange}
+              placeholder='Confirma Contraseña'
               required />
             <div className='loginEyeIcon' onClick={() => setShowPsw(!showPsw)}>
             {showPsw ? <AiOutlineEye/> : <AiOutlineEyeInvisible className='loginInIc'/>}
             </div>
             <div className='supEM'>
-             {errors.password2 && <p>{errors.password2}</p>} 
+             {errors.password2 && <p>{errors.password2}</p>}
             </div>
           </fieldset>
-        
+
         <button className='signupBtn'>Enviar</button>
 
         <div className="signupGg">
               <p>O ingresa con</p>
             </div>
             <div>
-                <AiOutlineGoogle size={30} className='loginGgIc'/> 
+                <AiOutlineGoogle size={30} className='loginGgIc'/>
             </div>
             <GoogleLogin/>
       </form>
