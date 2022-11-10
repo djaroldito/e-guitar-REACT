@@ -1,7 +1,6 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-
-
+import "./Styles/Activate.css"
 
 const Activate = () => {
 
