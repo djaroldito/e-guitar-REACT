@@ -23,40 +23,91 @@ function sendMail(message) {
   });
 }
 
-const mailRegisterConfirm = async function ({ toUser, hash }) {
-  function eliminarSlash(hash) {
-    const nuevoHash = hash.replace("/", "*");
-    return nuevoHash;
-  }
-  const hashSeguro = eliminarSlash(hash);
-
+const mailRegisterConfirm = async function ({ toUser }) {
   const message = {
-    from: process.env.GOOGLEUSER,
+    from: process.env.GOOGLE_USER,
     to: toUser.email,
     subject: "Guitar Code - Register Activation",
     html: `
-        <h3>Hola, ${toUser.fullname}!</h3>
-        <p>Gracias por registrarte con nosotros, sólo te queda un último paso!</p>
-        <p>Para activar tu cuenta por favor haz click en el siguiente link: <a target="" href=${process.env.DOMAIN}/activate/${toUser.email}>Activar cuenta</a></p>
-        <p>Saludos y gracias por confiar en nosotros! </p>`,
+        <h3>Hello, ${toUser.fullname}!</h3>
+        <p>Thank you for register with us, there's only one more step to go!</p>
+        <p>To activate your account please click in this link: <a target="" href=${process.env.DOMAIN}/activate/${toUser.email}>Activate account</a></p>
+        <p>Have a nice day!</p>`,
   };
   console.log("Esto es message: ", message);
   return sendMail(message);
 };
 
+const mailFotgotPassword = async function ({toUser}) {
+  const message = {
+    from: process.env.GOOGLE_USER,
+    to: toUser.email,
+    subject: "Guitar Code - Reset Password",
+    html: `
+    
+    `
+  }
+}
+
+// REGISTER ---------------------------------------------------------------------------------------------------------------------------
+
+router.post("/register", async (req, res) => {
+  try {
+    const { email, fullname, password } = req.body;
+    if (!email || !fullname || !password) res.status(400).send("faltan cargar datos");
+
+    const hash = bcrypt.hashSync(password, saltRounds);
+
+    const newPendingUser = await User.create({
+      fullname,
+      email,
+      password: hash,
+    });
+
+    const mailReg = await mailRegisterConfirm({
+      toUser: newPendingUser,
+      hash: hash,
+    });
+
+    return res.status(200).json({ message: "User has been activated!" });
+  } catch (error) {
+    res.status(400).send(error.message);
+  }
+});
+
+router.get("/registerGoogle", async (req, res) => {
+  try {
+    const { email, userName } = req.query;
+
+    if (!email || !userName) {
+      res.status(400).send("faltan cargar datos");
+    } else {
+      const user = await User.findOne({
+        where: {
+          email,
+          userName,
+        },
+      });
+
+      if (user) {
+        return res.status(200).json(user);
+      } else {
+        return res.status(200).json(user);
+      }
+    }
+  } catch (error) {
+    res.status(400).send(error);
+  }
+});
+
 router.get("/activate/:email", async (req, res) => {
   const { email } = req.params;
-  console.log("esto es email: ", email);
   try {
-    const user = await User.update(
-      {
-        isActive: true,
-      },
-      {
-        where: {
+    const user = await User.update({
+        isActive: true },
+      { where: {
           email: email,
-        },
-      }
+        },}
     );
     if (user) {
       res.redirect("http://localhost:3000/activate");
@@ -69,7 +120,7 @@ router.get("/activate/:email", async (req, res) => {
   }
 });
 
-/**  GET /rusers/login */
+/**  GET /rusers/login --------------------------------------------------------------------------------------------*/
 router.get("/login", async (req, res) => {
   try {
     const { email, password } = req.query;
@@ -99,56 +150,6 @@ router.get("/login", async (req, res) => {
     res.status(400).send(error);
   }
 });
-router.get("/registerGoogle", async (req, res) => {
-  try {
-    const { email, userName } = req.query;
-
-    if (!email || !userName) {
-      res.status(400).send("faltan cargar datos");
-    } else {
-      const user = await User.findOne({
-        where: {
-          email,
-          userName,
-        },
-      });
-
-      if (user) {
-        return res.status(200).json(user);
-      } else {
-        return res.status(200).json(user);
-      }
-    }
-  } catch (error) {
-    res.status(400).send(error);
-  }
-});
-
-/**
- * POST /ruser/register
- */
-router.post("/register", async (req, res) => {
-  try {
-    const { email, fullname, password } = req.body;
-
-    const hash = bcrypt.hashSync(password, saltRounds);
-    console.log("Esta es la password hash: ", hash);
-
-    const newPendingUser = await User.create({
-      fullname,
-      email,
-      password: hash,
-    });
-    const mailReg = await mailRegisterConfirm({
-      toUser: newPendingUser,
-      hash: hash,
-    });
-      console.log("Esto es mailRegisterConfirm: ", mailRegisterConfirm);
-      return res.status(200).json({ message: "User has been activated!" });
-  } catch (error) {
-    res.status(400).send(error.message);
-  }
-});
 
 router.get("/email", async (req, res) => {
   try {
@@ -174,9 +175,8 @@ router.get("/email", async (req, res) => {
   }
 });
 
-/**
- * load defaul admin user
- */
+// load defaul admin user ---------------------------------------------------------------------------------
+
 const loadAdminUserData = async () => {
   try {
     // get all users from database
@@ -200,5 +200,30 @@ const loadAdminUserData = async () => {
     throw new Error(error.message);
   }
 };
+
+// FORGOT PASSWORD ---------------------------------------------------------------------------------------------------------------
+router.post("/reset-password", async (req, res) => {
+  try {
+    const { fullname, email } = req.body;
+    console.log("Back reset-pass: ", fullname, email)
+    if (!fullname || !email) res.status(400).send("Cannot be empty fields")
+  
+    const user = await User.findeOne({ 
+      where: {
+        email
+      }});
+    console.log("Saliendo del findone en RPassword")
+    console.log("Esto es user en el back: ", user);
+    if (!user) return res.status(422).send("User doesn't exists!");
+
+    const hash = bcrypt.hashSync(fullname, saltRounds);
+    console.log("Esto es hash en RPass: ", hash)
+
+  } catch (error) {
+    
+  }
+
+})
+
 
 module.exports = router;

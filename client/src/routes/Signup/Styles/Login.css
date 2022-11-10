@@ -1,7 +1,10 @@
+.loginBox {
+  min-height: 775px;
+}
 
 #loginContainer{
   display: flex;
-  margin-top: 20px; 
+  margin-top: 2em; 
   flex-direction: column;
   position: relative;
   margin-left: 50%;
@@ -38,12 +41,12 @@
 
 .loginGg {
   text-align: center;
-  margin-top: 15px;
+  margin-top: 25px;
 }
 
 .loginAcc, .loginSup {
   text-align: center;
-  margin-top: 10px;
+  margin-top: 15px;
 }
 
 .loginAcc {
@@ -106,14 +109,13 @@
   cursor: pointer;
 }
 
-.loginBtn.google {
-  background: #DD4B39;
-  font-weight: bold;
-}
-
 .submitBtn {
   color: white;
   background: rgb(95, 194, 95);
   font-weight: bold;
   font-size: 15px;
+}
+
+.submitBtn:hover{
+  background: rgb(121, 216, 121);
 }
