@@ -3,11 +3,8 @@ import { getUser } from "./SignupSlice";
 
 export const postSignupForm =  async (supData) => {
     try {
-        console.log("Estamos en axios")
         await axios.post("/ruser/register", supData)
         .then(res => console.log("postUser Action response: ", res)) 
-        console.log("Salimos del axios")
-        return true
     } catch (error) {
         console.log("Esto tira userCreated:", error.message)
     }

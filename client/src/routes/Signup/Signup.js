@@ -52,9 +52,10 @@ export default function Signup() {
     if (data) return Swal.fire("This email is already registered")
       else { 
     // Dispatch del post ---------------------------------------------------------------------
-      console.log("llega al dispatch de postSignupForm")  
-      await postSignupForm(user);} 
-      console.log("Sale del dispatch del postSignupForm")
+       await (postSignupForm(user));};
+        
+    /* setIsSubmitting(true); */
+    
     // Sweet Alert ---------------------------------------------------------------------------
     Swal.fire("Successful Registration", "Please check your email to activate your account");
     

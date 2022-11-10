@@ -23,7 +23,10 @@ function sendMail(message) {
   });
 }
 
+ 
+
 const mailRegisterConfirm = async function ({ toUser }) {
+  const domain = process.env.DOMAIN;
   const message = {
     from: process.env.GOOGLE_USER,
     to: toUser.email,
@@ -31,7 +34,7 @@ const mailRegisterConfirm = async function ({ toUser }) {
     html: `
         <h3>Hello, ${toUser.fullname}!</h3>
         <p>Thank you for register with us, there's only one more step to go!</p>
-        <p>To activate your account please click in this link: <a target="" href=${process.env.DOMAIN}/activate/${toUser.email}>Activate account</a></p>
+        <p>To activate your account please click in this link: <a target="" href=${domain}/activate/${toUser.email}>Activate account</a></p>
         <p>Have a nice day!</p>`,
   };
   console.log("Esto es message: ", message);
