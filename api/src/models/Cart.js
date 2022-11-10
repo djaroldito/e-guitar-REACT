@@ -7,6 +7,10 @@ sequelize.define(
         quantity: {
             type: DataTypes.INTEGER,
             defaultValue: 1
+        },
+        color: {
+            type: DataTypes.STRING,
+            
         }
     },{
         timestamps: false,
