@@ -18,14 +18,14 @@ export default function Signup() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [showPsw, setShowPsw] = useState(false);
-  
+
   const [user, setUser] = useState({
     fullname: "",
     email: "",
     password: "",
     password2: "",
   });
-  
+
   const [errors, setErrors] = useState({});
   /* const [isSubmitting, setIsSubmitting] = useState(false); */
 
@@ -50,15 +50,15 @@ export default function Signup() {
       }})
 
     if (data) return Swal.fire("This email is already registered")
-      else { 
+      else {
     // Dispatch del post ---------------------------------------------------------------------
        await (postSignupForm(user));};
-        
+
     /* setIsSubmitting(true); */
-    
+
     // Sweet Alert ---------------------------------------------------------------------------
     Swal.fire("Successful Registration", "Please check your email to activate your account");
-    
+
     // cleanDetail  -------------------------------------------------------------------------
     // Limpiar los estados ------------------------------------------------------------------
     setUser({
@@ -90,7 +90,7 @@ export default function Signup() {
       errors.password = 'Password is required';
     } else if (user.password.length < 8) {
       errors.password = 'Password must have at least 8 characters';
-    } 
+    }
     if (!user.password2) {
       errors.password2 = 'Password is required';
     } else if (user.password2 !== user.password) {
@@ -104,14 +104,14 @@ export default function Signup() {
     <div className='signupBox'>
     <div id='signupContainer'>
       <h2>Sign up</h2>
-        
+
       <form className='signupForm' onSubmit={handleSubmit}>
           <fieldset>
-            <input type="text" 
-              name="fullname" 
+            <input type="text"
+              name="fullname"
               value={user.fullname}
-              onChange={handleChange} 
-              placeholder='User' 
+              onChange={handleChange}
+              placeholder='User'
               required />
               <AiOutlineUser className='loginUsIc' />
               <div className='supEM'>
@@ -120,12 +120,12 @@ export default function Signup() {
           </fieldset>
 
           <fieldset>
-            <input type="email" 
-              name="email" 
+            <input type="email"
+              name="email"
               value={user.email}
-              onChange={handleChange} 
-              placeholder='Email' 
-              required 
+              onChange={handleChange}
+              placeholder='Email'
+              required
               ref={email}
               />
               <AiOutlineMail className='loginUsIc' />
@@ -135,37 +135,37 @@ export default function Signup() {
           </fieldset>
 
           <fieldset>
-            <input type={showPsw ? "text" : "password"} 
-              id="password" 
-              name="password" 
+            <input type={showPsw ? "text" : "password"}
+              id="password"
+              name="password"
               value={user.password}
-              onChange={handleChange} 
-              placeholder='Password' 
+              onChange={handleChange}
+              placeholder='Password'
               required />
             <div className='signUpEyeIcon' onClick={() => setShowPsw(!showPsw)}>
              {showPsw ? <AiOutlineEye/> : <AiOutlineEyeInvisible className='loginInIc'/>}
             </div>
             <div className='supEM'>
-              {errors.password && <p>{errors.password}</p>} 
+              {errors.password && <p>{errors.password}</p>}
             </div>
           </fieldset>
 
           <fieldset>
-            <input type={showPsw ? "text" : "password"} 
-              id="password2" 
+            <input type={showPsw ? "text" : "password"}
+              id="password2"
               name="password2"
-              value={user.password2} 
-              onChange={handleChange} 
-              placeholder='Confirm Password' 
+              value={user.password2}
+              onChange={handleChange}
+              placeholder='Confirm Password'
               required />
             <div className='signUpEyeIcon' onClick={() => setShowPsw(!showPsw)}>
             {showPsw ? <AiOutlineEye/> : <AiOutlineEyeInvisible className='loginInIc'/>}
             </div>
             <div className='supEM'>
-             {errors.password2 && <p>{errors.password2}</p>} 
+             {errors.password2 && <p>{errors.password2}</p>}
             </div>
           </fieldset>
-        
+
         <button className='signupBtn'>Sign up</button>
 
         <div className="signupGg">

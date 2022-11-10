@@ -3,15 +3,16 @@ import { NavLink } from "react-router-dom"
 import dataProvider from "./dataProvider"
 import Card from "@mui/material/Card"
 import CardContent from "@mui/material/CardContent"
-
 import { deepPurple, indigo, } from "@mui/material/colors"
-
+// Products
 import ProductList from "./Product/ProductList"
 import ProductCreate from "./Product/ProductCreate"
 import ProductEdit from "./Product/ProductEdit"
-
+// Users
 import UserList from "./User/UserList"
 import UserEdit from "./User/UserEdit"
+// Orders
+import OrderList from './Order/OrderList'
 
 export default function Dashboard() {
 	const theme = {
@@ -43,6 +44,11 @@ export default function Dashboard() {
 					name='user'
 					list={UserList}
                     edit={UserEdit}
+				/>
+				<Resource
+					name='order'
+					list={OrderList}
+                    // edit={UserEdit}
 				/>
 			</Admin>
 		</>

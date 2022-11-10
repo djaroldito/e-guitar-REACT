@@ -29,7 +29,7 @@ router.get("/", async (req, res) => {
 			if (type) whereQuery.type = { [op.iLike]: `%${type}%` }
 			if (color) whereQuery.color = { [op.iLike]: `%${color}%` }
 			if (minPrice || maxPrice) whereQuery.price = { [op.between]: [minPrice, maxPrice]}
-			console.log(minPrice, maxPrice)
+			//console.log(minPrice, maxPrice)
 			if (sortPrice) {
 				orderBy = [
 					["price", sortPrice],

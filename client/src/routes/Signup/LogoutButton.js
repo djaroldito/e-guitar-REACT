@@ -19,7 +19,7 @@ export const LogoutButton = () => {
 	return (
 		<div id='signOutButton'>
 			<GoogleLogout
-				clientId='1071381556347-p8k8tg37ss2e9ag86088tvdds19dot5o.apps.googleusercontent.com'
+				clientId={process.env.CLIENTID}
 				buttonText={"Logout"}
 				onLogoutSuccess={onSuccess}
 				render={(renderProps) => (
