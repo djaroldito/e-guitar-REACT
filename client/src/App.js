@@ -28,7 +28,7 @@ function App() {
           <Route path="/cart" element={<Cart />} />
           <Route path="/orders" element={<Order />} />
           <Route path="/signup" element={<Signup />} />
-          <Route path="/activate" element={<Activate />} />
+          <Route path="/activate/:email" element={<Activate />} />
           <Route path="/login" element={<Login />} />
           <Route path="/reset-password" element={<ResetPassword />} />
           <Route path="/newProduct" element={<ProductForm />} />

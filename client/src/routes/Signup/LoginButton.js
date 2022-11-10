@@ -50,10 +50,11 @@ export const LoginButton = () => {
     console.log("LOGIN FAILED! res: ", res);
   };
 
+
   return (
     <div>
       <GoogleLogin
-        clientId="1071381556347-p8k8tg37ss2e9ag86088tvdds19dot5o.apps.googleusercontent.com"
+        clientId={process.env.CLIENTID}
         buttonText="Login with Google"
         onSuccess={onSuccess}
         onFailure={onFailure}
