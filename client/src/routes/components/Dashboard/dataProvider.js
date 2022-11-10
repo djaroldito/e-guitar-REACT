@@ -7,6 +7,11 @@ const apiUrl = `${backUrl}/admin`
 const httpClient = fetchUtils.fetchJson
 
 const dataProvider = {
+    getRestore: (resource, params) => {
+		return httpClient(`${apiUrl}/${resource}/restore/${params.id}`, {
+			method: "POST",
+		}).then(({ json }) => ({ data: json }))
+	},
 	getList: (resource, params) => {
 		const { page, perPage } = params.pagination
 		const { field, order } = params.sort
@@ -83,18 +88,18 @@ const dataProvider = {
 			if (params.data.color) {
 				params.data.color = params.data.color.join(",")
 			}
-        }
-        if (resource === 'user' && params.data.avatar) {
-            const file = params.data.avatar
-            const formData = new FormData()
-            formData.append("file", file.rawFile)
-            formData.append("upload_preset", "kym7uarq")
-            const res = await axios.post(
-                `https://api.cloudinary.com/v1_1/dnzbhrg86/image/upload`,
-                formData
-            )
-            params.data.avatar = res.data.url
-        }
+		}
+		if (resource === "user" && params.data.avatar) {
+			const file = params.data.avatar
+			const formData = new FormData()
+			formData.append("file", file.rawFile)
+			formData.append("upload_preset", "kym7uarq")
+			const res = await axios.post(
+				`https://api.cloudinary.com/v1_1/dnzbhrg86/image/upload`,
+				formData
+			)
+			params.data.avatar = res.data.url
+		}
 		return httpClient(`${apiUrl}/${resource}/${params.id}`, {
 			method: "PUT",
 			body: JSON.stringify(params.data),
@@ -111,34 +116,34 @@ const dataProvider = {
 	//     }).then(({ json }) => ({ data: json }));
 	// },
 
-    create: async (resource, params) => {
-        if (resource === "product") {
-            let imgTxt = ""
-            if (params.data.img) {
-                const imgArray = await Promise.all(
-                    params.data.img.map(async (item) => {
-                        if (item.hasOwnProperty("rawFile")) {
-                            // file to update
-                            const formData = new FormData()
-                            formData.append("file", item.rawFile)
-                            formData.append("upload_preset", "kym7uarq")
-                            const res = await axios.post(
-                                `https://api.cloudinary.com/v1_1/dnzbhrg86/image/upload`,
-                                formData
-                            )
-                            return res.data.url
-                        } else {
-                            return item.src
-                        }
-                    })
-                )
-                imgTxt = imgArray.join(",")
-                params.data.img = imgTxt
-            }
-            if (params.data.color) {
-                params.data.color = params.data.color.join(",")
-            }
-        }
+	create: async (resource, params) => {
+		if (resource === "product") {
+			let imgTxt = ""
+			if (params.data.img) {
+				const imgArray = await Promise.all(
+					params.data.img.map(async (item) => {
+						if (item.hasOwnProperty("rawFile")) {
+							// file to update
+							const formData = new FormData()
+							formData.append("file", item.rawFile)
+							formData.append("upload_preset", "kym7uarq")
+							const res = await axios.post(
+								`https://api.cloudinary.com/v1_1/dnzbhrg86/image/upload`,
+								formData
+							)
+							return res.data.url
+						} else {
+							return item.src
+						}
+					})
+				)
+				imgTxt = imgArray.join(",")
+				params.data.img = imgTxt
+			}
+			if (params.data.color) {
+				params.data.color = params.data.color.join(",")
+			}
+		}
 		return httpClient(`${apiUrl}/${resource}`, {
 			method: "POST",
 			body: JSON.stringify(params.data),

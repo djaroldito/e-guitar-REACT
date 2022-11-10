@@ -54,7 +54,7 @@ export const LoginButton = () => {
   return (
     <div>
       <GoogleLogin
-        clientId={process.env.CLIENTID}
+        clientId = {process.env.CLIENTID}
         buttonText="Login with Google"
         onSuccess={onSuccess}
         onFailure={onFailure}

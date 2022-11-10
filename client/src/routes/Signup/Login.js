@@ -8,15 +8,12 @@ import Home from "../home";
 import {LoginButton} from "./LoginButton";
 import {gapi} from 'gapi-script'
 
-
-
-
 export default function Login() {
 
   useEffect(()=>{
     function start(){
       gapi.client.init({
-        clientId:process.env.CLIENTID,
+        clientId: process.env.CLIENTID,
         scope:"email"
       })
     }
