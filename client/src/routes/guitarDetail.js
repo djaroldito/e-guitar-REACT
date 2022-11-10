@@ -1,4 +1,4 @@
-import { useEffect } from "react"
+import { useEffect, useState } from "react"
 import axios from "axios"
 import { useDispatch, useSelector } from "react-redux"
 import { useParams, useNavigate, Link } from "react-router-dom"
@@ -14,6 +14,8 @@ import { FaTrashAlt, FaEdit } from "react-icons/fa"
 import { IoArrowBackOutline } from "react-icons/io5"
 import { BsCart2 } from "react-icons/bs"
 
+
+
 const GuitarDetail = () => {
 	const dispatch = useDispatch()
 	const navigate = useNavigate()
@@ -26,16 +28,36 @@ const GuitarDetail = () => {
 		}
 	}, [dispatch, id])
 
+    const[input, setInput]= useState('')
+
+    
+
 	const detail = useSelector((state) => state.products.detail)
+    
 	const carrito = useSelector((state) => state.products.cart)
+   // console.log(carrito)
 
   const isInCart = () => carrito?.find(el=> el.id === detail.id)
   const addToCart = async (detail) => {
-	dispatch(getProductToCart(detail));
+    
+    Swal.fire({
+        title: 'Product added to cart!',
+        icon: 'success',
+        confirmButtonText: 'Ok'
+      })
+	
+    dispatch(getProductToCart({...detail, color:input}));
+    console.log(detail)
 	if(userId)
 	await addCartToDB(JSON.parse(localStorage.getItem('carrito')), userId);
   }
+ 
+  
+  const change = (e)=>{
+   setInput(e.target.value)
+    }
 
+   
 
 	const handleDeleteProduct = (id) => {
 		Swal.fire({
@@ -97,9 +119,9 @@ const GuitarDetail = () => {
 					<form>
 						<ColorDiv>
 							Colors:
-							{detail.color?.split(",").map((item, pos) => (
+							{detail.color?.split(", ").map((item, pos) => (
 								<div className='color-div' key={pos}>
-									<input name='color' type='radio' value={item} />
+									<input onChange={(e)=> change(e) } name='color' type='radio' value={item} />
 									<label htmlFor={item}>{item}</label>
 								</div>
 							))}
@@ -124,129 +146,142 @@ const GuitarDetail = () => {
 							</button>
 						</CustomButtons>
 					) : (
-						<CustomButtons>
-							<button
-								className='add-cart'
-								onClick={() => addToCart(detail)}
-								disabled={isInCart()}
-							>
-								<BsCart2 />
-								Add Cart
-							</button>
-							<Link to='/home'>
-								<button className='back-home'>
-									<IoArrowBackOutline /> Back Home
-								</button>
-							</Link>
-						</CustomButtons>
-					)}
-				</TextCont>
-			</CountDiv>
-			<AdInfo>aditional Information: <span dangerouslySetInnerHTML={{__html: `${detail.aditionalInformation}`}}></span></AdInfo>
-		</section>
-	)
+                        <CustomButtons>
+                        {carrito?.find(item => detail.id === item.id)?
+                            <Link to='/cart'>
+                        <button className="include">
+                        <BsCart2 /> This product is in your cart
+                        </button> 
+                             </Link>
+                         : <div>
+                         <button
+                              className='add-cart'
+                              onClick={() => addToCart(detail)}
+                              disabled={isInCart()}
+                              >
+                              <BsCart2 />
+                              Add Cart
+                          </button>
+                         </div> }
+                         <Link to='/home'>
+                             <button className='back-home'>
+                                 <IoArrowBackOutline /> Back Home
+                             </button>
+                         </Link>
+                     </CustomButtons>
+                 )}
+             </TextCont>
+         </CountDiv>
+         <AdInfo>aditional Information: <span dangerouslySetInnerHTML={{__html: `${detail.aditionalInformation}`}}></span></AdInfo>
+     </section>
+ )
 }
 
 const CountDiv = styled.div`
-	width: 740px;
-	max-width: 900px;
-	min-height: 400px;
-	margin: auto;
-	display: flex;
-	flex-direction: row;
-	margin-top: 75px;
-	background-color: white;
-	border-radius: 10px;
-	align-items: center;
-	.imgcont {
-		display: flex;
-		justify-content: center;
-		align-items: center;
-		height: 100%;
-		max-width: 300px;
-		min-width: 250px;
-	}
-	img {
-		max-width: 100%;
-		max-height: 400px;
-	}
-	.mySwiper {
-		max-width: 300px;
-		height: 100%;
-	}
+ width: 740px;
+ max-width: 900px;
+ min-height: 400px;
+ margin: auto;
+ display: flex;
+ flex-direction: row;
+ margin-top: 75px;
+ background-color: white;
+ border-radius: 10px;
+ align-items: center;
+ .centrado{
+ }
+ .imgcont {
+     display: flex;
+     justify-content: center;
+     /* height: 100%; */
+     max-width: 300px;
+     min-width: 250px;
+ }
+ img {
+     max-width: 100%;
+     max-height: 400px;
+ }
+ .mySwiper {
+     max-width: 300px;
+     height: 100%;
+ }
 `
 
 const TextCont = styled.div`
-	display: flex;
-	flex-direction: column;
-	width: 100%;
-	margin-left: 50px;
-	margin-top: 10px;
-	height: 100%;
-	h2,
-	h3 {
-		font-weight: 400;
-		margin: 3px;
-	}
+ display: flex;
+ flex-direction: column;
+ width: 100%;
+ margin-left: 50px;
+ margin-top: 10px;
+ height: 100%;
+ h2,
+ h3 {
+     font-weight: 400;
+     margin: 3px;
+ }
 `
 const LeftHand = styled.div`
-	padding: 5px;
-	border: 1px black solid;
-	height: 20px;
-	background: green;
-	color: white;
-	margin-top: 15px;
-	border-radius: 5px;
-	width: 140px;
+ padding: 5px;
+ border: 1px black solid;
+ height: 20px;
+ background: green;
+ color: white;
+ margin-top: 15px;
+ border-radius: 5px;
+ width: 140px;
 `
-const ColorDiv = styled.div`
-	display: flex;
-	flex-direction: row;
-	padding: 15px;
-	.color-div {
-		margin-left: 5px;
-	}
+const ColorDiv = styled.form`
+ display: flex;
+ flex-direction: row;
+ padding: 15px;
+ .color-div {
+     margin-left: 5px;
+ }
 `
 
 const CustomButtons = styled.div`
-	display: flex;
-	flex-direction: column;
-	width: 250px;
-	position: relative;
-	margin-top: auto;
-	margin: 15px;
-	a {
-		color: whitesmoke;
-		text-decoration: none;
-	}
-	button {
-		border-radius: 5px;
-		padding: 10px;
-		border: none;
-		cursor: pointer;
-		margin: 5px;
-		width: 100%;
-		background-color: rgb(76, 49, 138);
-		color: whitesmoke;
-		font-weight: 600;
-		align-items: center;
-		display: flex;
-		justify-content: center;
-	}
-	.back-home,
-	.delete {
-		background-color: rgb(128, 60, 60);
-		font-weight: 600;
-	}
-	svg {
-		padding: 0 8px;
-	}
+ display: flex;
+ flex-direction: column;
+ width: 250px;
+ position: relative;
+ margin-top: auto;
+ margin: 15px;
+ a {
+     color: whitesmoke;
+     text-decoration: none;
+     
+ }
+ button {
+     border-radius: 5px;
+     padding: 10px;
+     border: none;
+     cursor: pointer;
+     margin: 5px;
+     width: 100%;
+     background-color: rgb(76, 49, 138);
+     color: whitesmoke;
+     font-weight: 600;
+     align-items: center;
+     display: flex;
+     justify-content: center;
+ }
+ .back-home,
+ .delete {
+     background-color: rgb(128, 60, 60);
+     font-weight: 600;
+ }
+ svg {
+     padding: 0 8px;
+ }
+ .include{
+     background-color: green;
+ }
 `
 const AdInfo = styled.p`
-	font-size: 12px;
-	margin-left: auto;
-	margin-right: auto;
-	width: 700px;
+ font-size: 12px;
+ margin-left: auto;
+ margin-right: auto;
+ width: 700px;
 `
 
 export default GuitarDetail

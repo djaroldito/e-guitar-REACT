@@ -9,6 +9,7 @@ export const productSlice = createSlice({
 		cart: localStorage.getItem('carrito') ?  JSON.parse(localStorage.getItem("carrito")): [],
 		brands: [],
 		colors: [],
+		orders: [],
         types: [],
         filter: [],
         Filters: {
@@ -17,7 +18,7 @@ export const productSlice = createSlice({
             brand: '',
             fullName: '',
 			minPrice: 0,
-			maxPrice: 150000,
+			maxPrice: 5000,
 			sortPrice: ' '
           },
         currentPage: 1,
@@ -40,10 +41,18 @@ export const productSlice = createSlice({
 			if (cartIndex >= 0) {
 				state.cart[cartIndex].Cart.quantity += 1
 			} else {
-				let tempProduct = { ...action.payload, Cart: {quantity: 1, productId:action.payload.id, userId: parseInt(localStorage.getItem('userId'))}}
+				let tempProduct = { ...action.payload, Cart: {color:action.payload.color ,quantity: 1, productId:action.payload.id, userId: parseInt(localStorage.getItem('userId'))}}
 				state.cart.push(tempProduct)
 			}
 			localStorage.setItem("carrito", JSON.stringify(state.cart))
+			// let productFind = state.cart.find(item => item.id === action.payload.id)
+			// if(productFind){
+			// 	productFind.quantity += 1
+			// } else {
+			// 	let tempProduct = {...action.payload, userId: parseInt(localStorage.getItem('userId')) }
+			// 	state.cart.push(tempProduct)
+			// }
+			// localStorage.setItem("carrito", JSON.stringify(state.cart))
 		},
 
 		delOneFromCart: (state, action) => {
@@ -57,7 +66,9 @@ export const productSlice = createSlice({
 			}
 			localStorage.setItem("carrito", JSON.stringify(state.cart))
 		},
-
+		getOrder: (state, action) => {
+			state.orders = action.payload
+		},
 		delAllFromCart: (state, action) => {
 			return {
 				...state,
@@ -120,6 +131,7 @@ export const {
     clearDetail,
     setCurrentPage,
     setPageCount,
+	getOrder
 
 } = productSlice.actions
 

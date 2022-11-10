@@ -51,30 +51,33 @@ const mailFotgotPassword = async function ({toUser}) {
 
 // REGISTER ---------------------------------------------------------------------------------------------------------------------------
 
-router.post("/register", async (req, res) => {
+ router.post("/register", async (req, res) => {
   try {
-    const { email, fullname, password } = req.body;
-    if (!email || !fullname || !password) res.status(400).send("faltan cargar datos");
+    console.log(req.body)
+  const { email, fullname, password, avatar='', isActive=false  } = req.body;
 
-    const hash = bcrypt.hashSync(password, saltRounds);
-
-    const newPendingUser = await User.create({
-      fullname,
+  const hash = bcrypt.hashSync(password, saltRounds);
+  //console.log("Esta es la password hash: ", hash);
+  const newPendingUser = await User.create({
+    fullname,
       email,
+      avatar,
+      isActive,
       password: hash,
-    });
-
-    const mailReg = await mailRegisterConfirm({
-      toUser: newPendingUser,
-      hash: hash,
-    });
-
-    return res.status(200).json({ message: "User has been activated!" });
+  });
+  const mailReg = await mailRegisterConfirm({
+    toUser: newPendingUser,
+    hash: hash,
+  });
+    //console.log("Esto es mailRegisterConfirm: ", mailReg);
+    return res.status(200).json(newPendingUser);
   } catch (error) {
-    res.status(400).send(error.message);
-  }
+      console.log(error.message)
+  res.status(400).send(error.message);
+}
 });
 
+//controla que el mail este registrado
 router.get("/registerGoogle", async (req, res) => {
   try {
     const { email, userName } = req.query;
@@ -84,8 +87,7 @@ router.get("/registerGoogle", async (req, res) => {
     } else {
       const user = await User.findOne({
         where: {
-          email,
-          userName,
+          email
         },
       });
 
@@ -134,7 +136,7 @@ router.get("/login", async (req, res) => {
       const user = await User.findOne({
         where: {
           email,
-		  isActive: true	
+		  isActive: true
         },
         include: Product,
       });
@@ -150,6 +152,8 @@ router.get("/login", async (req, res) => {
     res.status(400).send(error);
   }
 });
+
+
 
 router.get("/email", async (req, res) => {
   try {
@@ -190,11 +194,11 @@ const loadAdminUserData = async () => {
         isAdmin: true,
 		isActive:true
       });
-      await User.create({
-        email: "cliente@gmail.com",
-        password: hash,
-        isAdmin: false,
-      });
+    //   await User.create({
+    //     email: "cliente@gmail.com",
+    //     password: hash,
+    //     isAdmin: false,
+    //   });
     }
   } catch (error) {
     throw new Error(error.message);
