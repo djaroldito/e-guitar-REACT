@@ -1,9 +1,9 @@
 import axios from "axios";
 import { getUser } from "./SignupSlice";
 
-export const postSignupForm = (supData) => {
+export const postSignupForm = async (supData) => {
     try {
-        axios.post("/ruser/register", supData)
+        await axios.post("/ruser/register", supData)
         .then( res => console.log(res))
 
     } catch (error) {
