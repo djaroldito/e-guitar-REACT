@@ -3,7 +3,6 @@ module.exports = (sequelize) => {
 	sequelize.define(
 		"review",
 		{
-			reviewDate: DataTypes.DATEONLY,
 			message: DataTypes.TEXT,
             stars: {
                 type: DataTypes.INTEGER,

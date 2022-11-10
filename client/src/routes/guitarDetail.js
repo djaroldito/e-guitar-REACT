@@ -14,6 +14,7 @@ import { FaTrashAlt, FaEdit } from "react-icons/fa"
 import { IoArrowBackOutline } from "react-icons/io5"
 import { BsCart2 } from "react-icons/bs"
 
+
 const GuitarDetail = () => {
     const dispatch = useDispatch()
     const navigate = useNavigate()
@@ -47,7 +48,6 @@ const GuitarDetail = () => {
         quantity: input.quantity,
         leftHand: input.leftHand
     }
-    console.log(newItem)
     
     const isInCart = () => carrito?.find(el=> el.id === detail.id)
     const addToCart = async (detail) => {
@@ -128,6 +128,7 @@ const handleDeleteProduct = (id) => {
                         {detail.type}
                     </p>
                     {detail.leftHand ? <LeftHand>Left Hand Available</LeftHand> : null}
+                    {/* <Rating name="half-rating-read" defaultValue={2.5} precision={0.5} readOnly /> */}
                   
                         <ColorDiv>
                             Colors:

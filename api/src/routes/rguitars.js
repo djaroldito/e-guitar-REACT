@@ -5,7 +5,7 @@ const { Router } = require("express")
 const router = Router()
 
 const sequelize = require("sequelize")
-const { Product } = require("../db.js")
+const { Product, Review, User } = require("../db.js")
 
 
 //  GET /rguitars
@@ -13,7 +13,7 @@ const { Product } = require("../db.js")
 // Pagination: limit=4 (items per page), page=1 (currentPage)
 router.get("/", async (req, res) => {
 	try {
-		const { brand, type, color, fullName, page=1, size=6, sortPrice, sortBrand, minPrice, maxPrice  } = req.query
+		const { brand, type, color, fullName, page = 1, size = 6, sortPrice, sortBrand, minPrice, maxPrice } = req.query
 
 		// if no product load form json
 		await loadProductData()
@@ -22,24 +22,24 @@ router.get("/", async (req, res) => {
 		let orderBy = []
 		//let orderByBrand = []
 		// check if there are filter parameters
-		if (brand || type || color || fullName || sortPrice || sortBrand || minPrice || maxPrice  ) {
+		if (brand || type || color || fullName || sortPrice || sortBrand || minPrice || maxPrice) {
 			const op = sequelize.Op
 			// ilike trabaja entre mayusculas y minusculas y de cierta forma te acelera los procesos
 			if (brand) whereQuery.brand = { [op.iLike]: `%${brand}%` }
 			if (type) whereQuery.type = { [op.iLike]: `%${type}%` }
 			if (color) whereQuery.color = { [op.iLike]: `%${color}%` }
-			if (minPrice || maxPrice) whereQuery.price = { [op.between]: [minPrice, maxPrice]}
+			if (minPrice || maxPrice) whereQuery.price = { [op.between]: [minPrice, maxPrice] }
 			console.log(minPrice, maxPrice)
 			if (sortPrice) {
 				orderBy = [
 					["price", sortPrice],
-						]
-					}
+				]
+			}
 			if (sortBrand) {
 				orderBy = [
 					["brand", sortBrand],
-						]
-				}
+				]
+			}
 
 			if (fullName) {
 				whereQuery[op.or] = {
@@ -58,12 +58,12 @@ router.get("/", async (req, res) => {
 			}
 		}
 
-        // get values for query
+		// get values for query
 		const { limit, offset } = getPagination(page, size)
-        // find data and make object for frontend
+		// find data and make object for frontend
 		Product.findAndCountAll({ where: whereQuery, limit, offset, order: orderBy })
 			.then((data) => {
-                const response = getPagingData(data, page, limit)
+				const response = getPagingData(data, page, limit)
 				res.send(response)
 			})
 			.catch((err) => {
@@ -71,7 +71,7 @@ router.get("/", async (req, res) => {
 					message:
 						err.message || "Some error occurred.",
 				})
-            })
+			})
 
 	} catch (error) {
 		console.error(error.message)
@@ -81,7 +81,7 @@ router.get("/", async (req, res) => {
 
 
 const getPagination = (page, size) => {
-    let nPage = page-1
+	let nPage = page - 1
 	const limit = size ? +size : 6
 	const offset = nPage ? nPage * limit : 0
 
@@ -106,6 +106,7 @@ router.get("/:idGuitar", async (req, res) => {
 			where: {
 				id: idGuitar.toUpperCase(),
 			},
+			include: User
 		})
 		if (guitar) {
 			//si encuentra el id
@@ -287,5 +288,6 @@ const loadProductData = async () => {
 		throw new Error(error.message)
 	}
 }
+
 
 module.exports = router
