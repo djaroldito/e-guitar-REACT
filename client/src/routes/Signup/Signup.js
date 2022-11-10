@@ -54,7 +54,7 @@ export default function Signup() {
     if (data) return Swal.fire("El Email pertenece a un usuario registrado")
       else{
     // Dispatch del post ---------------------------------------------------------------------
-        dispatch(postSignupForm(user));};
+       await (postSignupForm(user));};
         
     /* setIsSubmitting(true); */
     
