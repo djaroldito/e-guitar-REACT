@@ -52,8 +52,8 @@ export default function Signup() {
     if (data) return Swal.fire("This email is already registered")
       else {
     // Dispatch del post ---------------------------------------------------------------------
-       await (postSignupForm(user));};
-
+       await postSignupForm(user);};
+        
     /* setIsSubmitting(true); */
 
     // Sweet Alert ---------------------------------------------------------------------------
