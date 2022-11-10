@@ -1,10 +1,10 @@
 import axios from "axios";
 import { getUser } from "./SignupSlice";
 
-export const postSignupForm = /* async */ (supData) => {
+export const postSignupForm =  async (supData) => {
     try {
         console.log("Estamos en axios")
-        axios.post("/ruser/register", supData)
+        await axios.post("/ruser/register", supData)
         .then(res => console.log("postUser Action response: ", res)) 
         console.log("Salimos del axios")
         return true

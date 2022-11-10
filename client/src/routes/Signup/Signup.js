@@ -53,7 +53,7 @@ export default function Signup() {
       else { 
     // Dispatch del post ---------------------------------------------------------------------
       console.log("llega al dispatch de postSignupForm")  
-      dispatch(postSignupForm(user));} 
+      await postSignupForm(user);} 
       console.log("Sale del dispatch del postSignupForm")
     // Sweet Alert ---------------------------------------------------------------------------
     Swal.fire("Successful Registration", "Please check your email to activate your account");
