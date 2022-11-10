@@ -7,39 +7,18 @@ import {
 	NumberField,
 	TextInput,
 	EditButton,
-	DeleteWithConfirmButton,
+    DeleteButton,
 	Button,
-	useRecordContext,
+	useDataProvider,
+    useRecordContext,
+    useRefresh,
+    useNotify,
 } from "react-admin"
 import { Done, Clear, RestartAlt } from "@mui/icons-material"
 
 export const SoftDeleteField = (props) => {
 	const record = useRecordContext(props)
 	return <span>{record.deletedAt ? <Clear /> : <Done />}</span>
-}
-export const CustomActions = (props) => {
-	const handleRestore = () => {
-		alert("Restore the product")
-	}
-	const record = useRecordContext(props)
-	if (record.deletedAt) {
-		return (
-			<Button onClick={handleRestore} color='primary'>
-				<RestartAlt sx={{ marginRight: "5px" }} /> Restore{" "}
-			</Button>
-		)
-	} else {
-		return (
-			<div style={{ display: "inline-flex" }}>
-				<EditButton label='' basepath='/product' sx={{ fontSize: "12px" }} />
-				<DeleteWithConfirmButton
-					label=''
-					basepath='/product'
-					sx={{ fontSize: "12px" }}
-				/>
-			</div>
-		)
-	}
 }
 
 export const ColorField = (props) => {
@@ -57,7 +36,44 @@ DiscountField.defaultProps = {
 }
 
 const ProductList = (props) => {
-	const filters = [
+    const dataProvider = useDataProvider()
+    const refresh = useRefresh()
+    const notify = useNotify();
+	const handleRestore = (id) => {
+		dataProvider
+			.getRestore("product", { id: id })
+			.then(({ data }) => {
+                refresh()
+                notify(`Restored`, { type: 'success' })
+			})
+			.catch((error) => {
+				notify(error.message, { type: 'error' })
+			})
+    }
+
+	const CustomActions = (props) => {
+		const record = useRecordContext(props)
+		if (record.deletedAt) {
+			return (
+				<Button onClick={() => handleRestore(record.id)} color='primary'>
+					<RestartAlt sx={{ marginRight: "5px" }} /> Restore
+				</Button>
+			)
+		} else {
+			return (
+				<div style={{ display: "inline-flex" }}>
+					<EditButton label='' basepath='/product' sx={{ fontSize: "12px" }} />
+                    <DeleteButton
+                        label=''
+						basepath='/product'
+						sx={{ fontSize: "12px" }}
+					/>
+				</div>
+			)
+		}
+	}
+    const filters = [
+        <TextInput label="Search" source="q" alwaysOn />,
 		<TextInput label='Type' source='type' />,
 		<TextInput label='Brand' source='brand' />,
 	]

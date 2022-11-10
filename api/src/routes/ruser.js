@@ -141,10 +141,10 @@ router.post("/register", async (req, res) => {
         isActive,
         password: hash,
     });
-    // const mailReg = await mailRegisterConfirm({
-    //   toUser: newPendingUser,
-    //   hash: hash,
-    // });
+    const mailReg = await mailRegisterConfirm({
+      toUser: newPendingUser,
+      hash: hash,
+    });
       //console.log("Esto es mailRegisterConfirm: ", mailReg);
       return res.status(200).json(newPendingUser);
     } catch (error) {
