@@ -15,7 +15,6 @@ import GoogleLogin from 'react-google-login';
 
 export default function Signup() {
   const email = useRef();
-
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [showPsw, setShowPsw] = useState(false);
@@ -24,7 +23,7 @@ export default function Signup() {
     fullname: "",
     email: "",
     password: "",
-    password2: ""
+    password2: "",
   });
 
   const [errors, setErrors] = useState({});
@@ -44,28 +43,21 @@ export default function Signup() {
 
   async function handleSubmit(e){
     e.preventDefault();
-
     // Corroborar que no exista ese mail registrado ------------------------------------------
-    const { data } = await axios.get("/ruser/email", {
+     const { data } = await axios.get("/ruser/email", {
       params: {
         email: email.current.value
       }})
 
-    if (data) return Swal.fire("El Email pertenece a un usuario registrado")
-      else{
+    if (data) return Swal.fire("This email is already registered")
+      else {
     // Dispatch del post ---------------------------------------------------------------------
-        dispatch(postSignupForm(user));};
+       await (postSignupForm(user));};
 
     /* setIsSubmitting(true); */
 
     // Sweet Alert ---------------------------------------------------------------------------
-    console.log(Swal.fire({
-      position: 'center',
-      icon: 'success',
-      title: 'Usuario registrado exitosamente',
-      showConfirmButton: false,
-      timer: 1500
-    }));
+    Swal.fire("Successful Registration", "Please check your email to activate your account");
 
     // cleanDetail  -------------------------------------------------------------------------
     // Limpiar los estados ------------------------------------------------------------------
@@ -78,7 +70,7 @@ export default function Signup() {
 
     // Retornar al home
     navigate('/home');
-  };
+  }
 
   // Errors ----------------------------------------------------------------------------------
 
@@ -86,31 +78,32 @@ export default function Signup() {
     let errors = {};
 
     if (!user.fullname.trim()) {
-      errors.fullname = 'Es requerido un nombre de Usuario';
+      errors.fullname = 'Username is required';
     };
     if (!user.email) {
-      errors.email = 'Es requerido un Email';
+      errors.email = 'Email is required';
     } else if (!/\S+@\S+\.\S+/.test(user.email)) {
-      errors.email = 'Es requerido un Email válido';
+      errors.email = 'A valid email is required';
     };
 
     if (!user.password) {
-      errors.password = 'Es requerida una contraseña';
+      errors.password = 'Password is required';
     } else if (user.password.length < 8) {
-      errors.password = 'Debe tener un mínimo de 8 caracteres';
+      errors.password = 'Password must have at least 8 characters';
     }
     if (!user.password2) {
-      errors.password2 = 'Es requerida una contraseña';
+      errors.password2 = 'Password is required';
     } else if (user.password2 !== user.password) {
-      errors.password2 = 'No coinciden las contraseñas';
+      errors.password2 = 'Passwords dont match';
     }
 
     return errors;
   }
 
   return (
+    <div className='signupBox'>
     <div id='signupContainer'>
-      <h2>Regítrate</h2>
+      <h2>Sign up</h2>
 
       <form className='signupForm' onSubmit={handleSubmit}>
           <fieldset>
@@ -118,7 +111,7 @@ export default function Signup() {
               name="fullname"
               value={user.fullname}
               onChange={handleChange}
-              placeholder='Usuario'
+              placeholder='User'
               required />
               <AiOutlineUser className='loginUsIc' />
               <div className='supEM'>
@@ -149,7 +142,7 @@ export default function Signup() {
               onChange={handleChange}
               placeholder='Password'
               required />
-            <div className='loginEyeIcon' onClick={() => setShowPsw(!showPsw)}>
+            <div className='signUpEyeIcon' onClick={() => setShowPsw(!showPsw)}>
              {showPsw ? <AiOutlineEye/> : <AiOutlineEyeInvisible className='loginInIc'/>}
             </div>
             <div className='supEM'>
@@ -163,9 +156,9 @@ export default function Signup() {
               name="password2"
               value={user.password2}
               onChange={handleChange}
-              placeholder='Confirma Contraseña'
+              placeholder='Confirm Password'
               required />
-            <div className='loginEyeIcon' onClick={() => setShowPsw(!showPsw)}>
+            <div className='signUpEyeIcon' onClick={() => setShowPsw(!showPsw)}>
             {showPsw ? <AiOutlineEye/> : <AiOutlineEyeInvisible className='loginInIc'/>}
             </div>
             <div className='supEM'>
@@ -173,16 +166,14 @@ export default function Signup() {
             </div>
           </fieldset>
 
-        <button className='signupBtn'>Enviar</button>
+        <button className='signupBtn'>Sign up</button>
 
         <div className="signupGg">
-              <p>O ingresa con</p>
-            </div>
-            <div>
-                <AiOutlineGoogle size={30} className='loginGgIc'/>
-            </div>
-            <GoogleLogin/>
+            <p>Or sign up with: </p>
+        </div>
+            <GoogleLogin className='supGoogleBtn'/>
       </form>
+    </div>
     </div>
   )
 }
