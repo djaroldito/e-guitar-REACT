@@ -1,31 +1,28 @@
 import axios from "axios";
-import { addUser, getUser } from "./SignupSlice";
+import { getUser } from "./SignupSlice";
 
-export const postSignupForm = (supData) => (dispatch) => {
+export const postSignupForm =  async (supData) => {
     try {
-        const response = axios.post("/ruser/register", supData)
-        console.log("Registrado: ", supData)
-        .then((res) => dispatch(addUser(res.data)))
-        return response;
+        await axios.post("/ruser/register", supData)
+        .then(res => console.log("postUser Action response: ", res)) 
     } catch (error) {
         console.log("Esto tira userCreated:", error.message)
     }
-}
+};
+
 export const getUserDB = (email) => (dispatch) => {
-    
     axios(`/ruser/email?email=${email}`)
     .then(res => dispatch(getUser(res.data)))
     .catch(error => console.log(error));
+};
 
+export const resetPassword = async (data) => {
+    try {
+        const response = await axios.post("/ruser/reset-password", data)
+        console.log("SignupActions resetPassword Data: ", response);
+        return response;
+    } catch (error) {
+        console.log(error.message);
+    }
 }
 
-/* export const postRegisterGoogle = (supData) => (dispatch) => {
-    try {
-        const response = axios.post("http://localhost:3001/ruser/registerGoogle", supData)
-        console.log("Registrado: ", supData)
-        .then((res) => dispatch(addUser(res.data)))
-        return response;        
-    } catch (error) {
-        console.log("Esto tira userCreated:", error.message)
-    }
-}; */

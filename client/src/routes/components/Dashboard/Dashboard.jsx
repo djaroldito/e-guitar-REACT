@@ -1,13 +1,18 @@
 import { Admin, Resource, defaultTheme, Title } from "react-admin"
+import { NavLink } from "react-router-dom"
 import dataProvider from "./dataProvider"
 import Card from "@mui/material/Card"
 import CardContent from "@mui/material/CardContent"
-
 import { deepPurple, indigo, } from "@mui/material/colors"
-
+// Products
 import ProductList from "./Product/ProductList"
 import ProductCreate from "./Product/ProductCreate"
 import ProductEdit from "./Product/ProductEdit"
+// Users
+import UserList from "./User/UserList"
+import UserEdit from "./User/UserEdit"
+// Orders
+import OrderList from './Order/OrderList'
 
 export default function Dashboard() {
 	const theme = {
@@ -35,6 +40,16 @@ export default function Dashboard() {
 					create={ProductCreate}
 					edit={ProductEdit}
 				/>
+				<Resource
+					name='user'
+					list={UserList}
+                    edit={UserEdit}
+				/>
+				<Resource
+					name='order'
+					list={OrderList}
+                    // edit={UserEdit}
+				/>
 			</Admin>
 		</>
 	)
@@ -43,6 +58,10 @@ export default function Dashboard() {
 const AdminDashboard = () => (
 	<Card>
 		<Title title={"{GUITAR CODE}"} />
-		<CardContent> Wellcome to Admin Dashboard</CardContent>
+        <CardContent sx={{textAlign: 'center'}}>
+            <h2>Wellcome to Admin Dashboard</h2>
+
+            <NavLink to='/home'>Go to Home</NavLink>
+        </CardContent>
 	</Card>
 )

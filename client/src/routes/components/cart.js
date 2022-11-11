@@ -18,6 +18,7 @@ const Cart = () =>{
     const mail = sessionStorage.getItem('emailData') ? sessionStorage.getItem('emailData') : sessionStorage.getItem('emailGoogle') ;
     console.log(mail);
     const dispatch = useDispatch()
+    console.log(carrito)
 
   
 
@@ -111,7 +112,7 @@ const preguntaUno = async (item)=>{
           ))}
             <Total>
               {carrito.length >= 1 ? <label >Total: </label> : null }
-              <h1> {carrito.length >= 1 ?  carrito.reduce((acc,prod) => acc + (prod.price.toFixed(2) * prod.Cart.quantity) , 0).toFixed(2):null}</h1>
+              <h1> {carrito.length >= 1 ?  carrito.reduce((acc,prod)=>acc + (prod.price.toFixed(2) * prod.Cart.quantity) , 0).toFixed(2):null}</h1>
             </Total>
           </div>
           {carrito.length >= 1 ? <button onClick={() => completePayment(carrito, mail)} className="Purchasebutton"><BsCart2/>Completar Compra</button> : null}

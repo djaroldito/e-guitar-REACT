@@ -15,8 +15,8 @@ const path = require("path")
 const { DB_USER, DB_PASSWORD, DB_HOST,DB_NAME } = process.env;
 
 let sequelize =  process.env.NODE_ENV === 'production'
-     ? 
-	 
+     ?
+
 	new Sequelize(
 		`postgresql://postgres:Hb9YRGAgNZfk9Ts4si0O@containers-us-west-108.railway.app:7266/railway`,
 		{
@@ -74,8 +74,6 @@ User.belongsToMany(Product, { through: WishList })
 Product.belongsToMany(User, { through: Review })
 User.belongsToMany(Product, { through: Review })
 // cart
-
-
 
 Product.belongsToMany(User, { through: Cart })
 User.belongsToMany(Product, { through: Cart })

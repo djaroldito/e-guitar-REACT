@@ -20,6 +20,7 @@ const Order =  () => {
     return ( 
         <div>
             <div className="column">
+            <h1 style={{marginLeft: "5%"}}>Order History</h1>
             {orders.map(order => {
                 return(
                     <div className="orderContainer">
