@@ -131,7 +131,7 @@ export const {
     clearDetail,
     setCurrentPage,
     setPageCount,
-	getOrder
+	getOrder,
 
 } = productSlice.actions
 
