@@ -76,7 +76,7 @@ const ProductEdit = (props) => {
 	const TopToolbarActions = ({ basePath }) => (
 		<TopToolbar>
 			<ListButton basepath={basePath} label='Cancel' icon={<FaChevronLeft />} />
-			<ShowButton label='Preview' />
+			{/* <ShowButton label='Preview' /> */}
 		</TopToolbar>
 	)
 

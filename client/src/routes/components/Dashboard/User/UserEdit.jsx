@@ -48,73 +48,92 @@ const UserEdit = (props) => {
 
 	if (isLoading) return null
 	return (
-		<>
-			{isLoading ? (
-				""
-			) : (
-				<Edit
-					actions={<TopToolbarActions />}
-					submitOnEnter={false}
-					title='Edit User Data'
-					{...props}
+		<Edit
+			actions={<TopToolbarActions />}
+			submitOnEnter={false}
+			title='Edit User Data'
+			{...props}
+		>
+			<SimpleForm>
+				<Box
+					display={{ xs: "block", sm: "flex", width: "100%" }}
+					sx={{ flexDirection: "row" }}
 				>
-					<SimpleForm>
-						<Box display={{ xs: "block", sm: "flex", width: "100%" }} sx={{flexDirection:'row'}}>
-							<Box display={{ xs: "block", sm: "flex", width: "80%" }} sx={{flexDirection:'column'}}>
-								<Box display={{ xs: "block", sm: "flex", width: "100%" }} sx={{flexDirection:'row'}}>
-									<Box flex={1} mr={{ xs: 0, sm: "0.5em" }}>
-										<TextInput
-											source='email'
-											validate={validateEmail}
-											sx={{ width: "100%" }}
-										/>
-									</Box>
-
-									<Box flex={1} mr={{ xs: 0, sm: "0.8em" }}>
-										<TextInput
-											source='fullname'
-											sx={{ width: "100%" }}
-											required
-										/>
-									</Box>
-								</Box>
-								<Box display={{ xs: "block", sm: "flex", width: "100%" }}>
-									<Box flex={1} mr={{ xs: 0, sm: "0.5em" }}>
-										<BooleanInput
-											source='isActive'
-											label='Active'
-											labelplacement='top'
-										/>
-									</Box>
-
-									<Box flex={1} mr={{ xs: 0, sm: "0.8em" }}>
-										<BooleanInput
-											source='isAdmin'
-											label='Admin'
-											labelplacement='top'
-										/>
-									</Box>
-								</Box>
+					<Box
+						display={{ xs: "block", sm: "flex", width: "80%" }}
+						sx={{ flexDirection: "column" }}
+					>
+						<Box
+							display={{ xs: "block", sm: "flex", width: "100%" }}
+							sx={{ flexDirection: "row" }}
+						>
+							<Box flex={1} mr={{ xs: 0, sm: "0.5em" }}>
+                                <TextInput
+                                    required
+									source='email'
+									validate={validateEmail}
+									sx={{ width: "100%" }}
+								/>
 							</Box>
 
-							<Box display={{ xs: "block", sm: "flex", width: "20%" }}>
-								<ImageInput
-									sx={{
-										width: "100%",
-										"& .RaFileInput-dropZone": { fontSize: "12px" },
-									}}
-									source='avatar'
-									label='User avatar:'
-									accept='image/png, image/jpg, image/jpeg'
-								>
-									<PreviewImage source='src' />
-								</ImageInput>
+							<Box flex={1} mr={{ xs: 0, sm: "0.8em" }}>
+								<TextInput source='fullname' sx={{ width: "100%" }} required />
 							</Box>
 						</Box>
-					</SimpleForm>
-				</Edit>
-			)}
-		</>
+						<Box display={{ xs: "block", sm: "flex", width: "100%" }}>
+							<Box flex={1} mr={{ xs: 0, sm: "0.5em" }}>
+								<BooleanInput
+									source='isActive'
+									label='Active'
+									labelplacement='top'
+								/>
+							</Box>
+
+							<Box flex={1} mr={{ xs: 0, sm: "0.8em" }}>
+								<BooleanInput
+									source='isAdmin'
+									label='Admin'
+									labelplacement='top'
+								/>
+							</Box>
+						</Box>
+						<Box display={{ xs: "block", sm: "flex", width: "100%" }}>
+							<Box flex={1} mr={{ xs: 0, sm: "0.8em" }}>
+								<TextInput source='phone' fullWidth={true} />
+							</Box>
+							<Box flex={1} mr={{ xs: 0, sm: "0.8em" }}>
+								<TextInput source='address' fullWidth={true} />
+							</Box>
+						</Box>
+						<Box display={{ xs: "block", sm: "flex", width: "100%" }}>
+							<Box flex={1} mr={{ xs: 0, sm: "0.8em" }}>
+								<TextInput source='province' fullWidth={true} />
+							</Box>
+							<Box flex={1} mr={{ xs: 0, sm: "0.8em" }}>
+								<TextInput source='city' fullWidth={true} />
+							</Box>
+							<Box flex={1} mr={{ xs: 0, sm: "0.8em" }}>
+								<TextInput source='zipcode' fullWidth={true} />
+							</Box>
+						</Box>
+					</Box>
+
+					<Box display={{ xs: "block", sm: "flex", width: "20%" }}>
+						<ImageInput
+							sx={{
+								width: "100%",
+								"& .RaFileInput-dropZone": { fontSize: "12px" },
+							}}
+							source='avatar'
+							label='Avatar:'
+							accept='image/png, image/jpg, image/jpeg'
+						>
+							<PreviewImage source='src' />
+						</ImageInput>
+					</Box>
+				</Box>
+			</SimpleForm>
+		</Edit>
 	)
 }
 

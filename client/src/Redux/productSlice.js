@@ -78,7 +78,7 @@ export const productSlice = createSlice({
 		clearDetail: (state) => {
 			state.detail = {}
 		},
-		
+
 		clearCart: (state, action) => {
 			state.cart = []
 			localStorage.setItem("carrito", JSON.stringify(state.cart))
@@ -107,7 +107,7 @@ export const productSlice = createSlice({
         setPageCount(state, action) {
             state.pageCount = action.payload
 		},
-	
+
 	},
 })
 

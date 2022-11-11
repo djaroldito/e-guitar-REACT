@@ -13,7 +13,7 @@ export default function Login() {
   useEffect(()=>{
     function start(){
       gapi.client.init({
-        clientId: process.env.CLIENTID,
+        clientId: process.env.REACT_APP_CLIENTID,
         scope:"email"
       })
     }

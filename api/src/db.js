@@ -67,14 +67,16 @@ User.hasMany(Order)
 Product.belongsToMany(User, { through: OrderDetail })
 Order.belongsToMany(Product, { through: OrderDetail })
 // wishlist
-const WishList = sequelize.define("wishlist", {})
-Product.belongsToMany(User, { through: WishList })
-User.belongsToMany(Product, { through: WishList })
+// const WishList = sequelize.define("wishlist", {})
+// Product.belongsToMany(User, { through: WishList })
+// User.belongsToMany(Product, { through: WishList })
 // reviews
-Product.belongsToMany(User, { through: Review })
-User.belongsToMany(Product, { through: Review })
-// cart
+Review.belongsTo(User,{foreignKey: 'userId'});
+User.hasMany(Review,{foreignKey : 'userId'});
+Review.belongsTo(Product,{foreignKey: 'productId'});
+Product.hasMany(Review, { foreignKey: 'productId' });
 
+// cart
 Product.belongsToMany(User, { through: Cart })
 User.belongsToMany(Product, { through: Cart })
 

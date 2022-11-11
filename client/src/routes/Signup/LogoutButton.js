@@ -19,7 +19,7 @@ export const LogoutButton = () => {
 	return (
 		<div id='signOutButton'>
 			<GoogleLogout
-				clientId={process.env.CLIENTID}
+				clientId={process.env.REACT_APP_CLIENTID}
 				buttonText={"Logout"}
 				onLogoutSuccess={onSuccess}
 				render={(renderProps) => (

@@ -54,7 +54,7 @@ export const LoginButton = () => {
   return (
     <div>
       <GoogleLogin
-        clientId = {process.env.CLIENTID}
+        clientId = {process.env.REACT_APP_CLIENTID}
         buttonText="Login with Google"
         onSuccess={onSuccess}
         onFailure={onFailure}

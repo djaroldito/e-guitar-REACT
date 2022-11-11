@@ -13,6 +13,8 @@ import UserList from "./User/UserList"
 import UserEdit from "./User/UserEdit"
 // Orders
 import OrderList from './Order/OrderList'
+// Reviews
+import ReviewList from './Review/ReviewList'
 
 export default function Dashboard() {
 	const theme = {
@@ -48,6 +50,11 @@ export default function Dashboard() {
 				<Resource
 					name='order'
 					list={OrderList}
+                    // edit={UserEdit}
+				/>
+				<Resource
+					name='review'
+					list={ReviewList}
                     // edit={UserEdit}
 				/>
 			</Admin>
