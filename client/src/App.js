@@ -14,6 +14,7 @@ import Activate from "./routes/Signup/activate.js"
 import Layout from "./routes/Layout"
 import DashboardRoute from "./routes/components/Dashboard/DashboardRoute"
 import Dashboard from './routes/components/Dashboard/Dashboard'
+import OrderDetail from './routes/components/Order/OrderDetail'
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
           <Route path="/" element={<LandingPage />} />
           <Route path="/home" element={<Home />} />
           <Route path="/home/:id" element={<GuitarDetail />} />
+          <Route path="/orders/:id" element={<OrderDetail />} />
           <Route path="/home/Profile" element={<Profile />} />
           <Route path="/activate" element={<Activate />} />
           <Route path="/cart" element={<Cart />} />

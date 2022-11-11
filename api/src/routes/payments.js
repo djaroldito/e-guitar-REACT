@@ -50,7 +50,7 @@ router.post('/create-order', async (req, res) => {
                 landing_page: "LOGIN",
                 user_action: "PAY_NOW",
                 return_url: `http://localhost:3001/payments/capture-order?mail=${mail}&orderId=${orderdb.id}`,
-                cancel_url: "http://localhost:3001/payments/cancel-order"
+                cancel_url: `http://localhost:3001/payments/cancel-order?orderId=${orderdb.id}`
             }
         }
     
@@ -145,7 +145,17 @@ router.get('/capture-order', async (req, res) => {
         }
 })
 
-router.get('/cancel-order', (req, res) => {
+router.get('/cancel-order', async (req, res) => {
+    
+    const {orderId} = req.query;
+
+    await Order.update({
+        orderStatus: "CANCELED"
+    },{
+        where:{
+            id:orderId
+        }
+    })
     res.redirect('http://localhost:3000/home');
 })
 

@@ -8,7 +8,8 @@ import {
 	getAllTypes,
 	setCurrentPage,
 	setPageCount,
-	getOrder
+	getOrder,
+  getAllOrders
 } from "./productSlice"
 
 export const getAllPrds = () => (dispatch) => {
@@ -108,8 +109,13 @@ export const getCartFromDB = async (userID)  => {
 	console.log(cart);
 	return cart;
 }
-export const getOrderDB = (userID) => (dispatch) => {
+export const getAllOrderDB = (userID) => (dispatch) => {
 	axios(`/order?userId=${userID}`)
+	.then((res) => dispatch(getAllOrders(res.data)))
+	
+}
+export const getOrderDB = (orderID) => (dispatch) => {
+	axios(`/order/getOrder?id=${orderID}`)
 	.then((res) => dispatch(getOrder(res.data)))
 	
 }
