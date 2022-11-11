@@ -1,0 +1,68 @@
+.productsContainer{
+    background-color: transparent;
+    border: none;
+    margin-top: 3%;
+    
+    height: 25%;
+    width: 100%;
+    position:relative;
+    background-color:white;
+    border: 1px solid black;
+}
+.OrderDetailContainer{
+    background-color: transparent;
+    border: none;
+    margin-top: 3%;
+    height: 25%;
+    width: 100%;
+    position:relative;
+    background-color:white;
+    border: 1px solid black;
+}
+.PaymentDetailContainer{
+    background-color: transparent;
+    border: none;
+    height: 25%;
+    width: 30%;
+    margin-right: 15%;
+    position:relative;
+    background-color:white;
+    border: 1px solid black;
+}
+.bgTotal{
+    width: 100%;
+    background-color: whitesmoke;
+}
+
+.headerOrders{
+    display: flex;
+    width: 100%;
+    height: auto;
+    background-color: rgb(244,244,244);
+    Color: black;
+}
+.headerOrders h3{
+    margin-left:15px;
+}
+
+.orderCard{
+    background-color: white;
+    margin-top: 2%;
+    display: flex;
+    border-radius: 5px;
+    align-items: center;
+    margin-right:2%;
+}
+
+.OrderLayout{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-content: stretch;
+    justify-content: space-between;
+    align-items: center;
+}
+.inlineContent{
+    display: flex;
+    flex-direction: row;
+}

@@ -17,7 +17,6 @@ const Cart = () =>{
     const userId = sessionStorage.getItem('userId');
     const mail = sessionStorage.getItem('emailData') ? sessionStorage.getItem('emailData') : sessionStorage.getItem('emailGoogle') ;
     console.log(mail);
-    
     const dispatch = useDispatch()
     console.log(carrito)
 

@@ -64,7 +64,7 @@ const { Product, User, Order, OrderDetail, Review, Cart } = sequelize.models
 
 User.hasMany(Order)
 
-Product.belongsToMany(User, { through: OrderDetail })
+Product.belongsToMany(Order, { through: OrderDetail })
 Order.belongsToMany(Product, { through: OrderDetail })
 // wishlist
 const WishList = sequelize.define("wishlist", {})
