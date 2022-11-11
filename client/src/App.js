@@ -11,9 +11,10 @@ import Login from './routes/Signup/Login';
 import ProductForm from './routes/components/ProductForm/ProductForm'
 import Order from "./routes/components/Order/Order";
 import Activate from "./routes/Signup/activate.js"
-import Layout from "./routes/Layout";
-import DashboardRoute from "./routes/components/Dashboard/DashboardRoute";
-import Dashboard from "./routes/components/Dashboard/Dashboard";
+import Layout from "./routes/Layout"
+import DashboardRoute from "./routes/components/Dashboard/DashboardRoute"
+import Dashboard from './routes/components/Dashboard/Dashboard'
+import OrderDetail from './routes/components/Order/OrderDetail'
 import ResetPassword from "./routes/Signup/ResetPassword";
 
 function App() {
@@ -24,6 +25,7 @@ function App() {
           <Route path="/" element={<LandingPage />} />
           <Route path="/home" element={<Home />} />
           <Route path="/home/:id" element={<GuitarDetail />} />
+          <Route path="/orders/:id" element={<OrderDetail />} />
           <Route path="/home/Profile" element={<Profile />} />
           <Route path="/cart" element={<Cart />} />
           <Route path="/orders" element={<Order />} />
