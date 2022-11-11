@@ -1,6 +1,6 @@
 const { Router } = require("express");
 const router = Router();
-const { User, Product } = require("../db.js");
+const { User, Product, DiscountCode } = require("../db.js");
 const bcrypt = require("bcrypt");
 const saltRounds = 10;
 const nodemailer = require("nodemailer");
@@ -38,6 +38,22 @@ const mailRegisterConfirm = async function ({ toUser }) {
         <p>Have a nice day!</p>`,
   };
   console.log("Esto es message: ", message);
+  return sendMail(message);
+};
+
+const mailDiscountCoupon = async function ({ toUser, discountCode}) {
+  const message = {
+    from: process.env.GOOGLE_USER,
+    to: toUser.email,
+    subject: "Guitar code - Welcome Gift",
+    html: `
+    <h3>Hello, ${toUser.fullname}!</h3>
+    <p>Thank you for registering with us, we offer you a discount code to use on your first purchase, to applicate the code, please charge at the discount campus on the product you wish!</p>
+    <p>Thank you, Guitar Code </p>
+    <p>Code: <b>${discountCode}</b></p>
+    `
+  };
+  console.log("mail cupon", message)
   return sendMail(message);
 };
 
@@ -106,7 +122,8 @@ router.get("/registerGoogle", async (req, res) => {
 });
 
 router.get("/activate", async (req, res) => {
-  const { email } = req.query;
+  const { email, discount } = req.query;
+  
   try {
     const user = await User.update({
         isActive: true },
@@ -114,7 +131,21 @@ router.get("/activate", async (req, res) => {
           email: email,
         },}
     );
+    const userCode = await User.findAll({
+    where: {
+        email: email,
+      }}
+  );
     if (user) {
+      await mailDiscountCoupon({
+        toUser: userCode,
+        discountCode: discount
+      })
+      const discountCode = await DiscountCode.create({
+        code: discount,
+        discount: 10,
+        userId : userCode.id
+      }) 
       res.status(200).send("Usuario Activado")
     } else {
       console.log("Error en la activación ");
@@ -230,6 +261,46 @@ router.post("/reset-password", async (req, res) => {
     
   }
 
+})
+// post para codigo de descuento ----------------------------------
+router.post('/discountCode', async (req, res) => {
+  try {
+    const {code, discount, userId} = req.body;
+    console.log(code, discount)
+    if(!code || !discount || !userId) res.status(400).send('Cannot be empty fields');
+    else{
+      const discountCode = await DiscountCode.create({
+        code,
+        discount,
+        userId,
+      })
+      res.status(200).json(discountCode);
+    }
+  } catch (error) {
+    console.log(error)
+  }
+})
+
+// get para codigo de descuento ---------------------------------------
+
+router.get('/discountCode', async (req,res) => {
+  const {code} = req.query;
+  try {
+    if(!code) res.status(400).send('Cannot be empty fields');
+    else{
+      const discountCode = await DiscountCode.findAll({
+        where: {
+          code: code,
+        }
+      })
+      if(discountCode) res.status(200).json(discountCode);
+      else {
+        res.status(400).send('code doesnt exists!')
+      }
+    }
+  } catch (error) {
+    console.log(error)
+  }
 })
 
 
