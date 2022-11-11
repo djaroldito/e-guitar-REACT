@@ -3,4 +3,49 @@
     flex-wrap: wrap;
     flex-direction: row;
     align-content: center;
+    justify-content: space-between;
+    align-items: center;
+    background-color: white;
+    border: 1px solid black;
+    margin-top: 10px; 
+    margin-left: 5%;
+    margin-right: 5%;
+}
+.orderContainer button{
+    margin-right: 5%;
+    padding: 15px;
+    border: 1px solid black;
+    border-radius: 5px;
+    background-color: rgb(41, 73, 143); 
+    cursor: pointer;
+    transition: .2s ease-out;
+    color:white
+}
+.orderContainer button:hover{
+    background-color: white; 
+    color:rgb(41, 73, 143)
+    
+}
+.orderContent{
+    margin-left: 5%;
+    
+}
+.PENDING{
+    color:orange;
+}
+.DELIVERED{
+    color:green;
+}
+.COMPLETED{
+    color: green;
+}
+.AWAITING{
+color: orange;
+}
+
+.CANCELED{
+color: red;
+}
+.COMPLETED{
+color: green;
 }

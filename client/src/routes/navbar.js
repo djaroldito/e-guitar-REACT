@@ -131,7 +131,7 @@ const Logo = styled.div`
 		padding: 40px 15px 15px 15px;
 	}
 	img {
-		width: 135px;
+		width: 110px;
 	}
 `
 

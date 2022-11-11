@@ -49,8 +49,8 @@ router.post('/create-order', async (req, res) => {
                 brand_name: "E-commerce Guitar",
                 landing_page: "LOGIN",
                 user_action: "PAY_NOW",
-                return_url: `http://localhost:3001/payments/capture-order?mail=${mail}`,
-                cancel_url: "http://localhost:3001/payments/cancel-order"
+                return_url: `http://localhost:3001/payments/capture-order?mail=${mail}&orderId=${orderdb.id}`,
+                cancel_url: `http://localhost:3001/payments/cancel-order?orderId=${orderdb.id}`
             }
         }
     
@@ -82,11 +82,27 @@ router.post('/create-order', async (req, res) => {
 
 router.get('/capture-order', async (req, res) => {
 
-    try{const {token, mail} = req.query;
-    const response = await axios.post(`${PAYPAL_API}/v2/checkout/orders/${token}/capture`, {}, {
+    try{
+        const {token, mail, orderId} = req.query;
+
+        const response = await axios.post(`${PAYPAL_API}/v2/checkout/orders/${token}/capture`, {}, {
             auth:{
                 username: PAYPAL_API_CLIENT,
                 password: PAYPAL_API_SECRET
+            }
+        })
+
+        const order = await Order.findAll({
+            where:{
+                id:orderId
+            }
+        });
+        console.log(order);
+        await Order.update({
+            orderStatus: "PAYMENT COMPLETED"
+        },{
+            where:{
+                id:orderId
             }
         })
 
@@ -105,6 +121,8 @@ router.get('/capture-order', async (req, res) => {
                 })
             }) 
         }; 
+       
+
         const message = {
             from: process.env.GOOGLE_USER,
             to: mail,
@@ -120,13 +138,24 @@ router.get('/capture-order', async (req, res) => {
         }   
         sendMail(message);
         //console.log(response);
-        res.redirect('http://localhost:3000/payment/validation');}
+        res.redirect('http://localhost:3000/payment/validation');
+    }
         catch(error){
-            res.redirect('http://localhost:3000/payment/validation');
+            res.redirect('http://localhost:3000/payment/validation/error');
         }
 })
 
-router.get('/cancel-order', (req, res) => {
+router.get('/cancel-order', async (req, res) => {
+    
+    const {orderId} = req.query;
+
+    await Order.update({
+        orderStatus: "CANCELED"
+    },{
+        where:{
+            id:orderId
+        }
+    })
     res.redirect('http://localhost:3000/home');
 })
 

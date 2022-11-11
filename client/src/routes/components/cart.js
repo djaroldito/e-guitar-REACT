@@ -16,8 +16,7 @@ const Cart = () =>{
     const carrito = useSelector(state => state.products.cart)
     const userId = sessionStorage.getItem('userId');
     const mail = sessionStorage.getItem('emailData') ? sessionStorage.getItem('emailData') : sessionStorage.getItem('emailGoogle') ;
-    //console.log(mail);
-
+    console.log(mail);
     const dispatch = useDispatch()
     //console.log(carrito)
 
