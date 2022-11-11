@@ -62,10 +62,16 @@ sequelize.models = Object.fromEntries(capsEntries)
 // Para relacionarlos hacemos un destructuring
 const { Product, User, Order, OrderDetail, Review, Cart } = sequelize.models
 
-User.hasMany(Order)
+Order.belongsTo(User,{foreignKey : 'userId'})
+User.hasMany(Order, { foreignKey: 'userId' })
+OrderDetail.belongsTo(Order,{ foreignKey: 'orderId' })
+Order.hasMany(OrderDetail,{ foreignKey: 'orderId' })
+OrderDetail.belongsTo(Product,{ foreignKey: 'productId' })
+Product.hasMany(OrderDetail,{ foreignKey: 'productId' })
 
-Product.belongsToMany(User, { through: OrderDetail })
-Order.belongsToMany(Product, { through: OrderDetail })
+// Product.belongsToMany(User, { through: OrderDetail })
+// Order.belongsToMany(Product, { through: OrderDetail })
+
 // wishlist
 // const WishList = sequelize.define("wishlist", {})
 // Product.belongsToMany(User, { through: WishList })

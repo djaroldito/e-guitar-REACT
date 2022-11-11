@@ -1,7 +1,7 @@
 const { Router } = require("express")
 const router = Router()
 const sequelize = require("sequelize")
-const { Order, OrderDetail } = require("../../db")
+const { Order, OrderDetail, User, Product } = require("../../db")
 const { getPagination } = require("./utils")
 
 router.get("/", async (req, res) => {

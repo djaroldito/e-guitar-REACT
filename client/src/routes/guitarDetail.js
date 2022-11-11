@@ -21,6 +21,7 @@ const GuitarDetail = () => {
     const userId = sessionStorage.getItem("userId")
     const detail = useSelector((state) => state.products.detail)
 	const carrito = useSelector((state) => state.products.cart)
+    const [input, setInput] = useState('')
 
     useEffect(() => {
         dispatch(getById(id))
@@ -30,31 +31,31 @@ const GuitarDetail = () => {
 	}, [dispatch, id]) //eslint-disable-line
 
 	const isInCart = () => carrito?.find((el) => el.id === detail.id)
-	const addToCart = async (detail) => {
-		Swal.fire({
-			title: "Product added to cart!",
-			icon: "success",
-			confirmButtonText: "Ok",
-		})
-
-		dispatch(getProductToCart({ ...detail, color: input }))
-
-		if (userId)
+    const addToCart = async (detail) => {
+        if (input || detail.color.split(',').length===1) {
+            const color = input ? input : detail.color
+            const cartObj = { ...detail, color }
+            dispatch(getProductToCart(cartObj))
+            Swal.fire({
+                title: "Product added to cart!",
+                icon: "success",
+                confirmButtonText: "Ok",
+            })
+            if (userId)
 			await addCartToDB(JSON.parse(localStorage.getItem("carrito")), userId)
-	}
-
-    const [input, setInput] = useState('')
-	const change = (e) => {
-		setInput(e.target.value)
-	}
-
-    const handleChecked = () => {
-        if (detail.color) {
-            return true
         } else {
+            Swal.fire({
+                title: "Select the color!",
+                icon: "warning",
+            })
             return false
         }
-    }
+	}
+
+    const handleChange = (e) => {
+        setInput(e.target.value)
+	}
+
 	const handleDeleteProduct = (id) => {
 		Swal.fire({
 			title: "Are you sure?",
@@ -115,23 +116,22 @@ const GuitarDetail = () => {
 						{detail.type}
 					</p>
 					{detail.leftHand ? <LeftHand>Left Hand Available</LeftHand> : null}
-					<form>
+
 						<ColorDiv>
 							Colors:
 							{detail.color?.split(", ").map((item, pos) => (
 								<div className='color-div' key={pos}>
-									<input
-										onChange={(e) => change(e)}
+                                    <input
+										onChange={ handleChange }
 										name='color'
 										type='radio'
                                         value={item}
-                                        checked='item'
 									/>
 									<label htmlFor={item}>{item}</label>
 								</div>
 							))}
 						</ColorDiv>
-					</form>
+
 					{localStorage.getItem("isAdmin") === "true" ? (
 						<CustomButtons>
 							{/* <button
