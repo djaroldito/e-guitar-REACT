@@ -131,7 +131,7 @@ router.get("/activate", async (req, res) => {
           email: email,
         },}
     );
-    const userCode = await User.findAll({
+    const userCode = await User.findOne({
     where: {
         email: email,
       }}
