@@ -15,6 +15,10 @@ import UserEdit from "./User/UserEdit"
 import OrderList from './Order/OrderList'
 // Reviews
 import ReviewList from './Review/ReviewList'
+// Coupons
+import CouponList from './Coupon/CouponList'
+import CouponEdit from './Coupon/CouponEdit'
+import CouponCreate from './Coupon/CouponCreate'
 
 export default function Dashboard() {
 	const theme = {
@@ -51,6 +55,12 @@ export default function Dashboard() {
 					name='order'
 					list={OrderList}
                     // edit={UserEdit}
+				/>
+				<Resource
+					name='coupon'
+					list={CouponList}
+                    create={CouponCreate}
+					edit={CouponEdit}
 				/>
 				<Resource
 					name='review'

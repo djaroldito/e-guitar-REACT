@@ -78,7 +78,7 @@ const ProductList = (props) => {
 		<TextInput label='Brand' source='brand' />,
 	]
 	return (
-		<List title='List of Products' filters={filters} {...props}>
+		<List title='List of Products' filters={filters} {...props} mutationMode="pessimistic">
 			<Datagrid bulkActionButtons={false}>
 				<ImageField
 					source='img'

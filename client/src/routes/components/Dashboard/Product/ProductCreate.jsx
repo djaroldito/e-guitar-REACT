@@ -87,7 +87,9 @@ const ProductCreate = (props) => {
 			<Create
 				actions={<TopToolbarActions />}
 				submitOnEnter={false}
-				title='Create New Product'
+                title='Create New Product'
+                redirect="list"
+            mutationMode="pessimistic"
 				{...props}
 			>
 				<SimpleForm>

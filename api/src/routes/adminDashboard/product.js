@@ -55,7 +55,6 @@ router.get("/", async (req, res) => {
 				res.send({ data: products, total: data.count })
 			})
 			.catch((err) => {
-				console.log(err.message)
 				res.status(500).send({
 					message: err.message || "Some error occurred.",
 				})

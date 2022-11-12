@@ -87,7 +87,6 @@ Product.belongsToMany(User, { through: Cart })
 User.belongsToMany(Product, { through: Cart })
 
 //discount user
-
 DiscountCode.belongsTo(User, { foreignKey: "userId" })
 User.hasMany(DiscountCode, { foreignKey: "userId" })
 
