@@ -1,7 +1,7 @@
 const { Router } = require("express")
 const router = Router()
 const sequelize = require("sequelize")
-const { Order, OrderDetail, User, Product } = require("../../db")
+const { Review, User, Product } = require("../../db")
 const { getPagination } = require("./utils")
 
 router.get("/", async (req, res) => {
@@ -12,15 +12,15 @@ router.get("/", async (req, res) => {
 		// sort
         const [sort, order] = JSON.parse(req.query.sort)
         let orderQuery = ''
-        // if (sort) {
-        //     if (sort === 'user.email') {
-        //         orderQuery = [[User,'email',order]]
-        //     } else if (sort === 'product.brand') {
-        //         orderQuery = [[Product,'brand',order]]
-        //     } else {
-        //         orderQuery = [[sort, order]]
-        //     }
-        // }
+        if (sort) {
+            if (sort === 'user.email') {
+                orderQuery = [[User,'email',order]]
+            } else if (sort === 'product.brand') {
+                orderQuery = [[Product,'brand',order]]
+            } else {
+                orderQuery = [[sort, order]]
+            }
+        }
         // filter
 		// const { type, brand, q } = JSON.parse(req.query.filter)
 		// const whereQuery = {}
@@ -47,7 +47,7 @@ router.get("/", async (req, res) => {
 		// 		}
 		// 	}
 
-		Order.findAndCountAll({
+		Review.findAndCountAll({
 			// where: whereQuery,
 			limit,
 			offset,
@@ -59,7 +59,7 @@ router.get("/", async (req, res) => {
 					required: true,
 				},
 				{
-					model: OrderDetail,
+					model: Product,
 					required: true,
 				},
 			],
@@ -79,5 +79,19 @@ router.get("/", async (req, res) => {
 	}
 })
 
+router.delete("/:id", async (req, res) => {
+	try {
+		const { id } = req.params
+		// softdelete
+		const deleted = await Review.destroy({
+			where: {
+				id: id,
+			},
+		})
+		res.sendStatus(200)
+	} catch (error) {
+		res.status(400).send(error.message)
+	}
+})
 
 module.exports = router

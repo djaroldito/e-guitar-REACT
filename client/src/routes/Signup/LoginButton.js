@@ -55,7 +55,7 @@ export const LoginButton = () => {
     console.log("LOGIN FAILED! res: ", res);
   };
 
-  
+
   return (
     <div>
       <GoogleLogin

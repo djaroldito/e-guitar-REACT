@@ -62,24 +62,31 @@ sequelize.models = Object.fromEntries(capsEntries)
 // Para relacionarlos hacemos un destructuring
 const { Product, User, Order, OrderDetail, Review, Cart, DiscountCode} = sequelize.models
 
-User.hasMany(Order)
+Order.belongsTo(User,{foreignKey : 'userId'})
+User.hasMany(Order, { foreignKey: 'userId' })
+OrderDetail.belongsTo(Order,{ foreignKey: 'orderId' })
+Order.hasMany(OrderDetail,{ foreignKey: 'orderId' })
+OrderDetail.belongsTo(Product,{ foreignKey: 'productId' })
+Product.hasMany(OrderDetail,{ foreignKey: 'productId' })
 
-Product.belongsToMany(Order, { through: OrderDetail })
-Order.belongsToMany(Product, { through: OrderDetail })
+// Product.belongsToMany(User, { through: OrderDetail })
+// Order.belongsToMany(Product, { through: OrderDetail })
+
 // wishlist
-const WishList = sequelize.define("wishlist", {})
-Product.belongsToMany(User, { through: WishList })
-User.belongsToMany(Product, { through: WishList })
+// const WishList = sequelize.define("wishlist", {})
+// Product.belongsToMany(User, { through: WishList })
+// User.belongsToMany(Product, { through: WishList })
 // reviews
-Product.belongsToMany(User, { through: Review })
-User.belongsToMany(Product, { through: Review })
-// cart
+Review.belongsTo(User,{foreignKey: 'userId'});
+User.hasMany(Review,{foreignKey : 'userId'});
+Review.belongsTo(Product,{foreignKey: 'productId'});
+Product.hasMany(Review, { foreignKey: 'productId' });
 
+// cart
 Product.belongsToMany(User, { through: Cart })
 User.belongsToMany(Product, { through: Cart })
 
 //discount user
-
 DiscountCode.belongsTo(User, { foreignKey: "userId" })
 User.hasMany(DiscountCode, { foreignKey: "userId" })
 
