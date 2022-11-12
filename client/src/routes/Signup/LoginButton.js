@@ -38,7 +38,12 @@ export const LoginButton = () => {
       };
       sessionStorage.setItem("UserData", JSON.stringify(res.profileObj));
       sessionStorage.setItem("emailGoogle", res.profileObj.email);
-      dispatch(postSignupForm(supData));
+      await postSignupForm(supData);
+      var caracteres = "abcdefghijkmnpqrtuvwxyzABCDEFGHJKMNPQRTUVWXYZ2346789";
+      var code = "";
+      for (let i = 0; i < 10; i++) code += caracteres.charAt(Math.floor(Math.random() * caracteres.length));
+      axios.get(`/ruser/sendCode?email=${res.profileObj.email}&discount=10&code=${code}`,)
+      
 
      navigate("/home", { state: { sessionStorage } });
     }
