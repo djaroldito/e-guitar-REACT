@@ -56,7 +56,12 @@ const NavBar = () => {
                                     )}
                                     <div className="Dropdown-Content">
                                         {!isAdmin ?
-                                            <p onClick = { ()=> {window.location.href = '/orders'}}>orders</p> : ''
+                                            <div>
+											<p onClick = { ()=> {window.location.href = '/orders'}}>Orders</p>
+											<p onClick = { ()=> {window.location.href = '/home/Profile'}}>Perfil</p>
+											</div>
+											: ''
+											
                                         }
                                     </div>
 							</div>
