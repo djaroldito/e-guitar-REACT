@@ -286,7 +286,12 @@ router.get("/email", async (req, res) => {
 const loadAdminUserData = async () => {
   try {
     // get all users from database
-    let dbUsers = await User.findAll();
+    let dbUsers = await User.findAll({
+        where: {
+          isAdmin: true
+        }
+      });
+
     // if no users loaded
     if (dbUsers.length === 0) {
       const hash = bcrypt.hashSync("admin", saltRounds);
@@ -302,7 +307,9 @@ const loadAdminUserData = async () => {
       //     isAdmin: false,
       //   });
     }
+      return true
   } catch (error) {
+    console.error(error.message)
     throw new Error(error.message);
   }
 };

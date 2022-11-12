@@ -53,7 +53,7 @@ const ProductEdit = (props) => {
 		dispatch(getColors())
 	}, []) //eslint-disable-line
 
-	const { types, colors, brands } = useSelector((state) => state.products)
+    const { types, colors, brands } = useSelector((state) => state.products)
 
 	// VALUES FOR SELECTS
 	const [typeChoices, setTypeChoices] = useState(
@@ -64,8 +64,9 @@ const ProductEdit = (props) => {
 		brands.map((x) => ({ id: x, name: x }))
 	)
 	const [brandValue, setBrandValue] = useState(isLoading ? null : data.brand)
+	const colorChoices = colors?.map((value) => ({ id: value, name: value }))
 
-	const colorChoices = colors.map((value) => ({ id: value, name: value }))
+    if( isLoading || !types ) return null
 
 	const validateMin = [number(), minValue(0)]
 	const validateDiscount = [number(), minValue(0), maxValue(100)]
@@ -76,7 +77,7 @@ const ProductEdit = (props) => {
 	const TopToolbarActions = ({ basePath }) => (
 		<TopToolbar>
 			<ListButton basepath={basePath} label='Cancel' icon={<FaChevronLeft />} />
-			<ShowButton label='Preview' />
+			{/* <ShowButton label='Preview' /> */}
 		</TopToolbar>
 	)
 
@@ -89,12 +90,13 @@ const ProductEdit = (props) => {
 		return <ImageField record={record} source={source} />
 	}
 
-	if (isLoading || !types) return null
+
 	return (
 		<Edit
 			actions={<TopToolbarActions />}
 			submitOnEnter={false}
-			title='Edit Product'
+            title='Edit Product'
+            mutationMode="pessimistic"
 			{...props}
 		>
 			<SimpleForm>
@@ -163,7 +165,7 @@ const ProductEdit = (props) => {
 							validate={validateDiscount}
 						/>
 					</Box>
-					<Box flex={1} mr={{ xs: 0, sm: "0.5em" }}>
+                    <Box flex={1} mr={{ xs: 0, sm: "0.5em" }}>
 						<SelectArrayInput
 							source='color'
 							choices={colorChoices}

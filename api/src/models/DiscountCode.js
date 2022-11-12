@@ -3,7 +3,8 @@ const { DataTypes } = require("sequelize");
 module.exports = (sequelize) => {
   sequelize.define("DiscountCode", {
     code: {
-      type: DataTypes.STRING,
+        type: DataTypes.STRING,
+        unique: "codeIndex",
     },
     discount: {
       type: DataTypes.INTEGER,
