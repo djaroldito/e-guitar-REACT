@@ -23,7 +23,7 @@ function sendMail(message) {
   });
 }
 
- 
+
 
 const mailRegisterConfirm = async function ({ toUser }) {
 /*   const domain = process.env.DOMAIN; */
@@ -63,7 +63,7 @@ const mailFotgotPassword = async function ({toUser}) {
     to: toUser.email,
     subject: "Guitar Code - Reset Password",
     html: `
-    
+
     `
   }
 }
@@ -128,10 +128,10 @@ router.get("/registerGoogle", async (req, res) => {
     res.status(400).send(error);
   }
 });
- 
+
 router.get("/activate", async (req, res) => {
   const { email, discount } = req.query;
-  
+
   try {
     const user = await User.update({
         isActive: true },
@@ -153,7 +153,7 @@ router.get("/activate", async (req, res) => {
         code: discount,
         discount: 10,
         userId : userCode.id
-      }) 
+      })
       res.status(200).send("Usuario Activado")
     } else {
       console.log("Error en la activación ");
@@ -226,7 +226,12 @@ router.get("/email", async (req, res) => {
 const loadAdminUserData = async () => {
   try {
     // get all users from database
-    let dbUsers = await User.findAll();
+    let dbUsers = await User.findAll({
+        where: {
+          isAdmin: true
+        }
+      });
+
     // if no users loaded
     if (dbUsers.length === 0) {
       const hash = bcrypt.hashSync("admin", saltRounds);
@@ -236,13 +241,10 @@ const loadAdminUserData = async () => {
         isAdmin: true,
 		isActive:true
       });
-    //   await User.create({
-    //     email: "cliente@gmail.com",
-    //     password: hash,
-    //     isAdmin: false,
-    //   });
     }
+      return true
   } catch (error) {
+    console.error(error.message)
     throw new Error(error.message);
   }
 };
@@ -253,8 +255,8 @@ router.post("/reset-password", async (req, res) => {
     const { fullname, email } = req.body;
     console.log("Back reset-pass: ", fullname, email)
     if (!fullname || !email) res.status(400).send("Cannot be empty fields")
-  
-    const user = await User.findeOne({ 
+
+    const user = await User.findeOne({
       where: {
         email
       }});
@@ -266,7 +268,7 @@ router.post("/reset-password", async (req, res) => {
     console.log("Esto es hash en RPass: ", hash)
 
   } catch (error) {
-    
+
   }
 
 })
