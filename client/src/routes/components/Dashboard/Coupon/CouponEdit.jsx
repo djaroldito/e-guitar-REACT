@@ -3,8 +3,6 @@ import {
 	SimpleForm,
 	TextInput,
 	BooleanInput,
-	// validation
-	email,
 	// toolbar
 	ListButton,
 	TopToolbar,
@@ -19,9 +17,7 @@ import { useParams } from "react-router-dom"
 
 const CouponEdit = (props) => {
 	const { id } = useParams()
-	const { isLoading, data } = useGetOne("coupon", { id })
-
-	const validateEmail = [email()]
+	const { isLoading } = useGetOne("coupon", { id })
 
 	// Toolbars
 	const TopToolbarActions = ({ basePath }) => (

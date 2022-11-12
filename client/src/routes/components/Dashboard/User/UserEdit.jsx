@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react"
+import React from "react"
 import {
 	Edit,
 	SimpleForm,
@@ -10,7 +10,6 @@ import {
 	//	SelectArrayInput,
 	// validation
 	email,
-	required,
 	// toolbar
 	ListButton,
 	TopToolbar,
@@ -25,7 +24,7 @@ import { useParams } from "react-router-dom"
 
 const UserEdit = (props) => {
 	const { id } = useParams()
-	const { isLoading, data } = useGetOne("user", { id })
+	const { isLoading } = useGetOne("user", { id })
 
 	const validateEmail = [email()]
 
