@@ -84,10 +84,18 @@ const mailFotgotPassword = async function ({toUser}) {
       isActive,
       password: hash,
   });
+  const user = await User.findOne({
+    where: {
+      email
+    },
+  })
+  console.log(user)
+  if(user.dataValues.isActive===false){
   const mailReg = await mailRegisterConfirm({
     toUser: newPendingUser,
     hash: hash,
   });
+  }
     //console.log("Esto es mailRegisterConfirm: ", mailReg);
     return res.status(200).json(newPendingUser);
   } catch (error) {
@@ -120,7 +128,7 @@ router.get("/registerGoogle", async (req, res) => {
     res.status(400).send(error);
   }
 });
-
+ 
 router.get("/activate", async (req, res) => {
   const { email, discount } = req.query;
   
@@ -281,6 +289,38 @@ router.post('/discountCode', async (req, res) => {
   }
 })
 
+router.get('/sendCode', async (req, res) =>{
+  try {
+    const {code, discount, email} = req.query;
+    console.log(code, discount, email)
+    if(!code || !discount || !email) res.status(400).send('Cannot be empty fields');
+    else{
+      const user = await User.findOne({
+        where: {
+          email,
+        },
+    })
+    console.log("usuarioGOogle",user)
+    if(user){
+      await mailDiscountCoupon({
+        toUser: user,
+        discountCode: code
+      })
+      const discountCode = await DiscountCode.create({
+        code: code,
+        discount: discount,
+        userId : user.id
+      })
+      res.status(200).send('Send code with exito')
+    }else{
+      res.status(400).send("User doesn't exists!")
+    }
+  }
+  } catch (error) {
+    console.log(error)
+  }
+})
+
 // get para codigo de descuento ---------------------------------------
 
 router.get('/discountCode', async (req,res) => {
@@ -295,7 +335,7 @@ router.get('/discountCode', async (req,res) => {
       })
       if(discountCode) res.status(200).json(discountCode);
       else {
-        res.status(400).send('code doesnt exists!')
+        res.status(400).send("code doesn't exists!")
       }
     }
   } catch (error) {
