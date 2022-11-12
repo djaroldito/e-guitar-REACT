@@ -11,12 +11,11 @@ import {gapi} from 'gapi-script'
 export default function Login() {
 
 
-  const cli = "1071381556347-p8k8tg37ss2e9ag86088tvdds19dot5o.apps.googleusercontent.com"
   
   useEffect(()=>{
     function start(){
       gapi.client.init({
-        clientId:cli,
+        clientId:"1071381556347-p8k8tg37ss2e9ag86088tvdds19dot5o.apps.googleusercontent.com",
         scope:"email"
       })
     }

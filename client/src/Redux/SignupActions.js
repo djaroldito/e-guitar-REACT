@@ -1,5 +1,5 @@
 import axios from "axios";
-import { getUser } from "./SignupSlice";
+import { getUser, getUserById } from "./SignupSlice";
 
 export const postSignupForm =  async (supData) => {
     try {
@@ -25,4 +25,11 @@ export const resetPassword = async (data) => {
         console.log(error.message);
     }
 }
+
+export const getUserId = (id) => (dispatch) => {
+    axios(`/ruser/${id}`)
+    .then(res => dispatch(getUserById(res.data)))
+    .catch(error => console.log(error))
+};
+
 
