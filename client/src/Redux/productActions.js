@@ -12,6 +12,14 @@ import {
   getAllOrders
 } from "./productSlice"
 
+export const getAllOffers = () => (dispatch) => {
+  axios("/rguitars/offers")
+  .then((res) => {
+      dispatch(getAllProducts(res.data));
+  })
+  .catch((error) => console.log(error));
+}
+
 export const getAllPrds = () => (dispatch) => {
   axios("/rguitars")
     .then((res) => {

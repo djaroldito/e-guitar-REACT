@@ -111,7 +111,7 @@ export const productSlice = createSlice({
         setPageCount(state, action) {
             state.pageCount = action.payload
 		},
-
+		
 	},
 })
 
