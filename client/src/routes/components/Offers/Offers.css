@@ -1,0 +1,51 @@
+.OffersContainer{
+    display: flex;
+    background-color: whitesmoke;
+    margin-left: 10%;
+    margin-right: 10%;
+}
+
+.OffersCard{
+    margin-top: 5%;
+    width: 100%;
+    border: 1px solid rgb(58, 58, 58);
+    background-color: white;
+    color: black;
+    display:flex;
+    align-items: center;
+    align-content: center;
+    flex-direction: column;
+}
+.OffersCard a{
+    text-decoration: none;
+    color: black;
+}
+
+.OffersCard:hover{
+    background-color: rgb(178,178,178); 
+}
+.OffersCard:hover img{
+    filter: invert(0.30);
+}
+.DiscountBox{
+    position: absolute;
+    display: flex;
+    height: 30px;
+    width: 75px;
+    top:15%;
+    right: 0;
+    background-color: rgb(49, 49, 160);
+    color:white;
+    align-items: center;
+    justify-content: center;
+}
+.OfferImgContainer img{
+    width: 100%;
+    max-height: 100%;
+    object-fit: scale-down;
+}
+.OfferImgContainer{
+    width: 100%;
+    height: 250px;
+}
+
