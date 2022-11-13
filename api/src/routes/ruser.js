@@ -68,6 +68,58 @@ const mailFotgotPassword = async function ({toUser}) {
   }
 }
 
+router.put("/dataUser", async (req, res) => {
+  const { avatar, address, province, city, zipcode, phone, id } = req.body;
+  console.log(address)
+  /* try { */
+    if (!address || !province || !city || !zipcode || !phone || !id)  res.status(400).send("faltan parametros");
+    else {
+     const user = await User.update(
+        {
+          address,
+          avatar,
+          province,
+          city,
+          zipcode,
+          phone,
+        },
+        {
+          where: {
+            id: id,
+          },
+        }
+      );
+      console.log(user)
+      if(user){
+      res.status(200).send('Usuario actualizado')
+    }
+    }
+  /* } catch (error) {
+    console.log(error)
+  } */
+});
+
+router.get("/", async (req, res) => {
+  const { id } = req.query
+try {
+  //Get by Id
+  const user = await User.findOne({
+    where: {
+      id: id,
+    },
+  })
+      if (user) {
+          if(user.avatar){
+              user.avatar = { src: user.avatar}
+          }
+    return res.status(200).json(user)
+  } else {
+    return res.status(404).send("NOT FOUND")
+  }
+} catch (error) {
+  res.status(404).send(error.message)
+}
+})
 // REGISTER ---------------------------------------------------------------------------------------------------------------------------
 
  router.post("/register", async (req, res) => {
