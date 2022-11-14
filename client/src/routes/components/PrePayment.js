@@ -36,7 +36,6 @@ const PrePayment = () => {
   const [codeDisc, setCodeDisc] = useState({});
 
   const handleChange = (e) => {
-    e.preventDefault();
     // setinput(e.target.value)
     if (e.target.value !== "") {
       setinput({ [e.target.name]: e.target.value });
@@ -54,13 +53,20 @@ const PrePayment = () => {
       if (discountCode.data.length === 0) Swal.fire("Codigo no valido");
       codeValidate = discountCode.data;
       setCodeDisc(codeValidate);
+<<<<<<< HEAD
 
+=======
+      
+>>>>>>> dev
     } else {
       Swal.fire("Codigo no valido");
     }
   };
 
   const TotalConDescuento = (carrito, codeValidate) => {
+    setinput({
+      code:"",
+    })
     let totalDescuento =
       carrito
         ?.reduce(
@@ -122,7 +128,7 @@ const PrePayment = () => {
         onChange={(e) => handleChange(e)}
         style={{ padding: "14px 16px", width: "40%" }}
       />
-      <button onClick={() => validateCode(codeValidate)}>SendCode</button>
+      <button type="button" onClick={() => validateCode(codeValidate)}>SendCode</button>
       {carrito.length >= 1 ? (
         <button
           onClick={() => completePayment(carrito, mail, codeDisc?[0].code : null)}
