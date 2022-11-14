@@ -29,7 +29,13 @@ module.exports = (sequelize) => {
 			isActive: {
                 type: DataTypes.BOOLEAN,
                 defaultValue: false,
-            }
+            },
+			changePassword: {
+				type: DataTypes.STRING,
+			}
+		},
+		{
+			paranoid: true,
 		}
 	)
 }
