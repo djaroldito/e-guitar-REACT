@@ -1,17 +1,17 @@
-import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
-import { resetPassword } from "../../Redux/SignupActions";
+import React, { useState, useRef } from 'react';
+import { useNavigate } from 'react-router-dom';  
+import { AiOutlineUser, AiOutlineMail } from  "react-icons/ai";
 import "./Styles/ResetPassword.css"
 import Swal from 'sweetalert2';
+import axios from 'axios';
 
 
 export default function ResetPassword () {
-    const dispatch = useDispatch();
     const navigate = useNavigate();
+    const email = useRef();
     const [input, setInput] = useState({
         fullname: "",
-        email: ""
+        email: "",
     });
 
     function handleChange(e) {
@@ -24,8 +24,15 @@ export default function ResetPassword () {
 
     async function handleSubmit(e) {
         e.preventDefault();
-        console.log("RP componente FRONT, handleSubmit")
-        dispatch(resetPassword(input));
+    // Corroborar que no exista ese mail registrado ------------------------------------------
+/*         const { data } = await axios.get("/ruser/email", {
+            params: {
+              email: email.current.value
+            }})
+      
+          if (data) return Swal.fire("This email is already registered") */
+
+        axios.post("/ruser/reset-password", input)
         Swal.fire("Please, check your email to reset your password");
         setInput({
             fullname: "",
@@ -35,28 +42,39 @@ export default function ResetPassword () {
     }
 
   return (
-    <div id="resetBox">
+    <div className="resetBox">
+
         <div className='resetContainer'>
-            <h2>Reset Password</h2>
-            <form onSubmit={handleSubmit}>
-                <input type="text"
-                name="fullname"
-                value={input.fullname}
-                onChange={handleChange}
-                placeholder="User"
-                className='resetInput'
-                required
-                />
-                <input type="email"
-                name="email"
-                value={input.email} 
-                onChange={handleChange}
-                placeholder="Email"
-                className='resetInput'
-                required
-                />
-                <button className='resetBtn'>Reset!</button>
-            </form>
+            <div className='resetLeft'>
+                <h2>Reset Password</h2>
+                <form className='resetForm'  onSubmit={handleSubmit}>
+                    <fieldset>
+                        <input type="text"
+                        name="fullname"
+                        value={input.fullname}
+                        onChange={handleChange}
+                        placeholder="User"
+                        className='resetInput'
+                        required
+                        />
+                        <AiOutlineUser className='loginUsIc' />
+                    </fieldset>
+                    <fieldset>
+                        <input type="email"
+                        name="email"
+                        value={input.email} 
+                        onChange={handleChange}
+                        placeholder="Email"
+                        className='resetInput'
+                        required
+                        />
+                        <AiOutlineMail className='loginUsIc' />
+                    </fieldset>
+                    <button className='resetBtn'>Reset!</button>
+                </form>
+            </div>
+
+            <div className='resetRight'></div>
         </div>
     </div>
   )

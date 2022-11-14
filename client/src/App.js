@@ -16,6 +16,7 @@ import DashboardRoute from "./routes/components/Dashboard/DashboardRoute"
 import Dashboard from './routes/components/Dashboard/Dashboard'
 import OrderDetail from './routes/components/Order/OrderDetail'
 import ResetPassword from "./routes/Signup/ResetPassword";
+import ChangePassword from "./routes/Signup/ChangePassword"
 import PrePayment from "./routes/components/PrePayment";
 
 function App() {
@@ -31,9 +32,10 @@ function App() {
           <Route path="/cart" element={<Cart />} />
           <Route path="/orders" element={<Order />} />
           <Route path="/signup" element={<Signup />} />
-          <Route exact path="/activate/:email" element={<Activate />} />
+          <Route path="/activate/:email" element={<Activate />} />
           <Route path="/login" element={<Login />} />
           <Route path="/reset-password" element={<ResetPassword />} />
+          <Route path="/change-password" element={<ChangePassword />}/>
           <Route path="/newProduct" element={<ProductForm />} />
           <Route path="/editProduct/:id" element={<ProductForm />} />
           <Route path="/payment/validation" element={<Payment />} />
