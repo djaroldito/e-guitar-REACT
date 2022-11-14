@@ -1,8 +1,14 @@
-import React from 'react';
-import { NavLink } from 'react-router-dom';
+import React, { useEffect } from 'react';
+import { NavLink, useParams } from 'react-router-dom';
+import axios from "axios";
 import "./Styles/Activate.css"
 
 const Activate = () => {
+  const { email } = useParams();
+  
+  useEffect(() => {
+    axios.get(`/ruser/activate?email=${email}`)
+  }, [email])
 
   return (
     <div id="box">

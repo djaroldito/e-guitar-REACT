@@ -1,21 +1,16 @@
 import React, { useRef, useState } from 'react';
-import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { postSignupForm } from "../../Redux/SignupActions";
-import { AiOutlineEye, AiOutlineEyeInvisible, AiOutlineUser, AiOutlineMail, AiOutlineGoogle } from "react-icons/ai";
+import { AiOutlineEye, AiOutlineEyeInvisible, AiOutlineUser, AiOutlineMail } from "react-icons/ai";
 import Swal from "sweetalert2";
 import "./Styles/Signup.css";
 import axios from 'axios';
 import GoogleLogin from 'react-google-login';
 
-// Falta buscar si el usuario ya existe en la db
-// Registrarte con goolge a partir de Auth0
-// Averiguar cómo hacer para enviar también los datos del carrito del localStorage
-// Enviar un mail de confirmación de usuario
+// Ver cómo bloquear el submit si hay algún error de validación
 
 export default function Signup() {
   const email = useRef();
-  const dispatch = useDispatch();
   const navigate = useNavigate();
   const [showPsw, setShowPsw] = useState(false);
   
@@ -27,7 +22,6 @@ export default function Signup() {
   });
   
   const [errors, setErrors] = useState({});
-  /* const [isSubmitting, setIsSubmitting] = useState(false); */
 
   function handleChange(e) {
     const { name, value } = e.target;
@@ -51,15 +45,13 @@ export default function Signup() {
 
     if (data) return Swal.fire("This email is already registered")
       else { 
-    // Dispatch del post ---------------------------------------------------------------------
-      console.log("llega al dispatch de postSignupForm")  
+    // Dispatch del post --------------------------------------------------------------------- 
       await postSignupForm(user);} 
-      console.log("Sale del dispatch del postSignupForm")
-    // Sweet Alert ---------------------------------------------------------------------------
+    
+      // Sweet Alert ---------------------------------------------------------------------------
     Swal.fire("Successful Registration", "Please check your email to activate your account");
     
     // cleanDetail  -------------------------------------------------------------------------
-    // Limpiar los estados ------------------------------------------------------------------
     setUser({
       fullname: "",
       email: "",
@@ -101,7 +93,9 @@ export default function Signup() {
 
   return (
     <div className='signupBox'>
-    <div id='signupContainer'>
+    <div className='signupContainer'>
+    
+    <div className="signupLeft">
       <h2>Sign up</h2>
         
       <form className='signupForm' onSubmit={handleSubmit}>
@@ -164,7 +158,7 @@ export default function Signup() {
              {errors.password2 && <p>{errors.password2}</p>} 
             </div>
           </fieldset>
-        
+
         <button className='signupBtn'>Sign up</button>
 
         <div className="signupGg">
@@ -172,6 +166,9 @@ export default function Signup() {
         </div>
             <GoogleLogin className='supGoogleBtn'/>
       </form>
+    </div>
+
+    <div className='signupRight'></div>
     </div>
     </div>
   )

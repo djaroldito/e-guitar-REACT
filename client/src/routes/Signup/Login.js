@@ -62,7 +62,10 @@ export default function Login() {
 
   return (
     <div className="loginBox">
-      <div id="loginContainer">
+      <div className="loginContainer">
+      <div className="loginLeft"></div>
+      
+      <div className="loginRight">
       <h2>Log In</h2>
         {getEmail ? (
           <Home />
@@ -103,6 +106,7 @@ export default function Login() {
             </div>
           </form>
         )}
+      </div>
       </div>
     </div>
   );
