@@ -11,9 +11,9 @@ const router =  Router();
 router.post('/create-order', async (req, res) => {
     const products = req.body;
     const {mail} = req.query;
-    const productsMapped = products.map(product => 
+    const productsMapped = products.map(product =>
         (
-                {   
+                {
                     reference_id: product.Cart.productId,
                     amount:{
                         currency_code: "USD",
@@ -28,19 +28,17 @@ router.post('/create-order', async (req, res) => {
             orderStatus: "AWAITING PAYMENT",
             deliveryStatus: 'PENDING',
             total: productsMapped.reduce((acc, curr) => acc + (parseInt(curr.amount.value)), 0),
-            userId: products[0].Cart.userId 
+            userId: products[0].Cart.userId
         });
-        
+
         const orderDetail = products.map(product => ({
             quantity: product.Cart.quantity,
             productId: product.Cart.productId,
+            color: product.Cart.color,
             orderId: orderdb.id
-        })) 
+        }))
 
         await OrderDetail.bulkCreate(orderDetail)
-        
-        
-        
 
         const order = {
             intent: "CAPTURE",
@@ -53,10 +51,10 @@ router.post('/create-order', async (req, res) => {
                 cancel_url: `http://localhost:3001/payments/cancel-order?orderId=${orderdb.id}`
             }
         }
-    
+
         const params = new URLSearchParams();
         params.append("grant_type", "client_credentials");
-    
+
         const {data: {access_token}} = await axios.post('https://api-m.sandbox.paypal.com/v1/oauth2/token', params, {
            headers: {
             'Content-Type': 'application/x-www-form-urlenconded',
@@ -72,7 +70,7 @@ router.post('/create-order', async (req, res) => {
                 Authorization: `Bearer ${access_token}`
             }
         })
-        
+
         res.send(response.data.links[1].href);
     }
     catch (error){
@@ -119,9 +117,9 @@ router.get('/capture-order', async (req, res) => {
                     if (error) rej(error)
                     else res(info)
                 })
-            }) 
-        }; 
-       
+            })
+        };
+
 
         const message = {
             from: process.env.GOOGLE_USER,
@@ -135,7 +133,7 @@ router.get('/capture-order', async (req, res) => {
             <p>estado: ${response.data.status}</p>
             <p>para ver tu pedido haz <a>click aquí</a></p>
             <p>Saludos y gracias por confiar en nosotros! </p>`
-        }   
+        }
         sendMail(message);
         //console.log(response);
         res.redirect('http://localhost:3000/payment/validation');
@@ -146,7 +144,7 @@ router.get('/capture-order', async (req, res) => {
 })
 
 router.get('/cancel-order', async (req, res) => {
-    
+
     const {orderId} = req.query;
 
     await Order.update({
