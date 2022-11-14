@@ -35,14 +35,13 @@ const Home = () => {
 			dispatch(getColors());
 			dispatch(getBrands());
 		}
-		
+
 	}, [dispatch, products]);
 
 	/// PAGINATION
 	const handlePageChange = (pageNumber) => {
 		dispatch(setCurrentPage(pageNumber))
 	}
-
 
 	return (
 		<>

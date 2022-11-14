@@ -8,14 +8,14 @@ import Home from "../home";
 import {LoginButton} from "./LoginButton";
 import {gapi} from 'gapi-script'
 
-let client = "1071381556347-p8k8tg37ss2e9ag86088tvdds19dot5o.apps.googleusercontent.com"
-
 export default function Login() {
 
+
+ 
   useEffect(()=>{
     function start(){
       gapi.client.init({
-        clientId:client,
+        clientId:"1071381556347-p8k8tg37ss2e9ag86088tvdds19dot5o.apps.googleusercontent.com",
         scope:"email"
       })
     }
@@ -62,7 +62,10 @@ export default function Login() {
 
   return (
     <div className="loginBox">
-      <div id="loginContainer">
+      <div className="loginContainer">
+      <div className="loginLeft"></div>
+      
+      <div className="loginRight">
       <h2>Log In</h2>
         {getEmail ? (
           <Home />
@@ -103,6 +106,7 @@ export default function Login() {
             </div>
           </form>
         )}
+      </div>
       </div>
     </div>
   );

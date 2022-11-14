@@ -16,74 +16,74 @@ import { Link } from "react-router-dom";
 import { IoArrowBackOutline } from "react-icons/io5";
 import { AiOutlineClear } from "react-icons/ai";
 
-const Cart = () => {
-  const carrito = useSelector((state) => state.products.cart);
-  const userId = sessionStorage.getItem("userId");
-  const mail = sessionStorage.getItem("emailData")
-    ? sessionStorage.getItem("emailData")
-    : sessionStorage.getItem("emailGoogle");
-  console.log(mail);
+const Cart = () =>{
+    const carrito = useSelector(state => state.products.cart)
+    const userId = sessionStorage.getItem('userId');
+    const mail = sessionStorage.getItem('emailData') ? sessionStorage.getItem('emailData') : sessionStorage.getItem('emailGoogle') ;
+    console.log(mail);
+    const dispatch = useDispatch()
+    //console.log(carrito)
 
-  const dispatch = useDispatch();
-  console.log(carrito);
+  
 
-  const addCartItem = async (item) => {
-    dispatch(getProductToCart(item));
-    if (userId)
-      await addCartToDB(JSON.parse(localStorage.getItem("carrito")), userId);
-  };
+   const addCartItem = async (item)=> {
+    dispatch(getProductToCart(item))
+    if(userId)
+    await addCartToDB(JSON.parse(localStorage.getItem('carrito')), userId);
+  }
 
-  const delFromCart = async (item) => {
-    dispatch(delOneFromCart(item));
-    if (userId)
-      await addCartToDB(JSON.parse(localStorage.getItem("carrito")), userId);
-  };
+  const delFromCart = async (item)=> {
+     dispatch(delOneFromCart(item))
+     if(userId)
+      await addCartToDB(JSON.parse(localStorage.getItem('carrito')), userId);
+  }
 
-  const completePayment = async (cart, mail) => {
-    const response = await payment(cart, mail);
-    console.log(response);
-    window.location.href = response;
-  };
+  // const completePayment = async (cart, mail) => {
+  //   const response = await payment(cart, mail);
+  //   console.log(response);
+  //   window.location.href = response;
+  // };
 
   // constructorCart()
-  //funciones carteles de alerta
-  const preguntaTodo = () => {
-    Swal.fire({
-      title: "Are you sure to delete the entire cart?",
-      text: "You won't be able to revert this!",
-      icon: "warning",
-      showCancelButton: true,
-      confirmButtonColor: "#3085d6",
-      cancelButtonColor: "#d33",
-      confirmButtonText: "Yes, delete it!",
-    }).then((result) => {
-      if (result.isConfirmed) {
-        dispatch(clearCart());
-        Swal.fire("Deleted!");
-      }
-    });
-  };
-  const preguntaUno = async (item) => {
-    Swal.fire({
-      title: "Are you sure to delete this item from the cart?",
-      text: "You won't be able to revert this!",
-      icon: "warning",
-      showCancelButton: true,
-      confirmButtonColor: "#3085d6",
-      cancelButtonColor: "#d33",
-      confirmButtonText: "Yes, delete it!",
-    }).then(async (result) => {
-      if (result.isConfirmed) {
-        dispatch(delOneFromCart(item));
-        if (userId)
-          await addCartToDB(
-            JSON.parse(localStorage.getItem("carrito")),
-            userId
-          );
-        Swal.fire("Deleted!");
-      }
-    });
-  };
+ //funciones carteles de alerta
+  const preguntaTodo = ()=>{
+   Swal.fire({
+    title: 'Are you sure to delete the entire cart?',
+    text: "You won't be able to revert this!",
+    icon: 'warning',
+    showCancelButton: true,
+    confirmButtonColor: '#3085d6',
+    cancelButtonColor: '#d33',
+    confirmButtonText: 'Yes, delete it!'
+  }).then((result) => {
+    if (result.isConfirmed) {
+      dispatch(clearCart())
+      Swal.fire(
+        'Deleted!',
+        )
+    }
+     })
+
+}
+const preguntaUno = async (item)=>{
+  Swal.fire({
+   title: 'Are you sure to delete this item from the cart?',
+   text: "You won't be able to revert this!",
+   icon: 'warning',
+   showCancelButton: true,
+   confirmButtonColor: '#3085d6',
+   cancelButtonColor: '#d33',
+   confirmButtonText: 'Yes, delete it!'
+ }).then(async (result) => {
+   if (result.isConfirmed) {
+    dispatch(delOneFromCart(item))
+    if(userId)
+    await addCartToDB(JSON.parse(localStorage.getItem('carrito')), userId);
+     Swal.fire(
+       'Deleted!',
+       )
+   }
+ })
 
   return (
     <main>
@@ -213,7 +213,7 @@ const CustomButtons = styled.div`
   flex-direction: column;
   width: 100%;
   position: relative;
-
+  
   a {
     color: whitesmoke;
     text-decoration: none;
@@ -262,7 +262,7 @@ const ClearButton = styled.div`
     background-color: rgb(128, 60, 60);
     color: whitesmoke;
     padding: 10px 15px;
-    font-size: 15px;
+    font-size: 15px; 
     font-weight: 600;
     border-radius: 10px;
   }

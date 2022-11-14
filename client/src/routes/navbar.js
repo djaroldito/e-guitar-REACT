@@ -44,56 +44,47 @@ const NavBar = () => {
             ""
           )}
 
-          <IconCont>
-            {!email && !emailGoogle ? (
-              <NavLink className="link" to="/login" title="Log In">
-                <BiLogIn />
-              </NavLink>
-            ) : (
-              <>
-                <div className="Dropdown user-icon">
-                  {userImage !== "null" && userImage ? (
-                    <img
-                      src={userImage}
-                      alt="user"
-                      referrerPolicy="no-referrer"
-                      width={30}
-                    ></img>
-                  ) : (
-                    <FaUserAlt />
-                  )}
-                  <div className="Dropdown-Content">
-                    {!isAdmin ? (
-                      <p
-                        onClick={() => {
-                          window.location.href = "/orders";
-                        }}
-                      >
-                        orders
-                      </p>
-                    ) : (
-                      ""
-                    )}
-                  </div>
-                </div>
-                {email ? (
-                  <NavLink
-                    className="link"
-                    to="/home"
-                    onClick={handleLog}
-                    title="Log Out"
-                  >
-                    Logout <BiLogOut />
-                  </NavLink>
-                ) : (
-                  emailGoogle && (
-                    <div className="guser">
-                      <LogoutButton> Logout</LogoutButton>
-                    </div>
-                  )
-                )}
-              </>
-            )}
+				<IconCont>
+					{!email && !emailGoogle ? (
+						<NavLink to='/login' title='Log In'>
+							<BiLogIn />
+						</NavLink>
+					) : (
+						<>
+							<div className='Dropdown user-icon'>
+								{userImage !== "null" && userImage ? (
+									<img
+										src={userImage}
+										alt='user'
+										referrerPolicy='no-referrer'
+										width={30}
+									></img>
+								) : (
+									<FaUserAlt />
+                                    )}
+                                    <div className="Dropdown-Content">
+                                        {!isAdmin ?
+                                            <div>
+											<p onClick = { ()=> {window.location.href = '/orders'}}>Orders</p>
+											<p onClick = { ()=> {window.location.href = '/home/Profile'}}>Perfil</p>
+											</div>
+											: ''
+                                        }
+                                    </div>
+							</div>
+							{email ? (
+								<NavLink to='/home' onClick={handleLog} title='Log Out'>
+									<BiLogOut />
+								</NavLink>
+							) : (
+								emailGoogle && (
+									<div className="guser">
+										<LogoutButton />
+									</div>
+								)
+							)}
+						</>
+					)}
 
             <NavLink to="/cart">
               <AiOutlineShoppingCart />
@@ -185,21 +176,13 @@ const IconCont = styled.div`
 `;
 
 const Logo = styled.div`
-  margin-right: 15px;
-  margin-bottom: auto;
-  margin-top: 10px;
-  max-height: 70px;
-
-  a:hover {
-    padding: 40px 15px 15px 15px;
-  }
-  img {
-    width: 135px;
-  }
-  /* @media (max-width: 700) {
-    position: relative;
-    display: flex;
-  } */
-`;
+	margin-right: 15px;
+	a:hover {
+		padding: 40px 15px 15px 15px;
+	}
+	img {
+		width: 110px;
+	}
+`
 
 export default NavBar;

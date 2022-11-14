@@ -53,6 +53,7 @@ margin-top: 50px;
 }
 
 `
+/* margin-top: 50px; (va en la línea 46)*/
 const ColumDiv = styled.div`
 width: 33%;
 text-align: left;

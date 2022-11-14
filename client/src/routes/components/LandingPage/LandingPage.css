@@ -2,14 +2,13 @@
 
 .LandingBg{
     filter: grayscale(70%);
-    width: 100vw;
-    height: 100vh;
-    object-fit: cover;
-    position: absolute;
+    width: 100%;
+    position:absolute;
+    top:0;
     left: 0;
     right: 0;
-    top: 0;
     bottom: 0;
+    background-size: cover;
     z-index: -1;
 }
 
@@ -77,6 +76,8 @@
     font-family: 'Fjalla One';
     color: #EB984E;
     text-align: center;
+    position:block;
+    padding-bottom: 20%;
 }
 .title p {
     line-height: 1.5;
@@ -98,12 +99,15 @@
     color: white;
 }
 .about{
-    background-color: white;
+    background-color: black;
     padding-top:64px;
     padding-bottom:64px;
+    padding-left: 5%;
+    padding-right: 5%;
 }
 .offers{
     display: block;
     height: auto;
-    max-width: 100%
+    width: 100%;
+    background-color: whitesmoke;
 }

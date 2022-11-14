@@ -15,8 +15,8 @@ const path = require("path")
 const { DB_USER, DB_PASSWORD, DB_HOST,DB_NAME } = process.env;
 
 let sequelize =  process.env.NODE_ENV === 'production'
-     ? 
-	 
+     ?
+
 	new Sequelize(
 		`postgresql://postgres:Hb9YRGAgNZfk9Ts4si0O@containers-us-west-108.railway.app:7266/railway`,
 		{
@@ -60,25 +60,35 @@ sequelize.models = Object.fromEntries(capsEntries)
 
 // En sequelize.models están todos los modelos importados como propiedades
 // Para relacionarlos hacemos un destructuring
-const { Product, User, Order, OrderDetail, Review, Cart } = sequelize.models
+const { Product, User, Order, OrderDetail, Review, Cart, DiscountCode} = sequelize.models
 
-User.hasMany(Order)
+Order.belongsTo(User,{foreignKey : 'userId'})
+User.hasMany(Order, { foreignKey: 'userId' })
+OrderDetail.belongsTo(Order,{ foreignKey: 'orderId' })
+Order.hasMany(OrderDetail,{ foreignKey: 'orderId' })
+OrderDetail.belongsTo(Product,{ foreignKey: 'productId' })
+Product.hasMany(OrderDetail,{ foreignKey: 'productId' })
 
-Product.belongsToMany(User, { through: OrderDetail })
-Order.belongsToMany(Product, { through: OrderDetail })
+// Product.belongsToMany(User, { through: OrderDetail })
+// Order.belongsToMany(Product, { through: OrderDetail })
+
 // wishlist
-const WishList = sequelize.define("wishlist", {})
-Product.belongsToMany(User, { through: WishList })
-User.belongsToMany(Product, { through: WishList })
+// const WishList = sequelize.define("wishlist", {})
+// Product.belongsToMany(User, { through: WishList })
+// User.belongsToMany(Product, { through: WishList })
 // reviews
-Product.belongsToMany(User, { through: Review })
-User.belongsToMany(Product, { through: Review })
+Review.belongsTo(User,{foreignKey: 'userId'});
+User.hasMany(Review,{foreignKey : 'userId'});
+Review.belongsTo(Product,{foreignKey: 'productId'});
+Product.hasMany(Review, { foreignKey: 'productId' });
+
 // cart
-
-
-
 Product.belongsToMany(User, { through: Cart })
 User.belongsToMany(Product, { through: Cart })
+
+//discount user
+DiscountCode.belongsTo(User, { foreignKey: "userId" })
+User.hasMany(DiscountCode, { foreignKey: "userId" })
 
 module.exports = {
 	...sequelize.models, // para poder importar los modelos así: const { Product, User } = require('./db.js');
