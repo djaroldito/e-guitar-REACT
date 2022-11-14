@@ -170,7 +170,7 @@ const preguntaUno = async (item)=>{
       </div>
       {carrito.length >= 1 ? (
         <button
-          onClick={() => completePayment(carrito, mail)}
+          // onClick={() => completePayment(carrito, mail)}
           className="Purchasebutton"
         >
           <BsCart2 />

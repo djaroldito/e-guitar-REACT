@@ -11,18 +11,7 @@ const { Product, Review, User } = require("../db.js")
 //  GET /rguitars
 //  GET /rguitars?brand="..." &type="..." &color="..."
 // Pagination: limit=4 (items per page), page=1 (currentPage)
-router.get('/offers', async (req, res) => {
-	try{
-		const product = await Product.findAll({
-			where:{
-				discount: {[Op.gt]: 5}
-			}
-		})
-		res.send(product);
-	}catch(error){
-		res.status(400).send(error.message)
-	}
-})
+
 router.get("/", async (req, res) => {
 	try {
 		const { brand, type, color, fullName, page = 1, size = 6, sortPrice, sortBrand, minPrice, maxPrice } = req.query
@@ -112,11 +101,12 @@ const getPagingData = (data, page, limit) => {
 // GET /rguitars/{idGuitar}
 router.get("/:idGuitar", async (req, res) => {
 	const { idGuitar } = req.params
+	
 	try {
 		//Traigo el id por parametro
 		const guitar = await Product.findOne({
 			where: {
-				id: idGuitar.toUpperCase(),
+				id: idGuitar,
 			},
 		})
 		if (guitar) {
@@ -309,6 +299,18 @@ const loadProductData = async () => {
 		throw new Error(error.message)
 	}
 }
+router.get('/offers', async (req, res) => {
+	try{
+		const product = await Product.findAll({
+			where:{
+				discount: {[Op.gt]: 5}
+			}
+		})
+		res.send(product);
+	}catch(error){
+		res.status(400).send(error.message)
+	}
+})
 
 
 module.exports = router
