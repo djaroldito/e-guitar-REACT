@@ -230,7 +230,7 @@ router.get("/login", async (req, res) => {
     const { email, password } = req.query;
     console.log("Esto es email y password: ", email, password)
     // if no users load defaul
-    await loadAdminUserData();
+   // await loadAdminUserData();
 
     if (!email || !password) {
       res.status(400).send("Faltan parametros");
