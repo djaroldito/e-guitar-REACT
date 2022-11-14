@@ -16,6 +16,7 @@ import DashboardRoute from "./routes/components/Dashboard/DashboardRoute"
 import Dashboard from './routes/components/Dashboard/Dashboard'
 import OrderDetail from './routes/components/Order/OrderDetail'
 import ResetPassword from "./routes/Signup/ResetPassword";
+import PrePayment from "./routes/components/PrePayment";
 
 function App() {
   return (
@@ -37,6 +38,8 @@ function App() {
           <Route path="/editProduct/:id" element={<ProductForm />} />
           <Route path="/payment/validation" element={<Payment />} />
           <Route path="/payment/error" element={<Error />} />
+          <Route path="/prePayment" element={<PrePayment />} />
+
         </Route>
 
         {/* PROTECTED ROUTES FOR ADMIN DASHBOARD */}
