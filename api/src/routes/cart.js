@@ -29,7 +29,7 @@ router.post('/', async (req, res) => {
     
     const cartMapped = userCart.map(product => {
         return{
-                quantity: product.Cart.quantity,
+                quantity: product.cart.quantity,
                 productId: product.id,
                 userId: parseInt(userID)
             }
