@@ -57,15 +57,22 @@ const mailDiscountCoupon = async function ({ toUser, discountCode}) {
   return sendMail(message);
 };
 
-const mailFotgotPassword = async function ({toUser}) {
+const mailFotgotPassword = async function ({toUser, resetCode}) {
+  console.log("Esto es resetCode en la función del mail: ", resetCode)
   const message = {
     from: process.env.GOOGLE_USER,
     to: toUser.email,
     subject: "Guitar Code - Reset Password",
     html: `
+      <h3>Hola, ${toUser.fullname}</h3>
+      <p>Si te llega este mensaje es porque querés modificar la contraseña de tu cuenta en Guitar Code.</p>
+      <p> Para finalizar con el proceso de acttualización por favor ingrese el siguiente código en el formulario: <b>${resetCode}</b></p>
 
+      <a target="" href=${process.env.DOMAIN}/change-password><p>Formulario</p></a>
     `
-  }
+  };
+  console.log("Esto es message en mailForgot: ", message);
+  return sendMail(message);
 }
 
 router.put("/dataUser", async (req, res) => {
@@ -124,7 +131,6 @@ try {
 
  router.post("/register", async (req, res) => {
   try {
-    console.log(req.body)
   const { email, fullname, password, avatar='', isActive=false  } = req.body;
 
   const hash = bcrypt.hashSync(password, saltRounds);
@@ -220,7 +226,7 @@ router.get("/activate", async (req, res) => {
 router.get("/login", async (req, res) => {
   try {
     const { email, password } = req.query;
-
+    console.log("Esto es email y password: ", email, password)
     // if no users load defaul
     await loadAdminUserData();
 
@@ -230,11 +236,12 @@ router.get("/login", async (req, res) => {
       const user = await User.findOne({
         where: {
           email,
-		  isActive: true
+		      isActive: true
         },
         include: Product,
       });
       if (user) {
+        console.log("Esto es user: ",user)
         const match = await bcrypt.compare(password, user.password);
         if (match) {
           return res.status(200).json(user);
@@ -306,24 +313,42 @@ router.post("/reset-password", async (req, res) => {
   try {
     const { fullname, email } = req.body;
     console.log("Back reset-pass: ", fullname, email)
+
     if (!fullname || !email) res.status(400).send("Cannot be empty fields")
+    
+    let characters = "0123456789ABCDEFGH";
+    let resetCode = "";
+    for (let i = 0; i < 8; i++) {
+        resetCode += characters.charAt(Math.floor(Math.random() * characters.length));
+    };
 
-    const user = await User.findeOne({
+    const gotcha = await User.findOne({ 
       where: {
-        email
-      }});
-    console.log("Saliendo del findone en RPassword")
-    console.log("Esto es user en el back: ", user);
-    if (!user) return res.status(422).send("User doesn't exists!");
+        email,
+        fullname }});
 
-    const hash = bcrypt.hashSync(fullname, saltRounds);
-    console.log("Esto es hash en RPass: ", hash)
+    if (!gotcha) {
+      return res.status(422).send("Can't find this user, please try again!");
+    } 
+
+      await User.update({
+      changePassword: resetCode},   
+      { where: {
+        email,
+        fullname }});
+ 
+    await mailFotgotPassword({
+      toUser: gotcha,
+      resetCode: resetCode
+    })
+    
+    res.status(200).send("Successful Reset-Password")
 
   } catch (error) {
-
+    res.status(400).send(error.message);
   }
-
 })
+
 // post para codigo de descuento ----------------------------------
 router.post('/discountCode', async (req, res) => {
   try {
@@ -397,5 +422,29 @@ router.get('/discountCode', async (req,res) => {
   }
 })
 
+router.put("/new-password", async (req, res) =>{
+  try {
+    const { code, password } = req.body;
 
+    const change = await User.findOne({
+      where: {
+        changePassword: code
+      }})
+    console.log("Esto es user Change: ", change)
+
+    if(!change) res.status(400).send("The code or User is not valid");
+    const hash = bcrypt.hashSync(password, saltRounds);
+    User.update({
+      password: hash,
+      changePassword: null }, 
+      { where: {
+        changePassword: code
+      }
+    }) 
+    res.status(200).send("New Password activated")
+  } catch (error) {
+    console.log("Catch de New-Password")
+    res.status(400).send(error)
+  }
+})
 module.exports = router;
