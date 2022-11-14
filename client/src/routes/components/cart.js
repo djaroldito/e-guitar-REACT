@@ -84,6 +84,7 @@ const preguntaUno = async (item)=>{
        )
    }
  })
+}
 
   return (
     <main>
