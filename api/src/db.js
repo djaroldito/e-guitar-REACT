@@ -69,13 +69,6 @@ Order.hasMany(OrderDetail,{ foreignKey: 'orderId' })
 OrderDetail.belongsTo(Product,{ foreignKey: 'productId' })
 Product.hasMany(OrderDetail,{ foreignKey: 'productId' })
 
-// Product.belongsToMany(User, { through: OrderDetail })
-// Order.belongsToMany(Product, { through: OrderDetail })
-
-// wishlist
-// const WishList = sequelize.define("wishlist", {})
-// Product.belongsToMany(User, { through: WishList })
-// User.belongsToMany(Product, { through: WishList })
 // reviews
 Review.belongsTo(User,{foreignKey: 'userId'});
 User.hasMany(Review,{foreignKey : 'userId'});
