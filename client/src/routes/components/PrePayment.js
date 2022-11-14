@@ -48,9 +48,13 @@ const PrePayment = () => {
       let discountCode = await axios.get(
         `/ruser/discountCode?code=${input.code}`
       );
+      setinput({
+        code:"",
+      })
       if (discountCode.data.length === 0) Swal.fire("Codigo no valido");
       codeValidate = discountCode.data;
       setCodeDisc(codeValidate);
+
     } else {
       Swal.fire("Codigo no valido");
     }
@@ -96,18 +100,17 @@ const PrePayment = () => {
           </ImgDiv>
         </div>
       ))}
-      <Total>
+     <Total>
         {carrito.length >= 1 ? <label>Total: </label> : null}
         <h1>
           {carrito.length >= 1
             ? codeDisc?.length > 0 
               ? codeDisc[0].isUsed === false
-                ?
-                TotalConDescuento(carrito, codeDisc[0])
-                : Swal.fire("This Code was Used")
+                ? TotalConDescuento(carrito, codeDisc[0])
+                : Swal.fire("This Code was Used") && total(carrito) && setCodeDisc({})
               : total(carrito)
             : "No carrito"}
-        </h1>
+        </h1> 
       </Total>
 
       <label>Enter Discount Code</label>
@@ -122,7 +125,7 @@ const PrePayment = () => {
       <button onClick={() => validateCode(codeValidate)}>SendCode</button>
       {carrito.length >= 1 ? (
         <button
-          onClick={() => completePayment(carrito, mail, codeDisc[0].code)}
+          onClick={() => completePayment(carrito, mail, codeDisc?[0].code : null)}
           className="Purchasebutton"
         >
           <BsCart2 /> To Pay
