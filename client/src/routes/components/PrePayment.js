@@ -53,7 +53,11 @@ const PrePayment = () => {
       if (discountCode.data.length === 0) Swal.fire("Codigo no valido");
       codeValidate = discountCode.data;
       setCodeDisc(codeValidate);
+<<<<<<< HEAD
+
+=======
       
+>>>>>>> dev
     } else {
       Swal.fire("Codigo no valido");
     }
@@ -102,7 +106,7 @@ const PrePayment = () => {
           </ImgDiv>
         </div>
       ))}
-      <Total>
+     <Total>
         {carrito.length >= 1 ? <label>Total: </label> : null}
         <h1>
           {carrito.length >= 1
@@ -127,7 +131,7 @@ const PrePayment = () => {
       <button type="button" onClick={() => validateCode(codeValidate)}>SendCode</button>
       {carrito.length >= 1 ? (
         <button
-        onClick={() => completePayment(carrito, mail, codeDisc?[0].code : null)}
+          onClick={() => completePayment(carrito, mail, codeDisc?[0].code : null)}
           className="Purchasebutton"
         >
           <BsCart2 /> To Pay
