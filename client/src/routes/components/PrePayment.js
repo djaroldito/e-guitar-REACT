@@ -36,7 +36,6 @@ const PrePayment = () => {
   const [codeDisc, setCodeDisc] = useState({});
 
   const handleChange = (e) => {
-    e.preventDefault();
     // setinput(e.target.value)
     if (e.target.value !== "") {
       setinput({ [e.target.name]: e.target.value });
@@ -48,15 +47,22 @@ const PrePayment = () => {
       let discountCode = await axios.get(
         `/ruser/discountCode?code=${input.code}`
       );
+      setinput({
+        code:"",
+      })
       if (discountCode.data.length === 0) Swal.fire("Codigo no valido");
       codeValidate = discountCode.data;
       setCodeDisc(codeValidate);
+      
     } else {
       Swal.fire("Codigo no valido");
     }
   };
 
   const TotalConDescuento = (carrito, codeValidate) => {
+    setinput({
+      code:"",
+    })
     let totalDescuento =
       carrito
         ?.reduce(
@@ -102,12 +108,11 @@ const PrePayment = () => {
           {carrito.length >= 1
             ? codeDisc?.length > 0 
               ? codeDisc[0].isUsed === false
-                ?
-                TotalConDescuento(carrito, codeDisc[0])
-                : Swal.fire("This Code was Used")
+                ? TotalConDescuento(carrito, codeDisc[0])
+                : Swal.fire("This Code was Used") && total(carrito) && setCodeDisc({})
               : total(carrito)
             : "No carrito"}
-        </h1>
+        </h1> 
       </Total>
 
       <label>Enter Discount Code</label>
@@ -119,10 +124,10 @@ const PrePayment = () => {
         onChange={(e) => handleChange(e)}
         style={{ padding: "14px 16px", width: "40%" }}
       />
-      <button onClick={() => validateCode(codeValidate)}>SendCode</button>
+      <button type="button" onClick={() => validateCode(codeValidate)}>SendCode</button>
       {carrito.length >= 1 ? (
         <button
-          onClick={() => completePayment(carrito, mail, codeDisc[0].code)}
+        onClick={() => completePayment(carrito, mail, codeDisc?[0].code : null)}
           className="Purchasebutton"
         >
           <BsCart2 /> To Pay
