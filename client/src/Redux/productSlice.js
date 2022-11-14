@@ -1,5 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit"
-//borrar
+
+
 
 export const productSlice = createSlice({
 	name: "products",
@@ -41,7 +42,7 @@ export const productSlice = createSlice({
 			if (cartIndex >= 0) {
 				state.cart[cartIndex].Cart.quantity += 1
 			} else {
-				let tempProduct = { ...action.payload, Cart: {color:action.payload.color ,quantity: 1, productId:action.payload.id, userId: parseInt(localStorage.getItem('userId'))}}
+				let tempProduct = { ...action.payload, Cart: {color:action.payload.color ,quantity: 1, productId: action.payload.id, userId: parseInt(localStorage.getItem('userId'))}}
 				state.cart.push(tempProduct)
 			}
 			localStorage.setItem("carrito", JSON.stringify(state.cart))
@@ -115,7 +116,7 @@ export const productSlice = createSlice({
 export const {
 	getAllProducts,
 	getProductById,
-	//getProductByName,
+	filerError,
 	getProductFiltered,
 	clearCart,
 	getProductToCart,

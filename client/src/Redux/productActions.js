@@ -55,7 +55,7 @@ export const getByFilter = (filter, currentPage) => (dispatch) => {
       dispatch(setCurrentPage(res.data.currentPage));
       dispatch(setPageCount(res.data.pageCount));
     })
-    .catch((err) => console.log(err));
+    .catch(err => console.log(err))
 };
 
 export const postProductForm = async (formData) => {
@@ -112,4 +112,14 @@ export const getOrderDB = (userID) => (dispatch) => {
 	axios(`/order?userId=${userID}`)
 	.then((res) => dispatch(getOrder(res.data)))
 	
+}
+
+export const filterError = () => (dispatch)=> {
+  axios("/rguitars")
+  .then((res) => {
+    dispatch(getAllProducts(res.data.products));
+    dispatch(setCurrentPage(1));
+    dispatch(setPageCount(res.data.pageCount));
+  })
+  .catch((error) => console.log(error));
 }

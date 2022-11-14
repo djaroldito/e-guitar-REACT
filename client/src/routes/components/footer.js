@@ -37,13 +37,21 @@ return(
 }
 
 const ConDiv = styled.div`
-max-width: 100%;
+max-width: 1200px;
 color: whitesmoke;
 margin-left: auto;
 margin-right: auto;
 display: flex;
 flex-direction: row;
 margin-top: 50px;
+
+@media(max-width: 800px) {
+   flex-direction: column;
+   max-width: 400px;
+   margin-left: auto;
+   margin-right: auto;
+}
+
 `
 const ColumDiv = styled.div`
 width: 33%;
@@ -65,6 +73,13 @@ a{
 }
 h4{
    margin-bottom: 40px;
+}
+@media(max-width: 800px) {
+   width: 400px;
+   margin-left: auto;
+   margin-right: auto;
+   border-left: none;
+border-right: none
 }
 `
 const CopyDiv = styled.div`
