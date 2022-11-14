@@ -404,6 +404,7 @@ router.get('/sendCode', async (req, res) =>{
 
 router.get('/discountCode', async (req,res) => {
   const {code} = req.query;
+  console.log(code)
   try {
     if(!code) res.status(400).send('Cannot be empty fields');
     else{
