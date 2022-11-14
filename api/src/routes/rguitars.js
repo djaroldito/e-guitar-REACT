@@ -3,7 +3,7 @@ const path = require("path")
 
 const { Router } = require("express")
 const router = Router()
-
+const { Op } = require("sequelize");
 const sequelize = require("sequelize")
 const { Product } = require("../db.js")
 
@@ -11,6 +11,18 @@ const { Product } = require("../db.js")
 //  GET /rguitars
 //  GET /rguitars?brand="..." &type="..." &color="..."
 // Pagination: limit=4 (items per page), page=1 (currentPage)
+router.get('/offers', async (req, res) => {
+	try{
+		const product = await Product.findAll({
+			where:{
+				discount: {[Op.gt]: 5}
+			}
+		})
+		res.send(product);
+	}catch(error){
+		res.status(400).send(error.message)
+	}
+})
 router.get("/", async (req, res) => {
 	try {
 		const { brand, type, color, fullName, page=1, size=6, sortPrice, sortBrand, minPrice, maxPrice  } = req.query
@@ -29,7 +41,7 @@ router.get("/", async (req, res) => {
 			if (type) whereQuery.type = { [op.iLike]: `%${type}%` }
 			if (color) whereQuery.color = { [op.iLike]: `%${color}%` }
 			if (minPrice || maxPrice) whereQuery.price = { [op.between]: [minPrice, maxPrice]}
-			console.log(minPrice, maxPrice)
+			//console.log(minPrice, maxPrice)
 			if (sortPrice) {
 				orderBy = [
 					["price", sortPrice],

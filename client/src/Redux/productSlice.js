@@ -10,6 +10,7 @@ export const productSlice = createSlice({
 		brands: [],
 		colors: [],
 		orders: [],
+		order: {},
         types: [],
         filter: [],
         Filters: {
@@ -41,7 +42,7 @@ export const productSlice = createSlice({
 			if (cartIndex >= 0) {
 				state.cart[cartIndex].Cart.quantity += 1
 			} else {
-				let tempProduct = { ...action.payload, Cart: {color:action.payload.color ,quantity: 1, productId:action.payload.id, userId: parseInt(localStorage.getItem('userId'))}}
+				let tempProduct = { ...action.payload, Cart: {color:action.payload.color ,quantity: 1, productId:action.payload.id, userId: parseInt(sessionStorage.getItem('userId'))}}
 				state.cart.push(tempProduct)
 			}
 			localStorage.setItem("carrito", JSON.stringify(state.cart))
@@ -66,8 +67,11 @@ export const productSlice = createSlice({
 			}
 			localStorage.setItem("carrito", JSON.stringify(state.cart))
 		},
-		getOrder: (state, action) => {
+		getAllOrders: (state, action) => {
 			state.orders = action.payload
+		},
+		getOrder: (state, action) => {
+			state.order = action.payload
 		},
 		delAllFromCart: (state, action) => {
 			return {
@@ -78,7 +82,7 @@ export const productSlice = createSlice({
 		clearDetail: (state) => {
 			state.detail = {}
 		},
-		
+
 		clearCart: (state, action) => {
 			state.cart = []
 			localStorage.setItem("carrito", JSON.stringify(state.cart))
@@ -107,7 +111,7 @@ export const productSlice = createSlice({
         setPageCount(state, action) {
             state.pageCount = action.payload
 		},
-	
+		
 	},
 })
 
@@ -115,7 +119,6 @@ export const productSlice = createSlice({
 export const {
 	getAllProducts,
 	getProductById,
-	//getProductByName,
 	getProductFiltered,
 	clearCart,
 	getProductToCart,
@@ -131,7 +134,8 @@ export const {
     clearDetail,
     setCurrentPage,
     setPageCount,
-	getOrder
+	getOrder,
+	getAllOrders
 
 } = productSlice.actions
 

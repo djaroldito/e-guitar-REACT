@@ -3,6 +3,7 @@ import { NavLink } from "react-router-dom"
 import styled from "styled-components"
 import "./LandingPage.css"
 import React from "react"
+import Offers from "../Offers/Offers"
 
 
 const LandingPage = () => {
@@ -21,7 +22,7 @@ const LandingPage = () => {
 					{ '{ GUITAR CODE }' }
 				</h1>
 			</div>
-			<div className='offers'>
+			<div className='offers' id='offers'>
 				{/* {offers.map(product => {
 						return (<div>
 							<img src={product.img}></img>
@@ -30,9 +31,11 @@ const LandingPage = () => {
 						</div>)
 					}
 				)} */}
+				<h1 style={{marginLeft: "5%"}}>Discounts</h1>
+				<Offers></Offers>
 			</div>
 			{/* <div className="about">
-				<h2>Acerca de nosotros</h2>
+				<h2>About us</h2>
 				<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla vestibulum sit amet velit quis blandit. Curabitur libero nibh, varius ac pellentesque non, tristique maximus ipsum. In sollicitudin, tellus quis hendrerit porttitor, risus libero semper turpis, nec pharetra tellus purus fermentum lectus. Duis fringilla ultrices nunc. Proin ultrices mi non libero placerat fringilla. Integer eros nibh, accumsan a imperdiet vitae, convallis nec sapien. Aenean at rhoncus urna.
 				Morbi porta risus at congue feugiat. Fusce tempus pulvinar porta. Donec vulputate porta mi. Vivamus at velit arcu. Nam auctor mauris nisl, eu dictum elit vestibulum quis. Fusce in nisl nec ligula iaculis tristique. Fusce orci mauris, bibendum id massa in, interdum porttitor turpis. Morbi semper eleifend erat, sit amet aliquam ex mollis non. Sed placerat aliquet ex eget venenatis. Nulla varius vulputate blandit. Fusce molestie cursus risus at euismod. Sed sit amet turpis at arcu congue porta a in ante. Integer facilisis est felis, a consectetur risus rutrum sit amet.</p>
 			</div> */}

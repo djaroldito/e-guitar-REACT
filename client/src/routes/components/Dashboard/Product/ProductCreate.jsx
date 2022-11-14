@@ -1,4 +1,4 @@
-import React, { useEffect,useState } from "react"
+import React, { useEffect, useState } from "react"
 import {
 	Create,
 	SimpleForm,
@@ -11,12 +11,12 @@ import {
 	// validation
 	number,
 	minValue,
-    maxValue,
-    required,
+	maxValue,
+	required,
 	// toolbar
 	ListButton,
 	TopToolbar,
-    ShowButton,
+	ShowButton,
 } from "react-admin"
 
 import {
@@ -39,7 +39,7 @@ import {
 } from "../../../../Redux/productActions"
 
 const ProductCreate = (props) => {
-    const dispatch = useDispatch()
+	const dispatch = useDispatch()
 
 	useEffect(() => {
 		dispatch(getTypes())
@@ -47,19 +47,24 @@ const ProductCreate = (props) => {
 		dispatch(getColors())
 	}, []) //eslint-disable-line
 
-    const { types, colors, brands } = useSelector((state) => state.products)
+	const { types, colors, brands } = useSelector((state) => state.products)
 
 	// VALUES FOR SELECTS
-    const [typeChoices, setTypeChoices] = useState( types.map(x => ({ id:x, name: x }) ) )
-    const [typeValue, setTypeValue] = useState(null )
-    const [brandChoices, setBrandChoices] = useState( brands.map(x => ({ id:x, name: x }) ) )
-    const [brandValue, setBrandValue] = useState(null )
+	const [typeChoices, setTypeChoices] = useState(
+		types.map((x) => ({ id: x, name: x }))
+	)
+	const [typeValue, setTypeValue] = useState(null)
+	const [brandChoices, setBrandChoices] = useState(
+		brands.map((x) => ({ id: x, name: x }))
+	)
+	const [brandValue, setBrandValue] = useState(null)
 
 	const colorChoices = colors.map((value) => ({ id: value, name: value }))
 
 	const validateMin = [number(), minValue(0)]
+	const validateDiscount = [number(), minValue(0), maxValue(100)]
 	const validateStrings = [number(), minValue(6), maxValue(18)]
-	const validateDescription =[required()]
+	const validateDescription = [required()]
 
 	// Toolbars
 	const TopToolbarActions = ({ basePath }) => (
@@ -79,88 +84,89 @@ const ProductCreate = (props) => {
 	}
 	return (
 		<>
-            <Create
-                actions={<TopToolbarActions />}
+			<Create
+				actions={<TopToolbarActions />}
 				submitOnEnter={false}
-				title='Create New Product'
+                title='Create New Product'
+                redirect="list"
+            mutationMode="pessimistic"
 				{...props}
 			>
 				<SimpleForm>
 					<Box display={{ xs: "block", sm: "flex", width: "100%" }}>
 						<Box flex={1} mr={{ xs: 0, sm: "0.5em" }}>
-                            <SelectInput
+							<SelectInput
+								required
 								source='type'
-                                choices={typeChoices}
-                                value={typeValue}
-                                optionText="name"
-                                sx={{ width: '100%' }}
-                                onChange={(e)=>{
-                                    if (typeof e === "string") {
-											setTypeValue({ id: e, name: e })
-										}
-                                }}
-                                onCreate={() => {
-                                    const newName = prompt("Enter a new type")
-                                    const newType = { id: newName, name: newName }
-                                    setTypeChoices([...typeChoices,newType])
-                                    return newType
+								choices={typeChoices}
+								value={typeValue}
+								optionText='name'
+								fullWidth={true}
+								onChange={(e) => {
+									if (typeof e === "string") {
+										setTypeValue({ id: e, name: e })
+									}
+								}}
+								onCreate={() => {
+									const newName = prompt("Enter a new type")
+									const newType = { id: newName, name: newName }
+									setTypeChoices([...typeChoices, newType])
+									return newType
 								}}
 							/>
-
 						</Box>
 						<Box flex={1} mr={{ xs: 0, sm: "0.5em" }}>
 							<SelectInput
+								required
 								source='brand'
-                                choices={brandChoices}
-                                value={brandValue}
-                                sx={{ width: '100%' }}
-                                optionText="name"
-                                onChange={(e)=>{
-                                    if (typeof e === "string") {
-											setBrandValue({ id: e, name: e })
-										}
-                                }}
-                                onCreate={() => {
-                                    const newName = prompt("Enter a new brand")
-                                    const newBrand = { id: newName, name: newName }
-                                    setBrandChoices([...brandChoices,newBrand])
-                                    return newBrand
+								choices={brandChoices}
+								value={brandValue}
+								fullWidth={true}
+								optionText='name'
+								onChange={(e) => {
+									if (typeof e === "string") {
+										setBrandValue({ id: e, name: e })
+									}
+								}}
+								onCreate={() => {
+									const newName = prompt("Enter a new brand")
+									const newBrand = { id: newName, name: newName }
+									setBrandChoices([...brandChoices, newBrand])
+									return newBrand
 								}}
 							/>
 						</Box>
 						<Box flex={1}>
-							<TextInput source='model' sx={{ width: "100%" }} required />
+							<TextInput source='model' fullWidth={true} required />
 						</Box>
 					</Box>
 					<Box display={{ xs: "block", sm: "flex", width: "100%" }}>
 						<Box flex={1} mr={{ xs: 0, sm: "0.3em" }}>
 							<TextInput
-                                source='price'
-                                label='Price $'
+								source='price'
+								label='Price $'
 								required
-								sx={{ width: 150 }}
+								sx={{ width: 130 }}
 								validate={validateMin}
 							/>
 						</Box>
 						<Box flex={1} mr={{ xs: 0, sm: "0.3em" }}>
-							<TextInput
+                            <TextInput
+                                defaultValue={0}
 								source='discount'
 								label='Discount %'
-								sx={{ width: 150 }}
-								validate={validateMin}
-							/>
-						</Box>
-						<Box flex={1} mr={{ xs: 0, sm: "0.3em" }}>
-							<TextInput
-								source='stock'
-								required
-								sx={{ width: 100 }}
-								validate={validateMin}
+								sx={{ width: 120 }}
+								validate={validateDiscount}
 							/>
 						</Box>
 						<Box flex={1} mr={{ xs: 0, sm: "0.5em" }}>
-							<SelectArrayInput source='color' choices={colorChoices} />
-						</Box>
+							<SelectArrayInput
+								source='color'
+                                choices={colorChoices}
+                                sx={{ width: 250 }}
+								required
+							/>
+                        </Box>
 						<Box flex={1} mr={{ xs: 0, sm: "0.3em" }}>
 							<TextInput
 								source='strings'
@@ -173,7 +179,16 @@ const ProductCreate = (props) => {
 							<BooleanInput
 								source='leftHand'
 								label='Left-Hand'
-								labelplacement='top'
+                                sx={{ width: 100 }}
+							/>
+                        </Box>
+                        <Box flex={1} mr={{ xs: 0, sm: "0.3em" }}>
+                            <TextInput
+                                defaultValue={1}
+								source='stock'
+								required
+								sx={{ width: 100 }}
+								validate={validateMin}
 							/>
 						</Box>
 					</Box>
@@ -226,7 +241,5 @@ const ProductCreate = (props) => {
 		</>
 	)
 }
-
-
 
 export default ProductCreate

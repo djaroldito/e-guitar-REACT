@@ -1,5 +1,5 @@
 import axios from "axios";
-import { getUser } from "./SignupSlice";
+import { getUser, getUserById } from "./SignupSlice";
 
 export const postSignupForm =  async (supData) => {
     try {
@@ -14,5 +14,12 @@ export const getUserDB = (email) => (dispatch) => {
     axios(`/ruser/email?email=${email}`)
     .then(res => dispatch(getUser(res.data)))
     .catch(error => console.log(error));
+};
+
+
+export const getUserId = (id) => (dispatch) => {
+    axios(`/ruser?id=${id}`)
+    .then(res => dispatch(getUserById(res.data)))
+    .catch(error => console.log(error))
 };
 

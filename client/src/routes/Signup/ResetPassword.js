@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';  
 import { AiOutlineUser, AiOutlineMail } from  "react-icons/ai";
 import "./Styles/ResetPassword.css"
@@ -8,6 +8,7 @@ import axios from 'axios';
 
 export default function ResetPassword () {
     const navigate = useNavigate();
+    const email = useRef();
     const [input, setInput] = useState({
         fullname: "",
         email: "",
@@ -24,12 +25,12 @@ export default function ResetPassword () {
     async function handleSubmit(e) {
         e.preventDefault();
     // Corroborar que no exista ese mail registrado ------------------------------------------
-        const { data } = await axios.get("/ruser/email", {
+/*         const { data } = await axios.get("/ruser/email", {
             params: {
               email: email.current.value
             }})
       
-          if (data) return Swal.fire("This email is already registered")
+          if (data) return Swal.fire("This email is already registered") */
 
         axios.post("/ruser/reset-password", input)
         Swal.fire("Please, check your email to reset your password");

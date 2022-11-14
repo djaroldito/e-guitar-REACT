@@ -17,11 +17,10 @@ const Cart = () =>{
     const userId = sessionStorage.getItem('userId');
     const mail = sessionStorage.getItem('emailData') ? sessionStorage.getItem('emailData') : sessionStorage.getItem('emailGoogle') ;
     console.log(mail);
-    
     const dispatch = useDispatch()
-    console.log(carrito)
+    //console.log(carrito)
 
-  
+
 
    const addCartItem = async (item)=> {
     dispatch(getProductToCart(item))
@@ -35,11 +34,11 @@ const Cart = () =>{
       await addCartToDB(JSON.parse(localStorage.getItem('carrito')), userId);
   }
 
-  const completePayment = async (cart, mail) => {
-    const response = await payment(cart, mail);
-    console.log(response);
-    window.location.href = response;
-  };
+  // const completePayment = async (cart, mail) => {
+  //   const response = await payment(cart, mail);
+  //   console.log(response);
+  //   window.location.href = response;
+  // };
 
   // constructorCart()
  //funciones carteles de alerta
@@ -77,7 +76,7 @@ const preguntaUno = async (item)=>{
     if(userId)
     await addCartToDB(JSON.parse(localStorage.getItem('carrito')), userId);
      Swal.fire(
-       'Deleted!',      
+       'Deleted!',
        )
    }
  })
@@ -91,7 +90,7 @@ const preguntaUno = async (item)=>{
     <br/>
            {carrito.map((el, index)=>(
             <div key={index} className="ProductCard">
-              <ImgDiv>            
+              <ImgDiv>
                 <img src={el.img} alt={carrito.brand}/>
                 <div>
                   <h2>{el.brand}</h2>
@@ -99,7 +98,7 @@ const preguntaUno = async (item)=>{
                   {el.color?<p> <b>Color: </b>{el.color}.</p>: null}
                 </div>
               </ImgDiv>
-            
+
             {el.discount? <p> <b>Discount: </b>{el.discount}.</p>: null}
             <div className="InputCartContainer">
               <button  disabled= { el.Cart.quantity !== 1 ? false : true} onClick={() => delFromCart(el)}>-</button>
@@ -116,12 +115,14 @@ const preguntaUno = async (item)=>{
               <h1> {carrito.length >= 1 ?  carrito.reduce((acc,prod)=>acc + (prod.price.toFixed(2) * prod.Cart.quantity) , 0).toFixed(2):null}</h1>
             </Total>
           </div>
-          {carrito.length >= 1 ? <button onClick={() => completePayment(carrito, mail)} className="Purchasebutton"><BsCart2/>Completar Compra</button> : null}
+          {/* {carrito.length >= 1 ? <button onClick={() => completePayment(carrito, mail)} className="Purchasebutton"><BsCart2/>Completar Compra</button> : null} */}
+          
+          {carrito.length >= 1 ? <button className="Purchasebutton"> <Link to = {'/prePayment'} ><BsCart2/>Completar Compra</Link> </button>  : null}
           < br/>
           <CustomButtons>
           <Link to="/home">
               <button className="back-home">
-              <IoArrowBackOutline/> Back Home  
+              <IoArrowBackOutline/> Back Home
               </button>
 					</Link>
           </CustomButtons>
@@ -154,7 +155,7 @@ const CustomButtons = styled.div`
   flex-direction: column;
   width: 100%;
   position: relative;
-  
+
   a {
     color: whitesmoke;
     text-decoration: none;
@@ -203,7 +204,7 @@ const ClearButton = styled.div`
     background-color: rgb(128, 60, 60);
     color: whitesmoke;
     padding: 10px 15px;
-    font-size: 15px; 
+    font-size: 15px;
     font-weight: 600;
     border-radius: 10px;
   }

@@ -8,8 +8,17 @@ import {
 	getAllTypes,
 	setCurrentPage,
 	setPageCount,
-	getOrder
+	getOrder,
+  getAllOrders
 } from "./productSlice"
+
+export const getAllOffers = () => (dispatch) => {
+  axios("/rguitars/offers")
+  .then((res) => {
+      dispatch(getAllProducts(res.data));
+  })
+  .catch((error) => console.log(error));
+}
 
 export const getAllPrds = () => (dispatch) => {
   axios("/rguitars")
@@ -108,8 +117,13 @@ export const getCartFromDB = async (userID)  => {
 	console.log(cart);
 	return cart;
 }
-export const getOrderDB = (userID) => (dispatch) => {
+export const getAllOrderDB = (userID) => (dispatch) => {
 	axios(`/order?userId=${userID}`)
+	.then((res) => dispatch(getAllOrders(res.data)))
+	
+}
+export const getOrderDB = (orderID) => (dispatch) => {
+	axios(`/order/getOrder?id=${orderID}`)
 	.then((res) => dispatch(getOrder(res.data)))
 	
 }

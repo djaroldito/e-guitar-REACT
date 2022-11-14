@@ -38,7 +38,12 @@ export const LoginButton = () => {
       };
       sessionStorage.setItem("UserData", JSON.stringify(res.profileObj));
       sessionStorage.setItem("emailGoogle", res.profileObj.email);
-      dispatch(postSignupForm(supData));
+      await postSignupForm(supData);
+      var caracteres = "abcdefghijkmnpqrtuvwxyzABCDEFGHJKMNPQRTUVWXYZ2346789";
+      var code = "";
+      for (let i = 0; i < 10; i++) code += caracteres.charAt(Math.floor(Math.random() * caracteres.length));
+      axios.get(`/ruser/sendCode?email=${res.profileObj.email}&discount=10&code=${code}`,)
+      
 
      navigate("/home", { state: { sessionStorage } });
     }
@@ -50,10 +55,11 @@ export const LoginButton = () => {
     console.log("LOGIN FAILED! res: ", res);
   };
 
+
   return (
     <div>
       <GoogleLogin
-        clientId="1071381556347-p8k8tg37ss2e9ag86088tvdds19dot5o.apps.googleusercontent.com"
+        clientId = "1071381556347-p8k8tg37ss2e9ag86088tvdds19dot5o.apps.googleusercontent.com"
         buttonText="Login with Google"
         onSuccess={onSuccess}
         onFailure={onFailure}
