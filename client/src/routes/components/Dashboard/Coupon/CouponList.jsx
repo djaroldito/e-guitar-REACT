@@ -3,9 +3,10 @@ import {
 	List,
 	Datagrid,
 	TextField,
-    DateField,
-    BooleanField,
-    useRecordContext,
+	DateField,
+	BooleanField,
+	TextInput,
+	useRecordContext,
 	DeleteButton,
 } from "react-admin"
 
@@ -20,16 +21,20 @@ DiscountField.defaultProps = {
 }
 
 const CuponList = (props) => {
-
+	const filters = [<TextInput label='Search' source='q' alwaysOn />]
 	return (
-		<List title='List of Discount Coupons' {...props}>
+		<List title='List of Discount Coupons' filters={filters} {...props}>
 			<Datagrid bulkActionButtons={false}>
-                <TextField source='code' label='Code' sx={{ fontSize: "12px" }} />
-                <DiscountField source='discount' />
-                <TextField source='user.email' label='User' sx={{ fontSize: "12px" }} />
-                <DateField source='createdAt' label='Created' sx={{ fontSize: "12px" }} />
-                <BooleanField label='Used' source='isUsed' sx={{ fontSize: "12px" }} />
-                <DeleteButton basepath='/coupon' sx={{ fontSize: "12px" }} />
+				<TextField source='code' label='Code' sx={{ fontSize: "12px" }} />
+				<DiscountField source='discount' />
+				<TextField source='user.email' label='User' sx={{ fontSize: "12px" }} />
+				<DateField
+					source='createdAt'
+					label='Created'
+					sx={{ fontSize: "12px" }}
+				/>
+				<BooleanField label='Used' source='isUsed' sx={{ fontSize: "12px" }} />
+				<DeleteButton basepath='/coupon' sx={{ fontSize: "12px" }} />
 			</Datagrid>
 		</List>
 	)
