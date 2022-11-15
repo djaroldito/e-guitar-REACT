@@ -1,7 +1,7 @@
 const { Router } = require("express")
 const router = Router()
 const sequelize = require("sequelize")
-const { Order, OrderDetail, User, Product } = require("../../db")
+const { Order, OrderDetail, User, DiscountCode } = require("../../db")
 const { getPagination, updateOrCreate } = require("./utils")
 
 router.get("/", async (req, res) => {
@@ -53,7 +53,7 @@ router.get("/", async (req, res) => {
 				{
 					model: User,
 					required: true,
-				}
+				},
 			],
 		})
 
@@ -101,6 +101,32 @@ router.get("/summarize", async (req, res) => {
 	})
 	res.send(summarize)
 })
+router.get("/chartData", async (req, res) => {
+	const data = await Order.findAll({
+		where: {
+			orderStatus: "PAYMENT COMPLETED",
+		},
+		attributes: [
+			[
+				sequelize.fn("date_trunc", "month", sequelize.col("createdAt")),
+				"month",
+			],
+			[sequelize.fn("sum", sequelize.col("total")), "total"],
+		],
+		group: "month",
+		raw: true,
+		order: [["month", "ASC"]],
+	})
+	const formated = data.map((x) => {
+		const m = new Date(x.month)
+		return {
+			month: m.toISOString().substring(0, 7),
+			total: x.total,
+		}
+	})
+
+	res.send(formated)
+})
 
 router.get("/:id", async (req, res) => {
 	const { id } = req.params
@@ -113,6 +139,14 @@ router.get("/:id", async (req, res) => {
 			include: OrderDetail,
 		})
 		if (order) {
+			if (order.code) {
+				// coupon applied
+				const coupon = await DiscountCode.findOne({
+					where: { code: order.code },
+				})
+				order.dataValues.discount = coupon.discount
+			}
+
 			return res.status(200).json(order)
 		} else {
 			return res.status(404).send("NOT FOUND")

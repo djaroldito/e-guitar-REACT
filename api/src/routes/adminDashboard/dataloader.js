@@ -5,6 +5,7 @@ const fs = require("fs")
 const path = require("path")
 
 const sequelize = require("sequelize")
+const { conn } = require("../../db")
 const {
 	User,
 	Review,
@@ -12,14 +13,24 @@ const {
 	Order,
 	OrderDetail,
 	Product,
+    Cart,
+	query,
 } = require("../../db")
 const bcrypt = require("bcrypt")
 const saltRounds = 10
 
-router.post("/", async (req, res) => {
+router.get("/", async (req, res) => {
 	try {
 		// load - products
 		// read from guitarJson and bulk to database
+		// clean data
+		await Product.destroy({ truncate: true, restartIdentity: true, cascade: true })
+		await User.destroy({ truncate: true, restartIdentity: true, cascade: true })
+		await Review.destroy({ truncate: true, restartIdentity: true, cascade: true })
+		await DiscountCode.destroy({ truncate: true, restartIdentity: true, cascade: true })
+		await Order.destroy({ truncate: true, restartIdentity: true, cascade: true })
+		await Cart.destroy({ truncate: true, restartIdentity: true, cascade: true })
+
 		const guitarJson = fs.readFileSync(
 			path.join(__dirname, "../../mockupData/guitar.json")
 		)
@@ -40,97 +51,104 @@ router.post("/", async (req, res) => {
 				aditionalInformation: guitar["Additional-information"],
 			}
 		})
-        await Product.bulkCreate(products)
+		await Product.bulkCreate(products)
 
-        //load - users
-        const userJson = fs.readFileSync(
+		//load - users
+		const userJson = fs.readFileSync(
 			path.join(__dirname, "../../mockupData/user.json")
-        )
-        const users = JSON.parse(userJson)
-        const hashAdmin = bcrypt.hashSync("admin", saltRounds)
-        const hashUser = bcrypt.hashSync("12345678", saltRounds)
+		)
+		const users = JSON.parse(userJson)
+		const hashAdmin = bcrypt.hashSync("admin", saltRounds)
+		const hashUser = bcrypt.hashSync("12345678", saltRounds)
 
-        const userData = users.map(user => {
-            const avatarImg = `https://xsgames.co/randomusers/assets/avatars/${user.gender.toLowerCase()}/${user.id}.jpg`
-            return {
-                id: user.id,
-                fullname: user.fullname,
-                email: user.email,
-                password: user.isAdmin ? hashAdmin : hashUser,
-                isAdmin: user.isAdmin ? true: false,
-                isActive: user.isActive===false ? false : true,
-                avatar: user.isAdmin ? '' : avatarImg,
-                createdAt: user.createdAt
-            }
-        })
-        const datausers = await User.bulkCreate(userData)
+		const userData = users.map((user) => {
+			const avatarImg = `https://xsgames.co/randomusers/assets/avatars/${user.gender.toLowerCase()}/${
+				user.id
+			}.jpg`
+			return {
+				fullname: user.fullname,
+				email: user.email,
+				password: user.isAdmin ? hashAdmin : hashUser,
+				isAdmin: user.isAdmin ? true : false,
+				isActive: user.isActive === false ? false : true,
+				avatar: user.isAdmin ? "" : avatarImg,
+				createdAt: user.createdAt,
+			}
+		})
 
-        // load reviews
-        const reviewsJson = fs.readFileSync(
+		const datausers = await User.bulkCreate(userData)
+
+		// load reviews
+		const reviewsJson = fs.readFileSync(
 			path.join(__dirname, "../../mockupData/reviews.json")
-        )
-        const reviews = JSON.parse(reviewsJson)
+		)
+		const reviews = JSON.parse(reviewsJson)
 		const reviewsData = reviews.map((review) => {
 			return {
-				id: review.id,
 				userId: review.userId,
 				productId: review.productId,
 				stars: review.stars,
-                message: review.stars < 3 ? review.message : '',
-                createdAt: review.createdAt
+				message: review.stars < 3 ? review.message : "",
+				createdAt: review.createdAt,
 			}
 		})
-        await Review.bulkCreate(reviewsData)
 
-        // load coupon
-        const couponJson = fs.readFileSync(
+		await Review.bulkCreate(reviewsData)
+
+		// load coupon
+		const couponJson = fs.readFileSync(
 			path.join(__dirname, "../../mockupData/coupon.json")
-        )
-        const coupons = JSON.parse(couponJson)
+		)
+		const coupons = JSON.parse(couponJson)
 		const couponsData = coupons.map((coupon) => {
 			return {
-				id: coupon.id,
 				code: coupon.code.toUpperCase().substring(0, 8),
 				discount: coupon.discount,
 				userId: coupon.userId,
-				isUsed: coupon.isUsed
+				isUsed: coupon.isUsed,
 			}
 		})
-        await DiscountCode.bulkCreate(couponsData)
 
-        // load order
-        const orderJson = fs.readFileSync(
+		await DiscountCode.bulkCreate(couponsData)
+
+		// load order
+		const orderJson = fs.readFileSync(
 			path.join(__dirname, "../../mockupData/orders.json")
-        )
-        const orders = JSON.parse(orderJson)
-        const ordersData = orders.map((ord) => {
+		)
+		const orders = JSON.parse(orderJson)
+		const ordersData = orders.map((ord) => {
 			return {
 				id: ord.id,
 				orderDate: ord.createdAt.substring(0, 10),
 				orderStatus: ord.orderStatus,
 				deliveryStatus: ord.deliveryStatus,
-                total: ord.total,
-                aditionalDetails: ord.aditionalDetails,
-                createdAt: ord.createdAt,
-                userId: Math.ceil(Math.random() * 50),
+				total: ord.total,
+				aditionalDetails: ord.aditionalDetails,
+				createdAt: ord.createdAt,
+				userId: Math.ceil(Math.random() * 50),
 			}
-        })
-        await Order.bulkCreate(ordersData)
+		})
 
-        const details = orders.map((ord) => {
-            const detail = ord.orderDetail.map(d => {
-                return {
-                    orderId: ord.id,
-                    productId: d.productId,
-                    color: d.color,
-                    quantity: d.quantity
-                }
-            })
-            return detail
-        })
+		const ordersCreated = await Order.bulkCreate(ordersData)
 
-        const detailsData = details.flat()
-        await OrderDetail.bulkCreate(detailsData)
+		await conn.query(
+			`ALTER SEQUENCE "orders_id_seq" RESTART WITH ${ordersCreated.length + 1};`
+		)
+
+		const details = orders.map((ord) => {
+			const detail = ord.orderDetail.map((d) => {
+				return {
+					orderId: ord.id,
+					productId: d.productId,
+					color: d.color,
+					quantity: d.quantity,
+				}
+			})
+			return detail
+		})
+
+		const detailsData = details.flat()
+		await OrderDetail.bulkCreate(detailsData)
 
 		res.status(200).send("Data created")
 	} catch (error) {
