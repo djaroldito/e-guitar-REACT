@@ -10,6 +10,12 @@ body {
   background-color: rgb(119, 119, 119,.1);
 }
 
+@media (max-width: 920px){
+  body, header, main, section {
+    max-width: 100%;
+  }
+}
+
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;

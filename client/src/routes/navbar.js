@@ -64,11 +64,7 @@ const NavBar = () => {
                                     )}
                                     <div className="Dropdown-Content">
                                         {!isAdmin ?
-                                            <div>
-											<p onClick = { ()=> {window.location.href = '/orders'}}>Orders</p>
-											<p onClick = { ()=> {window.location.href = '/home/Profile'}}>Perfil</p>
-											</div>
-											: ''
+                                            <p onClick = { ()=> {window.location.href = '/orders'}}>orders</p> : ''
                                         }
                                     </div>
 							</div>
@@ -181,7 +177,7 @@ const Logo = styled.div`
 		padding: 40px 15px 15px 15px;
 	}
 	img {
-		width: 110px;
+		width: 135px;
 	}
 `
 

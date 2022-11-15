@@ -5,7 +5,7 @@ import { getByFilter } from "../../Redux/productActions";
 import { setFilters, setCurrentPage } from "../../Redux/productSlice";
 import { RiDeleteBin6Line } from "react-icons/ri";
 
-const Filter = ({ filtersShow, setfiltersShow }) => {
+const Filter = ({filtersShow, setfiltersShow}) => {
   const dispatch = useDispatch();
 
   const brands = useSelector((state) => state.products.brands);
@@ -23,164 +23,161 @@ const Filter = ({ filtersShow, setfiltersShow }) => {
     dispatch(getByFilter(filters, currentPage));
   }, [filters, dispatch, currentPage]);
 
+
   return (
     <section>
+
       <Filters filtersShow={filtersShow}>
         <div className="margin">
-          <select
-            name="sortPrice"
-            onChange={handleChange}
-            value={filters.sortPrice}
+        <select
+          name="sortPrice"
+          onChange={handleChange}
+          value={filters.sortPrice}
           >
-            <option value="">Order by Price</option>
-            <option value="ASC">Min to max price</option>
-            <option value="DESC">Max to min price</option>
-          </select>
-          <select name="brand" onChange={handleChange} value={filters.brand}>
-            <option label="Brand"></option>
-            {brands?.map((item, pos) => (
-              <option value={item} key={pos}>
-                {item}
-              </option>
-            ))}
-          </select>
-          <ColorDiv>
-            {colors?.map((item, pos) => (
-              <div className="contain" key={pos}>
-                <input
-                  className="radio"
-                  type="radio"
-                  onChange={handleChange}
-                  value={item}
-                  id={item}
-                  name="color"
-                  label={item}
-                  key={item}
-                  checked={filters.color === item ? true : false}
+          <option value="">Order by Price</option>
+          <option value="ASC">Min to max price</option>
+          <option value="DESC">Max to min price</option>
+        </select>
+        <select name="brand" onChange={handleChange} value={filters.brand}>
+          <option label="Brand"></option>
+          {brands?.map((item, pos) => (
+            <option value={item} key={pos}>
+              {item}
+            </option>
+          ))}
+        </select>
+        <ColorDiv>
+          {colors?.map((item, pos) => (
+            <div className="contain" key={pos}>
+              <input
+                className="radio"
+                type="radio"
+                onChange={handleChange}
+                value={item}
+                id={item}
+                name="color"
+                label={item}
+                key={item}
+                checked={filters.color === item ? true : false}
                 />
-                <label htmlFor={item}>{item}</label>
-              </div>
-            ))}
-          </ColorDiv>
-          <select name="type" onChange={handleChange} value={filters.type}>
-            <option label="type"></option>
-            {types?.map((item, pos) => (
-              <option value={item} key={pos}>
-                {item}
-              </option>
-            ))}
-          </select>
-          <PriceDiv>
-            <label>Min-Price:</label>
-            <div className="priceConta">
-              <input
-                type="number"
-                min="0"
-                max={filters.maxPrice}
-                step="100"
-                onChange={handleChange}
-                name="minPrice"
-                value={filters.minPrice}
-                className="priceInput"
-              />{" "}
-              {filters.minPrice > 0 ? (
-                <button
-                  onClick={() =>
-                    dispatch(
-                      setFilters({ ...filters, minPrice: 0 }),
-                      dispatch(setCurrentPage(1))
-                    )
-                  }
-                  className="priceButton"
-                >
-                  <RiDeleteBin6Line />
-                </button>
-              ) : null}
+              <label htmlFor={item}>{item}</label>
             </div>
-            <label>Max-Price:</label>
-            <div className="priceConta">
-              <input
-                type="number"
-                min={filters.minPrice}
-                max="5000"
-                step="100"
-                onChange={handleChange}
-                className="priceInput"
-                name="maxPrice"
-                value={filters.maxPrice}
-              />
-              {filters.maxPrice !== 5000 ? (
-                <button
-                  onClick={() =>
-                    dispatch(
-                      setFilters({ ...filters, maxPrice: 5000 }),
-                      dispatch(setCurrentPage(1))
-                    )
-                  }
-                  className="priceButton"
+          ))}
+        </ColorDiv>
+        <select name="type" onChange={handleChange} value={filters.type}>
+          <option label="type"></option>
+          {types?.map((item, pos) => (
+            <option value={item} key={pos}>
+              {item}
+            </option>
+          ))}
+        </select>
+        <PriceDiv>
+        <label>Min-Price:</label>
+        <div className="priceConta">
+          <input
+            type="number"
+            min="0"
+            max={filters.maxPrice}
+            step="100"
+            onChange={handleChange}
+            name="minPrice"
+            value={filters.minPrice}
+            className="priceInput"
+            />{" "}
+          {filters.minPrice > 0 ? (
+            <button
+            onClick={() =>
+              dispatch(
+                setFilters({ ...filters, minPrice: 0 }),
+                dispatch(setCurrentPage(1))
+                )
+              }
+                className="priceButton"
                 >
-                  <RiDeleteBin6Line />
-                </button>
-              ) : null}
-            </div>
+              <RiDeleteBin6Line />
+            </button>
+          ) : null}
+        </div>
+        <label>Max-Price:</label>
+        <div className="priceConta">
+          <input
+            type="number"
+            min={filters.minPrice}
+            max="5000"
+            step="100"
+            onChange={handleChange}
+            className="priceInput"
+            name="maxPrice"
+            value={filters.maxPrice}
+            />
+          {filters.maxPrice !== 5000 ? (
+            <button
+            onClick={() =>
+              dispatch(
+                setFilters({ ...filters, maxPrice: 5000 }),
+                dispatch(setCurrentPage(1))
+                )
+              }
+              className="priceButton"
+              >
+              <RiDeleteBin6Line />
+            </button>
+          ) : null}
+        </div>
           </PriceDiv>
 
-          {filters.color ? (
-            <FilterDiv>
-              <div>{filters.color}</div>
-              <button
-                onClick={() =>
-                  dispatch(
-                    setFilters({ ...filters, color: "" }),
-                    dispatch(setCurrentPage(1))
+        {filters.color ? (
+          <FilterDiv>
+            <div>{filters.color}</div>
+            <button
+              onClick={() =>
+                dispatch(
+                  setFilters({ ...filters, color: "" }),
+                  dispatch(setCurrentPage(1))
                   )
                 }
-              >
-                <RiDeleteBin6Line />
-              </button>
-            </FilterDiv>
-          ) : null}
-          {filters.brand ? (
-            <FilterDiv>
-              <div>{filters.brand}</div>
-              <button
-                onClick={() =>
-                  dispatch(
-                    setFilters({ ...filters, brand: "" }),
-                    dispatch(setCurrentPage(1))
+                >
+              <RiDeleteBin6Line />
+            </button>
+          </FilterDiv>
+        ) : null}
+        {filters.brand ? (
+          <FilterDiv>
+            <div>{filters.brand}</div>
+            <button
+              onClick={() =>
+                dispatch(
+                  setFilters({ ...filters, brand: "" }),
+                  dispatch(setCurrentPage(1))
                   )
                 }
-              >
-                <RiDeleteBin6Line />
-              </button>
-            </FilterDiv>
-          ) : null}
-          {filters.type ? (
-            <FilterDiv>
-              <div>{filters.type}</div>
-              <button
-                onClick={() =>
-                  dispatch(
-                    setFilters(
-                      { ...filters, type: "" },
-                      dispatch(setCurrentPage(1))
+                >
+              <RiDeleteBin6Line />
+            </button>
+          </FilterDiv>
+        ) : null}
+        {filters.type ? (
+          <FilterDiv>
+            <div>{filters.type}</div>
+            <button
+              onClick={() =>
+                dispatch(
+                  setFilters(
+                    { ...filters, type: "" },
+                    dispatch(setCurrentPage(1))
                     )
-                  )
-                }
-              >
-                <RiDeleteBin6Line />
-              </button>
-            </FilterDiv>
-          ) : null}
-          <button
-            className="button"
-            onClick={() => setfiltersShow(!filtersShow)}
-          >
-            Apply
-          </button>
-        </div>
+                    )
+                  }
+                  >
+              <RiDeleteBin6Line />
+            </button>
+          </FilterDiv>
+        ) : null}
+        <button className="button" onClick={() => setfiltersShow(!filtersShow)}>Apply</button>
+      </div>
       </Filters>
-    </section>
+        </section>
   );
 };
 
@@ -211,18 +208,18 @@ const Filters = styled.div`
     margin-left: auto;
     margin-right: auto;
     display: none;
-    @media (max-width: 920px) {
-      display: flex;
-    }
+    @media (max-width: 920px){
+    display: flex;
   }
-  .margin {
+  }
+  .margin{
     width: 100%;
     height: 100%;
-    @media (max-width: 920px) {
+    @media (max-width: 920px){
       margin-top: 45px;
-      label {
-        text-align: center;
-      }
+      label{
+    text-align: center;
+  }
     }
   }
   @media (max-width: 920px) {
@@ -230,22 +227,20 @@ const Filters = styled.div`
     width: 100%;
     height: 100vh;
     top: -2%;
-    ${(props) =>
-      !props.filtersShow
-        ? " transform: translateY(300%)"
-        : " transform:translateY(0)"};
-    transition: transform 0.8s ease-in;
+    transform: ${props => !props.filtersShow ? 'translateX(300%)' : 'translateX(0)'};
+    transition: transform .3s ease-in;
     height: 100vh;
     position: fixed;
-    background-color: whitesmoke;
+    background-color: (29,29,29,.3);
     z-index: 100;
     margin-left: auto;
     margin-right: auto;
     overflow: hidden;
     border-radius: 0;
   }
-  @media (max-width: 500px) {
-    width: 65%;
+  @media (max-width: 500px){
+    width: 100%;
+    height: 100vh;
   }
 
   .priceInput {
@@ -256,7 +251,7 @@ const Filters = styled.div`
     margin: 10px;
     padding: 5px;
     width: 100%;
-    border-radius: 3px;
+    border-radius: 10px;
     color: whitesmoke;
     margin-left: auto;
     background-color: rgb(128, 60, 60);
@@ -298,15 +293,15 @@ const Filters = styled.div`
   }
 `;
 const FilterDiv = styled.div`
-  margin-top: 10px;
-  display: flex;
-  flex-direction: row;
-  background-color: rgb(202, 211, 211);
-  align-items: center;
-  border-radius: 5px;
-  overflow: hidden;
-  width: 100%;
-  @media (max-width: 920px) {
+margin-top: 10px;
+display: flex;
+flex-direction: row;
+background-color: rgb(202, 211, 211);
+align-items: center;
+border-radius: 5px;
+overflow: hidden;
+width: 100%;
+@media (max-width: 920px) {
     display: flex;
     width: 40%;
     margin-left: auto;
@@ -314,39 +309,45 @@ const FilterDiv = styled.div`
     margin-bottom: 20px;
   }
 
-  div {
-    justify-content: left;
-    padding: 5px;
-  }
-  button {
-    padding: 7px;
-    margin-left: auto;
-    background: none;
-    border: none;
-    color: black;
-    height: 100%;
-    cursor: pointer;
-  }
+
+div {
+  justify-content: left;
+  padding: 5px;
+}
+button {
+  padding: 7px;
+  margin-left: auto;
+  background: none;
+  border: none;
+  color: black;
+  height: 100%;
+  cursor: pointer;
+}
 `;
 const ColorDiv = styled.div`
+display: flex;
+flex-direction: column;
+@media (max-width: 920px) {
   display: flex;
-  flex-direction: column;
-  @media (max-width: 920px) {
-    display: flex;
-    width: 40%;
-    margin-left: auto;
-    margin-right: auto;
-  }
-`;
+  width: 40%;
+  margin-left: auto;
+  margin-right: auto;
+}
+`
 const PriceDiv = styled.div`
-  @media (max-width: 920px) {
-    display: flex;
-    width: 200px;
-    margin-left: auto;
-    margin-right: auto;
-    flex-direction: column;
-    text-align: left;
-  }
-`;
+@media (max-width: 920px) {
+  display: flex;
+  width: 200px;
+  margin-left: auto;
+  margin-right: auto;
+  flex-direction: column;
+  text-align: left;
+}
+
+`
+
+
+
+;
 
 export default Filter;

@@ -78,6 +78,8 @@ const Card = styled.div`
     background-color: rgb(82, 54, 139);
     padding: 10px;
     border-radius: 7px;
+    margin-left: auto;
+    margin-right: auto;
   }
   h2,
   h3 {
@@ -97,8 +99,8 @@ const Card = styled.div`
   }
   
   img {
-    min-width: 90px;
-    width: 90%;
+    /* min-width: 90px; */
+    max-width: 90%;
     height: auto;
     max-height: 300px;
     margin-left: 10%;
@@ -115,6 +117,10 @@ const Card = styled.div`
 
   .imgcont{
       max-width: 50%;
+      min-height: 165px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
     }
 
   .cartbtn {
