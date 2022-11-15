@@ -23,6 +23,8 @@ import {
 
 import { Box } from "@mui/material"
 import { FaChevronLeft } from "react-icons/fa"
+import Chip from "@mui/material/Chip"
+import Badge from "@mui/material/Badge"
 
 import { useParams } from "react-router-dom"
 
@@ -38,9 +40,19 @@ export const ProductField = (props) => {
 	) : null
 }
 
+export const CouponField = (props) => {
+	const record = useRecordContext(props)
+	return record.code ? (
+		<Badge badgeContent={`${record.discount}%`} color='warning'>
+			<Chip size='medium' color='default' label={`${record.code}`} />
+		</Badge>
+	) : null
+}
+
 const OrderEdit = (props) => {
 	const { id } = useParams()
 	const { data, isLoading } = useGetOne("order", { id })
+
 	const status = [
 		{ id: "PAYMENT COMPLETED", name: "PAYMENT COMPLETED" },
 		{ id: "AWAITING PAYMENT", name: "AWAITING PAYMENT" },
@@ -60,6 +72,11 @@ const OrderEdit = (props) => {
 	)
 
 	if (isLoading) return null
+	if (data) {
+		var discount = data.discount
+		console.log(discount)
+	}
+
 	return (
 		<Edit
 			actions={<TopToolbarActions />}
@@ -118,6 +135,9 @@ const OrderEdit = (props) => {
 							variant='outlined'
 						/>
 					</Box>
+					<Box flex={1} mr={{ xs: 0, sm: "0.5em" }}>
+						<CouponField />
+					</Box>
 				</Box>
 
 				<Box display={{ xs: "block", sm: "flex", width: "100%" }}>
@@ -134,14 +154,19 @@ const OrderEdit = (props) => {
 								link={false}
 								reference='product'
 							>
-								<ImageField
-									source='img'
-									label={false}
-									sx={{
-										"& .RaImageField-image": { width: "40px", height: "40px" },
-									}}
-								/>
-								<ProductField />
+								<>
+									<ImageField
+										source='img'
+										label={false}
+										sx={{
+											"& .RaImageField-image": {
+												width: "40px",
+												height: "40px",
+											},
+										}}
+									/>
+									<ProductField />
+								</>
 							</ReferenceField>
 							<TextInput
 								source='color'
