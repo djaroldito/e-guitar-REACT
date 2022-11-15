@@ -101,13 +101,13 @@ const Profile = () => {
       <div>
         {user.hasOwnProperty("id") ? (
           <div>
-            <h2>Nombre completo: {user?.fullname}</h2>
-            <img src={user?.avatar.src} alt={user?.fullname} />
-            <p>{user?.address}</p>
-            <p>{user?.province}</p>
-            <p>{user?.city}</p>
-            <p>{user?.zipcode}</p>
-            <p>{user?.phone}</p>
+            <IMG src={user?.avatar.src} alt={user?.fullname} />
+            <h2>User: {user?.fullname}</h2>
+            <p>Address: {user?.address}</p>
+            <p>Province: {user?.province}</p>
+            <p>City: {user?.city}</p>
+            <p>Zipcode: {user?.zipcode}</p>
+            <p>Phone: {user?.phone}</p>
           </div>
         ) : (
           "no tiene user"
@@ -200,5 +200,19 @@ const ColumDiv = styled.div`
     width: 40%;
   }
 `;
+
+const IMG = styled.img`
+  margin: 0 auto;
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  border: 1px solid gray;
+  display: inline-block;
+  padding: 3px;
+  border: 3px solid #d2d6de;
+  margin-top: 20px;
+  margin-right: 57px;
+  margin-left: 57px;
+  `
 
 export default Profile;

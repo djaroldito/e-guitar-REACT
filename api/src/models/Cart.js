@@ -10,7 +10,6 @@ sequelize.define(
         },
         color: {
             type: DataTypes.STRING,
-
         }
     },{
         timestamps: false,

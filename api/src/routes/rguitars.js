@@ -14,7 +14,8 @@ const { Product, Review, User } = require("../db.js")
 
 router.get("/", async (req, res) => {
 	try {
-		const { brand, type, color, fullName, page = 1, size = 6, sortPrice, sortBrand, minPrice, maxPrice } = req.query
+		
+		const { brand, type, color, fullName, page=1, size=6, sortPrice, sortBrand, minPrice, maxPrice  } = req.query
 
 		// if no product load form json
 		await loadProductData()
@@ -298,6 +299,7 @@ const loadProductData = async () => {
 	} catch (error) {
 		throw new Error(error.message)
 	}
+	
 }
 router.get('/offers', async (req, res) => {
 	try{

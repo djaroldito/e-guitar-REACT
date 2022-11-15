@@ -8,16 +8,13 @@ const saltRounds = 10
 
 router.get("/", async (req, res) => {
 	try {
-		await loadAdminUserData()
-
 		// pagination
 		const [page, size] = JSON.parse(req.query.range)
 		const { limit, offset } = getPagination(page, size)
 		// sort
 		const orderQuery = req.query.sort ? [JSON.parse(req.query.sort)] : []
 		// filter
-		const { fullname, email, active, admin } =
-			req.query.filter ?? JSON.parse(req.query.filter)
+		const { fullname, email, active, admin } = JSON.parse(req.query.filter)
 
 		const whereQuery = {}
 		const op = sequelize.Op
@@ -52,18 +49,17 @@ router.get("/", async (req, res) => {
 })
 router.get("/many", async (req, res) => {
 	try {
-		const { ids } = req.query
+        const { ids } = req.query
 		const data = await User.findAll({
-			id: {
-				[sequelize.Op.in]: ids,
-			},
-        })
-        res.status(200).send(data)
+			where:  { id: JSON.parse(ids)  }
+		})
+		res.status(200).send(data)
 	} catch (error) {
 		console.log(error.message)
 		res.status(404).send(error)
 	}
 })
+
 router.get("/:id", async (req, res) => {
 	const { id } = req.params
 	try {

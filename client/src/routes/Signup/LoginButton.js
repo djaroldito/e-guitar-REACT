@@ -25,7 +25,7 @@ export const LoginButton = () => {
     } else {
       sessionStorage.setItem("UserData", JSON.stringify(res.profileObj));
       sessionStorage.setItem("emailGoogle", res.profileObj.email);
-      //sessionStorage.setItem("userId", data.id);
+      //
       //localStorage.setItem("carrito", JSON.stringify(data.products));
       sessionStorage.setItem("imageURL", res.profileObj.imageUrl);
       console.log("LOGIN SUCCESS! res: ", res.profileObj);
@@ -43,8 +43,12 @@ export const LoginButton = () => {
       var code = "";
       for (let i = 0; i < 10; i++) code += caracteres.charAt(Math.floor(Math.random() * caracteres.length));
       axios.get(`/ruser/sendCode?email=${res.profileObj.email}&discount=10&code=${code}`,)
-      
-
+      const { data } = await axios.get("/ruser/email", {
+        params: {
+          email: res.profileObj.email,
+        }
+      })
+      sessionStorage.setItem("userId", data.id);
      navigate("/home", { state: { sessionStorage } });
     }
 

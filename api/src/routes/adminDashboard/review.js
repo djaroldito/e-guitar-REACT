@@ -22,33 +22,33 @@ router.get("/", async (req, res) => {
             }
         }
         // filter
-		// const { type, brand, q } = JSON.parse(req.query.filter)
-		// const whereQuery = {}
-		// const op = sequelize.Op
-		// if (brand) whereQuery.brand = { [op.iLike]: `%${brand}%` }
-        // if (type) whereQuery.type = { [op.iLike]: `%${type}%` }
-        // if (q) {
-		// 		whereQuery[op.or] = {
-		// 			namesQuery: sequelize.where(
-		// 				sequelize.fn(
-		// 					"concat",
-		// 					sequelize.col("type"),
-		// 					" ",
-		// 					sequelize.col("brand"),
-		// 					" ",
-		// 					sequelize.col("model"),
-		// 					" ",
-		// 					sequelize.col("color")
-		// 				),
-		// 				{
-		// 					[op.iLike]: `%${q}%`,
-		// 				}
-		// 			),
-		// 		}
-		// 	}
+		const { q } = JSON.parse(req.query.filter)
+		const whereQuery = {}
+        const op = sequelize.Op
+		if (q) {
+			whereQuery[op.or] = {
+				namesQuery: sequelize.where(
+					sequelize.fn(
+						"concat",
+						sequelize.col("product.brand"),
+						" ",
+						sequelize.col("product.type"),
+						" ",
+						sequelize.col("product.model"),
+						" ",
+						sequelize.col("user.email"),
+						" ",
+						sequelize.col("message")
+					),
+					{
+						[op.iLike]: `%${q}%`,
+					}
+				),
+			}
+		}
 
 		Review.findAndCountAll({
-			// where: whereQuery,
+			where: whereQuery,
 			limit,
 			offset,
 			order: orderQuery,
