@@ -1,5 +1,6 @@
 const { Router } = require("express")
 const router = Router()
+const { conn } = require('../../db');
 
 const fs = require("fs")
 const path = require("path")
@@ -71,7 +72,6 @@ router.get("/", async (req, res) => {
         const reviews = JSON.parse(reviewsJson)
 		const reviewsData = reviews.map((review) => {
 			return {
-				id: review.id,
 				userId: review.userId,
 				productId: review.productId,
 				stars: review.stars,
@@ -88,7 +88,6 @@ router.get("/", async (req, res) => {
         const coupons = JSON.parse(couponJson)
 		const couponsData = coupons.map((coupon) => {
 			return {
-				id: coupon.id,
 				code: coupon.code.toUpperCase().substring(0, 8),
 				discount: coupon.discount,
 				userId: coupon.userId,
@@ -114,7 +113,11 @@ router.get("/", async (req, res) => {
                 userId: Math.ceil(Math.random() * 50),
 			}
         })
-        await Order.bulkCreate(ordersData)
+        const ordersCreated = await Order.bulkCreate(ordersData)
+
+        await conn.query(
+           `ALTER SEQUENCE "orders_id_seq" RESTART WITH ${ordersCreated.length + 1};`
+        );
 
         const details = orders.map((ord) => {
             const detail = ord.orderDetail.map(d => {
