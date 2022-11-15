@@ -12,7 +12,7 @@ const Offers = () => {
     useEffect(() => {
 			dispatch(getAllOffers())
 	}, []);
-    const products = useSelector((state) => state.products.products);
+    const products = useSelector((state) => state.products.offers);
     return (
         <div className="OffersContainer">
             <Swiper

@@ -14,7 +14,7 @@ const Profile = () => {
   useEffect(() => {
     dispatch(getUserId(idUser)); /* 
          user = axios.get(`/ruser/${idUser}`) */
-  }, [idUser, dispatch]);
+  }, []);
 
   const user = useSelector((state) => state.signup.userId);
   const [errors, setErrors] = useState({});

@@ -70,7 +70,6 @@ h4{
 const CopyDiv = styled.div`
 margin-left: auto;
 margin-right: auto;
-width: 500px;
 color: whitesmoke;
 margin-top: 25px;
 padding: 20px;
