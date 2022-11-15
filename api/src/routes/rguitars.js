@@ -29,7 +29,7 @@ router.get("/", async (req, res) => {
 		const { brand, type, color, fullName, page=1, size=6, sortPrice, sortBrand, minPrice, maxPrice  } = req.query
 
 		// if no product load form json
-		await loadProductData()
+		//await loadProductData()
 
 		const whereQuery = {}
 		let orderBy = []
