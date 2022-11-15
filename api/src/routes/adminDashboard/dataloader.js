@@ -1,12 +1,11 @@
 const { Router } = require("express")
 const router = Router()
+const sequelize = require("sequelize")
 const { conn } = require('../../db');
 
 const fs = require("fs")
 const path = require("path")
 
-const sequelize = require("sequelize")
-const { conn } = require("../../db")
 const {
 	User,
 	Review,
@@ -21,8 +20,6 @@ const saltRounds = 10
 
 router.get("/", async (req, res) => {
 	try {
-		// load - products
-		// read from guitarJson and bulk to database
 		// clean data
 		await Product.destroy({ truncate: true, restartIdentity: true, cascade: true })
 		await User.destroy({ truncate: true, restartIdentity: true, cascade: true })
@@ -31,6 +28,9 @@ router.get("/", async (req, res) => {
 		await Order.destroy({ truncate: true, restartIdentity: true, cascade: true })
 		await Cart.destroy({ truncate: true, restartIdentity: true, cascade: true })
 
+		// read from Json and bulk to database
+
+		// load - products
 		const guitarJson = fs.readFileSync(
 			path.join(__dirname, "../../mockupData/guitar.json")
 		)
