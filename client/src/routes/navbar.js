@@ -104,13 +104,14 @@ const NavCont = styled.div`
   align-items: center;
   justify-content: center;
 
-  /* @media (max-width: 700px) {
+  @media (max-width: 700px) {
     height: 100vh;
     background-color: black;
     position: absolute;
     width: 100%;
     z-index: 10;
-  } */
+    display: none;
+  }
   .links {
     margin-left: auto;
     display: flex;

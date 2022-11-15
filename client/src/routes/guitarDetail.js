@@ -345,7 +345,7 @@ const AdInfo = styled.p`
   font-size: 12px;
   margin-left: auto;
   margin-right: auto;
-  width: 700px;
+  width: 100%;
   
 `;
 

@@ -109,7 +109,7 @@ const Li = styled.li`
 	border-radius: 16px;
 	line-height: 1.43;
 	font-size: 13px;
-	/* min-width: 32px; */
+	min-width: 32px;
 	cursor: pointer;
 	&:hover {
 		background-color: rgba(0, 0, 0, 0.04);

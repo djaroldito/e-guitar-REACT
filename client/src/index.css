@@ -11,7 +11,7 @@ body {
 }
 
 @media (max-width: 920px){
-  body, header, main, section {
+  body, header, main, section, div {
     max-width: 100%;
   }
 }
