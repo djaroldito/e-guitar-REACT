@@ -16,7 +16,7 @@ const {
 const bcrypt = require("bcrypt")
 const saltRounds = 10
 
-router.post("/", async (req, res) => {
+router.get("/", async (req, res) => {
 	try {
 		// load - products
 		// read from guitarJson and bulk to database
@@ -53,7 +53,6 @@ router.post("/", async (req, res) => {
         const userData = users.map(user => {
             const avatarImg = `https://xsgames.co/randomusers/assets/avatars/${user.gender.toLowerCase()}/${user.id}.jpg`
             return {
-                id: user.id,
                 fullname: user.fullname,
                 email: user.email,
                 password: user.isAdmin ? hashAdmin : hashUser,

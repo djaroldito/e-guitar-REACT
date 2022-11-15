@@ -34,8 +34,10 @@ const PrePayment = () => {
   });
 
   const [codeDisc, setCodeDisc] = useState({});
+  const [totalConDescuento, setTotalConDescuento] = useState()
 
   const handleChange = (e) => {
+    e.preventDefault(e)
     // setinput(e.target.value)
     if (e.target.value !== "") {
       setinput({ [e.target.name]: e.target.value });
@@ -50,18 +52,23 @@ const PrePayment = () => {
       setinput({
         code:"",
       })
-      if (discountCode.data.length === 0) Swal.fire("Codigo no valido");
+      console.log(discountCode)
+      if (discountCode.data.length === 0) return Swal.fire("Codigo no valido");
       codeValidate = discountCode.data;
       setCodeDisc(codeValidate);
+      setTotalConDescuento(getTotalConDescuento(carrito,codeValidate))
+      console.log("total con des:",totalConDescuento)
     } else {
       Swal.fire("Codigo no valido");
     }
   };
 
-  const TotalConDescuento = (carrito, codeValidate) => {
-    setinput({
+  const getTotalConDescuento = (carrito, codeValidate) => {
+  /*   setinput({
       code:"",
-    })
+    }) */
+    console.log("entro", codeValidate)
+    if(!codeValidate) return 
     let totalDescuento =
       carrito
         ?.reduce(
@@ -69,7 +76,7 @@ const PrePayment = () => {
           0
         )
         .toFixed(2) -
-      (codeValidate?.discount *
+      (codeValidate[0]?.discount *
         carrito
           ?.reduce(
             (acc, prod) => acc + prod.price.toFixed(2) * prod.cart.quantity,
@@ -77,6 +84,7 @@ const PrePayment = () => {
           )
           .toFixed(2)) /
         100;
+        
     return totalDescuento.toFixed(2);
   };
 
@@ -88,7 +96,7 @@ const PrePayment = () => {
       )
       .toFixed(2);
   };
-
+  console.log(codeDisc)
   return (
     <div>
       <Profile />
@@ -107,7 +115,7 @@ const PrePayment = () => {
           {carrito.length >= 1
             ? codeDisc?.length > 0 
               ? codeDisc[0].isUsed === false
-                ? TotalConDescuento(carrito, codeDisc[0])
+                ? totalConDescuento
                 : Swal.fire("This Code was Used") && total(carrito) && setCodeDisc({})
               : total(carrito)
             : "No carrito"}
@@ -126,7 +134,7 @@ const PrePayment = () => {
       <button type="button" onClick={() => validateCode(codeValidate)}>SendCode</button>
       {carrito.length >= 1 ? (
         <button
-          onClick={() => completePayment(carrito, mail, codeDisc?[0].code : null)}
+        onClick={() => completePayment(carrito, mail, codeDisc[0].isUsed === false ? codeDisc[0].code : null )}
           className="Purchasebutton"
         >
           <BsCart2 /> To Pay

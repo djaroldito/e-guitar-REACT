@@ -23,12 +23,13 @@ router.post('/create-order', async (req, res) => {
             )
         );
     try{
+        if(code !== null){
         const cupon = await DiscountCode.update({
             isUsed: true },
           { where: {
               code: code,
             },}
-        );
+        )};
        const orderdb = await Order.create({
             orderDate: Sequelize.NOW(),
             orderStatus: "AWAITING PAYMENT",
