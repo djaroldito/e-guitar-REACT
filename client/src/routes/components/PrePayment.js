@@ -109,7 +109,7 @@ const PrePayment = () => {
           </ImgDiv>
         </div>
       ))}
-      <Total>
+     <Total>
         {carrito.length >= 1 ? <label>Total: </label> : null}
         <h1>
           {carrito.length >= 1
