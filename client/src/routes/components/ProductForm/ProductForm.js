@@ -72,7 +72,7 @@ export default function ProductForm() {
 	}
 
 	return (
-		<section>
+		<>
 			<div className='prdHeader'>
 			<h2>Create Product</h2>
 			</div>
@@ -221,18 +221,18 @@ export default function ProductForm() {
 												setProductImages([...productImages, e.target.files[0]])
 											}}
 										/>
-									
+									</div>
+									<div /* className="prdImgload" */> {/* Img load ----------------------- */}
 										{/* Render Images */}
 										{productImages.length > 0 &&
 											productImages.map((f, i) => (
 												<PreviewImage
-												file={f}
-												key={i}
-												handleDelete={() => handleDeleteImage(f)}
+													file={f}
+													key={i}
+													handleDelete={() => handleDeleteImage(f)}
 												/>
-												))}
-												</div>
-									
+											))}
+									</div>
 									<button      /*  Button ------------------------------------------ */
 										type='button'
 										onClick={() => fileRef.current.click()}
@@ -292,7 +292,6 @@ export default function ProductForm() {
 				</Formik>{" "}
 				{/* -------------------------------------------------------------------------- */}
 			</div>
-		</section>
-		
+		</>
 	)
 }
