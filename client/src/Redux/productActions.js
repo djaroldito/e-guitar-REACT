@@ -9,13 +9,14 @@ import {
 	setCurrentPage,
 	setPageCount,
 	getOrder,
-  getAllOrders
+  getAllOrders,
+  getOffers
 } from "./productSlice"
 
 export const getAllOffers = () => (dispatch) => {
   axios("/rguitars/offers")
   .then((res) => {
-      dispatch(getAllProducts(res.data));
+      dispatch(getOffers(res.data));
   })
   .catch((error) => console.log(error));
 }
