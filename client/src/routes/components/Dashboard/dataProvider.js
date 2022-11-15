@@ -12,6 +12,11 @@ const dataProvider = {
 			method: "POST",
 		}).then(({ json }) => ({ data: json }))
 	},
+	getSummarize: (resource, params) => {
+		return httpClient(`${apiUrl}/${resource}/summarize`, {
+			method: "GET",
+		}).then(({ json }) => ({ data: json }))
+	},
 	getList: (resource, params) => {
 		const { page, perPage } = params.pagination
 		const { field, order } = params.sort
@@ -26,7 +31,7 @@ const dataProvider = {
 
 		return httpClient(url).then(({ headers, json }) => ({
 			data: json.data,
-			total: json.total,
+            total: json.total
 		}))
 	},
 
@@ -39,7 +44,7 @@ const dataProvider = {
 		const query = {
 			ids: JSON.stringify(params.ids),
 		}
-		const url = `${apiUrl}/${resource}/many/?${stringify(query)}`
+		const url = `${apiUrl}/${resource}/many?${stringify(query)}`
 		return httpClient(url).then(({ json }) => ({ data: json }))
 	},
 

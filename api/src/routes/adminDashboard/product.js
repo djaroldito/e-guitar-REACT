@@ -5,7 +5,7 @@ const { Product } = require("../../db")
 const { getPagination, updateOrCreate } = require("./utils")
 
 router.get("/", async (req, res) => {
-    try {
+	try {
 		// pagination
 		const [page, size] = JSON.parse(req.query.range)
 		const { limit, offset } = getPagination(page, size)
@@ -17,26 +17,26 @@ router.get("/", async (req, res) => {
 		const whereQuery = {}
 		const op = sequelize.Op
 		if (brand) whereQuery.brand = { [op.iLike]: `%${brand}%` }
-        if (type) whereQuery.type = { [op.iLike]: `%${type}%` }
-        if (q) {
-				whereQuery[op.or] = {
-					namesQuery: sequelize.where(
-						sequelize.fn(
-							"concat",
-							sequelize.col("type"),
-							" ",
-							sequelize.col("brand"),
-							" ",
-							sequelize.col("model"),
-							" ",
-							sequelize.col("color")
-						),
-						{
-							[op.iLike]: `%${q}%`,
-						}
+		if (type) whereQuery.type = { [op.iLike]: `%${type}%` }
+		if (q) {
+			whereQuery[op.or] = {
+				namesQuery: sequelize.where(
+					sequelize.fn(
+						"concat",
+						sequelize.col("type"),
+						" ",
+						sequelize.col("brand"),
+						" ",
+						sequelize.col("model"),
+						" ",
+						sequelize.col("color")
 					),
-				}
+					{
+						[op.iLike]: `%${q}%`,
+					}
+				),
 			}
+		}
 
 		Product.findAndCountAll({
 			where: whereQuery,
@@ -60,6 +60,19 @@ router.get("/", async (req, res) => {
 				})
 			})
 	} catch (error) {
+		res.status(404).send(error)
+	}
+})
+
+router.get("/many", async (req, res) => {
+	try {
+		const { ids } = req.query
+		const data = await Product.findAll({
+			where: { id: JSON.parse(ids) },
+		})
+		res.status(200).send(data)
+	} catch (error) {
+		console.log("error", error.message)
 		res.status(404).send(error)
 	}
 })

@@ -5,7 +5,6 @@ const morgan = require("morgan");
 const routes = require("./routes/index.js");
 const adminRoutes = require("./routes/adminDashboard/index.js");
 
-
 const server = express();
 const cors = require('cors')
 

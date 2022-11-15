@@ -60,22 +60,15 @@ sequelize.models = Object.fromEntries(capsEntries)
 
 // En sequelize.models están todos los modelos importados como propiedades
 // Para relacionarlos hacemos un destructuring
-const { Product, User, Order, OrderDetail, Review, Cart, DiscountCode} = sequelize.models
+const { User, Product, Order, OrderDetail, Review, Cart, DiscountCode} = sequelize.models
 
 Order.belongsTo(User,{foreignKey : 'userId'})
 User.hasMany(Order, { foreignKey: 'userId' })
-OrderDetail.belongsTo(Order,{ foreignKey: 'orderId' })
+OrderDetail.belongsTo(Order,{ foreignKey: 'orderId', onDelete: 'cascade' })
 Order.hasMany(OrderDetail,{ foreignKey: 'orderId' })
 OrderDetail.belongsTo(Product,{ foreignKey: 'productId' })
 Product.hasMany(OrderDetail,{ foreignKey: 'productId' })
 
-// Product.belongsToMany(User, { through: OrderDetail })
-// Order.belongsToMany(Product, { through: OrderDetail })
-
-// wishlist
-// const WishList = sequelize.define("wishlist", {})
-// Product.belongsToMany(User, { through: WishList })
-// User.belongsToMany(Product, { through: WishList })
 // reviews
 Review.belongsTo(User,{foreignKey: 'userId'});
 User.hasMany(Review,{foreignKey : 'userId'});

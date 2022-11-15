@@ -44,9 +44,9 @@ export const productSlice = createSlice({
 				(item) => item.id === action.payload.id
 			)
 			if (cartIndex >= 0) {
-				state.cart[cartIndex].Cart.quantity += 1
+				state.cart[cartIndex].cart.quantity += 1
 			} else {
-				let tempProduct = { ...action.payload, Cart: {color:action.payload.color ,quantity: 1, productId:action.payload.id, userId: parseInt(sessionStorage.getItem('userId'))}}
+				let tempProduct = { ...action.payload, cart: {color:action.payload.color ,quantity: 1, productId:action.payload.id, userId: parseInt(sessionStorage.getItem('userId'))}}
 				state.cart.push(tempProduct)
 			}
 			localStorage.setItem("carrito", JSON.stringify(state.cart))
@@ -65,7 +65,7 @@ export const productSlice = createSlice({
 				(item) => item.id === action.payload.id
 			)
 			if (elToDel >= 0) {
-				state.cart[elToDel].Cart.quantity -= 1
+				state.cart[elToDel].cart.quantity -= 1
 			} else {
 				state.cart = state.cart.filter((el) => el.id !== action.payload)
 			}

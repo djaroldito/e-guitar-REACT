@@ -17,7 +17,10 @@ module.exports = (sequelize) => {
             total: {
                 type: DataTypes.FLOAT,
                 defaultValue: 0,
-            }
+            },
+			code: {
+				type: DataTypes.STRING,
+			}
 		}
 	)
 }

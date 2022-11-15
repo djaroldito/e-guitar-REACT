@@ -13,6 +13,7 @@ import UserList from "./User/UserList"
 import UserEdit from "./User/UserEdit"
 // Orders
 import OrderList from './Order/OrderList'
+import OrderEdit from './Order/OrderEdit'
 // Reviews
 import ReviewList from './Review/ReviewList'
 // Coupons
@@ -54,7 +55,7 @@ export default function Dashboard() {
 				<Resource
 					name='order'
 					list={OrderList}
-                    // edit={UserEdit}
+                    edit={OrderEdit}
 				/>
 				<Resource
 					name='coupon'
