@@ -5,6 +5,7 @@ export const productSlice = createSlice({
 	name: "products",
 	initialState: {
 		products: [],
+		offers: [],
 		detail: {},
 		cart: localStorage.getItem('carrito') ?  JSON.parse(localStorage.getItem("carrito")): [],
 		brands: [],
@@ -28,6 +29,9 @@ export const productSlice = createSlice({
 	reducers: {
 		getAllProducts: (state, action) => {
             state.products = action.payload
+		},
+		getOffers: (state, action) => {
+            state.offers = action.payload
 		},
 		getProductById: (state, action) => {
 			state.detail = action.payload
@@ -135,7 +139,8 @@ export const {
     setCurrentPage,
     setPageCount,
 	getOrder,
-	getAllOrders
+	getAllOrders,
+	getOffers
 
 } = productSlice.actions
 

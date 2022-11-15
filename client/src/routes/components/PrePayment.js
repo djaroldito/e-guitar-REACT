@@ -15,8 +15,10 @@ import { useState } from "react";
 import Profile from "../Signup/Profile";
 import { IoMapOutline } from "react-icons/io5";
 import Swal from "sweetalert2";
+import { getUserId } from "../../Redux/SignupActions";
 
 const PrePayment = () => {
+  const dispatch = useDispatch();
   const carrito = useSelector((state) => state.products.cart);
   const mail = sessionStorage.getItem("emailData")
     ? sessionStorage.getItem("emailData")
@@ -24,9 +26,25 @@ const PrePayment = () => {
   console.log(mail);
 
   const completePayment = async (cart, mail, code) => {
-    const response = await payment(cart, mail, code);
-    console.log(response);
-    window.location.href = response;
+    const { data } = await axios.get("/ruser/email", {
+      params: {
+        email: mail,
+      },
+    });
+    if (
+      data.fullname &&
+      data.address &&
+      data.province &&
+      data.city &&
+      data.zipcode &&
+      data.phone
+    ) {
+      const response = await payment(cart, mail, code);
+      console.log(response);
+      window.location.href = response;
+    } else {
+      Swal.fire("You must fill in your personal details");
+    }
   };
 
   const [input, setinput] = useState({
@@ -34,10 +52,10 @@ const PrePayment = () => {
   });
 
   const [codeDisc, setCodeDisc] = useState({});
-  const [totalConDescuento, setTotalConDescuento] = useState()
+  const [totalConDescuento, setTotalConDescuento] = useState();
 
   const handleChange = (e) => {
-    e.preventDefault(e)
+    e.preventDefault(e);
     // setinput(e.target.value)
     if (e.target.value !== "") {
       setinput({ [e.target.name]: e.target.value });
@@ -50,25 +68,23 @@ const PrePayment = () => {
         `/ruser/discountCode?code=${input.code}`
       );
       setinput({
-        code:"",
-      })
-      console.log(discountCode)
-      if (discountCode.data.length === 0) return Swal.fire("Codigo no valido");
+        code: "",
+      });
+      console.log(discountCode);
+      if (discountCode.data.length === 0) return Swal.fire("invalid code");
       codeValidate = discountCode.data;
       setCodeDisc(codeValidate);
-      setTotalConDescuento(getTotalConDescuento(carrito,codeValidate))
-      console.log("total con des:",totalConDescuento)
+      setTotalConDescuento(getTotalConDescuento(carrito, codeValidate));
     } else {
-      Swal.fire("Codigo no valido");
+      Swal.fire("invalid code");
     }
   };
 
   const getTotalConDescuento = (carrito, codeValidate) => {
-  /*   setinput({
+    /*   setinput({
       code:"",
     }) */
-    console.log("entro", codeValidate)
-    if(!codeValidate) return 
+    if (!codeValidate) return;
     let totalDescuento =
       carrito
         ?.reduce(
@@ -84,7 +100,7 @@ const PrePayment = () => {
           )
           .toFixed(2)) /
         100;
-        
+
     return totalDescuento.toFixed(2);
   };
 
@@ -96,7 +112,6 @@ const PrePayment = () => {
       )
       .toFixed(2);
   };
-  console.log(codeDisc)
   return (
     <div>
       <Profile />
@@ -109,17 +124,19 @@ const PrePayment = () => {
           </ImgDiv>
         </div>
       ))}
-     <Total>
+      <Total>
         {carrito.length >= 1 ? <label>Total: </label> : null}
         <h1>
           {carrito.length >= 1
-            ? codeDisc?.length > 0 
+            ? codeDisc?.length > 0
               ? codeDisc[0].isUsed === false
                 ? totalConDescuento
-                : Swal.fire("This Code was Used") && total(carrito) && setCodeDisc({})
+                : Swal.fire("This Code was Used") &&
+                  total(carrito) &&
+                  setCodeDisc({})
               : total(carrito)
             : "No carrito"}
-        </h1> 
+        </h1>
       </Total>
 
       <label>Enter Discount Code</label>
@@ -131,10 +148,18 @@ const PrePayment = () => {
         onChange={(e) => handleChange(e)}
         style={{ padding: "14px 16px", width: "40%" }}
       />
-      <button type="button" onClick={() => validateCode(codeValidate)}>SendCode</button>
+      <button type="button" onClick={() => validateCode(codeValidate)}>
+        SendCode
+      </button>
       {carrito.length >= 1 ? (
         <button
-        onClick={() => completePayment(carrito, mail, codeDisc[0].isUsed === false ? codeDisc[0].code : null )}
+          onClick={() =>
+            completePayment(
+              carrito,
+              mail,
+              codeDisc.length > 0 ? codeDisc[0].code : null
+            )
+          }
           className="Purchasebutton"
         >
           <BsCart2 /> To Pay
