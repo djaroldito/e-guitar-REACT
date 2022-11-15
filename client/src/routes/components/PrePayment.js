@@ -53,11 +53,6 @@ const PrePayment = () => {
       if (discountCode.data.length === 0) Swal.fire("Codigo no valido");
       codeValidate = discountCode.data;
       setCodeDisc(codeValidate);
-<<<<<<< HEAD
-
-=======
-      
->>>>>>> dev
     } else {
       Swal.fire("Codigo no valido");
     }
