@@ -92,6 +92,7 @@ const Profile = () => {
         
       await axios.put("/ruser/dataUser", userComplete);
       Swal.fire("Data updated successfully");
+      
     } 
     
   }
@@ -174,7 +175,7 @@ const Profile = () => {
             />
             {errors.phone && <p>{errors.phone}</p>}
           </div>
-          <button>Send</button>
+          <button type="submit">Send</button>
         </form>
       </ColumDiv>
     : ""}
