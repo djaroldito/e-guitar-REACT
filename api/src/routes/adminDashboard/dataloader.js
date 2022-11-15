@@ -1,6 +1,5 @@
 const { Router } = require("express")
 const router = Router()
-const { conn } = require('../../db');
 
 const fs = require("fs")
 const path = require("path")
