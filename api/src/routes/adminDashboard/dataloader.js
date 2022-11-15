@@ -15,7 +15,6 @@ const {
 	OrderDetail,
 	Product,
     Cart,
-	query,
 } = require("../../db")
 const bcrypt = require("bcrypt")
 const saltRounds = 10
