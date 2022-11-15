@@ -132,7 +132,6 @@ try {
   const { email, fullname, password, avatar='', isActive=false  } = req.body;
 
 		const hash = bcrypt.hashSync(password, saltRounds)
-		//console.log("Esta es la password hash: ", hash);
 		const newPendingUser = await User.create({
 			fullname,
 			email,
@@ -152,7 +151,7 @@ try {
 				hash: hash,
 			})
 		}
-		//console.log("Esto es mailRegisterConfirm: ", mailReg);
+	
 		return res.status(200).json(newPendingUser)
 	} catch (error) {
 		console.log(error.message)
