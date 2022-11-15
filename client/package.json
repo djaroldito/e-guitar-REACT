@@ -29,6 +29,7 @@
     "react-scripts": "^5.0.1",
     "react-social-login-buttons": "^3.6.1",
     "reactjs-social-login": "^2.6.0",
+    "recharts": "^2.1.16",
     "redux": "^4.2.0",
     "styled-components": "^5.3.6",
     "sweetalert2": "^11.6.4",

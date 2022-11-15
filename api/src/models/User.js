@@ -33,9 +33,6 @@ module.exports = (sequelize) => {
 			changePassword: {
 				type: DataTypes.STRING,
 			}
-		},
-		{
-			paranoid: true,
 		}
 	)
 }

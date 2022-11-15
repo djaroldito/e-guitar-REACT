@@ -17,6 +17,11 @@ const dataProvider = {
 			method: "GET",
 		}).then(({ json }) => ({ data: json }))
 	},
+	getChartData: (resource, params) => {
+		return httpClient(`${apiUrl}/${resource}/chartData`, {
+			method: "GET",
+		}).then(({ json }) => ({ data: json }))
+	},
 	getList: (resource, params) => {
 		const { page, perPage } = params.pagination
 		const { field, order } = params.sort

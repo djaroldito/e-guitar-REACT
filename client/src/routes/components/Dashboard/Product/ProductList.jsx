@@ -22,11 +22,11 @@ export const SoftDeleteField = (props) => {
 }
 
 export const ColorField = (props) => {
-	const record = useRecordContext(props)
+    const record = useRecordContext(props)
 	return record ? <span>{record.color?.join(" | ")}</span> : null
 }
 export const DiscountField = (props) => {
-	const record = useRecordContext(props)
+    const record = useRecordContext(props)
 	return record ? (
 		<span style={{ fontSize: "12px" }}>{record.discount} %</span>
 	) : null
@@ -78,7 +78,7 @@ const ProductList = (props) => {
 		<TextInput label='Brand' source='brand' />,
 	]
 	return (
-		<List title='List of Products' filters={filters} {...props} mutationMode="pessimistic">
+		<List title='List of Products' filters={filters} {...props} >
 			<Datagrid bulkActionButtons={false}>
 				<ImageField
 					source='img'

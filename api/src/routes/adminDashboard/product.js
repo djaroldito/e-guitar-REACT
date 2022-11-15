@@ -84,17 +84,18 @@ router.get("/:id", async (req, res) => {
 		const product = await Product.findOne({
 			where: {
 				id: id.toUpperCase(),
-			},
+            },
+            raw:true,
 			paranoid: false,
 		})
 		if (product) {
 			// add images array for visualization - regex for trim spaces
-			if (product.dataValues.img) {
-				product.dataValues.img = product.img.split(/\s*(?:,|$)\s*/).map((x) => {
+			if (product.img) {
+				product.img = product.img.split(/\s*(?:,|$)\s*/).map((x) => {
 					return { src: x }
 				})
 			}
-			product.dataValues.color = product.color.split(/\s*(?:,|$)\s*/)
+			product.color = product.color.split(/\s*(?:,|$)\s*/)
 			return res.status(200).json(product)
 		} else {
 			return res.status(404).send("NOT FOUND")

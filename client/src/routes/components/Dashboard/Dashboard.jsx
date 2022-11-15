@@ -3,7 +3,11 @@ import { NavLink } from "react-router-dom"
 import dataProvider from "./dataProvider"
 import Card from "@mui/material/Card"
 import CardContent from "@mui/material/CardContent"
-import { deepPurple, indigo, } from "@mui/material/colors"
+import { deepPurple, indigo } from "@mui/material/colors"
+import Button from "@mui/material/Button"
+import Stack from "@mui/material/Stack"
+import Chart from "./Chart"
+
 // Products
 import ProductList from "./Product/ProductList"
 import ProductCreate from "./Product/ProductCreate"
@@ -12,14 +16,14 @@ import ProductEdit from "./Product/ProductEdit"
 import UserList from "./User/UserList"
 import UserEdit from "./User/UserEdit"
 // Orders
-import OrderList from './Order/OrderList'
-import OrderEdit from './Order/OrderEdit'
+import OrderList from "./Order/OrderList"
+import OrderEdit from "./Order/OrderEdit"
 // Reviews
-import ReviewList from './Review/ReviewList'
+import ReviewList from "./Review/ReviewList"
 // Coupons
-import CouponList from './Coupon/CouponList'
-import CouponEdit from './Coupon/CouponEdit'
-import CouponCreate from './Coupon/CouponCreate'
+import CouponList from "./Coupon/CouponList"
+import CouponEdit from "./Coupon/CouponEdit"
+import CouponCreate from "./Coupon/CouponCreate"
 
 export default function Dashboard() {
 	const theme = {
@@ -38,7 +42,7 @@ export default function Dashboard() {
 				dashboard={AdminDashboard}
 				title='Admin Dashboard'
 				basename='/dashboard'
-                dataProvider={dataProvider}
+				dataProvider={dataProvider}
 				disableTelemetry
 			>
 				<Resource
@@ -47,26 +51,18 @@ export default function Dashboard() {
 					create={ProductCreate}
 					edit={ProductEdit}
 				/>
-				<Resource
-					name='user'
-					list={UserList}
-                    edit={UserEdit}
-				/>
-				<Resource
-					name='order'
-					list={OrderList}
-                    edit={OrderEdit}
-				/>
+				<Resource name='user' list={UserList} edit={UserEdit} />
+				<Resource name='order' list={OrderList} edit={OrderEdit} />
 				<Resource
 					name='coupon'
 					list={CouponList}
-                    create={CouponCreate}
+					create={CouponCreate}
 					edit={CouponEdit}
 				/>
 				<Resource
 					name='review'
 					list={ReviewList}
-                    // edit={UserEdit}
+					// edit={UserEdit}
 				/>
 			</Admin>
 		</>
@@ -76,10 +72,22 @@ export default function Dashboard() {
 const AdminDashboard = () => (
 	<Card>
 		<Title title={"{GUITAR CODE}"} />
-        <CardContent sx={{textAlign: 'center'}}>
-            <h2>Wellcome to Admin Dashboard</h2>
+		<CardContent sx={{ textAlign: "center" }}>
+			<h2>Welcome to Admin Dashboard</h2>
 
-            <NavLink to='/home'>Go to Home</NavLink>
-        </CardContent>
+            <h3 style={{ textAlign:'left'}} >Orders Incomings </h3>
+			<Chart />
+
+			<Stack
+				direction='row'
+				sx={{ marginTop: "20px" }}
+				justifyContent='center'
+				alignItems='center'
+			>
+				<Button variant='contained' href='/home'>
+					Back to Shop
+				</Button>
+			</Stack>
+		</CardContent>
 	</Card>
 )

@@ -40,7 +40,6 @@ import {
 
 const ProductCreate = (props) => {
 	const dispatch = useDispatch()
-
 	useEffect(() => {
 		dispatch(getTypes())
 		dispatch(getBrands())
@@ -81,7 +80,8 @@ const ProductCreate = (props) => {
 			}
 		}
 		return <ImageField record={record} source={source} />
-	}
+    }
+
 	return (
 		<>
 			<Create
@@ -89,7 +89,6 @@ const ProductCreate = (props) => {
 				submitOnEnter={false}
                 title='Create New Product'
                 redirect="list"
-            mutationMode="pessimistic"
 				{...props}
 			>
 				<SimpleForm>
@@ -161,7 +160,7 @@ const ProductCreate = (props) => {
 						</Box>
 						<Box flex={1} mr={{ xs: 0, sm: "0.5em" }}>
 							<SelectArrayInput
-								source='color'
+								source='color' 
                                 choices={colorChoices}
                                 sx={{ width: 250 }}
 								required
