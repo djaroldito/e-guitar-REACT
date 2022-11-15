@@ -16,7 +16,7 @@ const {
 const bcrypt = require("bcrypt")
 const saltRounds = 10
 
-router.post("/", async (req, res) => {
+router.get("/", async (req, res) => {
 	try {
 		// load - products
 		// read from guitarJson and bulk to database
