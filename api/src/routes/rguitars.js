@@ -5,28 +5,16 @@ const { Router } = require("express")
 const router = Router()
 const { Op } = require("sequelize");
 const sequelize = require("sequelize")
-const { Product } = require("../db.js")
+const { Product, Review, User } = require("../db.js")
 
 
 //  GET /rguitars
 //  GET /rguitars?brand="..." &type="..." &color="..."
 // Pagination: limit=4 (items per page), page=1 (currentPage)
-router.get('/offers', async (req, res) => {
-	try{
-		const product = await Product.findAll({
-			where:{
-				discount: {[Op.gt]: 5}
-			}
-		})
-		res.send(product);
-	}catch(error){
-		res.status(400).send(error.message)
-	}
-})
+
 router.get("/", async (req, res) => {
 	try {
-		
-		const { brand, type, color, fullName, page=1, size=6, sortPrice, sortBrand, minPrice, maxPrice  } = req.query
+		const { brand, type, color, fullName, page = 1, size = 6, sortPrice, sortBrand, minPrice, maxPrice } = req.query
 
 		// if no product load form json
 		await loadProductData()
@@ -35,7 +23,7 @@ router.get("/", async (req, res) => {
 		let orderBy = []
 		//let orderByBrand = []
 		// check if there are filter parameters
-		if (brand || type || color || fullName || sortPrice || sortBrand || minPrice || maxPrice  ) {
+		if (brand || type || color || fullName || sortPrice || sortBrand || minPrice || maxPrice) {
 			const op = sequelize.Op
 			// ilike trabaja entre mayusculas y minusculas y de cierta forma te acelera los procesos
 			if (brand) whereQuery.brand = { [op.iLike]: `%${brand}%` }
@@ -46,13 +34,13 @@ router.get("/", async (req, res) => {
 			if (sortPrice) {
 				orderBy = [
 					["price", sortPrice],
-						]
-					}
+				]
+			}
 			if (sortBrand) {
 				orderBy = [
 					["brand", sortBrand],
-						]
-				}
+				]
+			}
 
 			if (fullName) {
 				whereQuery[op.or] = {
@@ -71,12 +59,12 @@ router.get("/", async (req, res) => {
 			}
 		}
 
-        // get values for query
+		// get values for query
 		const { limit, offset } = getPagination(page, size)
-        // find data and make object for frontend
+		// find data and make object for frontend
 		Product.findAndCountAll({ where: whereQuery, limit, offset, order: orderBy })
 			.then((data) => {
-                const response = getPagingData(data, page, limit)
+				const response = getPagingData(data, page, limit)
 				res.send(response)
 			})
 			.catch((err) => {
@@ -84,7 +72,7 @@ router.get("/", async (req, res) => {
 					message:
 						err.message || "Some error occurred.",
 				})
-            })
+			})
 
 	} catch (error) {
 		console.error(error.message)
@@ -94,7 +82,7 @@ router.get("/", async (req, res) => {
 
 
 const getPagination = (page, size) => {
-    let nPage = page-1
+	let nPage = page - 1
 	const limit = size ? +size : 6
 	const offset = nPage ? nPage * limit : 0
 
@@ -113,15 +101,26 @@ const getPagingData = (data, page, limit) => {
 // GET /rguitars/{idGuitar}
 router.get("/:idGuitar", async (req, res) => {
 	const { idGuitar } = req.params
+	
 	try {
 		//Traigo el id por parametro
 		const guitar = await Product.findOne({
 			where: {
-				id: idGuitar.toUpperCase(),
+				id: idGuitar,
 			},
 		})
 		if (guitar) {
-			//si encuentra el id
+			const review = await Review.findAll({
+				where:{
+					productId: idGuitar
+				}
+			})
+			const starsToNumber = review? review.map(item => item.stars).reduce((acc, el )=> acc + el, 0): 0
+			const stars = starsToNumber/review.length
+			guitar.dataValues.stars = stars? stars: 0
+			console.log(starsToNumber)
+				
+
 			return res.status(200).json(guitar)
 		} else {
 			return res.status(404).send("NOT FOUND")
@@ -299,7 +298,19 @@ const loadProductData = async () => {
 	} catch (error) {
 		throw new Error(error.message)
 	}
-	
 }
+router.get('/offers', async (req, res) => {
+	try{
+		const product = await Product.findAll({
+			where:{
+				discount: {[Op.gt]: 5}
+			}
+		})
+		res.send(product);
+	}catch(error){
+		res.status(400).send(error.message)
+	}
+})
+
 
 module.exports = router
