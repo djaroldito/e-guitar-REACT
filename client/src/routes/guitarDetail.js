@@ -125,6 +125,7 @@ const GuitarDetail = () => {
 										onChange={ handleChange }
 										name='color'
 										type='radio'
+
                                         value={item}
 									/>
 									<label htmlFor={item}>{item}</label>
