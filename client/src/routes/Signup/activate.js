@@ -21,13 +21,11 @@ const Activate = () => {
   return (
     <div id="box">
       <div className="actContainer">
+        <div><i>✓</i></div>
         <h1>User Activated</h1>
         <h2>You have been succesfuly activated</h2>
         <h2>
-          You can login now:{" "}
-          <NavLink to="/login" className="actLogin">
-            Log in!
-          </NavLink>
+          You can <NavLink to="/login" className="actLogin"> login now</NavLink>
         </h2>
       </div>
     </div>

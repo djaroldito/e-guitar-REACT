@@ -1,0 +1,119 @@
+.prePayBox {
+    display: flex;
+    flex-direction: column;
+    padding-top: 30px;
+    padding-bottom: 30px;
+}
+
+.preCarAndPay {
+    display: flex;
+    flex-direction: wrap;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.preCarrito {
+    display: flex;
+    flex-direction: column;
+    width: 450px;
+    height: 450px;
+    background-color: rgba(45, 63, 92, 0.856); 
+    color: whitesmoke;
+    margin-top: 1.9em;
+}
+
+.preCarrito h2 {
+    margin-top: 3em;
+    margin-left: 2em;
+}
+
+.preCarrito h3 {
+    margin-left: 2em;
+}
+
+.preProduct  {
+    display: flex;
+    position: relative;
+    z-index: 2;
+    width: 400px;
+    max-height: 3.5em;
+    align-items: center;
+    justify-content: center;
+    margin-top: 20px;
+    font-size: 13px;
+}
+
+.preDivImg {
+    width: 3.5em;
+    height: 4em;
+    background-color: white;
+    margin-left: 25%;
+}
+
+.preProduct img {
+    width: 3em;
+    max-height: 4em;
+    display: flex;
+}
+
+.prePayCart {
+    position: absolute;
+    width: 600px;
+    float: right;
+    flex-wrap: wrap;
+    flex-direction: row;
+    align-content: flex-end;
+    align-items: center;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.prePayCart input {
+    height: 15px;
+    width: 20%;
+    border: none;
+    outline: none;
+    border-bottom: 2px solid #eee;
+}
+
+.preTotal, .prePayCart {
+    position: absolute;
+    z-index: 2;
+    display: block;
+    top: 600px;
+    height: 48px;
+}
+
+.preTotal {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    left: 68%;
+    width: 10em;
+}
+
+.preTotal label {
+    margin-right: 20px;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.prePayBtn {
+    position: absolute;
+    z-index: 3;
+    top: 700px;
+    right: 18%;
+    min-width: 200px;
+    height: 30px;
+    width: 300px;
+    height: 50px;
+    border: none;
+    cursor: pointer;
+    background-color: rgb(76, 49, 138); 
+    font-weight: bold;
+    border-radius: 5px;
+    color: whitesmoke
+}
+
+
+/* A PARTIR DE LOS 1000PX METER TODO EN UN DISPLAY COLUMN */
