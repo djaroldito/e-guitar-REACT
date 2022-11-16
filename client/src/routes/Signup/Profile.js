@@ -2,7 +2,7 @@ import axios from "axios";
 import { useEffect } from "react";
 import { getUserId } from "../../Redux/SignupActions";
 import { useDispatch, useSelector } from "react-redux";
-import React, { useRef, useState } from "react";
+import React, { useState } from "react";
 import "./Styles/Profile.css"
 import styled from "styled-components";
 import Swal from "sweetalert2";
@@ -89,22 +89,38 @@ const Profile = () => {
   }
 
   return (
-    <div>
-      <div>
+    <div className="profileBox">
+      <div className="profileContainer">
         {user.hasOwnProperty("id") ? (
-          <div>
-            <IMG src={user?.avatar.src} alt={user?.fullname} />
-            <h2>User: {user?.fullname}</h2>
-            <p>Address: {user?.address}</p>
-            <p>Province: {user?.province}</p>
-            <p>City: {user?.city}</p>
-            <p>Zipcode: {user?.zipcode}</p>
-            <p>Phone: {user?.phone}</p>
-          </div>
+          <div className="profileInfo">
+            <div className="profileImg">
+              <img className="profileProf" src={user?.avatar.src} alt={user?.fullname} />
+            </div>
+            {/* <h2>User: {user?.fullname}</h2> */}
+            <div className="profileText">
+              <label>Full name:</label><p>{user?.fullname}</p>
+            </div>
+            <div className="profileText">
+              <label>Address: </label><p>{user?.address}</p>
+            </div>
+            <div className="profileText">
+              <label>Province:</label><p>{user?.province}</p>
+            </div>
+            <div className="profileText">
+              <label>City:</label><p>{user?.city}</p>
+            </div>
+            <div className="profileText">
+              <label>Zipcode:</label><p>{user?.zipcode}</p>
+            </div>
+            <div className="profileText">
+              <label>Phone:</label><p>{user?.phone}</p>
+            </div>
+            </div>
         ) : (
           "no tiene user"
         )}
       </div>
+
       { !FaltanDatos ?
         <div className='profileForm'>
         <form onSubmit={handleSubmit}>
@@ -185,26 +201,7 @@ const Profile = () => {
     </div>
     )
 }
-
-const ColumDiv = styled.div`
-  text-align: left;
-  display: flex;
-
-
-  form {
-    display: flex;
-    flex-direction: row;
-    width: 80%;
-    flex-wrap: wrap;
-  }
-
-  .style {
-    display: flex;
-    flex-direction: column;
-    width: 40%;
-  }
-`;
-
+/* 
 const IMG = styled.img`
   margin: 0 auto;
   width: 100px;
@@ -217,6 +214,6 @@ const IMG = styled.img`
   margin-top: 20px;
   margin-right: 57px;
   margin-left: 57px;
-  `
+  ` */
 
 export default Profile;
