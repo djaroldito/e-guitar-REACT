@@ -233,7 +233,7 @@ const GuitarDetail = () => {
             )}
           </TextCont>
         ) : (
-          <Reviews />
+          <Reviews setReviewForm={setReviewForm} ReviewForm={ReviewForm} />
         )}
       </CountDiv>
       <AdInfo>
