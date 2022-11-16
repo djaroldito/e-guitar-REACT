@@ -1,0 +1,142 @@
+@import "https://fonts.googleapis.com/css?family=Nunito+Sans:400,400i,700,900&display=swap";
+
+ .profileBox {
+    height: 82vh;
+    padding-top: 30px;
+    padding-bottom: 30px;
+}
+
+ .profileBox, .profileImg {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.profileContainer {
+    position: relative;
+    flex-direction: column;
+    z-index: 0;
+    width: 40vw;
+    min-width: 480px;
+    min-height: 450px; 
+    bottom: 70px;
+    border-radius: 5px;
+    background-color: white;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2); 
+    font-family: "Nunito Sans", "Helvetica Neue", sans-serif;
+} 
+
+/* Img --------------------------------------------------------- */
+.profileImg {   
+    position: absolute;
+    padding-top: 1em;
+    height: 20%;
+    top: 0;
+    left: 0;
+    right: 0;
+    padding-bottom: 1em; 
+    background-image: url("./Guitar32.jpg");
+    background-size: cover;
+    object-fit: scale-down; 
+}
+
+.profileProf {
+    border-radius:150px
+} 
+
+/* Form --------------------------------------------------------- */
+
+.profileForm {
+    position: absolute;
+    display: flex;
+    flex-direction:row;
+    justify-content: center;
+    width: 30%;
+    min-width: 250px;
+    min-height: 40%;
+    margin-top: 4.2em; 
+    margin-left: 15%;
+    
+} 
+
+.profileForm form {
+    display: flex;
+    flex-direction: column;
+    width: 80%;
+    min-width: 300px;
+}
+
+.profileForm input {
+    margin-top: 3px;
+    min-width: 200px;
+    height: 1.7em;
+    margin: 0.2em;
+    border: none;
+    border: none;
+    outline: none;
+    border-bottom: 2px solid #eee;
+    font-family: "Nunito Sans", "Helvetica Neue", sans-serif;
+}
+
+.profileInputBox {
+    display: flex;
+    flex-direction: row;
+}
+
+.profileInfo {
+    position: relative;
+    justify-content: center;
+    top: 8em;
+    text-align: center;
+}
+
+.profileInfo h2 {
+    display: flex;
+    margin-left: 15%;
+    margin-top: 10px;
+}
+
+.profileText {
+    display: flex;
+    flex-direction: row;
+    height: 2em;
+    margin-left: 15%;
+}
+
+.profileText label, .profileText p {
+    display: flex;
+    text-align: center;
+    align-items: center;
+    width: 100px;
+}
+
+.profileText p {
+    margin-left: 10%;
+}
+
+.profileText label {
+    font-weight: bold;
+    width: 100px;
+} 
+
+.profileError {
+    position: absolute;
+    font-size: 14px;
+    left: 55%;
+    color: red;
+    text-align: center;
+}
+
+.profileBtn {
+    position: absolute;
+    top: 70%; 
+    width: 210px;
+    height: 30px;
+    border: none;
+    cursor: pointer;
+    background-color: rgb(76, 49, 138); 
+    font-weight: bold;
+    border-radius: 5px;
+    color: whitesmoke
+}
+ 

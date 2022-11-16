@@ -34,7 +34,7 @@ const mailRegisterConfirm = async function ({ toUser }) {
     html: `
         <h3>Hello, ${toUser.fullname}!</h3>
         <p>Thank you for register with us, there's only one more step to go!</p>
-        <p>To activate your account please click in this link: <a target="" href=${process.env.DOMAIN}/${toUser.email}>Activate account</a></p>
+        <p>To activate your account please click in this link: <a target="" href=${process.env.DOMAIN}/activate/${toUser.email}>Activate account</a></p>
         <p>Have a nice day!</p>`,
   };
   console.log("Esto es message: ", message);
@@ -49,7 +49,7 @@ const mailDiscountCoupon = async function ({ toUser, discountCode}) {
     html: `
     <h3>Hello, ${toUser.fullname}!</h3>
     <p>Thank you for registering with us, we offer you a discount code to use on your first purchase, to applicate the code, please charge at the discount campus on the product you wish!</p>
-    <p>Thank you, Guitar Code </p>
+    <p>Thank you, Guitar Code Team</p>
     <p>Code: <b>${discountCode}</b></p>
     `
   };
@@ -64,11 +64,15 @@ const mailFotgotPassword = async function ({toUser, resetCode}) {
     to: toUser.email,
     subject: "Guitar Code - Reset Password",
     html: `
-      <h3>Hola, ${toUser.fullname}</h3>
-      <p>Si te llega este mensaje es porque querés modificar la contraseña de tu cuenta en Guitar Code.</p>
-      <p> Para finalizar con el proceso de acttualización por favor ingrese el siguiente código en el formulario: <b>${resetCode}</b></p>
+      <h3>Greetings, ${toUser.fullname}</h3>
+      <p>If you get this e-mail it's because you want to change the password of your account in Guitar Code</p>
+      <p> To complete the update process, please enter the following code in the form: <b>${resetCode}</b></p>
 
-      <a target="" href=${process.env.DOMAIN}/change-password><p>Formulario</p></a>
+      <a target="" href=${process.env.DOMAIN}/change-password><p>Form</p></a>
+
+      <p>If you did not request the reset, please disregard this message. Your password will remain unchanged</p>
+
+      <p>Thank you, Guitar Code Team</p>
     `
   };
   console.log("Esto es message en mailForgot: ", message);
@@ -121,9 +125,11 @@ try {
           }
     return res.status(200).json(user)
   } else {
+    console.log("Entramos en el else de /")
     return res.status(404).send("NOT FOUND")
   }
 } catch (error) {
+  console.log("Entramos al catch de / ")
   res.status(404).send(error.message)
 }
 })

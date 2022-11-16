@@ -106,7 +106,8 @@ const preguntaUno = async (item)=>{
               <button disabled= { el.Cart.quantity < el.stock ? false : true} onClick={() => addCartItem(el)} >+</button>
               {el.stock?<p> <b>disponibles {el.stock}</b>.</p>: null}
             </div>
-              <p>${el.price.toFixed(2)}</p>
+              {/* <p>${el.price.toFixed(2)}</p> */}
+              <p>${(el.price * (100 - el.discount)/100).toFixed(2)}</p>
               <button onClick={() => preguntaUno(el.id, true)}><AiOutlineDelete/></button>
               </div>
           ))}
