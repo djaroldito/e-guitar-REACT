@@ -10,7 +10,8 @@ const NoFound = () => {
     brand: "",
     fullName: "",
     minPrice: 0,
-    maxPrice: 150000,
+    maxPrice: 1800,
+    sortPrice: " ",
   };
   return (
     <NoDiv>
@@ -20,7 +21,9 @@ const NoFound = () => {
         alt="no guitar found "
       />
       <div className="buttonCont">
-        <button onClick={() => dispatch(setFilters(Filters), getAllProducts())}>TRY AGAIN</button>
+        <button onClick={() => dispatch(setFilters(Filters), getAllProducts())}>
+          TRY AGAIN
+        </button>
       </div>
     </NoDiv>
   );
