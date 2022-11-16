@@ -38,13 +38,16 @@ router.post('/create-order', async (req, res) => {
               code: code,
             },}
         )};
-       const orderdb = await Order.create({
+      
+        await axios.delete(`${process.env.DOMAIN_PAYMENT}/cart?userID=${products[0].cart.userId}`);
+        
+        const orderdb = await Order.create({
             orderDate: Sequelize.NOW(),
             orderStatus: "AWAITING PAYMENT",
             deliveryStatus: 'PENDING',
             total: productsMapped.reduce((acc, curr) => acc + (parseFloat(curr.amount.value)), 0),
             userId: products[0].cart.userId,
-            code: code
+            code: code,
         });
 
         const orderDetail = products.map(product => ({
@@ -67,6 +70,8 @@ router.post('/create-order', async (req, res) => {
             }
         }
 
+        
+
         const params = new URLSearchParams();
         params.append("grant_type", "client_credentials");
 
@@ -86,6 +91,15 @@ router.post('/create-order', async (req, res) => {
             }
         })
 
+        await Order.update({
+            paymentLink: response.data.links[1].href
+        },{
+            where:{
+                id: orderdb.id
+            }
+        }
+        )
+        
         res.send(response.data.links[1].href);
     /* }
     catch (error){
