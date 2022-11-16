@@ -10,19 +10,27 @@ const router =  Router();
 
 router.post('/create-order', async (req, res) => {
     const products = req.body;
-    const {mail, code} = req.query;
+    const {mail, code, discount} = req.query;
+    
+    const totalDiscount = (price, quantity, productDiscount, discount) => {
+       return ((price * quantity) - (((price * quantity) * (parseInt(productDiscount) + parseInt(discount))) / 100)).toFixed(2)
+    }
+    const total = (price, quantity) =>{
+        return (price * quantity).toFixed(2);
+    }
+
     const productsMapped = products.map(product =>
         (
                 {
                     reference_id: product.cart.productId,
                     amount:{
                         currency_code: "USD",
-                        value: `${(product.price * product.cart.quantity).toFixed(2)}`
+                        value: `${ discount ?  totalDiscount(product.price, product.cart.quantity, product.discount, discount) : total(product.price, product.cart.quantity)}`
                     }
                 }
             )
         );
-    try{
+    
         if(code !== null){
         const cupon = await DiscountCode.update({
             isUsed: true },
@@ -34,7 +42,7 @@ router.post('/create-order', async (req, res) => {
             orderDate: Sequelize.NOW(),
             orderStatus: "AWAITING PAYMENT",
             deliveryStatus: 'PENDING',
-            total: productsMapped.reduce((acc, curr) => acc + (parseInt(curr.amount.value)), 0),
+            total: productsMapped.reduce((acc, curr) => acc + (parseFloat(curr.amount.value)), 0),
             userId: products[0].cart.userId,
             code: code
         });
@@ -54,8 +62,8 @@ router.post('/create-order', async (req, res) => {
                 brand_name: "E-commerce Guitar",
                 landing_page: "LOGIN",
                 user_action: "PAY_NOW",
-                return_url: `/payments/capture-order?mail=${mail}&orderId=${orderdb.id}`,
-                cancel_url: `/payments/cancel-order?orderId=${orderdb.id}`
+                return_url: `${process.env.DOMAIN_PAYMENT}/payments/capture-order?mail=${mail}&orderId=${orderdb.id}`,
+                cancel_url: `${process.env.DOMAIN_PAYMENT}/payments/cancel-order?orderId=${orderdb.id}`
             }
         }
 
@@ -79,12 +87,12 @@ router.post('/create-order', async (req, res) => {
         })
 
         res.send(response.data.links[1].href);
-    }
+    /* }
     catch (error){
         console.log(error.message)
         res.status(500).send(error);
 
-    }
+    } */
 });
 
 router.get('/capture-order', async (req, res) => {
