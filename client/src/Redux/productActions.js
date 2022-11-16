@@ -89,9 +89,9 @@ export const editProductForm = async (formData) => {
 		return { error: error.response ? error.response.data : error.message }
 	}
 }
-export const payment = async (cart, mail,code) => {
+export const payment = async (cart, mail, code, discount) => {
 	try{
-		const {data: link} = await axios.post(`/payments/create-order?mail=${mail}&code=${code}`, cart)
+		const {data: link} = await axios.post(`/payments/create-order?mail=${mail}&code=${code}&discount=${discount}`, cart)
 		return link;
 	} catch (error) {
 		return { error: error.response ? error.response.data : error.message }
