@@ -59,7 +59,7 @@ router.put('/', async (req, res) => {
     res.send();
 })
 router.delete('/', async (req, res) => {
-    const {userID, productID} = req.query;
+    const {userID} = req.query;
     
    await Cart.destroy(
         {

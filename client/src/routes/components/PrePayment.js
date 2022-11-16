@@ -2,6 +2,8 @@
 import axios from "axios";
 import { useSelector } from "react-redux";
 import { payment } from "../../Redux/productActions";
+import { clearCart } from '../../Redux/productSlice';
+import { useDispatch } from "react-redux";
 import { BsCart2 } from "react-icons/bs";
 import styled from "styled-components";
 import { useState } from "react";
@@ -15,7 +17,7 @@ const PrePayment = () => {
     ? sessionStorage.getItem("emailData")
     : sessionStorage.getItem("emailGoogle");
   console.log(mail);
-
+  const dispatch = useDispatch();
   const completePayment = async (cart, mail, code, discount) => {
     const { data } = await axios.get("/ruser/email", {
       params: {
@@ -31,6 +33,7 @@ const PrePayment = () => {
       data.phone
     ) {
       const response = await payment(cart, mail, code, discount);
+      dispatch(clearCart())
       console.log(response);
       window.location.href = response;
     } else {
