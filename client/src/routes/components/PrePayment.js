@@ -1,10 +1,3 @@
-// los nombres de los producto
-
-// los datos del usuuario.. si estan cargados sigue.. si no lo manda al perfil a completarlos datos
-
-// ingresa cupon de descuento
-
-//boton completa compra paypal
 
 import axios from "axios";
 import { useSelector } from "react-redux";
@@ -14,6 +7,7 @@ import styled from "styled-components";
 import { useState } from "react";
 import Profile from "../Signup/Profile";
 import Swal from "sweetalert2";
+import "./PrePayment/PrePayment.css";
 
 const PrePayment = () => {
   const carrito = useSelector((state) => state.products.cart);
@@ -22,7 +16,7 @@ const PrePayment = () => {
     : sessionStorage.getItem("emailGoogle");
   console.log(mail);
 
-  const completePayment = async (cart, mail, code) => {
+  const completePayment = async (cart, mail, code, discount) => {
     const { data } = await axios.get("/ruser/email", {
       params: {
         email: mail,
@@ -36,7 +30,7 @@ const PrePayment = () => {
       data.zipcode &&
       data.phone
     ) {
-      const response = await payment(cart, mail, code);
+      const response = await payment(cart, mail, code, discount);
       console.log(response);
       window.location.href = response;
     } else {
@@ -81,7 +75,7 @@ const PrePayment = () => {
     let totalDescuento =
       carrito
         ?.reduce(
-          (acc, prod) => acc + prod.price.toFixed(2) * prod.cart.quantity,
+          (acc, prod) => acc + prod.price.toFixed(2) * prod.cart.quantity - (((prod.price * prod.cart.quantity) * prod.discount)/100),
           0
         )
         .toFixed(2) -
@@ -90,7 +84,7 @@ const PrePayment = () => {
           ?.reduce(
             (acc, prod) => acc + prod.price.toFixed(2) * prod.cart.quantity,
             0
-          )
+          ) 
           .toFixed(2)) /
         100;
 
@@ -100,7 +94,7 @@ const PrePayment = () => {
   const total = (carrito) => {
     return carrito
       ?.reduce(
-        (acc, prod) => acc + prod.price.toFixed(2) * prod.cart.quantity,
+        (acc, prod) => acc + prod.price.toFixed(2) * prod.cart.quantity - (((prod.price * prod.cart.quantity) * prod.discount)/100),
         0
       )
       .toFixed(2);
@@ -146,13 +140,14 @@ const PrePayment = () => {
       </button>
       {carrito.length >= 1 ? (
         <button
-          onClick={() =>
-            completePayment(
-              carrito,
-              mail,
-              codeDisc.length > 0 ? codeDisc[0].code : null
-            )
-          }
+        onClick={() => /* completePayment(carrito, mail, codeDisc[0].code, codeDisc[0].discount) */
+        completePayment(
+          carrito,
+          mail,
+          codeDisc.length > 0 ? codeDisc[0].code : null,
+          codeDisc.length > 0 ? codeDisc[0].discount : 0
+        )
+      }
           className="Purchasebutton"
         >
           <BsCart2 /> To Pay

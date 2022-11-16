@@ -2,7 +2,8 @@ import axios from "axios";
 import { useEffect } from "react";
 import { getUserId } from "../../Redux/SignupActions";
 import { useDispatch, useSelector } from "react-redux";
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
+import "./Styles/Profile.css"
 import styled from "styled-components";
 import Swal from "sweetalert2";
 
@@ -22,8 +23,6 @@ const Profile = () => {
   if(user.address && user.province && user.city && user.zipcode && user.phone){
     FaltanDatos = true;
   }
-
-  console.log(user);
 
   //formulario para que el user cargue sus datos
   const [userComplete, setUser] = useState({
@@ -47,7 +46,6 @@ const Profile = () => {
         [e.target.name]: e.target.value
       }));
   }
-
   
   function validate(user) {
     let errors = {};
@@ -71,11 +69,8 @@ const Profile = () => {
     if(!userComplete.phone){
         errors.phone = 'Phone is required';
     }
-
     return errors;
   }
-  
-    
   
   async function handleSubmit(e) {
     e.preventDefault();
@@ -85,15 +80,11 @@ const Profile = () => {
         email: user.email,
       },
     });
-    console.log(userComplete);
 
-    if (data) {
-        
+    if (data) {   
       await axios.put("/ruser/dataUser", userComplete);
       Swal.fire("Data updated successfully");
-      
-    } 
-    
+    }   
   }
 
   return (
@@ -114,73 +105,85 @@ const Profile = () => {
         )}
       </div>
       { !FaltanDatos ?
-        <ColumDiv>
+        <div className='profileForm'>
         <form onSubmit={handleSubmit}>
+
           <div className="style">
-            <label>Fullname: </label>
-            <input
-              type="text"
-              name="fullname"
-              onChange={handleChange}
-              placeholder="Enter name and surname"
-              required
-            />
-            {errors.fullname && <p>{errors.fullname}</p>}
-            <label>Address: </label>
-            <input
-              type="text"
-              name="address"
-              onChange={handleChange}
-              placeholder="Enter address"
-              required
-            />
-            {errors.address && <p>{errors.address}</p>}
-            <label>Province: </label>
-            <input
-              type="text"
-              name="province"
-              onChange={handleChange}
-              placeholder="Enter province"
-              required
-            />
-            {errors.province && <p>{errors.province}</p>}
+            <div className='profileInputBox'>
+              <input
+                type="text"
+                name="fullname"
+                onChange={handleChange}
+                placeholder="Enter name and surname"
+                required
+              />
+              {errors.fullname && <p className='profileError'>{errors.fullname}</p>}
+            </div>
+
+            <div className='profileInputBox'>
+              <input
+                type="text"
+                name="address"
+                onChange={handleChange}
+                placeholder="Enter address"
+                required
+              />
+              {errors.address && <p className='profileError'>{errors.address}</p>}
+            </div>
+
+            <div className='profileInputBox'>
+              <input
+                type="text"
+                name="province"
+                onChange={handleChange}
+                placeholder="Enter province"
+                required
+              />
+              {errors.province && <p className='profileError'>{errors.province}</p>}
+            </div>
+
+            <div className='profileInputBox'>
+              <input
+                type="text"
+                name="city"
+                onChange={handleChange}
+                placeholder="Enter city"
+                required
+              />
+              {errors.city && <p className='profileError'>{errors.city}</p>}
+            </div>
+
+            <div className='profileInputBox'>
+              <input
+                type="text"
+                name="zipcode"
+                onChange={handleChange}
+                placeholder="Enter zipcode"
+                required
+              />
+              {errors.zipcode && <p className='profileError'>{errors.zipcode}</p>}
+            </div>
+
+            <div className='profileInputBox'>
+              <input
+                type="text"
+                name="phone"
+                onChange={handleChange}
+                placeholder="Enter phone"
+                required
+              />
+              {errors.phone && <p className='profileError'>{errors.phone}</p>}
+            </div>
           </div>
-          <div className="style">
-            <label>City: </label>
-            <input
-              type="text"
-              name="city"
-              onChange={handleChange}
-              placeholder="Enter city"
-              required
-            />
-            {errors.city && <p>{errors.city}</p>}
-            <label>Zipcode: </label>
-            <input
-              type="text"
-              name="zipcode"
-              onChange={handleChange}
-              placeholder="Enter zipcode"
-              required
-            />
-            {errors.zipcode && <p>{errors.zipcode}</p>}
-            <label>Phone: </label>
-            <input
-              type="text"
-              name="phone"
-              onChange={handleChange}
-              placeholder="Enter phone"
-              required
-            />
-            {errors.phone && <p>{errors.phone}</p>}
-          </div>
-          <button type="submit">Send</button>
+
+          <button className='profileBtn'>Send</button>
+
         </form>
-      </ColumDiv>
+      </div>
     : ""}
     </div>
-  );
-};
+    )
+}
 
 const ColumDiv = styled.div`
   text-align: left;
