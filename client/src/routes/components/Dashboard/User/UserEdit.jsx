@@ -126,7 +126,7 @@ const UserEdit = (props) => {
 							}}
 							source='avatar'
 							label='Avatar:'
-							accept='image/png, image/jpg, image/jpeg'
+							accept='image/png, image/jpg, image/jpeg, image/webp'
 						>
 							<PreviewImage source='src' />
 						</ImageInput>

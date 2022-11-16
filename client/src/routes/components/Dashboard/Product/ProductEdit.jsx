@@ -89,13 +89,14 @@ const ProductEdit = (props) => {
 		}
 		return <ImageField record={record} source={source} />
 	}
-if (isLoading || !types || !colorChoices) return null
+	console.log(typeChoices)
+	if (isLoading || !typeChoices || !colorChoices) return null
 	return (
 		<Edit
 			actions={<TopToolbarActions />}
 			submitOnEnter={false}
-            title='Edit Product'
-            mutationMode='optimistic'
+			title='Edit Product'
+			mutationMode='optimistic'
 			{...props}
 		>
 			<SimpleForm>
@@ -165,7 +166,6 @@ if (isLoading || !types || !colorChoices) return null
 						/>
 					</Box>
 					<Box flex={1} mr={{ xs: 0, sm: "0.5em" }}>
-
 						<SelectArrayInput
 							source='color'
 							choices={colorChoices}
@@ -235,7 +235,7 @@ if (isLoading || !types || !colorChoices) return null
 						sx={{ "& .RaFileInput-dropZone": { fontSize: "12px" } }}
 						source='img'
 						label='PHOTO GALLERY:'
-						accept='image/png, image/jpg, image/jpeg'
+						accept='image/png, image/jpg, image/jpeg, image/webp'
 						multiple
 					>
 						<PreviewImage source='src' />

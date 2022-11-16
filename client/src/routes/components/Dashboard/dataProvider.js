@@ -87,7 +87,7 @@ const dataProvider = {
 					`https://api.cloudinary.com/v1_1/dnzbhrg86/image/upload`,
 					formData
 				)
-				params.data.avatar = res.data.url
+				params.data.avatar = res.data.secure_url
             } else {
                 params.data.avatar = params.data.avatar.src
             }
@@ -159,7 +159,7 @@ const manageProducts = async (params) => {
 						`https://api.cloudinary.com/v1_1/dnzbhrg86/image/upload`,
 						formData
 					)
-					return res.data.url
+					return res.data.secure_url
 				} else {
 					return item.src
 				}

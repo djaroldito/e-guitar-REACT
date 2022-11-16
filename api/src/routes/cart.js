@@ -20,30 +20,31 @@ router.get('/', async (req, res) => {
 router.post('/', async (req, res) => {
     const {userID} = req.query;
     const userCart = req.body;
-    
+
     await Cart.destroy({
         where: {
-            userId: userID 
+            userId: userID
         }
     })
-    
+
     const cartMapped = userCart.map(product => {
         return{
                 quantity: product.cart.quantity,
                 productId: product.id,
+                color: product.cart.color,
                 userId: parseInt(userID)
             }
-        
+
     })
 
     await Cart.bulkCreate(cartMapped)
-    
+
     res.send();
-    
+
 })
 router.put('/', async (req, res) => {
     const {userID, productID, quantity} = req.query;
-    
+
     await Cart.update(
         {
             quantity: quantity
@@ -60,7 +61,7 @@ router.put('/', async (req, res) => {
 })
 router.delete('/', async (req, res) => {
     const {userID, productID} = req.query;
-    
+
    await Cart.destroy(
         {
             where: {
