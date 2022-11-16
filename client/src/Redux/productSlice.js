@@ -1,11 +1,11 @@
 import { createSlice } from "@reduxjs/toolkit"
-
-
+//borrar
 
 export const productSlice = createSlice({
 	name: "products",
 	initialState: {
 		products: [],
+		offers: [],
 		detail: {},
 		cart: localStorage.getItem('carrito') ?  JSON.parse(localStorage.getItem("carrito")): [],
 		brands: [],
@@ -29,6 +29,9 @@ export const productSlice = createSlice({
 	reducers: {
 		getAllProducts: (state, action) => {
             state.products = action.payload
+		},
+		getOffers: (state, action) => {
+            state.offers = action.payload
 		},
 		getProductById: (state, action) => {
 			state.detail = action.payload
@@ -120,7 +123,6 @@ export const productSlice = createSlice({
 export const {
 	getAllProducts,
 	getProductById,
-	filerError,
 	getProductFiltered,
 	clearCart,
 	getProductToCart,
@@ -137,7 +139,8 @@ export const {
     setCurrentPage,
     setPageCount,
 	getOrder,
-	getAllOrders
+	getAllOrders,
+	getOffers
 
 } = productSlice.actions
 

@@ -89,7 +89,7 @@ width: 500px;
 color: whitesmoke;
 margin-top: 25px;
 @media(max-width: 800px){
-   width: 380%;
+   width: 80%;
 }
 
 `

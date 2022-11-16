@@ -1,7 +1,6 @@
 .OffersContainer{
     display: flex;
     background-color: whitesmoke;
-    margin-left: 10%;
     margin-right: 10%;
 }
 
@@ -15,6 +14,7 @@
     align-items: center;
     align-content: center;
     flex-direction: column;
+    transition: .4s ease-out;
 }
 .OffersCard a{
     text-decoration: none;
@@ -22,11 +22,9 @@
 }
 
 .OffersCard:hover{
-    background-color: rgb(178,178,178); 
+    box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.2);
 }
-.OffersCard:hover img{
-    filter: invert(0.30);
-}
+
 .DiscountBox{
     position: absolute;
     display: flex;

@@ -4,16 +4,15 @@
     margin: 0;
     padding-top: 2rem;
     font-size: 2rem;
-    text-align: center;
-    margin-left: auto;
-    margin-right: auto;
+    text-align: left;
+    margin-left: 9em;
     color: rgb(97, 97, 97);
 }
 /* BODY ---------------------------------------------------- */
 
 .prdFormContiner {
-    height: 75vh;
-    max-width: 1000px;
+    height: 70vh;
+    width: 70vw;
     margin-left: auto;
     margin-right: auto;
     margin-top: 25px; 
@@ -28,26 +27,7 @@
     grid-template-columns: 50% 50%;
     height: 100%;
     margin-left: 2em;
-   
 }
-@media (max-width: 900px) {
-    .prdGrid{
-        display: flex;
-        flex-direction: column;
-        height: auto;
-        margin-left: auto;
-        margin-right: auto;
-    }
-    .prdFormContiner{
-        max-width: 500px;
-        height: auto;
-    }
-    .prdImgload{
-        margin-bottom: 0;
-        background-color: aqua;
-    }
-}
-
 
 .prdGrid div {
     margin-bottom: 1em;
@@ -101,7 +81,6 @@
     outline: none;
     border-color: #eb984e;
     box-shadow: 0 0 0 2px rgba(#a4b6ca,.2);
- 
 }
 
 .prdSelect:hover {
@@ -146,10 +125,6 @@
     margin-bottom: 220px;
     background-color: yellow;
 }
-img{
-    width: 90%;
-    height: auto;
-}
 
 .prdButtonImage {
     min-width: 30px;
@@ -174,8 +149,8 @@ img{
     align-items: center;
     margin-left: auto;
     margin-right: auto;
-    margin: 5px;
-    width: 30%;
+    margin-bottom: 8em;
+    background-color: pink;
 }
 
 .prdBtnSubmit {

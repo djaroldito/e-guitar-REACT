@@ -9,13 +9,14 @@ import {
 	setCurrentPage,
 	setPageCount,
 	getOrder,
-  getAllOrders
+  getAllOrders,
+  getOffers
 } from "./productSlice"
 
 export const getAllOffers = () => (dispatch) => {
   axios("/rguitars/offers")
   .then((res) => {
-      dispatch(getAllProducts(res.data));
+      dispatch(getOffers(res.data));
   })
   .catch((error) => console.log(error));
 }
@@ -64,7 +65,7 @@ export const getByFilter = (filter, currentPage) => (dispatch) => {
       dispatch(setCurrentPage(res.data.currentPage));
       dispatch(setPageCount(res.data.pageCount));
     })
-    .catch(err => console.log(err))
+    .catch((err) => console.log(err));
 };
 
 export const postProductForm = async (formData) => {
@@ -88,9 +89,9 @@ export const editProductForm = async (formData) => {
 		return { error: error.response ? error.response.data : error.message }
 	}
 }
-export const payment = async (cart, mail,code) => {
+export const payment = async (cart, mail, code, discount) => {
 	try{
-		const {data: link} = await axios.post(`/payments/create-order?mail=${mail}&code=${code}`, cart)
+		const {data: link} = await axios.post(`/payments/create-order?mail=${mail}&code=${code}&discount=${discount}`, cart)
 		return link;
 	} catch (error) {
 		return { error: error.response ? error.response.data : error.message }
@@ -126,14 +127,4 @@ export const getOrderDB = (orderID) => (dispatch) => {
 	axios(`/order/getOrder?id=${orderID}`)
 	.then((res) => dispatch(getOrder(res.data)))
 	
-}
-
-export const filterError = () => (dispatch)=> {
-  axios("/rguitars")
-  .then((res) => {
-    dispatch(getAllProducts(res.data.products));
-    dispatch(setCurrentPage(1));
-    dispatch(setPageCount(res.data.pageCount));
-  })
-  .catch((error) => console.log(error));
 }

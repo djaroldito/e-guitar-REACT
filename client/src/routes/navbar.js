@@ -440,4 +440,4 @@ const Logo = styled.div`
   }
 `;
 
-export default NavBar;
+export default NavBar

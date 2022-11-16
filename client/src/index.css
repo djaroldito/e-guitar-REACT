@@ -10,11 +10,8 @@ body {
   background-color: rgb(119, 119, 119,.1);
 
 }
-
-@media (max-width: 920px){
-  body, header, main, section, div {
-    max-width: 100%;
-  }
+html{
+  scroll-behavior: smooth;
 }
 
 code {
@@ -22,7 +19,7 @@ code {
     monospace;
 }
 
-header{
+.header{
   max-width: 100%;
   background-color: black;
   height: 80px;
@@ -37,9 +34,9 @@ main, section{
   max-width: 1200px;
   margin-left: auto;
   margin-right: auto;
-  height: auto;
-
+  scroll-behavior: smooth;
 }
+
 
 footer{
   max-width: 100%;

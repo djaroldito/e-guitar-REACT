@@ -1,27 +1,37 @@
+@import "https://fonts.googleapis.com/css?family=Nunito+Sans:400,400i,700,900&display=swap";
+
 #box {
 /*     height: 34em; */
     min-height: 700px;
-    padding-top: 6em;/* 
+    padding-top: 4em;
+    font-family: "Nunito Sans", "Helvetica Neue", sans-serif;
+    /* 
     background-image: url("./Guitar1\ \(1\).jpg");  */
 }
 
 .actContainer {
     position: relative;
     z-index: 2;
-    height: 15em;
+    height: 25em;
     width: 50em;
     background-color: white;
     text-align: center;
     margin-left: auto;
     margin-right: auto;
-    /* margin-top: 6em;  */
     border-radius: 10px;
     box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
-    padding-top: 20px;
+    padding-top: 10px;
+}
+
+.actContainer i {
+    color: rgb(95, 194, 95);
+    font-size: 100px;
+    line-height: 150px;
+    margin-left:-15px;
 }
 
 .actContainer h1 {
-    margin-top: 30px;
+/*     margin-top: 30px; */
     color: rgb(95, 194, 95);
     font-weight: bolder; 
 }
