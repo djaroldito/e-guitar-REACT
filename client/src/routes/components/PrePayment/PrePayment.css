@@ -21,6 +21,14 @@
     color: whitesmoke;
     margin-top: 1.9em;
     margin-left: 2em;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2); 
+    border-radius: 5px;
+}
+
+.prePayProfile {
+    position: relative;
+    height: 400px;
+    bottom: 6em;
 }
 
 .preCarrito h2 {
