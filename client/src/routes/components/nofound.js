@@ -5,12 +5,13 @@ import { getAllProducts, setFilters } from "../../Redux/productSlice";
 const NoFound = () => {
   const dispatch = useDispatch();
   const Filters = {
-    color: "",
-    type: "",
-    brand: "",
-    fullName: "",
+    color: '',
+    type: '',
+    brand: '',
+    fullName: '',
     minPrice: 0,
-    maxPrice: 150000,
+    maxPrice: 1800,
+    sortPrice: '',
   };
   return (
     <NoDiv>
