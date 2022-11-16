@@ -7,18 +7,15 @@
 //boton completa compra paypal
 
 import axios from "axios";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { payment } from "../../Redux/productActions";
 import { BsCart2 } from "react-icons/bs";
 import styled from "styled-components";
 import { useState } from "react";
 import Profile from "../Signup/Profile";
-import { IoMapOutline } from "react-icons/io5";
 import Swal from "sweetalert2";
-import { getUserId } from "../../Redux/SignupActions";
 
 const PrePayment = () => {
-  const dispatch = useDispatch();
   const carrito = useSelector((state) => state.products.cart);
   const mail = sessionStorage.getItem("emailData")
     ? sessionStorage.getItem("emailData")
@@ -56,7 +53,6 @@ const PrePayment = () => {
 
   const handleChange = (e) => {
     e.preventDefault(e);
-    // setinput(e.target.value)
     if (e.target.value !== "") {
       setinput({ [e.target.name]: e.target.value });
     }
@@ -81,9 +77,6 @@ const PrePayment = () => {
   };
 
   const getTotalConDescuento = (carrito, codeValidate) => {
-    /*   setinput({
-      code:"",
-    }) */
     if (!codeValidate) return;
     let totalDescuento =
       carrito

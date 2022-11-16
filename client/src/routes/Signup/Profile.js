@@ -2,7 +2,7 @@ import axios from "axios";
 import { useEffect } from "react";
 import { getUserId } from "../../Redux/SignupActions";
 import { useDispatch, useSelector } from "react-redux";
-import React, { useRef, useState } from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import Swal from "sweetalert2";
 
@@ -12,9 +12,8 @@ const Profile = () => {
   console.log(idUser);
 
   useEffect(() => {
-    dispatch(getUserId(idUser)); /* 
-         user = axios.get(`/ruser/${idUser}`) */
-  }, []);
+    dispatch(getUserId(idUser));
+  }, [dispatch, idUser]);
 
   const user = useSelector((state) => state.signup.userId);
   const [errors, setErrors] = useState({});
