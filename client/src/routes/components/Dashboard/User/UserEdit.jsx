@@ -50,7 +50,8 @@ const UserEdit = (props) => {
 		<Edit
 			actions={<TopToolbarActions />}
 			submitOnEnter={false}
-			title='Edit User Data'
+            title='Edit User Data'
+            mutationMode='optimistic'
 			{...props}
 		>
 			<SimpleForm>
@@ -125,7 +126,7 @@ const UserEdit = (props) => {
 							}}
 							source='avatar'
 							label='Avatar:'
-							accept='image/png, image/jpg, image/jpeg'
+							accept='image/png, image/jpg, image/jpeg, image/webp'
 						>
 							<PreviewImage source='src' />
 						</ImageInput>

@@ -160,7 +160,7 @@ const ProductCreate = (props) => {
 						</Box>
 						<Box flex={1} mr={{ xs: 0, sm: "0.5em" }}>
 							<SelectArrayInput
-								source='color' 
+								source='color'
                                 choices={colorChoices}
                                 sx={{ width: 250 }}
 								required
@@ -229,7 +229,7 @@ const ProductCreate = (props) => {
 							sx={{ "& .RaFileInput-dropZone": { fontSize: "12px" } }}
 							source='img'
 							label='PHOTO GALLERY:'
-							accept='image/png, image/jpg, image/jpeg'
+							accept='image/png, image/jpg, image/jpeg, image/webp'
 							multiple
 						>
 							<PreviewImage source='src' />
