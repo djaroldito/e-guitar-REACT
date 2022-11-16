@@ -16,7 +16,7 @@ const PrePayment = () => {
     : sessionStorage.getItem("emailGoogle");
   console.log(mail);
 
-  const completePayment = async (cart, mail, code) => {
+  const completePayment = async (cart, mail, code, discount) => {
     const { data } = await axios.get("/ruser/email", {
       params: {
         email: mail,
@@ -30,7 +30,7 @@ const PrePayment = () => {
       data.zipcode &&
       data.phone
     ) {
-      const response = await payment(cart, mail, code);
+      const response = await payment(cart, mail, code, discount);
       console.log(response);
       window.location.href = response;
     } else {
@@ -70,12 +70,12 @@ const PrePayment = () => {
     }
   };
 
-  const getTotalConDescuento = (carrito, codeValidate) => {
-    if (!codeValidate) return;
+  const getTotalConDescuento = (carrito, codeValidate) => {  
+    if(!codeValidate) return 
     let totalDescuento =
       carrito
         ?.reduce(
-          (acc, prod) => acc + prod.price.toFixed(2) * prod.cart.quantity,
+          (acc, prod) => acc + prod.price.toFixed(2) * prod.cart.quantity - (((prod.price * prod.cart.quantity) * prod.discount)/100),
           0
         )
         .toFixed(2) -
@@ -84,7 +84,7 @@ const PrePayment = () => {
           ?.reduce(
             (acc, prod) => acc + prod.price.toFixed(2) * prod.cart.quantity,
             0
-          )
+          ) 
           .toFixed(2)) /
         100;
 
@@ -94,7 +94,7 @@ const PrePayment = () => {
   const total = (carrito) => {
     return carrito
       ?.reduce(
-        (acc, prod) => acc + prod.price.toFixed(2) * prod.cart.quantity,
+        (acc, prod) => acc + prod.price.toFixed(2) * prod.cart.quantity - (((prod.price * prod.cart.quantity) * prod.discount)/100),
         0
       )
       .toFixed(2);
@@ -140,13 +140,14 @@ const PrePayment = () => {
       </button>
       {carrito.length >= 1 ? (
         <button
-          onClick={() =>
-            completePayment(
-              carrito,
-              mail,
-              codeDisc.length > 0 ? codeDisc[0].code : null
-            )
-          }
+        onClick={() => /* completePayment(carrito, mail, codeDisc[0].code, codeDisc[0].discount) */
+        completePayment(
+          carrito,
+          mail,
+          codeDisc.length > 0 ? codeDisc[0].code : null,
+          codeDisc.length > 0 ? codeDisc[0].discount : 0
+        )
+      }
           className="Purchasebutton"
         >
           <BsCart2 /> To Pay
