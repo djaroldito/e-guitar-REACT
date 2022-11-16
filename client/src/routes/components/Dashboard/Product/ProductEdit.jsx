@@ -16,7 +16,7 @@ import {
 	// toolbar
 	ListButton,
 	TopToolbar,
-	ShowButton,
+	//ShowButton,
 	//
 	useGetOne,
 } from "react-admin"
@@ -89,7 +89,7 @@ const ProductEdit = (props) => {
 		}
 		return <ImageField record={record} source={source} />
 	}
-	console.log(typeChoices)
+	console.log(typeChoices, colorChoices, data.color)
 	if (isLoading || !typeChoices || !colorChoices) return null
 	return (
 		<Edit
