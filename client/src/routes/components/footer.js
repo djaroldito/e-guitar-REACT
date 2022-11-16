@@ -37,14 +37,17 @@ return(
 }
 
 const ConDiv = styled.div`
-max-width: 100%;
+max-width: 1200px;
 color: whitesmoke;
 margin-left: auto;
 margin-right: auto;
 display: flex;
 flex-direction: row;
+margin-top: 50px;
+@media(max-width: 800px){
+   flex-direction: column;
+}
 `
-/* margin-top: 50px; (va en la línea 46)*/
 const ColumDiv = styled.div`
 width: 33%;
 text-align: left;
@@ -58,6 +61,13 @@ h4, p, a{
    margin-left: 20px;
    color: whitesmoke;
    text-decoration: none;
+   
+
+}
+@media(max-width: 800px){
+   margin-left: 0;
+   width: 70%;
+   text-align: center;
 }
 a{
    margin-top: 10px;
@@ -66,13 +76,22 @@ a{
 h4{
    margin-bottom: 40px;
 }
+@media(max-width: 800px) {
+   width: 100%;
+   border-left: none;
+   border-right: none
+}
 `
 const CopyDiv = styled.div`
 margin-left: auto;
 margin-right: auto;
+width: 500px;
 color: whitesmoke;
 margin-top: 25px;
-padding: 20px;
+@media(max-width: 800px){
+   width: 80%;
+}
+
 `
 
 export default Footer

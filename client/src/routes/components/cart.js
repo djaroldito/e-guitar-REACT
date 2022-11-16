@@ -75,8 +75,8 @@ const preguntaUno = async (item)=>{
 }
   console.log(carrito)
   return(
-  <main>
-    {carrito.length >= 1 ? <button onClick={preguntaTodo}>Clear Cart</button> : <EmptyCart/> }
+  <Main>
+    {carrito.length >= 1 ? <ClearButton> <button onClick={preguntaTodo}>Clear Cart</button> </ClearButton> : <EmptyCart/> }
   <div className="ProductCartContainer">
     <br/>
            {carrito.map((el, index)=>(
@@ -109,12 +109,12 @@ const preguntaUno = async (item)=>{
               {carrito.length >= 1 ? <label >Total: </label> : null }
               {carrito.length >= 1
               ? carrito
-                  .reduce(
-                    (acc, prod) =>
-                      acc + ((prod.discount > 0 ? prod.price.toFixed(2) *  (100 - prod.discount)/100 : prod.price.toFixed(2)) * prod.cart.quantity),
-                    0
-                  )
-                  .toFixed(2)
+                    .reduce(
+                      (acc, prod) =>
+                        acc + ((prod.discount > 0 ? prod.price.toFixed(2) *  (100 - prod.discount)/100 : prod.price.toFixed(2)) * prod.cart.quantity),
+                      0
+                    )
+                    .toFixed(2)
               : null}
             
             </Total>
@@ -129,7 +129,7 @@ const preguntaUno = async (item)=>{
               </button>
 					</Link>
           </CustomButtons>
-  </main>
+  </Main>
   )
 }
 
@@ -152,6 +152,11 @@ const Total = styled.div`
   flex-direction: row;
   align-content: flex-end;
   align-items: center;
+
+  .price{
+    color: green;
+    margin-left: 5px;
+  }
 `;
 const CustomButtons = styled.div`
   display: flex;
@@ -190,18 +195,18 @@ const CustomButtons = styled.div`
 `;
 
 const Main = styled.main`
- min-height: 720px;
-`
+  min-height: 720px;
+  max-width: 1200px;
+`;
 
 const ClearButton = styled.div`
-  width: 100%;
   text-align: end;
   margin-top: 20px;
   align-items: center;
   display: flex;
   justify-content: end;
   font-size: 25px;
-  button{
+  button {
     border: none;
     cursor: pointer;
     background-color: rgb(128, 60, 60);
@@ -211,6 +216,6 @@ const ClearButton = styled.div`
     font-weight: 600;
     border-radius: 10px;
   }
-`
+`;
 
 export default Cart;
