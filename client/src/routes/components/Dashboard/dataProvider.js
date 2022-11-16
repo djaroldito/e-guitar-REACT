@@ -36,7 +36,7 @@ const dataProvider = {
 
 		return httpClient(url).then(({ headers, json }) => ({
 			data: json.data,
-            total: json.total
+			total: json.total,
 		}))
 	},
 
@@ -72,20 +72,25 @@ const dataProvider = {
 	//     }));
 	// },
 
-	update: async (resource, params) => {
+    update: async (resource, params) => {
+        console.log(params.data.avatar)
 		if (resource === "product") {
 			params = await manageProducts(params)
 		}
 		if (resource === "user" && params.data.avatar) {
-			const file = params.data.avatar
-			const formData = new FormData()
-			formData.append("file", file.rawFile)
-			formData.append("upload_preset", "kym7uarq")
-			const res = await axios.post(
-				`https://api.cloudinary.com/v1_1/dnzbhrg86/image/upload`,
-				formData
-			)
-			params.data.avatar = res.data.url
+			if ( params.data.avatar.hasOwnProperty('rawFile') ) {
+				const file = params.data.avatar
+				const formData = new FormData()
+				formData.append("file", file.rawFile)
+				formData.append("upload_preset", "kym7uarq")
+				const res = await axios.post(
+					`https://api.cloudinary.com/v1_1/dnzbhrg86/image/upload`,
+					formData
+				)
+				params.data.avatar = res.data.url
+            } else {
+                params.data.avatar = params.data.avatar.src
+            }
 		}
 		return httpClient(`${apiUrl}/${resource}/${params.id}`, {
 			method: "PUT",
@@ -160,11 +165,11 @@ const manageProducts = async (params) => {
 				}
 			})
 		)
-		imgTxt = imgArray.join(',')
+		imgTxt = imgArray.join(",")
 		params.data.img = imgTxt
 	}
 	if (params.data.color) {
-		params.data.color = params.data.color.join(', ')
+		params.data.color = params.data.color.join(", ")
 	}
 	return params
 }

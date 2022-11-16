@@ -22,7 +22,7 @@ const saltRounds = 10
 router.get("/", async (req, res) => {
 	try {
 		// clean data
-		await Product.destroy({ truncate: true, restartIdentity: true, cascade: true })
+		await Product.destroy({ truncate: true, restartIdentity: true, cascade: true, paranoid: false })
 		await User.destroy({ truncate: true, restartIdentity: true, cascade: true })
 		await Review.destroy({ truncate: true, restartIdentity: true, cascade: true })
 		await DiscountCode.destroy({ truncate: true, restartIdentity: true, cascade: true })

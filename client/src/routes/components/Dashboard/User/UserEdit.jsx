@@ -50,7 +50,8 @@ const UserEdit = (props) => {
 		<Edit
 			actions={<TopToolbarActions />}
 			submitOnEnter={false}
-			title='Edit User Data'
+            title='Edit User Data'
+            mutationMode='optimistic'
 			{...props}
 		>
 			<SimpleForm>

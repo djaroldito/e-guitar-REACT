@@ -6,5 +6,5 @@ const { conn } = require('./src/db.js');
 conn.sync({ force: false }).then(() => {
     server.listen(process.env.PORT, function () {
     console.log('escuchando en puerto', process.env.PORT); // eslint-disable-line no-console
-  });  
+  });
 });

@@ -19,8 +19,6 @@ import {
 	ShowButton,
 	//
 	useGetOne,
-	useRecordContext,
-	WithRecord,
 } from "react-admin"
 
 import {
@@ -70,8 +68,6 @@ const ProductEdit = (props) => {
 		? colors.map((value) => ({ id: value, name: value }))
 		: []
 
-	if (isLoading || !types || !colorChoices) return null
-
 	const validateMin = [number(), minValue(0)]
 	const validateDiscount = [number(), minValue(0), maxValue(100)]
 	const validateStrings = [number(), minValue(6), maxValue(18)]
@@ -93,13 +89,13 @@ const ProductEdit = (props) => {
 		}
 		return <ImageField record={record} source={source} />
 	}
-
+if (isLoading || !types || !colorChoices) return null
 	return (
 		<Edit
 			actions={<TopToolbarActions />}
 			submitOnEnter={false}
-			title='Edit Product'
-			mutationMode='pessimistic'
+            title='Edit Product'
+            mutationMode='optimistic'
 			{...props}
 		>
 			<SimpleForm>
@@ -169,6 +165,7 @@ const ProductEdit = (props) => {
 						/>
 					</Box>
 					<Box flex={1} mr={{ xs: 0, sm: "0.5em" }}>
+
 						<SelectArrayInput
 							source='color'
 							choices={colorChoices}

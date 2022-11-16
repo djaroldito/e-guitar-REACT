@@ -21,10 +21,10 @@ export const SoftDeleteField = (props) => {
 	return <span>{record.deletedAt ? <Clear /> : <Done />}</span>
 }
 
-export const ColorField = (props) => {
-    const record = useRecordContext(props)
-	return record ? <span>{record.color?.join(" | ")}</span> : null
-}
+// export const ColorField = (props) => {
+//     const record = useRecordContext(props)
+// 	return Array.isArray(record.color) ? <span>{record.color.join(" | ")}</span> : record.color
+// }
 export const DiscountField = (props) => {
     const record = useRecordContext(props)
 	return record ? (
@@ -81,14 +81,16 @@ const ProductList = (props) => {
 		<List title='List of Products' filters={filters} {...props} >
 			<Datagrid bulkActionButtons={false}>
 				<ImageField
-					source='img'
+                    source='img'
+                    emptyText="photo"
 					label={false}
 					sx={{ "& .RaImageField-image": { width: "40px", height: "40px" } }}
 				/>
 				<TextField source='type' sx={{ fontSize: "12px" }} />
 				<TextField source='brand' sx={{ fontSize: "12px" }} />
 				<TextField source='model' sx={{ fontSize: "12px" }} />
-				<ColorField source='color' sx={{ fontSize: "12px" }} />
+				<TextField source='color' sx={{ fontSize: "12px" }} />
+				{/* <ColorField source='color' sx={{ fontSize: "12px" }} /> */}
 				<NumberField
 					source='price'
 					options={{
