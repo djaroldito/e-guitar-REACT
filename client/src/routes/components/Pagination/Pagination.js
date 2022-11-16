@@ -89,12 +89,15 @@ export default function Pagination({
 
 // Styled components
 const Container = styled.ul`
-	width: 100%;
+	width: 90%;
 	display: flex;
 	justify-content: center;
 	list-style-type: none;
 	padding: 0;
 	margin: 15px;
+	@media (max-width: 600px) {
+		width: 90%;
+	}
 `
 const Li = styled.li`
 	padding: 0 12px;
@@ -125,4 +128,10 @@ const Li = styled.li`
 			cursor: default;
 		}
 	}
+
+	@media (max-width: 600px) {
+		min-width: 28px;
+		padding: 10px;
+	}
+	
 `
