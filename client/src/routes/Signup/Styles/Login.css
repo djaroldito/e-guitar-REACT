@@ -1,6 +1,7 @@
 .loginBox {
   height: 80vh;
-  min-height: 80vh;
+/*   min-height: 80vh; */
+  max-height: 600px;
   padding-top: 30px;
   padding-bottom: 30px;
   display: flex;
@@ -14,7 +15,7 @@
   position: relative;
   z-index: 1;
   min-width: 50vw;
-  min-height: 100%;
+  min-height: 100%; 
   border-radius: 5px;
   overflow: hidden;
   background-color: white;
