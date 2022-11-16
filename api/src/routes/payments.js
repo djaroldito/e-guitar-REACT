@@ -1,6 +1,6 @@
 const {Router} = require('express');
 const axios = require('axios');
-const { Order, OrderDetail } = require("../db.js")
+const { Order, OrderDetail, DiscountCode } = require("../db.js")
 const nodemailer = require("nodemailer");
 const {PAYPAL_API, PAYPAL_API_SECRET, PAYPAL_API_CLIENT} = require('../paymentConfig.js');
 const { Sequelize } = require('sequelize');
@@ -10,37 +10,42 @@ const router =  Router();
 
 router.post('/create-order', async (req, res) => {
     const products = req.body;
-    const {mail} = req.query;
-    const productsMapped = products.map(product => 
+    const {mail, code} = req.query;
+    const productsMapped = products.map(product =>
         (
-                {   
-                    reference_id: product.Cart.productId,
+                {
+                    reference_id: product.cart.productId,
                     amount:{
                         currency_code: "USD",
-                        value: `${(product.price * product.Cart.quantity).toFixed(2)}`
+                        value: `${(product.price * product.cart.quantity).toFixed(2)}`
                     }
                 }
             )
         );
     try{
+        if(code !== null){
+        const cupon = await DiscountCode.update({
+            isUsed: true },
+          { where: {
+              code: code,
+            },}
+        )};
        const orderdb = await Order.create({
             orderDate: Sequelize.NOW(),
             orderStatus: "AWAITING PAYMENT",
             deliveryStatus: 'PENDING',
             total: productsMapped.reduce((acc, curr) => acc + (parseInt(curr.amount.value)), 0),
-            userId: products[0].Cart.userId 
+            userId: products[0].cart.userId,
+            code: code
         });
-        
+
         const orderDetail = products.map(product => ({
-            quantity: product.Cart.quantity,
-            productId: product.Cart.productId,
+            quantity: product.cart.quantity,
+            productId: product.cart.productId,
             orderId: orderdb.id
-        })) 
+        }))
 
         await OrderDetail.bulkCreate(orderDetail)
-        
-        
-        
 
         const order = {
             intent: "CAPTURE",
@@ -49,14 +54,14 @@ router.post('/create-order', async (req, res) => {
                 brand_name: "E-commerce Guitar",
                 landing_page: "LOGIN",
                 user_action: "PAY_NOW",
-                return_url: `http://localhost:3001/payments/capture-order?mail=${mail}&orderId=${orderdb.id}`,
-                cancel_url: `http://localhost:3001/payments/cancel-order?orderId=${orderdb.id}`
+                return_url: `/payments/capture-order?mail=${mail}&orderId=${orderdb.id}`,
+                cancel_url: `/payments/cancel-order?orderId=${orderdb.id}`
             }
         }
-    
+
         const params = new URLSearchParams();
         params.append("grant_type", "client_credentials");
-    
+
         const {data: {access_token}} = await axios.post('https://api-m.sandbox.paypal.com/v1/oauth2/token', params, {
            headers: {
             'Content-Type': 'application/x-www-form-urlenconded',
@@ -72,11 +77,13 @@ router.post('/create-order', async (req, res) => {
                 Authorization: `Bearer ${access_token}`
             }
         })
-        
+
         res.send(response.data.links[1].href);
     }
     catch (error){
+        console.log(error.message)
         res.status(500).send(error);
+
     }
 });
 
@@ -119,9 +126,9 @@ router.get('/capture-order', async (req, res) => {
                     if (error) rej(error)
                     else res(info)
                 })
-            }) 
-        }; 
-       
+            })
+        };
+
 
         const message = {
             from: process.env.GOOGLE_USER,
@@ -135,18 +142,18 @@ router.get('/capture-order', async (req, res) => {
             <p>estado: ${response.data.status}</p>
             <p>para ver tu pedido haz <a>click aquí</a></p>
             <p>Saludos y gracias por confiar en nosotros! </p>`
-        }   
+        }
         sendMail(message);
         //console.log(response);
-        res.redirect('http://localhost:3000/payment/validation');
+        res.redirect(`${process.env.DOMAIN}/payment/validation`);
     }
         catch(error){
-            res.redirect('http://localhost:3000/payment/validation/error');
+            res.redirect(`${process.env.DOMAIN}/payment/validation/error`);
         }
 })
 
 router.get('/cancel-order', async (req, res) => {
-    
+
     const {orderId} = req.query;
 
     await Order.update({
@@ -156,7 +163,7 @@ router.get('/cancel-order', async (req, res) => {
             id:orderId
         }
     })
-    res.redirect('http://localhost:3000/home');
+    res.redirect(`${process.env.DOMAIN}/home`);
 })
 
 module.exports = router;

@@ -25,10 +25,11 @@ router.get('/offers', async (req, res) => {
 })
 router.get("/", async (req, res) => {
 	try {
+		
 		const { brand, type, color, fullName, page=1, size=6, sortPrice, sortBrand, minPrice, maxPrice  } = req.query
 
 		// if no product load form json
-		await loadProductData()
+		//await loadProductData()
 
 		const whereQuery = {}
 		let orderBy = []
@@ -298,6 +299,7 @@ const loadProductData = async () => {
 	} catch (error) {
 		throw new Error(error.message)
 	}
+	
 }
 
 module.exports = router

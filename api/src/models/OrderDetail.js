@@ -6,9 +6,11 @@ module.exports = (sequelize) => {
 		{
 			quantity: {
                 type: DataTypes.INTEGER,
-                defaultValue: 0,
+                defaultValue: 1,
+            },
+            color: {
+                type: DataTypes.STRING,
             }
-
 		},
 		{
 			timestamps: false,

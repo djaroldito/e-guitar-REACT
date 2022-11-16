@@ -1,8 +1,8 @@
-import { React, useEffect } from "react"
+import { React } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import styled from "styled-components"
 import {delOneFromCart, clearCart, getProductToCart} from "../../Redux/productSlice"
-import {payment, addCartToDB} from '../../Redux/productActions';
+import { addCartToDB} from '../../Redux/productActions';
 import {AiOutlineDelete} from "react-icons/ai";
 import EmptyCart from "./Cart/EmptyCart";
 import { BsCart2 } from "react-icons/bs";
@@ -10,7 +10,7 @@ import "./Cart/Cart.css";
 import Swal from "sweetalert2";
 import { Link } from "react-router-dom";
 import { IoArrowBackOutline } from "react-icons/io5";
-import {AiOutlineClear} from 'react-icons/ai'
+
 
 const Cart = () =>{
     const carrito = useSelector(state => state.products.cart)
@@ -18,9 +18,6 @@ const Cart = () =>{
     const mail = sessionStorage.getItem('emailData') ? sessionStorage.getItem('emailData') : sessionStorage.getItem('emailGoogle') ;
     console.log(mail);
     const dispatch = useDispatch()
-    //console.log(carrito)
-
-
 
    const addCartItem = async (item)=> {
     dispatch(getProductToCart(item))
@@ -33,12 +30,6 @@ const Cart = () =>{
      if(userId)
       await addCartToDB(JSON.parse(localStorage.getItem('carrito')), userId);
   }
-
-  // const completePayment = async (cart, mail) => {
-  //   const response = await payment(cart, mail);
-  //   console.log(response);
-  //   window.location.href = response;
-  // };
 
   // constructorCart()
  //funciones carteles de alerta
@@ -82,7 +73,7 @@ const preguntaUno = async (item)=>{
  })
 
 }
-
+  console.log(carrito)
   return(
   <main>
     {carrito.length >= 1 ? <button onClick={preguntaTodo}>Clear Cart</button> : <EmptyCart/> }
@@ -96,28 +87,39 @@ const preguntaUno = async (item)=>{
                   <h2>{el.brand}</h2>
                   {el.model?<p> <b>Model: </b>{el.model}.</p>: null}
                   {el.color?<p> <b>Color: </b>{el.color}.</p>: null}
+                  {el.discount? <p> <b>Discount: </b>{el.discount}.</p>: null}
                 </div>
               </ImgDiv>
 
-            {el.discount? <p> <b>Discount: </b>{el.discount}.</p>: null}
             <div className="InputCartContainer">
-              <button  disabled= { el.Cart.quantity !== 1 ? false : true} onClick={() => delFromCart(el)}>-</button>
-              <input placeholder={el.Cart.quantity} disabled></input>
-              <button disabled= { el.Cart.quantity < el.stock ? false : true} onClick={() => addCartItem(el)} >+</button>
+              <button  disabled= { el.cart.quantity !== 1 ? false : true} onClick={() => delFromCart(el)}>-</button>
+              <input placeholder={el.cart.quantity} disabled></input>
+              <button disabled= { el.cart.quantity < el.stock ? false : true} onClick={() => addCartItem(el)} >+</button>
               {el.stock?<p> <b>disponibles {el.stock}</b>.</p>: null}
             </div>
-              {/* <p>${el.price.toFixed(2)}</p> */}
+            
               <p>${(el.price * (100 - el.discount)/100).toFixed(2)}</p>
+           
+
               <button onClick={() => preguntaUno(el.id, true)}><AiOutlineDelete/></button>
               </div>
+
           ))}
             <Total>
               {carrito.length >= 1 ? <label >Total: </label> : null }
-              <h1> {carrito.length >= 1 ?  carrito.reduce((acc,prod)=>acc + (prod.price.toFixed(2) * prod.Cart.quantity) , 0).toFixed(2):null}</h1>
+              {carrito.length >= 1
+              ? carrito
+                  .reduce(
+                    (acc, prod) =>
+                      acc + ((prod.discount > 0 ? prod.price.toFixed(2) *  (100 - prod.discount)/100 : prod.price.toFixed(2)) * prod.cart.quantity),
+                    0
+                  )
+                  .toFixed(2)
+              : null}
+            
             </Total>
           </div>
-          {/* {carrito.length >= 1 ? <button onClick={() => completePayment(carrito, mail)} className="Purchasebutton"><BsCart2/>Completar Compra</button> : null} */}
-          
+
           {carrito.length >= 1 ? <button className="Purchasebutton"> <Link to = {'/prePayment'} ><BsCart2/>Completar Compra</Link> </button>  : null}
           < br/>
           <CustomButtons>
