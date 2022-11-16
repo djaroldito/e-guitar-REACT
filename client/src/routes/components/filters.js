@@ -4,6 +4,7 @@ import styled from "styled-components";
 import { getByFilter } from "../../Redux/productActions";
 import { setFilters, setCurrentPage } from "../../Redux/productSlice";
 import { RiDeleteBin6Line } from "react-icons/ri";
+import {IoMdRadioButtonOff} from 'react-icons/io'
 
 const Filter = ({filtersShow, setfiltersShow}) => {
   const dispatch = useDispatch();
@@ -47,9 +48,13 @@ const Filter = ({filtersShow, setfiltersShow}) => {
           ))}
         </select>
         <ColorDiv>
+
           {colors?.map((item, pos) => (
-            <div className="contain" key={pos}>
-              <input
+            <div className="contain" style={{boxShadow: item === 'white'? 'rgba(0, 0, 0, 0.02) 0px 1px 3px 0px, rgba(27, 31, 35, 0.15) 0px 0px 0px 1px': null}} key={pos}>
+              <label style={{ width:100, background: `${item === 'natural'? 'rgb(226, 208, 156)' :
+            item === 'golden'? 'gold' : item === 'mahogany'? "brown": item
+            }`}} className='checkmark' htmlFor={item}>
+                 <input
                 className="radio"
                 type="radio"
                 onChange={handleChange}
@@ -60,7 +65,8 @@ const Filter = ({filtersShow, setfiltersShow}) => {
                 key={item}
                 checked={filters.color === item ? true : false}
                 />
-              <label htmlFor={item}>{item}</label>
+                {filters.color === item && <span style={{color: filters.color === 'white'? 'black' :'white'}}><IoMdRadioButtonOff/></span>}
+            </label>
             </div>
           ))}
         </ColorDiv>
@@ -104,18 +110,18 @@ const Filter = ({filtersShow, setfiltersShow}) => {
           <input
             type="number"
             min={filters.minPrice}
-            max="5000"
+            max="1800"
             step="100"
             onChange={handleChange}
             className="priceInput"
             name="maxPrice"
             value={filters.maxPrice}
             />
-          {filters.maxPrice !== 5000 ? (
+          {filters.maxPrice !== 1800 ? (
             <button
             onClick={() =>
               dispatch(
-                setFilters({ ...filters, maxPrice: 5000 }),
+                setFilters({ ...filters, maxPrice: 1800 }),
                 dispatch(setCurrentPage(1))
                 )
               }
@@ -186,7 +192,7 @@ const Filters = styled.div`
   flex-direction: column;
   flex-wrap: wrap;
   margin-top: 15px;
-  box-shadow: 0px 0px 0px 1px rgba(0, 0, 0, 0.2);
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
   width: 135px;
   padding: 35px;
   height: auto;
@@ -216,20 +222,20 @@ const Filters = styled.div`
     width: 100%;
     height: 100%;
     @media (max-width: 920px){
-      margin-top: 45px;
+      margin-top: 100px;
       label{
-    text-align: center;
+      text-align: center;
+    
   }
-    }
+  }
   }
   @media (max-width: 920px) {
     display: flex;
     width: 100%;
     height: 100vh;
-    top: -2%;
-    transform: ${props => !props.filtersShow ? 'translateX(300%)' : 'translateX(0)'};
-    transition: transform .3s ease-in;
-    height: 100vh;
+    bottom: ${props => !props.filtersShow ? '-150vh' : '0'};
+    transition: bottom .3s ease-in;
+    height: 100;
     position: fixed;
     background-color: (29,29,29,.3);
     z-index: 100;
@@ -240,7 +246,6 @@ const Filters = styled.div`
   }
   @media (max-width: 500px){
     width: 100%;
-    height: 100vh;
   }
 
   .priceInput {
@@ -265,8 +270,58 @@ const Filters = styled.div`
   }
 
   .contain {
-    padding: 3px;
+    padding: 5px;
+    width: 24px;
+    height: 24px;
+    margin: 3%;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    border-radius: 50%;
+    box-shadow: rgba(99, 99, 99, 0.3) 0px 2px 8px 0px;
+    overflow: hidden;
+    @media (max-width: 920px){
+    margin: 5%;
   }
+    
+    input{
+      display: none;
+    }
+    label {
+      cursor: pointer;
+      display: flex;
+      width: 40px;
+      height: 50px;
+      /* justify-content: center; */
+      /* text-align: center; */
+      /* align-items: center; */
+      span{
+      width: calc(100% - 8px);
+      height: calc(100% - 4px);
+      font-size: 28px;
+      margin-right: 50%;
+      position: relative;
+      margin: auto;
+      display: inline-block;
+      color: white;
+      @media (max-width: 920px){
+        width: calc(100% - 8px);
+        height: calc(100% - 8px);
+        display: flex;
+  }
+
+}
+    }
+  }
+  .checkmark{
+    margin-left: -6px;
+    margin-top: -6px;
+    margin-right: auto;
+    width: 100%;
+    height: 160%;
+  }
+
+
+
   .priceButton {
     text-align: end;
     background: none;
@@ -326,13 +381,15 @@ button {
 `;
 const ColorDiv = styled.div`
 display: flex;
-flex-direction: column;
+flex-direction: row;
+flex-wrap: wrap;
 @media (max-width: 920px) {
   display: flex;
   width: 40%;
   margin-left: auto;
   margin-right: auto;
 }
+
 `
 const PriceDiv = styled.div`
 @media (max-width: 920px) {
@@ -343,6 +400,8 @@ const PriceDiv = styled.div`
   flex-direction: column;
   text-align: left;
 }
+
+
 
 `
 

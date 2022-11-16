@@ -84,7 +84,6 @@ const CardsCont = styled.div`
 	flex-direction: row;
 	flex-wrap: wrap;
 	justify-content: center;
-	margin-right: 25px;
 	margin-bottom: 25px;
 	min-height: 775px;
 	margin-left: auto;

@@ -56,7 +56,7 @@ const Card = styled.div`
   width: 45%;
   min-height: 350px;
   max-height: 350px;
-  box-shadow: 0px 0px 0px 1px rgba(0, 0, 0, 0.2);
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
   background-color: white;
   margin-right: 15px;
   margin-top: 15px;
@@ -99,7 +99,6 @@ const Card = styled.div`
   }
   
   img {
-    /* min-width: 90px; */
     max-width: 90%;
     height: auto;
     max-height: 300px;

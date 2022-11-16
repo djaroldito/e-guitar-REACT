@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams, useNavigate, Link } from "react-router-dom";
-import { getById, addCartToDB } from "../Redux/productActions";
+import { getById, addCartToDB, getAllOrderDB } from "../Redux/productActions";
 import { clearDetail, getProductToCart } from "../Redux/productSlice";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Pagination } from "swiper";
@@ -15,6 +15,7 @@ import { IoArrowBackOutline } from "react-icons/io5";
 import { BsCart2 } from "react-icons/bs";
 import { Rating } from "@mui/material";
 import Reviews from "./components/reviews";
+import {CgProfile} from 'react-icons/cg'
 
 const GuitarDetail = () => {
   const dispatch = useDispatch();
@@ -24,6 +25,9 @@ const GuitarDetail = () => {
   const userId = sessionStorage.getItem("userId");
   useEffect(() => {
     dispatch(getById(id));
+    if(userId){
+      dispatch(getAllOrderDB(userId))
+    }
     return () => {
       dispatch(clearDetail());
     };
@@ -32,24 +36,38 @@ const GuitarDetail = () => {
   const [input, setInput] = useState("");
   const detail = useSelector((state) => state.products.detail);
   const carrito = useSelector((state) => state.products.cart);
+  const userOrders = useSelector(state => state.products.orders)
+
+  console.log(userOrders)
+
 
   const isInCart = () => carrito?.find((el) => el.id === detail.id);
-  const addToCart = async (detail) => {
-    Swal.fire({
-      title: "Product added to cart!",
-      icon: "success",
-      confirmButtonText: "Ok",
-    });
-
-    dispatch(getProductToCart({ ...detail, color: input }));
-
-    if (userId)
-      await addCartToDB(JSON.parse(localStorage.getItem("carrito")), userId);
-  };
 
   const change = (e) => {
     setInput(e.target.value);
   };
+  console.log(input)
+  const addToCart = async (detail) => {
+    if (input || detail.color.split(',').length===1) {
+        const color = input ? input : detail.color
+        const cartObj = { ...detail, color }
+        dispatch(getProductToCart(cartObj))
+        Swal.fire({
+            title: "Product added to cart!",
+            icon: "success",
+            confirmButtonText: "Ok",
+        })
+        if (userId)
+  await addCartToDB(JSON.parse(localStorage.getItem("carrito")), userId)
+    } else {
+        Swal.fire({
+            title: "Select the color!",
+            icon: "warning",
+        })
+        return false
+    }
+}
+
 
   let ReviewButton;
   if (!userId) {
@@ -118,15 +136,15 @@ const GuitarDetail = () => {
             <h2>{detail.brand}</h2>
             { detail.discount >= 1? <div className="priceDiv">
             <p className="price disc"><del>U$D{detail.price}</del> {detail.discount}%OFF</p>
-            <h3 className="price">U$D { (detail.price * 1-detail.discount).toFixed(2)}</h3>
+            <h3 className="price">U$D { (detail.price * (100-detail.discount)/100).toFixed(2)}</h3>
             </div>:
-            <h3 className="price">U$D {(detail.price * 1-detail.discount).toFixed(2)}</h3>
+            <h3 className="price">U$D {(detail.price * (100 - detail.discount)/100).toFixed(2)}</h3>
           } 
             <h3>model: {detail.model}</h3>
             {detail.stars ? (
               <Rating value={detail.stars} precision={0.5} readOnly />
             ) : null}
-            <button
+            <button className="review"
               onClick={() => setReviewForm(!ReviewForm)}
             >
               Leave a review
@@ -142,17 +160,26 @@ const GuitarDetail = () => {
             </p>
             {detail.leftHand ? <LeftHand>Left Hand Available</LeftHand> : null}
 
-            <ColorDiv>
-              Colors:
+             <p>Colors:</p> 
+            <ColorDiv >
               {detail.color?.split(", ").map((item, pos) => (
-                <div className="color-div" key={pos}>
+                <div style={{border: input === item ? '2px solid black' : null}} className="contain" key={pos}>
+                  <label className="checkmark" htmlFor={item}
+                  style={{ width:100, background: `${item === 'natural'? 'rgb(226, 208, 156)' :
+                  item === 'golden'? 'gold' : item === 'mahogany'? "brown": item
+                  }`}}
+                  >
                   <input
-                    onChange={(e) => change(e)}
-                    name="color"
+                    className="radio"
                     type="radio"
+                    onChange={change}
                     value={item}
-                  />
-                  <label htmlFor={item}>{item}</label>
+                    id={item}
+                    name="color"
+                    label={item}
+                    key={item}
+                    />
+                    </label>
                 </div>
               ))}
             </ColorDiv>
@@ -177,14 +204,14 @@ const GuitarDetail = () => {
               </CustomButtons>
             ) : (
               <CustomButtons>
-                {carrito?.find((item) => detail.id === item.id) ? (
+                {carrito?.find((item) => detail.id === item.id) ?
                   <Link to="/cart">
                     <button className="include">
                       <BsCart2 /> This product is in your cart
                     </button>
                   </Link>
-                ) : (
-                  <div>
+                 : userId?
+                 <div>
                     <button
                       className="add-cart"
                       onClick={() => addToCart(detail)}
@@ -194,7 +221,9 @@ const GuitarDetail = () => {
                       Add Cart
                     </button>
                   </div>
-                )}
+                  : detail.stock < 1? <button disabled className="logIn"><CgProfile/> Not Available</button> 
+                  :<button className="logIn"><Link to='/login'><CgProfile/> Please Log In</Link></button> 
+                }
                 <Link to="/home">
                   <button className="back-home">
                     <IoArrowBackOutline /> Back Home
@@ -208,7 +237,7 @@ const GuitarDetail = () => {
         )}
       </CountDiv>
       <AdInfo>
-        aditional Information:{" "}
+        aditional Information:
         <span
           dangerouslySetInnerHTML={{ __html: `${detail.aditionalInformation}` }}
         ></span>
@@ -225,6 +254,7 @@ const CountDiv = styled.div`
   display: flex;
   flex-direction: row;
   margin-top: 75px;
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
   background-color: white;
   border-radius: 10px;
   align-items: center;
@@ -232,7 +262,7 @@ const CountDiv = styled.div`
 		flex-direction: column;
     max-height: auto;
     height: auto;
-    max-width: 100%;
+    max-width: 95%;
 	}
 
   .priceDiv{
@@ -255,7 +285,9 @@ const CountDiv = styled.div`
   }
   img {
     max-width: 100%;
+    width: auto;
     max-height: 400px;
+    object-fit: fill;
   }
   .mySwiper {
     max-width: 300px;
@@ -274,6 +306,21 @@ const TextCont = styled.div`
   @media(max-width: 920px){
 	width: 80%;
 	}
+
+  .review{
+    border-radius: 5px;
+    padding: 10px;
+    border: none;
+    cursor: pointer;
+    margin: 5px;
+    width: 120px;
+    background-color: green;
+    color: whitesmoke;
+    font-weight: 600;
+    align-items: center;
+    display: flex;
+    justify-content: center;
+  }
 
   h2,
   h3 {
@@ -294,9 +341,29 @@ const LeftHand = styled.div`
 const ColorDiv = styled.form`
   display: flex;
   flex-direction: row;
-  padding: 15px;
-  .color-div {
-    margin-left: 5px;
+  
+  input{
+    display: none;
+  }
+  .contain {
+    padding: 5px;
+    width: 22px;
+    height: 20px;
+    margin-right: 15px;
+    border-radius: 50%;
+    box-shadow: rgba(99, 99, 99, 0.3) 0px 2px 8px 0px;
+    overflow: hidden;
+    label {
+      cursor: pointer;
+      display: inline-block;
+    }
+  }
+  .checkmark{
+    margin-left: -6px;
+    margin-top: -6px;
+    margin-right: auto;
+    width: 100%;
+    height: 160%;
   }
 `;
 
@@ -310,6 +377,9 @@ const CustomButtons = styled.div`
   @media(max-width: 920px){
 	width: 80%;
 	}
+  .logIn{
+    background-color:  rgb(80, 130, 221);
+  }
   a {
     color: whitesmoke;
     text-decoration: none;
@@ -345,7 +415,7 @@ const AdInfo = styled.p`
   font-size: 12px;
   margin-left: auto;
   margin-right: auto;
-  width: 100%;
+  width: 60%;
   
 `;
 

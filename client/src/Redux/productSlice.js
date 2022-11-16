@@ -20,7 +20,7 @@ export const productSlice = createSlice({
             brand: '',
             fullName: '',
 			minPrice: 0,
-			maxPrice: 5000,
+			maxPrice: 1800,
 			sortPrice: ' '
           },
         currentPage: 1,

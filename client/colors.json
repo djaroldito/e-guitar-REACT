@@ -1,0 +1,30 @@
+[
+    {
+        "black": "black" 
+    },
+    {
+        "blue": "blue"
+    },{
+
+        "golden": "gold"
+    },
+    {
+        "mahogany": "brown"
+    },
+    {
+        "natural":"rgb(226, 208, 156)"
+    },
+    {
+        "orange":"orange"
+    },
+    {
+        "pink": "pink"
+    },
+    {
+        "red": "red"
+    },
+    {
+        "white": "white"
+    }
+
+]
