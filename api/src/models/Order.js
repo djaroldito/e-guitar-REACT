@@ -20,6 +20,9 @@ module.exports = (sequelize) => {
             },
 			code: {
 				type: DataTypes.STRING,
+			},
+			paymentLink: {
+				type: DataTypes.STRING
 			}
 		}
 	)

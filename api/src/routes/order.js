@@ -1,5 +1,5 @@
 const {Router} = require('express');
-const { Order, Product } = require("../db.js")
+const { Order, Product, OrderDetail } = require("../db.js")
 const router =  Router();
 
 router.get('/', async (req, res) => {
@@ -19,9 +19,15 @@ router.get('/getOrder', async (req, res) => {
         where: {
             id: id
         },
-        include: Product
     });
-    res.json(order);
+    const orderDetail = await OrderDetail.findAll({
+        where: {
+            orderId: id
+        },
+        include: Product
+    })
+    
+    res.json({...order.dataValues, orderDetail: [...orderDetail]});
 })
 
 

@@ -39,6 +39,21 @@ export const ProductField = (props) => {
 		/>
 	) : null
 }
+export const PriceField = (props) => {
+    const record = useRecordContext(props)
+    if (record.discount > 0) {
+        const newPrice = record.price * (1 - record.discount/100 )
+        record.price = newPrice.toFixed(2)
+    }
+	return record ? (
+        <TextInput
+            source='price'
+			sx={{ width: 120 }}
+			disabled
+			variant='outlined'
+		/>
+	) : null
+}
 
 export const CouponField = (props) => {
 	const record = useRecordContext(props)
@@ -185,12 +200,7 @@ const OrderEdit = (props) => {
 								link={false}
 								reference='product'
 							>
-								<TextInput
-									source='price'
-									sx={{ width: 120 }}
-									disabled
-									variant='outlined'
-								/>
+								<PriceField/>
 							</ReferenceField>
 						</SimpleFormIterator>
 					</ArrayInput>
