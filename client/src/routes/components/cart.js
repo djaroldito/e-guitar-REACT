@@ -1,8 +1,8 @@
-import { React, useEffect } from "react"
+import { React } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import styled from "styled-components"
 import {delOneFromCart, clearCart, getProductToCart} from "../../Redux/productSlice"
-import {payment, addCartToDB} from '../../Redux/productActions';
+import { addCartToDB} from '../../Redux/productActions';
 import {AiOutlineDelete} from "react-icons/ai";
 import EmptyCart from "./Cart/EmptyCart";
 import { BsCart2 } from "react-icons/bs";
@@ -10,7 +10,7 @@ import "./Cart/Cart.css";
 import Swal from "sweetalert2";
 import { Link } from "react-router-dom";
 import { IoArrowBackOutline } from "react-icons/io5";
-import {AiOutlineClear} from 'react-icons/ai'
+
 
 const Cart = () =>{
     const carrito = useSelector(state => state.products.cart)
@@ -18,9 +18,6 @@ const Cart = () =>{
     const mail = sessionStorage.getItem('emailData') ? sessionStorage.getItem('emailData') : sessionStorage.getItem('emailGoogle') ;
     console.log(mail);
     const dispatch = useDispatch()
-    //console.log(carrito)
-
-
 
    const addCartItem = async (item)=> {
     dispatch(getProductToCart(item))
@@ -33,12 +30,6 @@ const Cart = () =>{
      if(userId)
       await addCartToDB(JSON.parse(localStorage.getItem('carrito')), userId);
   }
-
-  // const completePayment = async (cart, mail) => {
-  //   const response = await payment(cart, mail);
-  //   console.log(response);
-  //   window.location.href = response;
-  // };
 
   // constructorCart()
  //funciones carteles de alerta
@@ -100,9 +91,7 @@ const preguntaUno = async (item)=>{
                 </div>
               </ImgDiv>
 
-            {/* {el.discount? <p> <b>Discount: </b>{el.discount}.</p>: null} */}
             <div className="InputCartContainer">
-            {/* {el.discount? <p> <b>Discount: </b>{el.discount}.</p>: null} */}
               <button  disabled= { el.cart.quantity !== 1 ? false : true} onClick={() => delFromCart(el)}>-</button>
               <input placeholder={el.cart.quantity} disabled></input>
               <button disabled= { el.cart.quantity < el.stock ? false : true} onClick={() => addCartItem(el)} >+</button>
@@ -130,8 +119,7 @@ const preguntaUno = async (item)=>{
             
             </Total>
           </div>
-          {/* {carrito.length >= 1 ? <button onClick={() => completePayment(carrito, mail)} className="Purchasebutton"><BsCart2/>Completar Compra</button> : null} */}
-          
+
           {carrito.length >= 1 ? <button className="Purchasebutton"> <Link to = {'/prePayment'} ><BsCart2/>Completar Compra</Link> </button>  : null}
           < br/>
           <CustomButtons>

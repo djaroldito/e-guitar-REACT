@@ -22,15 +22,17 @@ export default function ResetPassword () {
         })
     }
 
+    const inputEmail = input.email
+
     async function handleSubmit(e) {
         e.preventDefault();
     // Corroborar que no exista ese mail registrado ------------------------------------------
-/*         const { data } = await axios.get("/ruser/email", {
+        const { data } = await axios.get("/ruser/email", {
             params: {
-              email: email.current.value
+              email: inputEmail
             }})
       
-          if (data) return Swal.fire("This email is already registered") */
+          if (!data) return Swal.fire("This email is not registered") 
 
         axios.post("/ruser/reset-password", input)
         Swal.fire("Please, check your email to reset your password");
