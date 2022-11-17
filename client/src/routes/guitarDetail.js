@@ -236,7 +236,7 @@ const RevieButtonOk = async (userId, id) =>{
             )}
           </TextCont>
         ) : (
-          <Reviews setReviewForm={setReviewForm} ReviewForm={ReviewForm} />
+          <Reviews setReviewForm={setReviewForm} setReviewButton={setReviewButton} ReviewForm={ReviewForm} />
         )}
       </CountDiv>
       <AdInfo>
