@@ -17,7 +17,7 @@ router.post("/:idGuitar", async (req, res) => {
 		if (stars && review && user) {
 			const newReview = await Review.create({
                 stars,
-                message: review, 
+                message: review,
                 userId: user,
                 productId: idGuitar
 			})
@@ -25,8 +25,9 @@ router.post("/:idGuitar", async (req, res) => {
 		} else {
 			return res.status(400).send("Faltan parametros")
 		}
-	} catch (error) {
-		return res.status(400).send(console.log(error.message))
+    } catch (error) {
+
+		return res.status(400).send(error.message)
 	}
 })
 
