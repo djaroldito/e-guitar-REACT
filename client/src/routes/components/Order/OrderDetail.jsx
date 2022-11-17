@@ -37,6 +37,7 @@ const OrderDetail =  () => {
                                 </ImgDiv>
                             </div>
                 </div>
+                
                 <div className="productsContainer">
                     <div className="headerOrders">
                         <h3>Product Detail</h3>
@@ -53,12 +54,11 @@ const OrderDetail =  () => {
                                     </div>
                                 </ImgDiv>
                                     <p>x{product.quantity}</p>
-                                
                             </div>
                         )
                     })}
                 </div>
-                {order.orderStatus != 'PAYMENT COMPLETED' && (<a href={order.paymentLink} style={{marginTop:'5%'}}>completar el pago</a>)}
+                {order.orderStatus != 'PAYMENT COMPLETED' && (<a href={order.paymentLink} style={{marginTop:'5%'} } className='PaymentLink'>completar el pago</a>)}
             </PaymentOrderCont>
             
                 <div className='PaymentDetailContainer'>
@@ -74,7 +74,7 @@ const OrderDetail =  () => {
                             </div>
                      
                 </div>
-           
+                
         </div>
     )
 }
@@ -90,6 +90,7 @@ export const ImgDiv = styled.div`
         max-height: auto;
         object-fit: scale-down;
     }
+    
 `;
 
 
@@ -100,6 +101,12 @@ export const PaymentCont = styled.div`
 export const PaymentOrderCont = styled.div`
     width: 30%;
     margin-left:15%;
+    @media(max-width: 950px){
+        {
+            width: 70%;
+            margin-right: 15%;
+        }
+       }
 `
 
 export default OrderDetail;

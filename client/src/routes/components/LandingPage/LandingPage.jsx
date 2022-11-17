@@ -56,7 +56,7 @@ const LandingPage = () => {
 				<Offers></Offers>
 			</div>
 			<div className="NavLinkContainer">
-				<NavLink to='/home'>see all products</NavLink>
+				<NavLink to='/home' className="PaymentLink">see all products</NavLink>
 			</div>
 
 		</div>

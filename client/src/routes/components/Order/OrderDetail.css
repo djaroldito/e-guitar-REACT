@@ -1,7 +1,8 @@
 .productsContainer{
     background-color: transparent;
     border: none;
-    margin-top: 3%;
+    margin-top: 5%;
+    margin-bottom: 5%;
     height: 25%;
     width: 100%;
     position:relative;
@@ -11,7 +12,8 @@
 .OrderDetailContainer{
     background-color: transparent;
     border: none;
-    margin-top: 3%;
+    margin-top: 5%;
+    margin-bottom: 5%;
     height: 25%;
     width: 100%;
     position:relative;
@@ -21,6 +23,7 @@
 .PaymentDetailContainer{
     background-color: transparent;
     border: none;
+    margin-top: 5%;
     height: 25%;
     width: 30%;
     margin-right: 15%;
@@ -64,4 +67,38 @@
 .inlineContent{
     display: flex;
     flex-direction: row;
+}
+
+@media(max-width: 950px){
+    .OrderLayout{
+        flex-direction: column
+    }
+    .PaymentDetailContainer{
+        width: 70%;
+        margin-left:15%;
+        margin-right: 15%;
+        margin-top: 10%;
+        margin-bottom: 10%;
+    }
+    .productsContainer{
+        margin-top: 10%;
+        margin-bottom: 10%;
+    }
+   }
+.PaymentLink{
+    margin-top: 5%;
+    margin-bottom: 10%;
+    text-decoration: none;
+    margin-right: 5%;
+    padding: 15px;
+    border: 1px solid black;
+    border-radius: 5px;
+    background-color: rgb(41, 73, 143); 
+    cursor: pointer;
+    transition: .2s ease-out;
+    color:white;
+}
+.PaymentLink:hover{
+    background-color: white; 
+    color:rgb(41, 73, 143)
 }

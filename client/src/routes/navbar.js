@@ -165,7 +165,7 @@ const NavBar = () => {
                       {isAdmin !== 'true' ? (
                         <div>
                           <NavLink
-                            to="/orders"
+                            to="/home/Profile"
                             onClick={nav ? handleActive : null}
                           >
                             <CgProfile />
