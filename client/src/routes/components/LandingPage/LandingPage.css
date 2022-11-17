@@ -16,7 +16,11 @@
     background-size: cover;
     z-index: -1;
 }
-
+@media(max-width: 1281px){
+     .Arrow{
+        display:none;
+     }
+	}
 .Arrow {
     width: 6vmin;
     height: 6vmin;
@@ -26,6 +30,7 @@
     bottom:10%;
     transform: rotate(135deg);
 }
+
 .Arrow::before {
     content: '';
     width: 100%;
@@ -103,24 +108,19 @@
     font-size: 20px;
     color: white;
 }
-.about{
-    background-color: black;
-    padding-top:64px;
-    padding-bottom:64px;
-    padding-left: 5%;
-    padding-right: 5%;
-}
+
 .offers{
     display: block;
     height: auto;
-    padding: 64px;
+    padding-top: 64px;
+    padding-bottom: 64px;
     width: 100%;
     background-color: whitesmoke;
 }
 .ImageSwiper{
     display: block;
-    height: auto;
-    padding: 64px;
+    padding-bottom: 64px;
+    padding-top: 64px;
     width: 100%;
     height: 33%;
     background-color: whitesmoke;
