@@ -4,7 +4,7 @@ import styled from "styled-components";
 import { RiStarSFill } from "react-icons/ri";
 import axios from "axios";
 
-const Reviews = ({setReviewForm, ReviewForm}) => {
+const Reviews = ({setReviewForm, ReviewForm, setReviewButton}) => {
   const { id } = useParams();
   const userId = sessionStorage.getItem('userId')
   const [review, setReview] = useState({
@@ -21,6 +21,7 @@ const Reviews = ({setReviewForm, ReviewForm}) => {
     axios.post(`/reviews/${id}`, review)
     console.log(review)
     setReviewForm(!ReviewForm)
+    setReviewButton(false)
   };
 
 

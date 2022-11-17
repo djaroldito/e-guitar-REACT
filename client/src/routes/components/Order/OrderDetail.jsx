@@ -41,23 +41,24 @@ const OrderDetail =  () => {
                     <div className="headerOrders">
                         <h3>Product Detail</h3>
                     </div>
-                    {order.products?.map(product => {
+                    {order.orderDetail?.map(product => {
                         return(
                             
                             <div className="orderCard">
                                 <ImgDiv>
-                                    <img src={product.img}></img>
+                                    <img src={product.product.img}></img>
                                     <div>
-                                    <p>{product.brand} {product.model}</p>
-                                    <p>{product.color}</p>
+                                    <p>{product.product.brand} {product.product.model}</p>
+                                    <p>{product.product.color}</p>
                                     </div>
                                 </ImgDiv>
-                                    <p>x{product.OrderDetail.quantity}</p>
+                                    <p>x{product.quantity}</p>
                                 
                             </div>
                         )
                     })}
                 </div>
+                {order.orderStatus != 'PAYMENT COMPLETED' && (<a href={order.paymentLink} style={{marginTop:'5%'}}>completar el pago</a>)}
             </PaymentOrderCont>
             
                 <div className='PaymentDetailContainer'>

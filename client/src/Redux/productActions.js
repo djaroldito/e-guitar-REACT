@@ -128,3 +128,13 @@ export const getOrderDB = (orderID) => (dispatch) => {
 	.then((res) => dispatch(getOrder(res.data)))
 	
 }
+
+export const getOrdersUser = async (userId, Id)  => {
+  try {
+    const ordersUser = await axios(`/order/getorderdetail?userId=${userId}&Id=${Id}`)
+    return ordersUser.data
+  } catch (error) {
+     console.log(error)
+  }
+	
+}
