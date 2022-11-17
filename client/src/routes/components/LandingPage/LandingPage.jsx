@@ -30,8 +30,9 @@ const LandingPage = () => {
 				</h1>
 			</div>
 			<div className='ImageSwiper'>
-				<div style={{marginRight: "10%"}}>
+				<div>
 					<Swiper
+						className="swiper-slide"
 						modules={[Navigation, Scrollbar, A11y]}
 						slidesPerView={1}
 						navigation

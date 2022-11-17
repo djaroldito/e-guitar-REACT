@@ -49,7 +49,7 @@ const OrderDetail =  () => {
                                     <img src={product.product.img}></img>
                                     <div>
                                     <p>{product.product.brand} {product.product.model}</p>
-                                    <p>{product.product.color}</p>
+                                    <p>{product.color}</p>
                                     </div>
                                 </ImgDiv>
                                     <p>x{product.quantity}</p>

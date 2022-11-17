@@ -9,7 +9,7 @@ import Cart from './routes/components/cart';
 import Signup from './routes/Signup/Signup';
 import Login from './routes/Signup/Login';
 import ProductForm from './routes/components/ProductForm/ProductForm'
-import Order from "./routes/components/Order/Order";
+import OrderEmpty from "./routes/components/Order/OrderEmpty";
 import Activate from "./routes/Signup/activate.js"
 import Layout from "./routes/Layout"
 import DashboardRoute from "./routes/components/Dashboard/DashboardRoute"
@@ -30,7 +30,7 @@ function App() {
           <Route path="/orders/:id" element={<OrderDetail />} />
           <Route path="/home/Profile" element={<Profile />} />
           <Route path="/cart" element={<Cart />} />
-          <Route path="/orders" element={<Order />} />
+          <Route path="/orders" element={<OrderEmpty/>} />
           <Route path="/signup" element={<Signup />} />
           <Route exact path="/activate/:email" element={<Activate />} />
           <Route path="/login" element={<Login />} />
