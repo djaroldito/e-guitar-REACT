@@ -7,12 +7,12 @@ import {
 	NumberField,
 	TextInput,
 	EditButton,
-    DeleteButton,
+	DeleteButton,
 	Button,
 	useDataProvider,
-    useRecordContext,
-    useRefresh,
-    useNotify,
+	useRecordContext,
+	useRefresh,
+	useNotify,
 } from "react-admin"
 import { Done, Clear, RestartAlt } from "@mui/icons-material"
 
@@ -21,12 +21,24 @@ export const SoftDeleteField = (props) => {
 	return <span>{record.deletedAt ? <Clear /> : <Done />}</span>
 }
 
-export const ColorField = (props) => {
-    const record = useRecordContext(props)
-	return record ? <span>{record.color?.join(" | ")}</span> : null
+const PreviewImage = (props) => {
+	const record = useRecordContext(props)
+    let img = ""
+	if (record.img) {
+		if (typeof record.img === "string") {
+			// split and use [0]
+			img = record.img.split(/\s*(?:,|$)\s*/)[0].trim()
+		} else {
+			img = record.img.src
+		}
+		return <img alt={`${record.id}`} src={`${img}`} height={40} />
+	} else {
+		return null
+	}
 }
+
 export const DiscountField = (props) => {
-    const record = useRecordContext(props)
+	const record = useRecordContext(props)
 	return record ? (
 		<span style={{ fontSize: "12px" }}>{record.discount} %</span>
 	) : null
@@ -36,20 +48,20 @@ DiscountField.defaultProps = {
 }
 
 const ProductList = (props) => {
-    const dataProvider = useDataProvider()
-    const refresh = useRefresh()
-    const notify = useNotify();
+	const dataProvider = useDataProvider()
+	const refresh = useRefresh()
+	const notify = useNotify()
 	const handleRestore = (id) => {
 		dataProvider
 			.getRestore("product", { id: id })
 			.then(({ data }) => {
-                refresh()
-                notify(`Restored`, { type: 'success' })
+				refresh()
+				notify(`Restored`, { type: "success" })
 			})
 			.catch((error) => {
-				notify(error.message, { type: 'error' })
+				notify(error.message, { type: "error" })
 			})
-    }
+	}
 
 	const CustomActions = (props) => {
 		const record = useRecordContext(props)
@@ -63,8 +75,8 @@ const ProductList = (props) => {
 			return (
 				<div style={{ display: "inline-flex" }}>
 					<EditButton label='' basepath='/product' sx={{ fontSize: "12px" }} />
-                    <DeleteButton
-                        label=''
+					<DeleteButton
+						label=''
 						basepath='/product'
 						sx={{ fontSize: "12px" }}
 					/>
@@ -72,23 +84,26 @@ const ProductList = (props) => {
 			)
 		}
 	}
-    const filters = [
-        <TextInput label="Search" source="q" alwaysOn />,
+	const filters = [
+		<TextInput label='Search' source='q' alwaysOn />,
 		<TextInput label='Type' source='type' />,
 		<TextInput label='Brand' source='brand' />,
 	]
 	return (
-		<List title='List of Products' filters={filters} {...props} >
+		<List title='List of Products' filters={filters} {...props}>
 			<Datagrid bulkActionButtons={false}>
-				<ImageField
-					source='img'
+				{/* <ImageField
+                    source='img'
+                    emptyText="photo"
 					label={false}
 					sx={{ "& .RaImageField-image": { width: "40px", height: "40px" } }}
-				/>
+				/> */}
+				<PreviewImage />
 				<TextField source='type' sx={{ fontSize: "12px" }} />
 				<TextField source='brand' sx={{ fontSize: "12px" }} />
 				<TextField source='model' sx={{ fontSize: "12px" }} />
-				<ColorField source='color' sx={{ fontSize: "12px" }} />
+				<TextField source='color' sx={{ fontSize: "12px" }} />
+				{/* <ColorField source='color' sx={{ fontSize: "12px" }} /> */}
 				<NumberField
 					source='price'
 					options={{

@@ -9,9 +9,9 @@ const NoFound = () => {
     type: '',
     brand: '',
     fullName: '',
-    minPrice: 0,
-    maxPrice: 1800,
-    sortPrice: '',
+  minPrice: 0,
+  maxPrice: 1800,
+  sortPrice: ' '
   };
   return (
     <NoDiv>

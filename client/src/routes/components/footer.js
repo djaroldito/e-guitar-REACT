@@ -13,7 +13,7 @@ return(
     <footer>
          <ConDiv>
             <ColumDiv>
-            <h4>SOPORT</h4>
+            <h4>SUPPORT</h4>
             <p>Frequent questions</p>
             <p>Refund policies</p>
             <p>Changes policies</p>

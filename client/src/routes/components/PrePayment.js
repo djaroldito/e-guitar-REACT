@@ -106,7 +106,7 @@ const PrePayment = () => {
   return (
     <div className='prePayBox'>
       <div className='preCarAndPay'>
-        <Profile />
+        <Profile className="prePayProfile"/>
         <div className='preCarrito'>
           <h2>Product list: </h2>
           {carrito.map((el, index) => (

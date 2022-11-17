@@ -15,12 +15,12 @@
   position: relative;
   z-index: 1;
   min-width: 50vw;
-  min-height: 100%; 
+  min-height: 100%;
   border-radius: 5px;
   overflow: hidden;
   background-color: white;
-  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2); 
-} 
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
+}
 
 .loginLeft {
   display: flex;
@@ -28,7 +28,11 @@
   width: 50%;
   background-image: url("./Guitar4.jpg");
   background-size: cover;
-
+}
+@media (max-width: 600px) {
+  .loginLeft {
+    display: none;
+  }
 }
 
 .loginRight {
@@ -59,16 +63,22 @@
   bottom: 20px;
   margin-bottom: 0px;
   color: grey;
+  font-size: 12px;
 }
 
 .loginGg {
   text-align: center;
   margin-top: 25px;
 }
+.loginGg p{
+    font-size: 14px;
+    padding:5px;
+}
 
 .loginAcc, .loginSup {
   text-align: center;
   margin-top: 15px;
+  font-size: 12px;
 }
 
 .loginAcc {
@@ -87,7 +97,7 @@
   border: none;
   position: relative;
 }
-  
+
 .signInForm input {
   width: 250px;
   min-height: 35px;
@@ -99,7 +109,7 @@
   border: 1px solid rgba(65, 65, 65, 0.3);
   box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
   vertical-align: top;
-  padding-left: 20px; 
+  padding-left: 20px;
   position: relative;
 }
 
@@ -114,7 +124,7 @@
 
 
 /* Buttons --------------------------------------------------------- */
-    
+
 .submitBtn, .loginBtn {
   display: block;
   width: 250px;

@@ -1,11 +1,5 @@
 @import "https://fonts.googleapis.com/css?family=Nunito+Sans:400,400i,700,900&display=swap";
 
- .profileBox {
-    height: 82vh;
-    padding-top: 30px;
-    padding-bottom: 30px;
-}
-
  .profileBox, .profileImg {
     display: flex;
     justify-content: center;
@@ -17,15 +11,16 @@
     flex-direction: column;
     z-index: 0;
     width: 40vw;
-    min-width: 480px;
+    min-width: 390px;
     height: 450px; 
-    bottom: 70px;
+    margin-top: 1.8em; 
+    margin-bottom: 5em; 
     border-radius: 5px;
     background-color: white;
     box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2); 
     font-family: "Nunito Sans", "Helvetica Neue", sans-serif;
-
 } 
+
 
 /* Img --------------------------------------------------------- */
 .profileImg {   
@@ -52,24 +47,26 @@
     display: flex;
     flex-direction:row;
     justify-content: center;
-    width: 30%;
+     width: 25%; 
+    /* width: 31%; */
     min-width: 250px;
     min-height: 40%;
-    margin-top: 2.5em; 
-    margin-left: 15%;
-    
+    margin-top: 6.8em; 
+    margin-left: 9em;
+    padding-top: 8px;
+/*     background-color: pink; */
 } 
 
 .profileForm form {
     display: flex;
     flex-direction: column;
-    width: 80%;
+    width: 450px;
     min-width: 300px;
 }
 
 .profileForm input {
     margin-top: 3px;
-    min-width: 200px;
+    min-width: 250px;
     height: 1.9em;
     margin: 0.2em;
     border: none;
@@ -87,8 +84,6 @@
  
 .profileInfo {
     position: relative;
-/*     display: flex;
-    flex-direction: column; */
     height: 18em;
     padding-top: 10em;
     font-size: 15px;
@@ -110,21 +105,22 @@
 } 
 
 .profileText p { 
-    margin-left: 10%; 
+/*     margin-left: 10%; */ 
+    width: 200px;
+    border-bottom: 2px solid #eee;
 }
 
 .profileText label, .profileText p {
     display: flex;
     text-align: center;
     align-items: center;
-    width: 100px;
 }
 
 .profileError {
     position: absolute;
     font-size: 14px;
     left: 55%;
-    color: red;
+    color: rgba(255, 0, 0, 0.466);
     text-align: center;
 }
 
@@ -139,4 +135,45 @@
     font-weight: bold;
     border-radius: 5px;
     color: whitesmoke
+}
+
+
+
+/* RESPONSIVE --------------------------------------------------------------- */
+@media (max-width: 1040px){
+    .profileBox {
+        display: flex;
+    }
+
+    .profileContainer {
+        position: relative;
+        flex-direction: column;
+        z-index: 0;
+        width: 40vw;
+        min-width: 390px;
+        margin-top: 1.8em; 
+        border-radius: 5px;
+        background-color: white;
+        box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2); 
+        font-family: "Nunito Sans", "Helvetica Neue", sans-serif;
+    } 
+
+    .profileForm {
+        width: 30%;
+        margin-left: -5px;
+        margin-bottom: 10px;
+        background-color: white;
+    }
+
+    .profileText {
+        margin-left: 1%;
+    }
+    .profileText label {
+        color: white
+    }
+
+    .profileBtn {
+        margin-left: 50px;
+        margin-top: 5px;
+    }
 }

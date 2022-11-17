@@ -99,7 +99,7 @@ const NavBar = () => {
                       
                     )}
                     <div className="Dropdown-Content">
-                      {!isAdmin ? (
+                      {isAdmin !== 'true' ? (
                         <div>
                           <p
                             onClick={() => {
@@ -159,10 +159,10 @@ const NavBar = () => {
                         width={30}
                       />
                     ) : (
-                      <FaUserAlt />
+                      <FaUserAlt className='userico' />
                     )}
                     <div>
-                      {!isAdmin ? (
+                      {isAdmin !== 'true' ? (
                         <div>
                           <NavLink
                             to="/orders"
@@ -416,6 +416,11 @@ const IconCont = styled.div`
       border-radius: 50%;
       width: 75px;
     }
+  }
+  .userico{
+    font-size: 40px;
+    margin-left: auto;
+    margin-right: auto;
   }
 `;
 
