@@ -4,21 +4,35 @@ import styled from "styled-components";
 import { RiStarSFill } from "react-icons/ri";
 import axios from "axios";
 
-const Reviews = () => {
+const Reviews = ({setReviewForm, ReviewForm, setReviewButton}) => {
   const { id } = useParams();
+  const userId = sessionStorage.getItem('userId')
   const [review, setReview] = useState({
-    userId: sessionStorage.getItem("userID") ? sessionStorage("userID") : false,
+    user: userId,
     stars: 5,
-    review: "",
+    review: " "
   });
+
+  console.log(id)
 
   const HandleSubmit = (e) => {
     e.preventDefault();
-    axios.post(`/reviews/${id}`)
+    if(review.review === ' ' || review.review === '' ) review.review = 'No message'
+    axios.post(`/reviews/${id}`, review)
+    console.log(review)
+    setReviewForm(!ReviewForm)
+    setReviewButton(false)
   };
+
+
+
+
   const handleChange = (e) => {
     setReview({ ...review, [e.target.name]: e.target.value });
+  
   };
+
+  // console.log(validate.textarea)
 
 
   return (

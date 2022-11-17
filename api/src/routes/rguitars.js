@@ -5,7 +5,7 @@ const { Router } = require("express")
 const router = Router()
 const { Op } = require("sequelize");
 const sequelize = require("sequelize")
-const { Product } = require("../db.js")
+const { Product, Review } = require("../db.js")
 
 
 //  GET /rguitars
@@ -122,6 +122,16 @@ router.get("/:idGuitar", async (req, res) => {
 		})
 		if (guitar) {
 			//si encuentra el id
+			const review = await Review.findAll({
+				where:{
+					productId: idGuitar
+				}
+			})
+			const starsToNumber = review? review.map(item => item.stars).reduce((acc, el )=> acc + el, 0): 0
+			const stars = starsToNumber/review.length
+			guitar.dataValues.stars = stars? stars: 0
+			console.log(starsToNumber)
+				
 			return res.status(200).json(guitar)
 		} else {
 			return res.status(404).send("NOT FOUND")

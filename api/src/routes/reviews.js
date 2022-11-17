@@ -1,24 +1,23 @@
-const fs = require("fs")
-const path = require("path")
+
 const { Router } = require("express")
 const router = Router()
 
-const sequelize = require("sequelize")
 
-const { Product, Review, User } = require("../db.js")
+
+const { Review } = require("../db.js")
 
 
 router.post("/:idGuitar", async (req, res) => {
-	//res.sendStatus(200)
 	const {	stars, review, user } = req.body
     const {idGuitar} = req.params
 
+	console.log(stars, review, user, idGuitar)
+
 	try {
-		//compruebo que esten todos los parametros requeridos
 		if (stars && review && user) {
 			const newReview = await Review.create({
                 stars,
-                message: review, 
+                message: review,
                 userId: user,
                 productId: idGuitar
 			})
@@ -26,9 +25,12 @@ router.post("/:idGuitar", async (req, res) => {
 		} else {
 			return res.status(400).send("Faltan parametros")
 		}
-	} catch (error) {
+    } catch (error) {
+
 		return res.status(400).send(error.message)
 	}
 })
+
+
 
 module.exports = router

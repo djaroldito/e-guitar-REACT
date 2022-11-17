@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams, useNavigate, Link } from "react-router-dom";
-import { getById, addCartToDB, getAllOrderDB } from "../Redux/productActions";
+import { getById, addCartToDB, getOrdersUser } from "../Redux/productActions";
 import { clearDetail, getProductToCart } from "../Redux/productSlice";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Pagination } from "swiper";
@@ -17,17 +17,18 @@ import { Rating } from "@mui/material";
 import Reviews from "./components/reviews";
 import {CgProfile} from 'react-icons/cg'
 
+
 const GuitarDetail = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { id } = useParams();
   const [ReviewForm, setReviewForm] = useState(true);
   const userId = sessionStorage.getItem("userId");
+  const [ReviewButton, setReviewButton] = useState(false)
+  
   useEffect(() => {
     dispatch(getById(id));
-    if(userId){
-      dispatch(getAllOrderDB(userId))
-    }
+    RevieButtonOk(userId,id)
     return () => {
       dispatch(clearDetail());
     };
@@ -36,9 +37,7 @@ const GuitarDetail = () => {
   const [input, setInput] = useState("");
   const detail = useSelector((state) => state.products.detail);
   const carrito = useSelector((state) => state.products.cart);
-  const userOrders = useSelector(state => state.products.orders)
 
-  console.log(userOrders)
 
 
   const isInCart = () => carrito?.find((el) => el.id === detail.id);
@@ -69,12 +68,16 @@ const GuitarDetail = () => {
 }
 
 
-  let ReviewButton;
-  if (!userId) {
-     ReviewButton = false;
-  } else {
-     ReviewButton = true;
-};
+const RevieButtonOk = async (userId, id) =>{
+    if (!userId) {
+      setReviewButton(false);
+    } else {
+      const OrdersUser = await getOrdersUser(userId, id)
+      if(OrdersUser.length > 0){
+        setReviewButton(true)
+      } 
+    }
+  }
 
   const handleDeleteProduct = (id) => {
     Swal.fire({
@@ -144,11 +147,11 @@ const GuitarDetail = () => {
             {detail.stars ? (
               <Rating value={detail.stars} precision={0.5} readOnly />
             ) : null}
-            <button className="review"
+           { ReviewButton && <button className="review"
               onClick={() => setReviewForm(!ReviewForm)}
             >
               Leave a review
-            </button>
+            </button>}
             <div>
               <p
                 dangerouslySetInnerHTML={{ __html: `${detail.description}` }}
@@ -233,7 +236,7 @@ const GuitarDetail = () => {
             )}
           </TextCont>
         ) : (
-          <Reviews />
+          <Reviews setReviewForm={setReviewForm} ReviewForm={ReviewForm} />
         )}
       </CountDiv>
       <AdInfo>
