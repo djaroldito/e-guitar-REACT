@@ -85,7 +85,8 @@ const NavBar = () => {
                 </NavLink>
               ) : (
                 <>
-                  <div className="Dropdown user-icon">
+                  <div className="user-icon">
+                    <div className="Dropdown">
                     {userImage !== "null" && userImage ? (
                       <img
                         src={userImage}
@@ -118,6 +119,7 @@ const NavBar = () => {
                       ) : (
                         ""
                       )}
+                    </div>
                     </div>
                   </div>
                   {email ? (
