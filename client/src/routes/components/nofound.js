@@ -55,6 +55,9 @@ const NoDiv = styled.div`
   img {
     width: 250px;
   }
+  @media (max-width: 920px) {
+    width: 100%;
+  }
 `;
 
 export default NoFound;
