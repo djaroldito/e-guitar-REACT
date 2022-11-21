@@ -4,12 +4,10 @@ import {
 	SimpleForm,
 	TextInput,
 	DateInput,
-	NumberInput,
 	//	SelectInput,
 	ImageField,
 	ArrayInput,
 	//fields
-	TextField,
 	ReferenceField,
 	SimpleFormIterator,
 	// toolbar
@@ -87,10 +85,10 @@ const OrderEdit = (props) => {
 	)
 
 	if (isLoading) return null
-	if (data) {
-		var discount = data.discount
-		console.log(discount)
-	}
+    // var discount = ''
+	// if (data) {
+	// 	 discount = data.discount
+	// }
 
 	return (
 		<Edit
