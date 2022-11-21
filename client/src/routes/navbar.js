@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { NavLink, Link } from "react-router-dom";
+import { NavLink, Link, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { BiLogIn, BiLogOut } from "react-icons/bi";
 import { FaUserAlt } from "react-icons/fa";
@@ -11,8 +11,11 @@ import { BurgerButton } from "./components/burgerButton.js";
 import { useSelector } from "react-redux";
 import { BsFillBagCheckFill } from "react-icons/bs";
 import { CgProfile } from "react-icons/cg";
+import { FaUserCog } from "react-icons/fa";
+import Swal from "sweetalert2";
 
 const NavBar = () => {
+  const navigate = useNavigate();
   const [nav, setNav] = useState(false);
   const handleLog = () => {
     sessionStorage.removeItem("emailData");
@@ -29,8 +32,6 @@ const NavBar = () => {
   const emailGoogle = sessionStorage.getItem("emailGoogle");
   const userImage = sessionStorage.getItem("imageURL");
   const userId = sessionStorage.getItem('userId')
-
-  console.log(cartNumb.length);
 
   const handleActive = () => {
     setNav(!nav);
@@ -70,7 +71,11 @@ const NavBar = () => {
               Dashboard
             </NavLink>
           ) : (
-            ""
+            <NavLink className="link admin" alt="Admin Dashboard" to="/home" onClick={() => {
+                Swal.fire('Access to Admin Dashboard', 'Login with the following access data <br/> Email: <b>admin@gmail.com</b> <br/> Password: <b>admin</b>').then( res => navigate("/login"))
+            }} >
+              <FaUserCog/> <span>Dashboard</span>
+            </NavLink>
           )}
 
           <IconCont>
@@ -96,7 +101,7 @@ const NavBar = () => {
                       />
                     ) : (
                       <FaUserAlt />
-                      
+
                     )}
                     <div className="Dropdown-Content">
                       {isAdmin !== 'true' ? (
@@ -209,7 +214,7 @@ const NavBar = () => {
               )}
               <span>Cart</span>
             </NavLink> : null
-            }          
+            }
           </IconCont>
         </div>
       </NavCont>
@@ -252,11 +257,14 @@ const NavCont = styled.div`
       margin-bottom: auto;
       transition: top 0.3s ease-in;
       align-items: center;
-     
+
     }
   }
   .link {
-    padding: 25px 5px;
+    padding: 25px;
+    &.admin{
+        font-size:26px;
+    }
     @media (max-width: 900px) {
       display: block;
       margin-left: auto;
