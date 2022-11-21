@@ -44,7 +44,6 @@ router.get("/", async (req, res) => {
 
 		const data = await Order.findAndCountAll({
 			where: whereQuery,
-			logging: console.log,
 			limit,
 			offset,
 			order: orderQuery,
@@ -165,7 +164,6 @@ router.delete("/:id", async (req, res) => {
 				id: id,
 			},
 		})
-		console.log(deleted)
 		res.sendStatus(200)
 	} catch (error) {
 		res.status(400).send(error.message)
