@@ -73,8 +73,8 @@ const PrePayment = () => {
     }
   };
 
-  const getTotalConDescuento = (carrito, codeValidate) => {  
-    if(!codeValidate) return 
+  const getTotalConDescuento = (carrito, codeValidate) => {
+    if(!codeValidate) return
     let totalDescuento =
       carrito
         ?.reduce(
@@ -87,7 +87,7 @@ const PrePayment = () => {
           ?.reduce(
             (acc, prod) => acc + prod.price.toFixed(2) * prod.cart.quantity,
             0
-          ) 
+          )
           .toFixed(2)) /
         100;
 
@@ -128,7 +128,7 @@ const PrePayment = () => {
           type="text"
           placeholder="Discount Code..."
           onChange={(e) => handleChange(e)}
-          style={{ padding: "14px 16px", width: "40%" }}/>        
+          style={{ padding: "14px 16px", width: "40%" }}/>
           <button className="prePayCartBtn" type="button" onClick={() => validateCode(codeValidate)}>
             SendCode
           </button>
@@ -146,7 +146,7 @@ const PrePayment = () => {
                   total(carrito) &&
                   setCodeDisc({})
               : total(carrito)
-            : "No carrito"}
+            : ""}
         </h1>
 
         {carrito.length >= 1 ? (
