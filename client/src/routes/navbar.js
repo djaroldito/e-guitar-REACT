@@ -94,11 +94,10 @@ const NavBar = () => {
                         width={30}
                       />
                     ) : (
-                      <FaUserAlt />
-                      
+                      <FaUserAlt/>
                     )}
                     <div className="Dropdown-Content">
-                      {!isAdmin ? (
+                        {isAdmin !== "true" ? 
                         <div>
                           <p
                             onClick={() => {
@@ -114,10 +113,7 @@ const NavBar = () => {
                           >
                             Perfil
                           </p>
-                        </div>
-                      ) : (
-                        ""
-                      )}
+                        </div>: null}
                     </div>
                   </div>
                   {email ? (
