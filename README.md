@@ -1,70 +1,65 @@
-# Getting Started with Create React App
+# { Guitar Code } <img height="80" src="./client/src/pics/guitar_code_logo.png" align="right"/>
+#### _Team Project for Henry Bootcamp_ 🚀
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-## Available Scripts
+## Functionalities
 
-In the project directory, you can run:
+### Shop Page
+- Landing page with an intro and relevant information like offers
+- List of products by visualizing them by paging.
+- View the details of each guitar.
+- Search products by brand and type. Sort by price.
+- Filter by diferent features like color, price, etc.
+### Dashboard
+- Estadistic chart of orders incomings by month.
+- List, create, edit and delete products.
+- List of registered users in shop
+- List of orders with status detail
+- Creation and management of discount coupons.
+- List of reviews submitted by purchasers
 
-### `npm start`
+#### Aditional Info
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+- The project was developed under the SCRUM framework.
+- The execution of the entire project lasted 3 weeks.
+- The frontend and backend were developed as separate projects.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+<hr>
 
-### `npm test`
+## ⚡ Main Technologies
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- Frontend: **_React, Redux Toolkit, React Router v6, Styled Components, React Google Login, MaterialUI, React-Admin, Recharts_**
+- Backend: **_nodeJS, ExpressJS, Sequelize, PostgreSQL, NodeMailer_**
 
-### `npm run build`
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## 🔗 Demo
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+ https://e-guitar-react.vercel.app
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
-### `npm run eject`
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+| Landing      | Homepage |
+| ----------- | ----------- |
+| ![Landing](./client/src/pics/landing.png) | ![Homepage](./client/src/pics/home.png) |
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+| Detail page      | Profile page |
+| ----------- | ----------- |
+| ![Detail](./client/src/pics/detail.png) | ![Profile](./client/src/pics/profile.png) |
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+| Dashboard      | Product List |
+| ----------- | ----------- |
+| ![Dashboard](./client/src/pics/dashboard_home.png) | ![Products](./client/src/pics/dashboard_products.png) |
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+| Create product      | Reviews |
+| ----------- | ----------- |
+| ![Create](./client/src/pics/dashboard_create.png) | ![Reviews](./client/src/pics/dashboard_reviews.png) |
 
-## Learn More
+<hr>
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+## Authors
 
-To learn React, check out the [React documentation](https://reactjs.org/).
 
-### Code Splitting
+| <img src='https://github.com/mateorogatky.png' width='64'> | [![@aicaceres](https://github.com/aicaceres.png?size=64)](https://github.com/aicaceres) | <img src='https://github.com/TorianNomas.png' width='64'> | [![@a1l1n](https://github.com/a1l1n.png?size=64)](https://github.com/a1l1n) | [![@djaroldito](https://github.com/djaroldito.png?size=64)](https://github.com/djaroldito) | [![@miguel-mm89](https://github.com/miguel-mm89.png?size=64)](https://github.com/miguel-mm89) |
+| ----------- | ----------- | ----------- | ----------- | ----------- | ----------- |
+| @mateorogatky | @aicaceres | @TorianNomas | @a1l1n | @djaroldito | @miguel-mm89 |
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
