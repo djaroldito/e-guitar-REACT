@@ -16,11 +16,20 @@
     display: flex;
     flex-direction: column;
     width: 450px;
+    min-width: 390;
     height: 450px;
     background-color: rgba(45, 63, 92, 0.856); 
     color: whitesmoke;
     margin-top: 1.9em;
     margin-left: 2em;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2); 
+    border-radius: 5px;
+}
+
+.prePayProfile {
+    position: relative;
+    height: 400px;
+    bottom: 6em;
 }
 
 .preCarrito h2 {
@@ -58,7 +67,6 @@
 }
 
 .prePayCart {
-    position: absolute;
     width: 550px;
     float: right;
     flex-wrap: wrap;
@@ -72,6 +80,7 @@
 .prePayCart input {
     height: 15px;
     width: 20%;
+    max-width: 150px;
     border-radius: 5px;
     border: none;
     outline: none;
@@ -105,7 +114,6 @@
 .prePayBtn {
     position: absolute;
     z-index: 3;  
-    min-width: 200px;
     margin-left: 17em; 
     flex-direction: row-reverse;
     align-items: flex-end;
@@ -134,4 +142,84 @@
 }
 
 
-/* A PARTIR DE LOS 1000PX METER TODO EN UN DISPLAY COLUMN */
+/* A PARTIR DE LOS 1000PX METER TODO EN UN DISPLAY COLUMN ----------------------------*/
+
+@media (max-width: 1000px){
+    .prePayBox {
+        display: flex;
+        flex-direction: column;
+        padding-top: 30px;
+        padding-bottom: 30px;
+        height: 1250px;
+    }
+
+    .preCarAndPay {
+        display: flex;
+        flex-direction: column;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .preCarrito {
+        margin-left: 0.5em;
+        width: 380px;
+        margin-left: 0.5em;
+    }
+
+    .preProduct  {
+        display: flex;
+        position: relative;
+        z-index: 2;
+        width: 350px;
+        max-height: 3.5em;
+        align-items: center;
+        justify-content: center;
+        margin-top: 20px; 
+        font-size: 13px;
+    }
+
+    .preTotal, .prePayCart {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        width: 390px;
+        top: 10em; 
+    }
+
+    .prePayCart {
+        top: 5em;
+        flex-direction: row;
+        align-content: flex-end;
+        align-items: center;
+    }
+
+    .prePayCart label {
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .prePayCartBtn {
+        margin-left: auto;
+        margin-right: auto;
+        margin-top: 30px;
+        bottom: 10px;
+    }
+
+    .preTotal {
+        width: 300px;
+        display: flex;
+        margin-top: -50px; 
+        bottom: 2em;
+        left: 0.1%;
+        flex-direction: row;
+        align-content: flex-end;
+        align-items: center;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .prePayBtn {
+        width: 100px;
+    }
+
+}

@@ -5,13 +5,13 @@ import { getAllProducts, setFilters } from "../../Redux/productSlice";
 const NoFound = () => {
   const dispatch = useDispatch();
   const Filters = {
-    color: "",
-    type: "",
-    brand: "",
-    fullName: "",
-    minPrice: 0,
-    maxPrice: 1800,
-    sortPrice: " ",
+    color: '',
+    type: '',
+    brand: '',
+    fullName: '',
+  minPrice: 0,
+  maxPrice: 1800,
+  sortPrice: ' '
   };
   return (
     <NoDiv>
@@ -56,6 +56,9 @@ const NoDiv = styled.div`
 
   img {
     width: 250px;
+  }
+  @media (max-width: 920px) {
+    width: 100%;
   }
 `;
 

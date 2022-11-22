@@ -1,6 +1,8 @@
-const {Router} = require('express');
-const { Order, Product } = require("../db.js")
+const {Router, query} = require('express');
+const { Order, Product, OrderDetail } = require("../db.js");
+const { route } = require('./reviews.js');
 const router =  Router();
+const {Op} = require('sequelize')
 
 router.get('/', async (req, res) => {
     const {userId} = req.query;
@@ -14,15 +16,42 @@ router.get('/', async (req, res) => {
 
 router.get('/getOrder', async (req, res) => {
     const {id} = req.query;
-    console.log(id);
+    
     const order = await Order.findOne({
         where: {
             id: id
         },
-        include: Product
     });
-    res.json(order);
+    const orderDetail = await OrderDetail.findAll({
+        where: {
+            orderId: id
+        },
+        include: Product
+    })
+    
+    res.json({...order.dataValues, orderDetail: [...orderDetail]});
 })
+
+router.get('/getorderdetail', async (req, res) => {
+    const {userId, Id} = req.query
+   
+    
+   
+    try {
+        const orders = await Order.findAll({
+            where:{
+                userId: userId
+            }, 
+            include:[{model:OrderDetail,where:{productId: Id}}]
+        })
+        res.json(orders)
+    } catch (error) {
+        res.send(error.message)
+    }
+
+}
+
+)
 
 
 

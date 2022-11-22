@@ -38,13 +38,16 @@ router.post('/create-order', async (req, res) => {
               code: code,
             },}
         )};
-       const orderdb = await Order.create({
+      
+        await axios.delete(`${process.env.DOMAIN_PAYMENT}/cart?userID=${products[0].cart.userId}`);
+        
+        const orderdb = await Order.create({
             orderDate: Sequelize.NOW(),
             orderStatus: "AWAITING PAYMENT",
             deliveryStatus: 'PENDING',
             total: productsMapped.reduce((acc, curr) => acc + (parseFloat(curr.amount.value)), 0),
             userId: products[0].cart.userId,
-            code: code
+            code: code,
         });
 
         const orderDetail = products.map(product => ({
@@ -67,6 +70,8 @@ router.post('/create-order', async (req, res) => {
             }
         }
 
+        
+
         const params = new URLSearchParams();
         params.append("grant_type", "client_credentials");
 
@@ -86,6 +91,15 @@ router.post('/create-order', async (req, res) => {
             }
         })
 
+        await Order.update({
+            paymentLink: response.data.links[1].href
+        },{
+            where:{
+                id: orderdb.id
+            }
+        }
+        )
+        
         res.send(response.data.links[1].href);
     /* }
     catch (error){
@@ -143,13 +157,13 @@ router.get('/capture-order', async (req, res) => {
             to: mail,
             subject: "Recibo de compra",
             html: `
-            <h3>Hola!</h3>
-            <p>Gracias por tu compra, tu pago fue recibido y en este momento tu pedido esta siendo procesado</p>
-            <h3>Detalle de tu compra</h3>
+            <h3>Hello!</h3>
+            <p>Thank you for your purchase, we have received your payment and your order is beign processed!</p>
+            <h3>Order Detail</h3>
             <p>id: ${response.data.id}</p>
-            <p>estado: ${response.data.status}</p>
-            <p>para ver tu pedido haz <a>click aquí</a></p>
-            <p>Saludos y gracias por confiar en nosotros! </p>`
+            <p>state: ${response.data.status}</p>
+            <p>you can check your order <a href=${process.env.DOMAIN}/orders/${orderId}>clicking here</a></p>
+            <p>Thank you for using GuitarCode </p>`
         }
         sendMail(message);
         //console.log(response);

@@ -30,8 +30,9 @@ const LandingPage = () => {
 				</h1>
 			</div>
 			<div className='ImageSwiper'>
-				<div style={{marginRight: "10%"}}>
+				<div>
 					<Swiper
+						className="swiper-slide"
 						modules={[Navigation, Scrollbar, A11y]}
 						slidesPerView={1}
 						navigation
@@ -55,7 +56,7 @@ const LandingPage = () => {
 				<Offers></Offers>
 			</div>
 			<div className="NavLinkContainer">
-				<NavLink to='/home'>see all products</NavLink>
+				<NavLink to='/home' className="PaymentLink">see all products</NavLink>
 			</div>
 
 		</div>

@@ -4,12 +4,10 @@ import {
 	SimpleForm,
 	TextInput,
 	DateInput,
-	NumberInput,
 	//	SelectInput,
 	ImageField,
 	ArrayInput,
 	//fields
-	TextField,
 	ReferenceField,
 	SimpleFormIterator,
 	// toolbar
@@ -35,6 +33,21 @@ export const ProductField = (props) => {
 			source={`${record.brand} ${record.model} - ${record.type}`}
 			disabled
 			sx={{ width: "40%" }}
+			variant='outlined'
+		/>
+	) : null
+}
+export const PriceField = (props) => {
+    const record = useRecordContext(props)
+    if (record.discount > 0) {
+        const newPrice = record.price * (1 - record.discount/100 )
+        record.price = newPrice.toFixed(2)
+    }
+	return record ? (
+        <TextInput
+            source='price'
+			sx={{ width: 120 }}
+			disabled
 			variant='outlined'
 		/>
 	) : null
@@ -72,10 +85,10 @@ const OrderEdit = (props) => {
 	)
 
 	if (isLoading) return null
-	if (data) {
-		var discount = data.discount
-		console.log(discount)
-	}
+    // var discount = ''
+	// if (data) {
+	// 	 discount = data.discount
+	// }
 
 	return (
 		<Edit
@@ -185,12 +198,7 @@ const OrderEdit = (props) => {
 								link={false}
 								reference='product'
 							>
-								<TextInput
-									source='price'
-									sx={{ width: 120 }}
-									disabled
-									variant='outlined'
-								/>
+								<PriceField/>
 							</ReferenceField>
 						</SimpleFormIterator>
 					</ArrayInput>

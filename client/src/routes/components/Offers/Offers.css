@@ -1,8 +1,10 @@
 .OffersContainer{
     display: flex;
     background-color: whitesmoke;
-    margin-right: 10%;
+    
 }
+.swiper-slide { width: 80% }
+
 
 .OffersCard{
     margin-top: 5%;

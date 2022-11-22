@@ -6,8 +6,7 @@ import "./Order.css";
 import React from "react";
 
 
-const Order =  () => {
-    const userID = sessionStorage.getItem("userId");
+const Order =  ({userID}) => {
     const dispatch = useDispatch();
     React.useEffect(() => {
         dispatch(getAllOrderDB(userID))
