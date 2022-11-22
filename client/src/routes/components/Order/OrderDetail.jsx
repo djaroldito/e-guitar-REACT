@@ -13,21 +13,21 @@ const OrderDetail =  () => {
         dispatch(getOrderDB(id))
     }, []);
     const order = useSelector(state =>  state.products.order);
-    console.log(order);
-    return ( 
+    
+    return (
         <div className="OrderLayout">
             <PaymentOrderCont>
                 <div className="OrderDetailContainer">
                     <div className="headerOrders">
                         <h3>Order Detail</h3>
-                    </div>  
+                    </div>
                             <div className="orderCard">
                                 <ImgDiv>
                                     <div>
                                     <div className="inlineContent">
-                                        <p>Shipment : </p> 
+                                        <p>Shippment : </p>
                                         <p className={order.deliveryStatus}>{order.deliveryStatus} </p>
-                                    </div>   
+                                    </div>
                                         <p> Order Date : {order.orderDate} </p>
                                     <div className="inlineContent">
                                         <p>Payment Status : </p>
@@ -37,17 +37,17 @@ const OrderDetail =  () => {
                                 </ImgDiv>
                             </div>
                 </div>
-                
+
                 <div className="productsContainer">
                     <div className="headerOrders">
                         <h3>Product Detail</h3>
                     </div>
                     {order.orderDetail?.map(product => {
                         return(
-                            
+
                             <div className="orderCard">
                                 <ImgDiv>
-                                    <img src={product.product.img}></img>
+                                    <img src={product.product.img} alt="product"></img>
                                     <div>
                                     <p>{product.product.brand} {product.product.model}</p>
                                     <p>{product.color}</p>
@@ -58,9 +58,9 @@ const OrderDetail =  () => {
                         )
                     })}
                 </div>
-                {order.orderStatus != 'PAYMENT COMPLETED' && (<a href={order.paymentLink} style={{marginTop:'5%'} } className='PaymentLink'>completar el pago</a>)}
+                {order.orderStatus != 'PAYMENT COMPLETED' && (<a href={order.paymentLink} style={{marginTop:'5%'} } className='PaymentLink'>complete payment</a>)}
             </PaymentOrderCont>
-            
+
                 <div className='PaymentDetailContainer'>
                     <div className="headerOrders">
                         <h3>Payment Detail</h3>
@@ -72,9 +72,9 @@ const OrderDetail =  () => {
                                 <h2>Total: {order.total}</h2>
                                 </div>
                             </div>
-                     
+
                 </div>
-                
+
         </div>
     )
 }
@@ -90,7 +90,7 @@ export const ImgDiv = styled.div`
         max-height: auto;
         object-fit: scale-down;
     }
-    
+
 `;
 
 
