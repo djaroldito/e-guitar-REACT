@@ -12,12 +12,12 @@ const Order =  ({userID}) => {
         dispatch(getAllOrderDB(userID))
     }, []);
     const orders = useSelector(state =>  state.products.orders);
-    console.log(orders);
+
     const navigate = useNavigate();
     const Redirect = (id) => {
         navigate(`/orders/${id}`)
     }
-    return ( 
+    return (
         <div>
             <div className="column">
             <h1 style={{marginLeft: "5%"}}>Order History</h1>
@@ -25,26 +25,26 @@ const Order =  ({userID}) => {
                 return(
                     <div className="orderContainer">
                         <div className="orderContent">
-                            <h2>id</h2>
+                            <h2>ID</h2>
                             <h3>{order.id}</h3>
                         </div>
                         <div>
-                            <h2>fecha del pedido</h2>
+                            <h2>Date</h2>
                             <h3>{order.orderDate}</h3>
                         </div>
                         <div>
-                            <h2>monto</h2>
+                            <h2>Amount</h2>
                             <h3>${order.total}</h3>
                         </div>
                         <div>
-                            <h2>envio</h2>
+                            <h2>Shipment</h2>
                             <h3 className={order.deliveryStatus}> {order.deliveryStatus}</h3>
                         </div>
                         <div>
-                            <h2>pago</h2>
+                            <h2>Payment</h2>
                             <h3 className={order.orderStatus}>{order.orderStatus}</h3>
                         </div>
-                        <button onClick={() => Redirect(order.id)}>detalle</button>
+                        <button onClick={() => Redirect(order.id)}>Detail</button>
                     </div>
                 )
             })}

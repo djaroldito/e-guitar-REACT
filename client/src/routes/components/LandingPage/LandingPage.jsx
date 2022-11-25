@@ -21,7 +21,7 @@ const LandingPage = () => {
 			</video>
 			<a href='#offers'>
 				<div className='Arrow'>
-					<h2 className='ArrowContent'>DISCOUNTS</h2>
+					<h2 className='ArrowContent'>View our offers!</h2>
 				</div>
 			</a>
 			<div className='title'>
@@ -52,7 +52,7 @@ const LandingPage = () => {
 				</div>
 			</div>
 			<div className='offers' id='offers'>
-				<h1 style={{marginLeft: "5%"}}>Discounts</h1>
+				<h1 style={{marginLeft: "5%"}}>Offers</h1>
 				<Offers></Offers>
 			</div>
 			<div className="NavLinkContainer">
