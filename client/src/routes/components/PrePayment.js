@@ -12,6 +12,7 @@ import Swal from "sweetalert2";
 import "./PrePayment/PrePayment.css";
 
 const PrePayment = () => {
+  //prueba
   const carrito = useSelector((state) => state.products.cart);
   const mail = sessionStorage.getItem("emailData")
     ? sessionStorage.getItem("emailData")
