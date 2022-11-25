@@ -75,7 +75,7 @@ const PrePayment = () => {
   };
 
   const getTotalConDescuento = (carrito, codeValidate) => {
-    if(!codeValidate) return
+    if (!codeValidate) return;
     let totalDescuento =
       carrito
         ?.reduce(

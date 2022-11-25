@@ -21,7 +21,9 @@ const NoFound = () => {
         alt="no guitar found "
       />
       <div className="buttonCont">
-        <button onClick={() => dispatch(setFilters(Filters), getAllProducts())}>TRY AGAIN</button>
+        <button onClick={() => dispatch(setFilters(Filters), getAllProducts())}>
+          TRY AGAIN
+        </button>
       </div>
     </NoDiv>
   );
