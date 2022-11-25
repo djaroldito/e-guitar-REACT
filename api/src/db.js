@@ -18,7 +18,7 @@ let sequelize =  process.env.NODE_ENV === 'production'
      ?
 
 	new Sequelize(
-		`postgresql://postgres:Hb9YRGAgNZfk9Ts4si0O@containers-us-west-108.railway.app:7266/railway`,
+		`postgresql://postgres:BgLqltAa73qxr7TQbrWj@containers-us-west-108.railway.app:7266/railway`,
 		{
 			logging: false, // set to console.log to see the raw SQL queries
 			native: false, // lets Sequelize know we can use pg-native for ~30% more speed
