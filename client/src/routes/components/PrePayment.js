@@ -61,7 +61,6 @@ const PrePayment = () => {
       let discountCode = await axios.get(
         `/ruser/discountCode?code=${input.code}`
       );
-      Swal.fire("10% discount applied!")
       setinput({
         code: "",
       });
@@ -76,7 +75,7 @@ const PrePayment = () => {
   };
 
   const getTotalConDescuento = (carrito, codeValidate) => {
-    if(!codeValidate) return
+    if (!codeValidate) return;
     let totalDescuento =
       carrito
         ?.reduce(
