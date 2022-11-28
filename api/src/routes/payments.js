@@ -2,7 +2,7 @@ const {Router} = require('express');
 const axios = require('axios');
 const { Order, OrderDetail, DiscountCode } = require("../db.js")
 const nodemailer = require("nodemailer");
-const {PAYPAL_API, PAYPAL_API_SECRET, PAYPAL_API_CLIENT} = require('../paymentConfig.js');
+const {PAYPAL_API} = require('../paymentConfig.js');
 const { Sequelize } = require('sequelize');
 const router =  Router();
 
@@ -80,8 +80,8 @@ router.post('/create-order', async (req, res) => {
             'Content-Type': 'application/x-www-form-urlenconded',
            },
             auth: {
-                username: PAYPAL_API_CLIENT,
-                password: PAYPAL_API_SECRET
+                username: process.env.PAYPAL_API_CLIENT,
+                password: process.env.PAYPAL_API_SECRET
             }
         })
 
@@ -116,8 +116,8 @@ router.get('/capture-order', async (req, res) => {
 
         const response = await axios.post(`${PAYPAL_API}/v2/checkout/orders/${token}/capture`, {}, {
             auth:{
-                username: PAYPAL_API_CLIENT,
-                password: PAYPAL_API_SECRET
+                username: process.env.PAYPAL_API_CLIENT,
+                password: process.env.PAYPAL_API_SECRET
             }
         })
 
