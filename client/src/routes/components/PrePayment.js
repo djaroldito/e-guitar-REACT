@@ -61,6 +61,7 @@ const PrePayment = () => {
       let discountCode = await axios.get(
         `/ruser/discountCode?code=${input.code}`
       );
+      Swal.fire("10% discount applied!")
       setinput({
         code: "",
       });
